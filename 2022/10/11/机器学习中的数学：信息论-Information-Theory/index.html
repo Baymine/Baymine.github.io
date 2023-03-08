@@ -1,0 +1,374 @@
+
+ <!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>机器学习中的数学：信息论(Information Theory) | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="@[toc]
+
+参考：Dive into Deep Learning A. zhang ect Chapter 18 Appendix: Mathematics for Deep Learning
+
+利用信息论我们可以测量或者比较在不同的信号（signals）中信息。在这部分，我们主要讨论机器学习对">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Hexo" title="Hexo"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Hexo">Hexo</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:example.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2022/10/11/机器学习中的数学：信息论-Information-Theory/" title="机器学习中的数学：信息论(Information Theory)" itemprop="url">机器学习中的数学：信息论(Information Theory)</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://example.com" title="John Doe">John Doe</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2022-10-11T14:19:24.000Z" itemprop="datePublished">2022-10-11</time>
+    Updated:<time datetime="2022-10-11T14:19:36.548Z" itemprop="dateModified">2022-10-11</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%EF%BC%88Information%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">信息（Information）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E4%BF%A1%E6%81%AF%EF%BC%88Self-information%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">自信息（Self-information）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%86%B5%EF%BC%88Entropy%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">熵（Entropy）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%86%B5%E7%9A%84%E5%8A%A8%E6%9C%BA%EF%BC%88Motivating-Entropy%EF%BC%89"><span class="toc-number">3.1.</span> <span class="toc-text">提出熵的动机（Motivating Entropy）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%EF%BC%88Definition%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">定义（Definition）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%EF%BC%88Interpretation%EF%BC%89"><span class="toc-number">3.3.</span> <span class="toc-text">解释（Interpretation）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%86%B5%E7%9A%84%E6%80%A7%E8%B4%A8%EF%BC%88Properties-of-Entropy%EF%BC%89"><span class="toc-number">3.4.</span> <span class="toc-text">熵的性质（Properties of Entropy）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%92%E4%BF%A1%E6%81%AF%EF%BC%88Mutual-Information%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">互信息（Mutual Information）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%94%E5%90%88%E7%86%B5-Joint-Entropy"><span class="toc-number">4.1.</span> <span class="toc-text">联合熵(Joint Entropy)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E7%86%B5%EF%BC%88Conditional-Entropy%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">条件熵（Conditional Entropy）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%92%E4%BF%A1%E6%81%AF%EF%BC%88Mutual-Information%EF%BC%89-1"><span class="toc-number">4.3.</span> <span class="toc-text">互信息（Mutual Information）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%92%E4%BF%A1%E6%81%AF%E7%9A%84%E6%80%A7%E8%B4%A8-Properties-of-Mutual-Information"><span class="toc-number">4.4.</span> <span class="toc-text">互信息的性质(Properties of Mutual Information)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%82%B9%E9%97%B4%E4%BA%92%E4%BF%A1%E6%81%AF%EF%BC%88Pointwise-Mutual-Information%EF%BC%89"><span class="toc-number">4.5.</span> <span class="toc-text">点间互信息（Pointwise Mutual Information）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%92%E4%BF%A1%E6%81%AF%E7%9A%84%E5%BA%94%E7%94%A8%EF%BC%88Applications-of-Mutual-Information%EF%BC%89"><span class="toc-number">4.6.</span> <span class="toc-text">互信息的应用（Applications of Mutual Information）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Kullback%E2%80%93Leibler-%E6%95%A3%E5%BA%A6%EF%BC%88Kullback%E2%80%93Leibler-Divergence%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">Kullback–Leibler 散度（Kullback–Leibler Divergence）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%EF%BC%88Definition%EF%BC%89-1"><span class="toc-number">5.1.</span> <span class="toc-text">定义（Definition）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8%EF%BC%88Properties%EF%BC%89"><span class="toc-number">5.2.</span> <span class="toc-text">性质（Properties）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%A4%E5%8F%89%E7%86%B5%EF%BC%88Cross-Entropy%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">交叉熵（Cross-Entropy）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E5%BC%8F%E5%AE%9A%E4%B9%89%EF%BC%88Formal-Definition%EF%BC%89"><span class="toc-number">6.1.</span> <span class="toc-text">正式定义（Formal Definition）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8%EF%BC%88Properties%EF%BC%89-1"><span class="toc-number">6.2.</span> <span class="toc-text">性质（Properties）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A4%E5%8F%89%E7%86%B5%E4%BD%9C%E4%B8%BA%E5%A4%9A%E5%85%83%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%E7%9A%84%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%EF%BC%88Cross-Entropy-as-An-Objective-Function-of-Multi-class-Classification%EF%BC%89"><span class="toc-number">6.3.</span> <span class="toc-text">交叉熵作为多元分类问题的目标函数（Cross-Entropy as An Objective Function of Multi-class Classification）</span></a></li></ol></li></ol>
+		</div>
+		
+		<p>@[toc]</p>
+<blockquote>
+<p>参考：<em>Dive into Deep Learning A. zhang ect</em> Chapter 18 <strong>Appendix: Mathematics for Deep Learning</strong></p>
+</blockquote>
+<p>利用信息论我们可以测量或者比较在不同的信号（signals）中信息。在这部分，我们主要讨论机器学习对信息论的一些概念和应用。<br>首先我们先简要描述介绍一下机器学习和信息论之间的关系。机器学习的主要的任务就是从数据中提取出有价值的信息，然后利用这些信息去做一些预测。而信息论主要研究信息的编码、解码、转换和操作（sencoding, decoding, transmitting, and manipulating information）。所以，我们可以利用信息论来讨论机器学习在训练中对信息的处理过程。</p>
+<h1 id="信息（Information）"><a href="#信息（Information）" class="headerlink" title="信息（Information）"></a>信息（Information）</h1><p><strong>信息</strong>就是能够将所有事情通过一种或者是多种编码格式编码成一个特定的序列。但是怎么样编码才能正确地表述事物所具有的信息量呢？在我们描述一个事件的时候，如果这件事情是不寻常的，这时候我们需要更多的信息来描述，反之需要更少的信息。这就好比说一个普通的碗和清朝乾隆皇帝御用的碗，后者是比较少见的，需要更多的必要信息才能描述清楚它的特征。所以可以将信息表示为事件发生的抽象概率。</p>
+<h1 id="自信息（Self-information）"><a href="#自信息（Self-information）" class="headerlink" title="自信息（Self-information）"></a>自信息（Self-information）</h1><p>香农（Shannon）将<strong>比特</strong>（bit）作为信息的单位，这将时间发生的概率转换成比特数。这样，对于一个长度为$n$的二进制序列所包含的信息为$n$比特。<br>假设二进制序列每一个位置为1或者0的概率相等（都为$\frac 12$）,所以对于一个事件$X$,这个事件为：一个长度为$n$二进制序列，每种序列出现的概率为$\frac{1}{2^n}$,香农定义了<strong>自信息</strong>，将事件的概率转换成了比特数：<br>$$I(x) &#x3D; -\log_2(p)$$<br>举例来说，对于一个序列“0010”的自信息为：<br>$$I(“0010”) &#x3D; -\log_2(p(“0010”))&#x3D;-\log_2(\frac{1}{2^4})&#x3D;4\ bits$$<br>* <code>在本章节中，我们省略log的下标，如无特殊说明都表示  </code> $\log_2p$</p>
+<h1 id="熵（Entropy）"><a href="#熵（Entropy）" class="headerlink" title="熵（Entropy）"></a>熵（Entropy）</h1><p>自信息只能描述一个离散事件的信息，这部分介绍能够任意随机变量的描述方式。</p>
+<h2 id="提出熵的动机（Motivating-Entropy）"><a href="#提出熵的动机（Motivating-Entropy）" class="headerlink" title="提出熵的动机（Motivating Entropy）"></a>提出熵的动机（Motivating Entropy）</h2><p>熵的形式受限于<strong>香农熵定理</strong>：</p>
+<ol>
+<li>我们通过观察随机变量得到的信息与随机变量的元素的名称无关，与发生概率为0的元素无关。</li>
+<li>两个随机变量<strong>一起</strong>观测得到的信息 $\le$ 两个随机变量<strong>分开</strong>观测得到的信息。当两个随机变量相互独立的时候，取得等号。</li>
+<li>通过一个确定事件所得到的信息为0</li>
+</ol>
+<p>我们可以将抛掷一个完全均匀的硬币所得到的信息为1比特作为基准，以消除使用不同的基本单位而导致的对同一事件的信息量上的差异。</p>
+<h2 id="定义（Definition）"><a href="#定义（Definition）" class="headerlink" title="定义（Definition）"></a>定义（Definition）</h2><p>对于一个随机变量$X$, 遵循概率分布$P$,概率密度函数或概率质量函数为$p(x)$,我们利用熵来描述信息的期望值：<br>$$H(x)&#x3D;-E_{x\sim P}[\log p(x)]$$<br>具体来说：<br>$$H(X)&#x3D;\left{\begin{aligned}<br>&amp; -\sum_i p_i\log p_i, \quad p_i &#x3D; P(X_i)\quad X 是离散型随机变量 \<br>&amp; -\int_x p(x)\log p(x) dx\quad X是连续型随机变量<br>\end{aligned}<br>\right.$$<br>连续性随机变量的熵也被称为<strong>微分熵</strong>（Differential Entropy） </p>
+<h2 id="解释（Interpretation）"><a href="#解释（Interpretation）" class="headerlink" title="解释（Interpretation）"></a>解释（Interpretation）</h2><p>在这一节中，主要解释两个关于上述公式的问题。</p>
+<ol>
+<li><p>为什么要使用负对数？<br> 首先是为什么要使用对数。这是为了保证熵对独立随机变量的可加性。对于一系列相互独立的事件发生的概率为$f_i(x)$, 那么所有事件发生的概率为 $p(X)&#x3D;\prod_if_i(x)$,使用对数可以将这个连乘转换成连加。</p>
+</li>
+<li><p>为什么添加负号？<br> 因为信息的定义。由于发生概率低的事件应该包含更多的信息，但是对数是一个单调递增函数，所以为了保证事件概率和对应的熵之间的反比例的关系，我们需要对对数加一个负号，让他变成单调递减函数。</p>
+</li>
+<li><p>为什么需要期望函数？<br> 对于一个随机变量X，它的自信息（$-\log(p)$）就是对于某个输出的不确定性的数量。但是当事件发生的概率趋向于0的时候，这种不确定性就会趋向于$+\infin$.同样的，我们可以将熵解释为观测事件X的平均不确定性。举例子来说，对于一个模型的相互独立的输出$s_1,\cdots, s_k$的对应的概率为$p_1,\cdots, p_k$， 那么这个系统的熵就是输出值的平均自信息：<br> $$H(S) &#x3D; \sum_ip_i\cdot I(s_i)&#x3D;-\sum_ip_i\cdot\log p_i$$</p>
+</li>
+</ol>
+<h2 id="熵的性质（Properties-of-Entropy）"><a href="#熵的性质（Properties-of-Entropy）" class="headerlink" title="熵的性质（Properties of Entropy）"></a>熵的性质（Properties of Entropy）</h2><p>下面考虑随机事件$X$, 它对应的概率分布为$P$</p>
+<ul>
+<li>对所有离散型随机变量$X$:$H(X)\ge 0$(连续性随机变量的熵可能会是负数)</li>
+<li>假设一个随机事件$X\sim P\quad(p.d.f&#x3D;p(x))$，我们想用一个新的概率分布$Q\quad(p.d.f&#x3D;q(x))$来估计$P$则有：<br>   $$H(X)&#x3D;-E_{x\sim P}[\log p(x)]\le -E_{x\sim P}[\log q(x)]$$<br>   当$P&#x3D;Q$的时候，取得等号。</li>
+<li>对于一个随机变量$X\sim P$, $x$将会传递最多的信息，如果他能将这些信息均匀地分布在所有可能的结果上。具体来说，对于一个概率分布$P$的k种相互独立的输出${p_1,\cdots, p_k}$:<br> $$H(X)\le \log(k), with\ equality\ if \ and \ only \ if \ p_i&#x3D;\frac{1}{k},\forall_i$$<br> 但是如果$P$是一个连续性随机变量，那么处理过程就会很麻烦了。我们假设P在一个有限的区间内，那么，如果这个随机变量在这个区间上满足均匀分布，那么这个随机变量的熵的值将会是最大的。</li>
+</ul>
+<h1 id="互信息（Mutual-Information）"><a href="#互信息（Mutual-Information）" class="headerlink" title="互信息（Mutual Information）"></a>互信息（Mutual Information）</h1><p>在这部分，我们联合变量$(X,Y)$的熵。在本节中，我们使用的联合变量$(X,Y)$遵循联合概率分布$P$,概率密度函数为$P_{X,Y}(x,y)$,其中$X\sim p_X(x);\quad Y\sim p_Y(y)$</p>
+<h2 id="联合熵-Joint-Entropy"><a href="#联合熵-Joint-Entropy" class="headerlink" title="联合熵(Joint Entropy)"></a>联合熵(Joint Entropy)</h2><p>联合熵与先前定义的熵的形式一致：<br>$$H(X,Y)&#x3D;-E_{(x,y)\sim P}[\log p_{X,Y}(x,y)]\tag {<em>}$$<br>具体形式为：<br>$$H(X,Y)&#x3D;\left{\begin{aligned}<br>&amp;-\sum_x\sum_yp_{X,Y}(x,y)\log p_{X,Y}(x,y),\quad 离散型\<br>&amp;-\int_{x,y}p_{X,Y}(x,y)\log p_{X,Y}(x,y)dxdy,\quad 连续型<br>\end{aligned}\right.<br>$$<br>$(</em>)$表示一对随机变量的全部的不确定性。当$X&#x3D;Y$的时候，$H(X,Y)&#x3D;H(X)&#x3D;H(Y)$,当X与Y相互独立的时候$H(X,Y)&#x3D;H(X)+H(Y)$,所以有：<br>$$H(X),H(Y)\le H(X,Y)\le H(X)+H(Y)$$</p>
+<h2 id="条件熵（Conditional-Entropy）"><a href="#条件熵（Conditional-Entropy）" class="headerlink" title="条件熵（Conditional Entropy）"></a>条件熵（Conditional Entropy）</h2><p>在机器学习中，我们更多的时候，我们更关注条件上而不是联合熵。例如我们要根据图片判断图片的标签，这就可以理解为在图片像素信息条件下的对标签的信息。条件熵的定义与之前的几种熵的定义相似：<br>$$H(Y|X)&#x3D;-E_{(x,y)\sim P}[\log p(y|x)]$$<br>其中：$p(y|x)&#x3D;\frac{p_{X,Y}(x,y)}{p_X(x)}$.条件熵与熵和联合熵的关系为：<br>$$H(Y|X)&#x3D;H(X,Y)-H(X)$$<br>这样条件熵既可以理解为存在于Y中的而不存在与X中的的信息。</p>
+<h2 id="互信息（Mutual-Information）-1"><a href="#互信息（Mutual-Information）-1" class="headerlink" title="互信息（Mutual Information）"></a>互信息（Mutual Information）</h2><p>上面我们讨论了联合变量之中独有的信息，现在我们讨论两个变量之间共有的信息。所以根据定义可以得到（互信息:$I(X,Y)$）<br>$$I(X,Y) &#x3D; H(X,Y)-H(Y|X)-H(X|Y)$$<br>将原先的定义式带入，整理可得：<br>$$I(X,Y)&#x3D;E_xE_y\left{<br>p_{X,Y}(x,y)\log \frac{p_{X,Y}(x,y)}{p_X(x)p_Y(y)}<br>\right}<br>$$<br>在本节中提到的定义之间的关系如下图：<br><img src="https://img-blog.csdnimg.cn/013c87570cd9401fb52ba8c3dd7d9da8.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_Q1NETiBATGVhcm5pbmdEZWVwbHk=,size_29,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h2 id="互信息的性质-Properties-of-Mutual-Information"><a href="#互信息的性质-Properties-of-Mutual-Information" class="headerlink" title="互信息的性质(Properties of Mutual Information)"></a>互信息的性质(Properties of Mutual Information)</h2><ul>
+<li>对称性：$I(X,Y) &#x3D; I(Y,X)$</li>
+<li>非负性：$I(X,Y)\ge 0$</li>
+<li>如果两个随机变量是相互独立的，那么$I(X,Y)&#x3D;0$</li>
+<li>如果X是Y的可逆函数：$I(X,Y)&#x3D;H(Y)&#x3D;H(X)$</li>
+</ul>
+<h2 id="点间互信息（Pointwise-Mutual-Information）"><a href="#点间互信息（Pointwise-Mutual-Information）" class="headerlink" title="点间互信息（Pointwise Mutual Information）"></a>点间互信息（Pointwise Mutual Information）</h2><p>点间互信息:$pmi(x,y)$就是互信息定义中的对数部分：<br>$$pmi(x,y) &#x3D; \log\frac{p_{X,Y}(x,y)}{p_X(x)p_Y(y)}$$<br>他描述的是两个联合事件发生的概率比分别发生的概率的具体的数值关系。</p>
+<h2 id="互信息的应用（Applications-of-Mutual-Information）"><a href="#互信息的应用（Applications-of-Mutual-Information）" class="headerlink" title="互信息的应用（Applications of Mutual Information）"></a>互信息的应用（Applications of Mutual Information）</h2><p>在自认语言处理中，<strong>歧义消除</strong>（Ambiguity Resolution）是一件比较难的事情。也就是一些词在文中的含义不是很明确。例如先前出现的新闻“亚马逊起火了”，我们不知道是公司起火了，还是那个雨林起火了。这时候就产生了歧义。我们先找出一组词，这些词与亚马逊公司有较大互信息。同样找到与亚马逊雨林有较大互信息的词，然后分析这些那些在文中有更高的出现频率。利用这个，我们能够了解新闻是关于公司的还是雨林的。</p>
+<h1 id="Kullback–Leibler-散度（Kullback–Leibler-Divergence）"><a href="#Kullback–Leibler-散度（Kullback–Leibler-Divergence）" class="headerlink" title="Kullback–Leibler 散度（Kullback–Leibler Divergence）"></a>Kullback–Leibler 散度（Kullback–Leibler Divergence）</h1><p>我们可以利用范数来表示任何维度两点之间的距离。现在我们想知道两个概率分布之间的距离（相似程度）。<strong>KL散度</strong>就是一种测量两种分布之间相似程度的量。</p>
+<h2 id="定义（Definition）-1"><a href="#定义（Definition）-1" class="headerlink" title="定义（Definition）"></a>定义（Definition）</h2><p>对于一个随机变量$X$遵循概率分布$P$,概率密度分布为$p(x)$.我们利用另一个概率分布$Q$($p.d.f&#x3D;q(x)$),那么$P$和$Q$之间的KL散度（相对熵，Relative Entropy）定义为：<br>$$D_{KL}(P|Q)&#x3D;E_{x\sim P}[\log\frac{p(x)}{q(x)}]$$<br>可见DL散度就是在描述两个随机变量之间不确定性程度的相对关系。</p>
+<h2 id="性质（Properties）"><a href="#性质（Properties）" class="headerlink" title="性质（Properties）"></a>性质（Properties）</h2><ul>
+<li>非对称性：$D_{KL}(P|Q)\ne D_{KL}(Q|P)$</li>
+<li>非负性：$D_{KL}(P|Q)\ge0$,当$P&#x3D;Q$时取得等号。</li>
+<li>如果$p(x)&gt;0,\ q(x)&#x3D;0$则$D_{KL}(P|Q)&#x3D;\infin$</li>
+<li>以下三种表达式等价：<br>  $$D_{KL}(P(X,Y)| P(X)P(Y))$$<br>  $$E_Y{D_{KL}(P(X|Y))|P(X))}$$<br>  $$E_X{D_{KL}(P(Y|X)|P(Y))}$$<blockquote>
+<p>For the first term, we interpret mutual information as the KL divergence between P(X, Y ) and the product of P(X) and P(Y ), and thus is a measure of how different the joint distribution is from the distribution if they were independent. For the second term, mutual information tells us the average reduction in uncertainty about Y that results from learning the value of the $X$ʼs distribution. Similarly to the third term.</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="交叉熵（Cross-Entropy）"><a href="#交叉熵（Cross-Entropy）" class="headerlink" title="交叉熵（Cross-Entropy）"></a>交叉熵（Cross-Entropy）</h1><p>对于一个二分类问题，预测值为$\hat y_i &#x3D; p_\theta(y_i|x_i)$.预测结果为1的概率为：$\pi_i&#x3D;p_\theta(y_i&#x3D;1|x_i)$所以log似然方程为：<br>$$\begin{aligned}<br>l(\theta)&amp;&#x3D;\log L(\theta)\<br>&amp;&#x3D;\log \prod^n_{i&#x3D;1}\pi_i^{y_i}(1-\pi_i)^{1-y_i}\<br>&amp;&#x3D;\sum^n_{i&#x3D;1}y_i \log(\pi_i)+(1-y_i)\log(1-\pi_i)<br>\end{aligned}<br>$$<br>我们的目标就是最大化这个似然函数，这种方法就是极大似然估计。看到式中的自然对数，我们可以联想到之前提到一些信息论的概念。这暗示我们这个函数可以从信息论的角度理解。</p>
+<h2 id="正式定义（Formal-Definition）"><a href="#正式定义（Formal-Definition）" class="headerlink" title="正式定义（Formal Definition）"></a>正式定义（Formal Definition）</h2><p>我们假设有两个随机变量:$P\sim p(x);\quad Q\sim q(x)$(前者是真实值的分布，后者是预测值的分布).，我们可以通过交叉熵来描述两种分布之间的散度：<br>$$CE(P,Q)&#x3D;-E_{x\sim P}[\log (q(x))]$$<br>通过之前提到的关系式，可以将上式转化为：<br>$$CE(P,Q) &#x3D; H(P)+D_{KL}(P|Q)$$</p>
+<h2 id="性质（Properties）-1"><a href="#性质（Properties）-1" class="headerlink" title="性质（Properties）"></a>性质（Properties）</h2><p>交叉熵可以用于优化问题的损失函数，以下几种说法是等价的：</p>
+<ul>
+<li>最大化分布对于分布P的预测概率(最大化$E_{x\sim P[\log (q(x))]}$)</li>
+<li>最小化交叉熵$CE(P,Q)$</li>
+<li>最小化KL散度</li>
+</ul>
+<p>这些性质可以从交叉熵的定义中得出。注意因为P是真实值的分布，所以$H(P)$是一个常量。</p>
+<h2 id="交叉熵作为多元分类问题的目标函数（Cross-Entropy-as-An-Objective-Function-of-Multi-class-Classification）"><a href="#交叉熵作为多元分类问题的目标函数（Cross-Entropy-as-An-Objective-Function-of-Multi-class-Classification）" class="headerlink" title="交叉熵作为多元分类问题的目标函数（Cross-Entropy as An Objective Function of Multi-class Classification）"></a>交叉熵作为多元分类问题的目标函数（Cross-Entropy as An Objective Function of Multi-class Classification）</h2><p>现在考虑一个k分类问题，这个分类问题的标签用独热编码（One-hot encoding）表示$y_i&#x3D;(y_{i1},\cdots,y_{ik})$,预测标签值为：<br>$$\hat y_i&#x3D;p_\theta(y_i|x_i)&#x3D;\sum^k_{j&#x3D;1}y_{ij}p_\theta(y_{ij}|x_i)$$<br>所以交叉熵可以表示为：<br>$$CE(y,\hat y)&#x3D;-\sum^n_{i&#x3D;1}y_i\log\hat y_i&#x3D;-\sum^n_{i&#x3D;1}\sum^k_{j&#x3D;1}y_{ij}\log(y_{ij}|x_i)$$<br>另一方面，我们可以利用极大似然估计来解决这个问题。假设一个随机变量$z&#x3D;(z_1,\cdots,z_k)$满足k分类多元伯努利分布，对应的概率为$p&#x3D;(p_1,\cdots, p_k)$,也就是：<br>$$p(z)&#x3D;p(z_1,\cdots,z_k)&#x3D;Multi(p_1,\cdots,p_k),\ where\ \sum^k_{i&#x3D;1}p_i&#x3D;1$$<br>z的联合概率质量函数为:<br>$$p^z&#x3D;\prod^k_{j&#x3D;1}p^{z_j}<em>j$$<br>所以对应的log似然方程为：<br>$$l(\theta)&#x3D;\log L(\theta)&#x3D;\log\prod^n</em>{i&#x3D;1}p^{y_i}&#x3D;\log\prod^n_{i&#x3D;1}\prod_{j&#x3D;1}^{k}p^{y_{ij}}&#x3D;\sum^n_{i&#x3D;1}\sum^k_{j&#x3D;1}y_{ij}\log p_j$$<br>所以对于多分类问题最大化log似然函数等价于最小化交叉熵损失$CE(y,\hat y)$</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://example.com/2022/10/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%E4%BF%A1%E6%81%AF%E8%AE%BA-Information-Theory/" data-title="机器学习中的数学：信息论(Information Theory) | Hexo" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2022/10/12/面对对象编程/" title="面对对象编程">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  面对对象编程</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2022/10/11/test/"  title="test">
+ <strong>NEXT:</strong><br/> 
+ <span>test
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%EF%BC%88Information%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">信息（Information）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E4%BF%A1%E6%81%AF%EF%BC%88Self-information%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">自信息（Self-information）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%86%B5%EF%BC%88Entropy%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">熵（Entropy）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%86%B5%E7%9A%84%E5%8A%A8%E6%9C%BA%EF%BC%88Motivating-Entropy%EF%BC%89"><span class="toc-number">3.1.</span> <span class="toc-text">提出熵的动机（Motivating Entropy）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%EF%BC%88Definition%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">定义（Definition）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%EF%BC%88Interpretation%EF%BC%89"><span class="toc-number">3.3.</span> <span class="toc-text">解释（Interpretation）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%86%B5%E7%9A%84%E6%80%A7%E8%B4%A8%EF%BC%88Properties-of-Entropy%EF%BC%89"><span class="toc-number">3.4.</span> <span class="toc-text">熵的性质（Properties of Entropy）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%92%E4%BF%A1%E6%81%AF%EF%BC%88Mutual-Information%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">互信息（Mutual Information）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%94%E5%90%88%E7%86%B5-Joint-Entropy"><span class="toc-number">4.1.</span> <span class="toc-text">联合熵(Joint Entropy)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E7%86%B5%EF%BC%88Conditional-Entropy%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">条件熵（Conditional Entropy）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%92%E4%BF%A1%E6%81%AF%EF%BC%88Mutual-Information%EF%BC%89-1"><span class="toc-number">4.3.</span> <span class="toc-text">互信息（Mutual Information）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%92%E4%BF%A1%E6%81%AF%E7%9A%84%E6%80%A7%E8%B4%A8-Properties-of-Mutual-Information"><span class="toc-number">4.4.</span> <span class="toc-text">互信息的性质(Properties of Mutual Information)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%82%B9%E9%97%B4%E4%BA%92%E4%BF%A1%E6%81%AF%EF%BC%88Pointwise-Mutual-Information%EF%BC%89"><span class="toc-number">4.5.</span> <span class="toc-text">点间互信息（Pointwise Mutual Information）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%92%E4%BF%A1%E6%81%AF%E7%9A%84%E5%BA%94%E7%94%A8%EF%BC%88Applications-of-Mutual-Information%EF%BC%89"><span class="toc-number">4.6.</span> <span class="toc-text">互信息的应用（Applications of Mutual Information）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Kullback%E2%80%93Leibler-%E6%95%A3%E5%BA%A6%EF%BC%88Kullback%E2%80%93Leibler-Divergence%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">Kullback–Leibler 散度（Kullback–Leibler Divergence）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%EF%BC%88Definition%EF%BC%89-1"><span class="toc-number">5.1.</span> <span class="toc-text">定义（Definition）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8%EF%BC%88Properties%EF%BC%89"><span class="toc-number">5.2.</span> <span class="toc-text">性质（Properties）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%A4%E5%8F%89%E7%86%B5%EF%BC%88Cross-Entropy%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">交叉熵（Cross-Entropy）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E5%BC%8F%E5%AE%9A%E4%B9%89%EF%BC%88Formal-Definition%EF%BC%89"><span class="toc-number">6.1.</span> <span class="toc-text">正式定义（Formal Definition）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8%EF%BC%88Properties%EF%BC%89-1"><span class="toc-number">6.2.</span> <span class="toc-text">性质（Properties）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A4%E5%8F%89%E7%86%B5%E4%BD%9C%E4%B8%BA%E5%A4%9A%E5%85%83%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%E7%9A%84%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%EF%BC%88Cross-Entropy-as-An-Objective-Function-of-Multi-class-Classification%EF%BC%89"><span class="toc-number">6.3.</span> <span class="toc-text">交叉熵作为多元分类问题的目标函数（Cross-Entropy as An Objective Function of Multi-class Classification）</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/C-primer/" title="C++ primer">C++ primer<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DB/" title="DB">DB<sup>1</sup></a></li>
+		
+			<li><a href="/tags/OS/" title="OS">OS<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Projects/" title="Projects">Projects<sup>1</sup></a></li>
+		
+			<li><a href="/tags/侯捷C/" title="侯捷C++">侯捷C++<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2023 
+		
+		<a href="http://example.com" target="_blank" title="John Doe">John Doe</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,378 @@
+
+ <!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>C++ Memory Management | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="第一讲 primitives1. overview
+资料： DL Malloc
+涉及的库
+
+
+2、3. 内存分配的每一层面及基本用法
+本课程只考虑CRT以上的层次。
+基本工具
+
+基本用法
+12345678910111213void* p3 = ::operator new (512);   // 5">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Hexo" title="Hexo"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Hexo">Hexo</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:example.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2022/12/18/C-Memory-Management/" title="C++ Memory Management" itemprop="url">C++ Memory Management</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://example.com" title="John Doe">John Doe</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2022-12-18T07:04:19.000Z" itemprop="datePublished">2022-12-18</time>
+    Updated:<time datetime="2022-12-21T09:08:01.289Z" itemprop="dateModified">2022-12-21</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E8%AE%B2-primitives"><span class="toc-number">1.</span> <span class="toc-text">第一讲 primitives</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-overview"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. overview</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%813-%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%9A%84%E6%AF%8F%E4%B8%80%E5%B1%82%E9%9D%A2%E5%8F%8A%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="toc-number">1.0.2.</span> <span class="toc-text">2、3. 内存分配的每一层面及基本用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%815%E3%80%816%E3%80%81%E5%9F%BA%E6%9C%AC%E6%9E%84%E4%BB%B6%E2%80%94%E2%80%94new-delete-expression"><span class="toc-number">1.0.3.</span> <span class="toc-text">4、5、6、基本构件——new delete expression</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E3%80%81Array-new"><span class="toc-number">1.0.4.</span> <span class="toc-text">7、Array new</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-palcement-new"><span class="toc-number">1.0.5.</span> <span class="toc-text">8.palcement new</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-random"><span class="toc-number">1.0.6.</span> <span class="toc-text">9.random</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<h1 id="第一讲-primitives"><a href="#第一讲-primitives" class="headerlink" title="第一讲 primitives"></a>第一讲 primitives</h1><h3 id="1-overview"><a href="#1-overview" class="headerlink" title="1. overview"></a>1. overview</h3><ul>
+<li>资料： <a target="_blank" rel="noopener" href="http://gee.cs.oswego.edu/dl/">DL Malloc</a></li>
+<li>涉及的库</li>
+</ul>
+<p><img src="/.com//C-Memory-Management/1671347745514.png" alt="1671347745514"></p>
+<h3 id="2、3-内存分配的每一层面及基本用法"><a href="#2、3-内存分配的每一层面及基本用法" class="headerlink" title="2、3. 内存分配的每一层面及基本用法"></a>2、3. 内存分配的每一层面及基本用法</h3><p><img src="/.com//C-Memory-Management/1671348085106.png" alt="1671348085106"></p>
+<p>本课程只考虑CRT以上的层次。</p>
+<p><strong>基本工具</strong></p>
+<p><img src="/.com//C-Memory-Management/1671348161500.png" alt="1671348161500"></p>
+<p><strong>基本用法</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span>* p3 = ::<span class="keyword">operator</span> <span class="built_in">new</span> (<span class="number">512</span>);   <span class="comment">// 512 bytes</span></span><br><span class="line">::<span class="function"><span class="keyword">operator</span> <span class="title">delete</span><span class="params">(p3)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __BORLANDC__  <span class="comment">// 不同库不同</span></span></span><br><span class="line">	<span class="comment">// 申请5个int。 一般容器中使用</span></span><br><span class="line">	<span class="type">int</span>* p4 = <span class="built_in">allocator</span>&lt;<span class="type">int</span>&gt;().<span class="built_in">allocate</span>(<span class="number">5</span>);</span><br><span class="line">	<span class="built_in">allocator</span>&lt;<span class="type">int</span>&gt;().<span class="built_in">deallocate</span>(p4, <span class="number">5</span>);</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __GNUC__   <span class="comment">// 较早版本中</span></span></span><br><span class="line">	<span class="type">void</span>* p4 = alloc::<span class="built_in">allocate</span>(<span class="number">512</span>);</span><br><span class="line">	alloc::<span class="built_in">deallocate</span>(p4, <span class="number">512</span>);</span><br><span class="line"> <span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4、5、6、基本构件——new-delete-expression"><a href="#4、5、6、基本构件——new-delete-expression" class="headerlink" title="4、5、6、基本构件——new delete expression"></a>4、5、6、基本构件——new delete expression</h3><p>new 中实际上就是在调用malloc</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class_name* pc = <span class="keyword">new</span> <span class="built_in">class_name</span>(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译器转换为</span></span><br><span class="line"><span class="comment">// 加上try catch</span></span><br><span class="line"><span class="type">void</span>* mem = <span class="keyword">operator</span> <span class="built_in">new</span>(<span class="built_in">sizeof</span>(class_name));</span><br><span class="line">pc = <span class="built_in">static_cast</span>&lt;class_name*&gt;(mem);</span><br><span class="line">pc-&gt;class_name::<span class="built_in">class_name</span>(<span class="number">1</span>, <span class="number">2</span>); <span class="comment">// 只有编译其才能这样调用构造函数</span></span><br><span class="line"><span class="comment">// 但是可以直接调用析构函数</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="7、Array-new"><a href="#7、Array-new" class="headerlink" title="7、Array new"></a>7、Array new</h3><p>当new一个数组的时候，系统会使用4个字节存放数组的一些信息，即为下图中的 <code>cookie</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Complex* pca = <span class="keyword">new</span> Complex[<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+
+<p><img src="/.com//C-Memory-Management/1671438018665.png" alt="1671438018665"></p>
+<ul>
+<li>在进行array new的时候，单个元素不会独自进行内存对齐。</li>
+<li>构建的时候是从上往下，析构的时候是由下往上</li>
+<li><img src="/.com//C-Memory-Management/1671439085184.png" alt="1671439085184"><ul>
+<li><code> 61h</code>就是cokie，需要进行内存对齐（VC6)中是16位对齐</li>
+<li>对于申请的int类型的数组，可以直接使用delete，因为这些数据类型没有析构函数，</li>
+</ul>
+</li>
+<li><img src="/.com//C-Memory-Management/1671440046493.png" alt="1671440046493"><ul>
+<li>因为数组个数被写入，所以内存的整体布局会发生变化，所以不能直接用 <code>delete</code>来回收</li>
+<li><code>61h</code>的大小计算<ul>
+<li>类大小<em>类个数&#x3D;((3</em>4) * 3) &#x3D; 36\ 上下debugger header &#x3D; 32 + 4\ 两个61h&#x3D;4*2&#x3D;8</li>
+<li>最后向16的倍数内存对齐最后的 <code>pad</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-palcement-new"><a href="#8-palcement-new" class="headerlink" title="8.palcement new"></a>8.palcement new</h3><p>允许将对象构造与已分配的内存中</p>
+<p><img src="/.com//C-Memory-Management/1671441329456.png" alt="1671441329456"></p>
+<h3 id="9-random"><a href="#9-random" class="headerlink" title="9.random"></a>9.random</h3><ul>
+<li>placement new 的重载</li>
+<li>嵌入式指针使用案例（内存池）<ul>
+<li>通过一次性申请一定量的内存，减少每个内存中的cookie的数量，同时减少malloc的调用</li>
+<li>整个内存是通过一个链表管理的，释放内存就是将空闲的内存插入到链表头部</li>
+<li>但是申请的内存没有真正释放，所以可能会存在使用峰值的问题</li>
+</ul>
+</li>
+</ul>
+<p><img src="/.com//C-Memory-Management/1671541094430.png" alt="1671541094430"></p>
+<ul>
+<li>可以自定义handler来让更多的空间可用，或者调用abort() 或 exit();</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set_new_handler</span>(handlerFunctionPoint);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>default, delete 关键字</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/侯捷C/">侯捷C++</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://example.com/2022/12/18/C-Memory-Management/" data-title="C++ Memory Management | Hexo" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2023/01/05/GeePRC-notes/" title="GeePRC notes">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  GeePRC notes</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2022/12/16/MIT6-S081/"  title="MIT6.S081">
+ <strong>NEXT:</strong><br/> 
+ <span>MIT6.S081
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E8%AE%B2-primitives"><span class="toc-number">1.</span> <span class="toc-text">第一讲 primitives</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-overview"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. overview</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%813-%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%9A%84%E6%AF%8F%E4%B8%80%E5%B1%82%E9%9D%A2%E5%8F%8A%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="toc-number">1.0.2.</span> <span class="toc-text">2、3. 内存分配的每一层面及基本用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%815%E3%80%816%E3%80%81%E5%9F%BA%E6%9C%AC%E6%9E%84%E4%BB%B6%E2%80%94%E2%80%94new-delete-expression"><span class="toc-number">1.0.3.</span> <span class="toc-text">4、5、6、基本构件——new delete expression</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E3%80%81Array-new"><span class="toc-number">1.0.4.</span> <span class="toc-text">7、Array new</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-palcement-new"><span class="toc-number">1.0.5.</span> <span class="toc-text">8.palcement new</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-random"><span class="toc-number">1.0.6.</span> <span class="toc-text">9.random</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/C-primer/" title="C++ primer">C++ primer<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DB/" title="DB">DB<sup>1</sup></a></li>
+		
+			<li><a href="/tags/OS/" title="OS">OS<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Projects/" title="Projects">Projects<sup>1</sup></a></li>
+		
+			<li><a href="/tags/侯捷C/" title="侯捷C++">侯捷C++<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2023 
+		
+		<a href="http://example.com" target="_blank" title="John Doe">John Doe</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

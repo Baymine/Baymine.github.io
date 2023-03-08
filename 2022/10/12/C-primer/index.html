@@ -1,0 +1,507 @@
+
+ <!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>C++ primer | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="TODO：总结各种初始化方法
+temp
+p407：内置类型或组合类型的对象的值将是未定义的，而类对象将用默认构造函数进行初始化1234567891011string *ps = new string;  // empty stringint *pi = new int;  // uninitiali">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Hexo" title="Hexo"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Hexo">Hexo</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:example.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2022/10/12/C-primer/" title="C++ primer" itemprop="url">C++ primer</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://example.com" title="John Doe">John Doe</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2022-10-12T12:07:04.000Z" itemprop="datePublished">2022-10-12</time>
+    Updated:<time datetime="2022-10-22T00:41:39.360Z" itemprop="dateModified">2022-10-22</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TODO%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">TODO：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#temp"><span class="toc-number"></span> <span class="toc-text">temp</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number"></span> <span class="toc-text">知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-Oriented-Programming"><span class="toc-number">1.</span> <span class="toc-text">Object-Oriented Programming</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E5%88%97%E8%A1%A8"><span class="toc-number">1.1.</span> <span class="toc-text">对象列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#this-%E6%8C%87%E9%92%88"><span class="toc-number">1.2.</span> <span class="toc-text">this 指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-Scope-Constants"><span class="toc-number">1.3.</span> <span class="toc-text">Class Scope Constants</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%A5%E6%9C%89%E7%B1%BB%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B%EF%BC%88C-11%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">拥有类作用域的枚举类型（C++11）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%96%B9%E9%9D%A2%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="toc-number">2.</span> <span class="toc-text">输入输出方面的命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Separate-Compilation"><span class="toc-number">3.</span> <span class="toc-text">Separate Compilation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Storage-Duration-Scope-and-Linkage"><span class="toc-number">4.</span> <span class="toc-text">Storage Duration, Scope, and Linkage</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%88Scope%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">变量的作用域（Scope）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#volatile%E5%85%B3%E9%94%AE%E8%AF%8D"><span class="toc-number">4.1.1.</span> <span class="toc-text">volatile关键词</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mutable"><span class="toc-number">4.1.2.</span> <span class="toc-text">mutable</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#extern"><span class="toc-number">4.1.3.</span> <span class="toc-text">extern</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Functions-and-Linkage"><span class="toc-number">4.2.</span> <span class="toc-text">Functions and Linkage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Language-Linking"><span class="toc-number">4.3.</span> <span class="toc-text">Language Linking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Storage-Schemes-and-Dynamic-Allocation"><span class="toc-number">4.4.</span> <span class="toc-text">Storage Schemes and Dynamic Allocation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8D%E5%AD%97%E5%9F%9F"><span class="toc-number">4.5.</span> <span class="toc-text">名字域</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF"><span class="toc-number">5.</span> <span class="toc-text">函数模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88"><span class="toc-number">6.</span> <span class="toc-text">函数指针</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">6.1.</span> <span class="toc-text">函数指针可能遇到的问题</span></a></li></ol></li></ol>
+		</div>
+		
+		<h2 id="TODO："><a href="#TODO：" class="headerlink" title="TODO："></a>TODO：</h2><p>总结各种初始化方法</p>
+<h1 id="temp"><a href="#temp" class="headerlink" title="temp"></a>temp</h1><ul>
+<li>p407：内置类型或组合类型的对象的值将是未定义的，而类对象将用默认构造函数进行初始化<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">string *ps = <span class="keyword">new</span> string;  <span class="comment">// empty string</span></span><br><span class="line"><span class="type">int</span> *pi = <span class="keyword">new</span> <span class="type">int</span>;  <span class="comment">// uninitialized int</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 值初始化</span></span><br><span class="line"><span class="type">int</span> *pi2 = <span class="keyword">new</span> <span class="built_in">int</span>(); <span class="comment">// initialized as 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 拷贝构造也可以这样</span></span><br><span class="line"><span class="keyword">auto</span> p1 = <span class="keyword">new</span> <span class="built_in">auto</span>(p2);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 动态分配const 对象</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *pci = <span class="keyword">new</span> <span class="type">const</span> <span class="built_in">int</span>(<span class="number">1024</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>有一个很容易出错的点，当函数返回一个指向动态内存的指针的时候，调用者需要自行删除内存。还有在内存被释放之后，应该将指针空，这样可以防止使用被释放了的内存。当同一块内存释放两次，可能会对自由空间造成破坏。</p>
+<ul>
+<li><p>接受指针参数的只能智能指针的构造函数是explicit的，所以不能将一个内置的指针隐式地转换成智能指针</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">shared_ptr&lt;<span class="type">int</span>&gt; p1 = <span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">1024</span>); <span class="comment">// Error!</span></span><br><span class="line">shared_ptr&lt;<span class="type">int</span>&gt;<span class="built_in">p2</span>(<span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">42</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 同样函数作为返回值的时候也是不能进行隐式转换的</span></span><br><span class="line"><span class="function">shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">clone</span><span class="params">(<span class="type">int</span> p)</span></span>&#123;</span><br><span class="line">	<span class="comment">// return new int(p); // Error!</span></span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">shared_ptr</span>&lt;<span class="type">int</span>&gt;(<span class="keyword">new</span> <span class="built_in">int</span> (p));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在利用智能指针进行传参的时候，不能直接传入一个内置的指针</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">process</span><span class="params">(shared_ptr&lt;<span class="type">int</span>&gt; ptr)</span></span>&#123; <span class="comment">// 智能指针的引用+1，在函数中的引用不会小于2</span></span><br><span class="line">	....</span><br><span class="line">&#125;<span class="comment">// 离开作用域之后，ptr所指向的内存不会被销毁</span></span><br><span class="line"><span class="comment">// 你需要使用一个临时变量进行传参</span></span><br><span class="line"><span class="function">shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">42</span>))</span></span>;</span><br><span class="line"><span class="built_in">process</span>(p); <span class="comment">// 离开作用域之后p这个临时变量就会被销毁</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用get函数能够获得智慧指针的内置指针。</p>
+</li>
+</ul>
+<p><code>永远不要get初始化另一个智能指针或者为另一个智能指针赋值</code>。他们会指向相同的内存</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">42</span>))</span></span>;</span><br><span class="line"><span class="type">int</span> *q = p.<span class="built_in">get</span>();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>其他操作<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 检查p是不是指向该内存的唯一指针，是则重置并分配指针</span></span><br><span class="line"><span class="keyword">if</span>(!p.<span class="built_in">unique</span>())p.<span class="built_in">reset</span>(<span class="keyword">new</span> <span class="built_in">string</span>(*p));</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">smart</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> p = <span class="keyword">new</span> <span class="built_in">int</span>();</span><br><span class="line">    <span class="keyword">auto</span> sp = <span class="built_in">shared_ptr</span>&lt;<span class="type">int</span>&gt;(p);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;address of p: &quot;</span> &lt;&lt; p </span><br><span class="line">        &lt;&lt; <span class="string">&quot;\n addresss of sp:&quot;</span> &lt;&lt; sp  <span class="comment">// p与sp的地址相同 </span></span><br><span class="line">        &lt;&lt; <span class="string">&quot;\n Count:&quot;</span> &lt;&lt; sp.<span class="built_in">use_count</span>() &lt;&lt; endl;  <span class="comment">// 1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<strong>unique_ptr</strong></li>
+</ul>
+<p>这种指针只能指向一个给定的对象，不支持普通的拷贝或者赋值操作，没有类似<code>make_shared</code>的标准库函数返回一个这样的指针，只能通过绑定到一个new返回的指针上</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 转移</span></span><br><span class="line">unique_ptr&lt;<span class="type">int</span>&gt;<span class="built_in">p1</span>(p2.<span class="built_in">release</span>());</span><br><span class="line"><span class="comment">// 或者.reset释放了p1指向的内存</span></span><br><span class="line">p1.<span class="built_in">reset</span>(p2.<span class="built_in">release</span>());</span><br><span class="line">p2.<span class="built_in">release</span>(); <span class="comment">// Error!要释放p2指向的内存</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><ul>
+<li><p>当结构体很大且需要将结构体作为指针传入到函数中的时候，这时候最好是转入一个结构体指针</p>
+</li>
+<li><p>C++的函数名表示函数指针，你可以使用这个函数名作为函数的输入参数</p>
+</li>
+<li><p>C++中不允许<code>main()</code>调用自己，而在C语言中可以</p>
+</li>
+<li><p>存在递归的函数不能设置为内联函数</p>
+</li>
+<li><p>应该将默认参数全部放在参数的最后。</p>
+</li>
+<li><p>使用别名传参（引用传参）的时候，传入的变量会可能会被修改，其效果和传址的方式类似。</p>
+</li>
+</ul>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span>  <span class="title">swap</span> <span class="params">(<span class="type">int</span> &amp;a, <span class="type">int</span> &amp;b)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line"><span class="built_in">swap</span> (a, b);</span><br><span class="line"><span class="comment">//这个时候函数体内的变量和传入的变量是同一个变量</span></span><br></pre></td></tr></table></figure>
+
+<img src="/.com//10/12/C-primer/20211209210853.png" class>
+<ul>
+<li>**重载解析(Overload Resolution)**： 编译器选择哪一个版本的函数的过程（函数可能经过重载等会有多个同名函数）</li>
+</ul>
+<h2 id="Object-Oriented-Programming"><a href="#Object-Oriented-Programming" class="headerlink" title="Object-Oriented Programming"></a>Object-Oriented Programming</h2><ul>
+<li>在类中定义的任何函数在默认情况下都会被认为是内联函数（内联函数只能在定义它的文件当中使用，但是一些编译器有智能链接器，可以让内联函数在其他文件当中被使用）<u>p517最后一段不是很理解</u><blockquote>
+<p><strong>重写逻辑（Rewriting Rule）</strong>：</p>
+</blockquote>
+</li>
+<li>其实类的使用与client-sever模型很相似</li>
+<li>如果有一种更好的实现方法，那么你应该仅修改函数的具体实现细节，而不是对应的接口</li>
+</ul>
+<p><strong>构造函数</strong>：</p>
+<ul>
+<li>如果没有构造函数，你不能直接对类进行初始化，因为这些数据是仅能进行私有访问的，所以你需要一个能够访问这些私有变量的函数，也就是构造函数。</li>
+<li>构造函数不需要返回值类型，名称应该与类名一致，并且构造函数还会在类被定义的时候自动被调用，同时为了避免混淆，构造函数中的参数名称不能与成员变量的名称一致，对于成员变量可以在变量名称前面加上<code>m_</code>或者在名称后面加上<code>_</code></li>
+</ul>
+<p>构造函数不能直接通过对象直接访问，当构造函数完成它的任务之后，这个对象的构造函数就消失了。</p>
+<p><strong>关于构造函数的使用</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Stock food = <span class="built_in">Stock</span>(<span class="string">&quot;World Cabbage&quot;</span>, <span class="number">250</span>, <span class="number">1.25</span>);</span><br><span class="line"></span><br><span class="line"><span class="function">Stock <span class="title">garment</span><span class="params">(<span class="string">&quot;Furry Mason&quot;</span>, <span class="number">50</span>, <span class="number">2.5</span>)</span></span>;</span><br><span class="line">Stock pstock* = <span class="keyword">new</span> <span class="built_in">Stock</span>(<span class="string">&quot;Electroshock Games&quot;</span>, <span class="number">19</span>, <span class="number">19.0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// List Initialization</span></span><br><span class="line">Stock hot_tip = &#123;<span class="string">&quot;Derivative Plus Plus&quot;</span>, <span class="number">100</span>, <span class="number">45.0</span>&#125;;</span><br><span class="line">Stock hot_tip&#123;<span class="string">&quot;Derivative Plus Plus&quot;</span>, <span class="number">100</span>, <span class="number">45.0</span>&#125;</span><br><span class="line">Stock temp&#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在对一个以赋值的类变量进行赋值的时候，编译器会先构造一个临时的变量，然后将内容转移到另一个类变量中，这时候再删除这个变量。一些编译器会让这个临时变量存在一段时间，之后再调用析构函数。下面是一个关于这方面的例子，首先利用一个构造函数创建一个变量，然后对这个变量进行一个重新赋值，这时候，就需要上面的临时变量了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Stock stock2 = <span class="built_in">Stock</span>(<span class="string">&quot;Boffo Objects&quot;</span>, <span class="number">2</span>, <span class="number">2.0</span>);  <span class="comment">// Constructor called</span></span><br><span class="line">stock2 = <span class="built_in">Stock</span>(<span class="string">&quot;Nifty Foods&quot;</span>, <span class="number">10</span>, <span class="number">50.0</span>); <span class="comment">// The constructor and destructor for temporary variable will be called</span></span><br></pre></td></tr></table></figure>
+<p>所以可以看出，<strong>利用第一种方法直接对变量初始化是一种更加高效的方法</strong>（防止临时变量的出现）。</p>
+<p>当程序退出的时候，先声明的变量的构造器会最后被调用，因为这些变量都是存放在一个栈中的。</p>
+<p>**<code>const</code> 成员函数 (静态成员变量)**：<br>有时候用一个const关键字修饰了一个类变量，这个变量应该是不能被修改的，但是对于一些函数不能保证不修改这个变量，所以可以在函数后面加上一个<code>const</code>关键字，声明这个函数是不修改静态变量的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span> <span class="type">const</span></span>; <span class="comment">// Promises not to change invoking object</span></span><br></pre></td></tr></table></figure>
+<p>TIPS：当你声明的成员函数不修改变量的时候，你最好在后面加上一个<code>const</code>关键字。</p>
+<h3 id="对象列表"><a href="#对象列表" class="headerlink" title="对象列表"></a>对象列表</h3><p>你可以对列表中的每一个元素分别使用构造函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> STKS = <span class="number">4</span>;</span><br><span class="line">Stock stocks[STKS] = &#123;</span><br><span class="line">	<span class="built_in">Stock</span>(<span class="string">&quot;NanoSmart&quot;</span>, <span class="number">12.5</span>, <span class="number">20</span>),</span><br><span class="line">	<span class="built_in">Stock</span>(<span class="string">&quot;Boffo Objects&quot;</span>, <span class="number">200</span>, <span class="number">2.0</span>),</span><br><span class="line">	<span class="built_in">Stock</span>(<span class="string">&quot;Monolithic Obelisks&quot;</span>, <span class="number">130</span>, <span class="number">3.25</span>),</span><br><span class="line">	<span class="built_in">Stock</span>(<span class="string">&quot;Fleep Enterprises&quot;</span>, <span class="number">60</span>, <span class="number">6.5</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="this-指针"><a href="#this-指针" class="headerlink" title="this 指针"></a>this 指针</h3><p>一个指向类自己的指针，当一个函数访问私有变量的时候，实际上就是在使用this这个类来访问。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A member function</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cout &lt;&lt; val&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// C-type</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">(<span class="type">const</span> Stock*<span class="keyword">this</span>)</span></span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="keyword">this</span>-&gt;val&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Class-Scope-Constants"><a href="#Class-Scope-Constants" class="headerlink" title="Class Scope Constants"></a>Class Scope Constants</h3><p>属于这个类的常量。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">test</span>&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">enum</span> &#123;Months=<span class="number">12</span>&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种声明不会创建类数据成员。</p>
+<p>第二种定义类内常量的方式——使用关键词<code>static</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Bakery</span>&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">static</span> <span class="type">const</span> <span class="type">int</span> Months = <span class="number">12</span>;</span><br><span class="line">	....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="拥有类作用域的枚举类型（C-11）"><a href="#拥有类作用域的枚举类型（C-11）" class="headerlink" title="拥有类作用域的枚举类型（C++11）"></a>拥有类作用域的枚举类型（C++11）</h3><p>在通常的枚举类型中，其中的枚举变量的名称不能一致，因为两个不同的枚举变量之间的作用域是一致的，但是在C++11中，提供了一种拥有类作用域的枚举类型</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum class</span> <span class="title class_">egg</span>&#123;Small, Medium, Large, Jumbo&#125;;</span><br><span class="line">egg choice = egg::Larger;</span><br></pre></td></tr></table></figure>
+<p>但是不像传统的枚举类型，类枚举类型不能进行隐式类型转换。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">egg_old</span> &#123;Small, Medium, Large, Jumbo&#125;; <span class="comment">// unscoped</span></span><br><span class="line"><span class="keyword">enum class</span> <span class="title class_">t_shirt</span> &#123;Small, Medium, Large, Xlarge&#125;; <span class="comment">// scoped</span></span><br><span class="line">egg_old one = Medium; <span class="comment">// unscoped</span></span><br><span class="line">t_shirt rolf = t_shirt::Large; <span class="comment">// scoped</span></span><br><span class="line"><span class="type">int</span> king = one; <span class="comment">// implicit type conversion for unscoped</span></span><br><span class="line"><span class="type">int</span> ring = rolf; <span class="comment">// not allowed, no implicit type conversion</span></span><br><span class="line"><span class="keyword">if</span> (king &lt; Jumbo) <span class="comment">// allowed</span></span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;Jumbo converted to int before comparison.\n&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (king &lt; t_shirt::Medium) <span class="comment">// not allowed</span></span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;Not allowed: &lt; not defined for scoped enum.\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 但是可以进行显示类型转换</span></span><br><span class="line"><span class="type">int</span> Frodo = <span class="built_in">int</span>(t_shirt::Small);</span><br><span class="line"></span><br><span class="line"><span class="comment">//可以指定其中变量的类型</span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">class</span> : <span class="type">short</span> pizza &#123;Small, Medium, Large, XLarge&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="输入输出方面的命令"><a href="#输入输出方面的命令" class="headerlink" title="输入输出方面的命令"></a>输入输出方面的命令</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">getline</span>(cin, string_var); <span class="comment">// 读取整行，包括前导和嵌入的空格（应该是遇到&quot;\n&quot;时结束）</span></span><br><span class="line">cin &gt;&gt; char_variable; <span class="comment">// 从第一个非空格开始阅读，当读取到下一个空白字符时，停止读取</span></span><br><span class="line">cin.<span class="built_in">get</span>(); <span class="comment">// cin对象的内置函数，获取一个字符，并返回（赋值的方式）</span></span><br><span class="line"><span class="comment">/*对于这个函数，可以用于暂停程序的一个方法（按下回车以继续）*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// What are the differences they make ?</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Separate-Compilation"><a href="#Separate-Compilation" class="headerlink" title="Separate Compilation"></a>Separate Compilation</h2><p>在编写大型程序的时候，最好将程序放在三个文件当中。</p>
+<ul>
+<li>一个是头文件，这个用于存储函数头和一些结构体的声明，但是不能定义一些具体的变量，因为这个头文件可能会被不同的程序文件所包含，这使得头文件可能会被反复编译，这可能会导致重定义的问题。</li>
+<li>一个是用于定义函数的文件。</li>
+<li>一个是主程序文件，这个文件中包含main文件。</li>
+</ul>
+<p><strong>守卫</strong>：为了防止一些变量被反复编译，C++中定义了守卫</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># ifndefine FUNCTION_NAME</span></span><br><span class="line"><span class="meta"># <span class="keyword">define</span> FUNCTION_NAME</span></span><br><span class="line">....<span class="comment">// Your code</span></span><br><span class="line"><span class="meta"># <span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>当存在多个程序文件的时候，程序就会进行联合编译。在window中直接运行即可，但是在UNIX系统中需要指定联合编译的文件。(在Linux系统中只需要执行其中一个文件即可，这是用include语句包含了对应的文件)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CC file1.cpp file2.cpp</span><br><span class="line"></span><br><span class="line">g++ file1.cpp file2.cpp</span><br></pre></td></tr></table></figure>
+
+<p>在包含文件的时候，不同的标点符号会使得程序查找文件的范围顺序有所差异</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">include</span> <span class="string">&lt;file&gt;</span>  <span class="comment">//在系统文件中寻找</span></span></span><br><span class="line"><span class="meta"># <span class="keyword">include</span> <span class="string">&quot;file&quot;</span>  <span class="comment">// 优先在当前路径下查找文件</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="Storage-Duration-Scope-and-Linkage"><a href="#Storage-Duration-Scope-and-Linkage" class="headerlink" title="Storage Duration, Scope, and Linkage"></a>Storage Duration, Scope, and Linkage</h2><p>C++中的常见变量的生命周期：</p>
+<ol>
+<li><strong>Automatic storage duration</strong> ： 在函数中定义的变量，当函数结束的时候，变量会被释放</li>
+<li><strong>Static storage duration</strong>： 在函数外或者其他地方定义的变量，当程序结束的时候被释放</li>
+<li><strong>Thread storage duration (C++11)</strong> ： 生命周期局限于某一个线程</li>
+<li><strong>Dynamic storage duration</strong> ： 由关键字<code>new</code>申请的空间，生命周期由操作者确定，或者在程序结束的时候被释放</li>
+</ol>
+<h3 id="变量的作用域（Scope）"><a href="#变量的作用域（Scope）" class="headerlink" title="变量的作用域（Scope）"></a>变量的作用域（Scope）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> outter = <span class="number">100</span>;</span><br><span class="line">	<span class="keyword">if</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">		<span class="type">int</span> outter = <span class="number">10</span>;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;The inner = &quot;</span> &lt;&lt; outter &lt;&lt; endl; <span class="comment">// 这里的outter与外部的无关</span></span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;The outer = &quot;</span> &lt;&lt; outter &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* The inner = 10</span></span><br><span class="line"><span class="comment">The outer = 100*/</span></span><br></pre></td></tr></table></figure>
+<p>在函数内部出现与全局变量一致的变量，这个时候函数内的这个变量会是局部变量，想要访问全局变量需要使用作用域解析运算符<code>::</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> warming = <span class="number">10</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">local</span> <span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">double</span> warming = <span class="number">5</span>;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;Local = &quot;</span>&lt;&lt; warming&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;Global = &quot;</span>&lt;&lt; :: warming &lt;&lt; endl;  <span class="comment">// 访问全局变量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译器是通过利用栈将这些变量的优先级进行调整的，当进入一个函数的时候，声明的变量会出现在栈顶端，这时候条用这个变量的时候就会优先调用这个函数内的局部变量。<br>全局变量应该仅仅被使用于一些通用的变量</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span> * <span class="type">const</span> months[<span class="number">12</span>] =</span><br><span class="line">&#123;</span><br><span class="line"><span class="string">&quot;January&quot;</span>, <span class="string">&quot;February&quot;</span>, <span class="string">&quot;March&quot;</span>, <span class="string">&quot;April&quot;</span>, <span class="string">&quot;May&quot;</span>,</span><br><span class="line"><span class="string">&quot;June&quot;</span>, <span class="string">&quot;July&quot;</span>, <span class="string">&quot;August&quot;</span>, <span class="string">&quot;September&quot;</span>, <span class="string">&quot;October&quot;</span>,</span><br><span class="line"><span class="string">&quot;November&quot;</span>, <span class="string">&quot;December&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">这里第二个const是为了保证数组不被改变，第一个是为了使得数组内的指针所指向的元素</span></span><br><span class="line"><span class="comment">不会发生改变</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">这样理解：第一个const实际上是得到一个类型const char* 这代表数组元素，第二个修饰数组</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p><code>const</code>关键词实际上就是在表明变量的<strong>内存</strong>一旦确定之后在之后就不应该被改变了<br>在联合编译的时候，一个文件中定义的全局变量会在另外一个文件中被访问到，这时候可以使用<code>static</code>关键词，这使得这个变量仅仅存在于当前文件中。</p>
+<blockquote>
+<p>在Ubuntu上面没有办法成功编译！</p>
+</blockquote>
+<p>在函数内定义变量时加上这个关键词，则可以使得这个变量在整个文件中都能够被访问到。<br>当这个关键词被加上之后，这个变量当且仅当被定义的时候初始化为0，其余的时候这其中的值不会被初始化。</p>
+<h4 id="volatile关键词"><a href="#volatile关键词" class="headerlink" title="volatile关键词"></a>volatile关键词</h4><p>当一个变量多次被使用的时候，编译器会将这个变量放到寄存器中，也就是说编译器会为了系统的优化改动定义的变量存储的地址。如果加上<code>volatile</code>关键词，那么这种改动就不会发生</p>
+<h4 id="mutable"><a href="#mutable" class="headerlink" title="mutable"></a>mutable</h4><p>在一个<code>const</code>修饰的变量中，被<code>mutable</code>修饰的成员变量还是能够被修改.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">data</span>&#123;</span><br><span class="line">	<span class="keyword">mutable</span> <span class="type">int</span> data;</span><br><span class="line">	<span class="type">float</span> value;</span><br><span class="line">&#125;</span><br><span class="line">data d = &#123;<span class="number">10</span>, <span class="number">10.23</span>&#125;</span><br><span class="line">d.data = <span class="number">20</span>; <span class="comment">// Allow</span></span><br><span class="line">d.value = <span class="number">10.20</span>; <span class="comment">// Disallow</span></span><br></pre></td></tr></table></figure>
+<h4 id="extern"><a href="#extern" class="headerlink" title="extern"></a>extern</h4><p><code>extern</code> 修饰的变量不能直接初始化。<br>但是如果想用常量作为具有外部链接的变量，那么可以使用<code>const</code>重载这个修辞</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="keyword">extern</span> <span class="type">int</span> con = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Functions-and-Linkage"><a href="#Functions-and-Linkage" class="headerlink" title="Functions and Linkage"></a>Functions and Linkage</h3><p>由于C++中不允许一个函数在另外一个函数中定义，所以，所有的函数的作用域都是静态存储的周期（当程序结束时被释放）。但是你可以在函数原型前面加上一些关键词来指定函数的作用域（像<code>extern</code>、<code>static</code>等）<br>在默认的情况下，函数都是有外部链接的，也就是说联合编译中，其他文件是可以调用不同文件中的函数的。但是要调用其他文件中的函数还是需要包含所使用函数的函数原型。<br>编译器查找的方式是根据函数原型的作用域确定查找范围的。如果你在文件中定义了一个与外部函数有相同名称的函数，那么最终的这个内部链接的函数还覆盖外部链接的函数。</p>
+<h3 id="Language-Linking"><a href="#Language-Linking" class="headerlink" title="Language Linking"></a>Language Linking</h3><p>编译器在链接的过程中需要为每一个不同的函数找一个不同的符号名称（symbolic name）。在C语言中，因为函数不允许重载，所以可以在函数名称前面简单地加上一个下划线即可，但是由于在C++中存在函数的重载，所以需要正在这个符号语言中加上函数的参数信息。例如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spiff(double, double) to _spiff_d_d</span><br></pre></td></tr></table></figure>
+<p>如果我们需要在C++中使用C语言中的函数，我们可以显式地指定这种符号名称的类型</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> <span class="function"><span class="type">void</span> <span class="title">spiff</span><span class="params">(<span class="type">int</span>)</span></span>; <span class="comment">// use C protocol for name look-up</span></span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="type">void</span> <span class="title">spoff</span><span class="params">(<span class="type">int</span>)</span></span>; <span class="comment">// use C++ protocol for name look-up</span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C++&quot;</span> <span class="function"><span class="type">void</span> <span class="title">spaff</span><span class="params">(<span class="type">int</span>)</span></span>; <span class="comment">// use C++ protocol for name look-up</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Storage-Schemes-and-Dynamic-Allocation"><a href="#Storage-Schemes-and-Dynamic-Allocation" class="headerlink" title="Storage Schemes and Dynamic Allocation"></a>Storage Schemes and Dynamic Allocation</h3><p>编译器会为不同的变量划分出三个不同的内存，分别是：<code>静态变量区</code>、<code>局部变量区（automatic variable）</code>、<code>动态变量区</code>。但是，编译器会适应静态变量存储区或者局部变量区的内存跟踪动态变量区的变量（也就是指针）。</p>
+<blockquote>
+<p>虽然说动态生成的数据的存储空间在程序结束的时候会自动被释放掉，但是对于一些健壮性不是很好的操作系统，这个自动过程可能不会自动执行，所以还是最好使用<code>delete</code>将<code>new</code>出来的变量删掉。</p>
+</blockquote>
+<p>动态变量的初始化：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *a = <span class="keyword">new</span> <span class="built_in">int</span> (<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">name</span>&#123;<span class="type">int</span> x; <span class="type">int</span> y; <span class="type">int</span> z&#125;;</span><br><span class="line"></span><br><span class="line">name* n = <span class="keyword">new</span> name&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;  <span class="comment">// 初始化结构体</span></span><br></pre></td></tr></table></figure>
+<p><code>new</code>、<code>delete</code>是可以被替换的，所以你可以根据自己的需求对这两个函数进行调整。<br>你可以指定申请变量的存储的地址</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">include</span><span class="string">&lt;new&gt;</span></span></span><br><span class="line"><span class="type">char</span> buffer[<span class="number">100</span>]; <span class="comment">// 在静态变量区申请的内存</span></span><br><span class="line"><span class="type">int</span>* a = <span class="built_in">new</span> (buffer) <span class="type">double</span> [<span class="number">10</span>]; <span class="comment">// 申请的变量会被存储在指定的内存区域</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 但是最终不能使用delete删除，这会导致错误。这是因为变量申请的空间是在静态变量空间中，而delete只能删除动态变量空间</span></span><br></pre></td></tr></table></figure>
+<p>传统的<code>new</code>会存储之前可用的内存的位置，或者搜索可用的内存，但是可替换的<code>new</code>不会检查当前的内存是否被占用，也不存储之前可用的内存的位置信息。<br>实际上可替换的<code>new</code>只是简单地将传入的地址的类型转换成<code>void*</code>使得输出的地址能够分配给任意类型的指针。</p>
+<h3 id="名字域"><a href="#名字域" class="headerlink" title="名字域"></a>名字域</h3>
+<p>在每一个定义区域中各个变量之间的定义不会发生冲突。</p>
+<img src="/.com//10/12/C-primer/Scope.png" class>
+<p>作用域，指的是在变量定义之后的区域，也就是程序中可以使用这个变量的区域。不同的定义区域中的变量的作用域不会发生冲突。</p>
+<p>使用关键字<code>namespace</code>定义自己的名字域,这些名字域中可以包含函数或者其他名字域，也可以自己在里面定义一个名字域。由于为了防止直接导入一些不需要的变量可能导致的问题，你可以使用名字域解析运算符或者指定导入变量的方式。也可以自定义一个名字域，在其中放入自己常用的函数或变量。</p>
+<p>将名字域导入到当前的定义域中的方法</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> Name&#123;</span><br><span class="line">	<span class="type">int</span> age = <span class="number">20</span>;</span><br><span class="line">	string first;</span><br><span class="line">	string second;</span><br><span class="line">	<span class="function">string <span class="title">Concatenate</span><span class="params">(string a, string b)</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> a + b;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">using</span> std::out;</span><br><span class="line">	<span class="keyword">using</span> std::endl;</span><br><span class="line">	<span class="keyword">namespace</span> life&#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 给名字域起一个别名</span></span><br><span class="line"><span class="keyword">namespace</span> n = Name::life</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="built_in">func</span>()&#123;</span><br><span class="line">	<span class="comment">// using declaration</span></span><br><span class="line">	<span class="keyword">using</span> Name::first;</span><br><span class="line">	<span class="comment">//这种方式就是将这个变量导入到当前的定义域中，这时候first不能再次被定义</span></span><br><span class="line">	<span class="comment">// 有时候利用这种方式导入，可能会导致冲突，编译器会避免这种导入</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> age = <span class="number">25</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func2</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">// using directive</span></span><br><span class="line">	<span class="keyword">using</span> <span class="keyword">namespace</span> Name; <span class="comment">// 导入到当前定义域，其他的定义域中不能使用这个名字域 </span></span><br><span class="line">	<span class="type">int</span> age = <span class="number">10</span>;</span><br><span class="line">	cout &lt;&lt; age &lt;&lt; Name::age &lt;&lt; ::age; <span class="comment">// 10 20 25</span></span><br><span class="line">	<span class="comment">//这种方式导入，当前的定义域可以直接使用名字域中所有的变量，但是其中的变量没有局部作用域，所以可以被覆写</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于名字域的定义不一定需要指定名字。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> &#123;</span><br><span class="line">	<span class="type">int</span> count;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 接下来的代码都能够使用这里的变量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> count;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意一点，静态变量不是不能修改，而是只会初始化一次。之后在遇到初始化的语句就会直接被忽略。</p>
+</blockquote>
+<h2 id="函数模板"><a href="#函数模板" class="headerlink" title="函数模板"></a>函数模板</h2><ul>
+<li>在使用模板的时候，如果出现比较，那么比较的东西可能会与预期的不太一致。还有在赋值的时候可能会出现数值和地址之间的冲突。<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T c = a*b <span class="comment">// 这时候c可能会被赋予一个新的地址</span></span><br></pre></td></tr></table></figure>
+当你想要对模板类型进行具体化的时候，可以采用以下策略：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function">T <span class="title">maxn</span><span class="params">(T arr[], <span class="type">int</span> n)</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="type">char</span>* <span class="built_in">maxn</span>&lt;<span class="type">char</span>*&gt;(<span class="type">char</span>* arr[], <span class="type">int</span> n)&#123;&#125;  <span class="comment">// &lt;char*&gt;是可以忽略的</span></span><br></pre></td></tr></table></figure>
+ 在对模板类型进行具体化的时候，这个过程称为Implicit Instantiation,但是C++提供了显示初始化Explicit Instantiation. <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> <span class="type">void</span> <span class="built_in">Swap</span>&lt;<span class="type">int</span>&gt;(<span class="type">int</span> &amp;, <span class="type">int</span> &amp;);</span><br><span class="line"><span class="function"><span class="keyword">template</span> <span class="type">void</span> <span class="title">Swap</span><span class="params">(<span class="type">int</span> &amp;, <span class="type">int</span> &amp;)</span></span>;</span><br></pre></td></tr></table></figure>
+ 当输入的变量类型不一致的时候，使用模板的函数可能会报错，这时候需要显示实例化 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="function">T <span class="title">Add</span><span class="params">(T a, T b)</span> <span class="keyword">return</span> a + b</span>;</span><br><span class="line"><span class="type">int</span> m = <span class="number">6</span>;</span><br><span class="line"><span class="type">double</span> x = <span class="number">10.2</span>;</span><br><span class="line">cout &lt;&lt; <span class="built_in">Add</span>&lt;<span class="type">double</span>&gt;(x,m) &lt;&lt; endl;  <span class="comment">// 不实例化会导致报错 p429</span></span><br></pre></td></tr></table></figure>
+ 上述概念的使用场景：</li>
+<li>隐式具体化—模板类型的自动推断</li>
+<li>显示具体化—自定义类型的参数必须使用（？）</li>
+<li>显示实例化—实例化参数 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Swap</span> <span class="params">(T &amp;, T &amp;)</span></span>; <span class="comment">// template prototype</span></span><br><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="type">void</span> <span class="built_in">Swap</span>&lt;job&gt;(job &amp;, job &amp;); <span class="comment">// explicit specialization for job</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">template</span> <span class="type">void</span> <span class="built_in">Swap</span>&lt;<span class="type">char</span>&gt;(<span class="type">char</span> &amp;, <span class="type">char</span> &amp;); <span class="comment">// explicit instantiation for char</span></span><br><span class="line"><span class="type">short</span> a, b;</span><br><span class="line">...</span><br><span class="line"><span class="built_in">Swap</span>(a,b); <span class="comment">// implicit template instantiation for short</span></span><br><span class="line">job n, m;</span><br><span class="line">...</span><br><span class="line"><span class="built_in">Swap</span>(n, m); <span class="comment">// use explicit specialization for job</span></span><br><span class="line"><span class="type">char</span> g, h;</span><br><span class="line">...</span><br><span class="line"><span class="built_in">Swap</span>(g, h); <span class="comment">// use explicit template instantiation for char</span></span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h2><p>我们想让一个函数能够调用其他函数。这需要完成以下三个步骤：</p>
+<ol>
+<li>获取函数的地址 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">process</span>(<span class="built_in">think</span>())  <span class="comment">// 将函数的返回值作为传入参数</span></span><br><span class="line"><span class="built_in">process</span>(think)   <span class="comment">// 将函数的地址作为参数</span></span><br></pre></td></tr></table></figure></li>
+<li>定义指向函数的指针<blockquote>
+<p>函数签名（function’s signature）: 函数的参数列表<br>C++中的<strong>函数签名</strong>(function signature)：包含了一个<strong>函数</strong>的信息，包括<strong>函数</strong>名、参数类型、参数个数、顺序以及它所在的类和命名空间。（这是为了帮助编译器准确地找到想要访问的函数）</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">pam</span><span class="params">(<span class="type">int</span>)</span></span>;  <span class="comment">// Function Prototype</span></span><br><span class="line"><span class="built_in">double</span> (*pf) (<span class="type">int</span>); <span class="comment">// 指针pf指向一个输入参数为int，输出为double的函数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*本质上就是将函数名用(*pf)进行代替了，这里还利用了括号的具有更高优先级的特性，指明这里是一个指</span></span><br><span class="line"><span class="comment">针，如果pf没有括号，那么就变成一个函数了*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">estimate</span><span class="params">(<span class="type">int</span> lines, <span class="type">double</span>(*pf)(<span class="type">int</span>))</span></span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>在函数中使用函数指针<br>可以通过函数名或者函数指针访问函数。<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> x = <span class="built_in">pam</span>(<span class="number">4</span>);  <span class="comment">// Prefer</span></span><br><span class="line"><span class="type">double</span> x = (*pf)(<span class="number">5</span>);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="函数指针可能遇到的问题"><a href="#函数指针可能遇到的问题" class="headerlink" title="函数指针可能遇到的问题"></a>函数指针可能遇到的问题</h3><p>定义以下函数的函数指针会不会重名？</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">const</span> <span class="type">double</span> * <span class="title">f1</span><span class="params">(<span class="type">const</span> <span class="type">double</span> ar[], <span class="type">int</span> n)</span></span>;</span><br><span class="line"><span class="function"><span class="type">const</span> <span class="type">double</span> * <span class="title">f2</span><span class="params">(<span class="type">const</span> <span class="type">double</span> [], <span class="type">int</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="type">const</span> <span class="type">double</span> * <span class="title">f3</span><span class="params">(<span class="type">const</span> <span class="type">double</span> *, <span class="type">int</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>向函数中传入一个数组和传入一个指针是等价的.</li>
+<li>在函数原型中，参数的名称是可以忽略的，“const double []”就是忽略了数组的名称<br>所以上述的三个函数是一致的</li>
+</ol>
+</blockquote>
+<p>在对函数指针进行初始化的时候，可以利用C++11的新特性，auto自动推断对应的类型</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">double</span> * (*p1)(<span class="type">const</span> <span class="type">double</span> *, <span class="type">int</span>) = f1;</span><br><span class="line"><span class="comment">// Equivelent to</span></span><br><span class="line"><span class="keyword">auto</span> p2 = f2;</span><br></pre></td></tr></table></figure>
+
+<p><strong>定义一个函数指针数组</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">double</span> * (*pa[<span class="number">3</span>])(<span class="type">const</span> <span class="type">double</span> *, <span class="type">int</span>) = &#123;f1, f2, f3&#125;;</span><br></pre></td></tr></table></figure>
+<p>分析中括号的作用： 因为中括号的优先级比较高，所以中括号优先指明这个名称是个数组</p>
+<blockquote>
+<p>Automatic type deduction works with a single initializer value, not an initialization list.也就是说这里前面的指针定义不能用auto代替（因为初始化的是一个数组）。但是我们能够用auto推断数组指针类型</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> pb = pa;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>数组名<code>a</code>表示的是数组的第一个元素的地址，<code>&amp;a</code>表示的所有数组所有元素的地址，<code>&amp;a+1</code>就表示下一个数组（是不是一个保存数组每一个元素的地址的数组？）</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">	<span class="type">int</span> a[<span class="number">3</span>]&#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span> &#125;;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;a:&quot;</span> &lt;&lt; a &lt;&lt; <span class="string">&quot;\t&amp;a:&quot;</span> &lt;&lt; &amp;a &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;size of a:&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(a) &lt;&lt; <span class="string">&quot;\tsize of &amp;a:&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(&amp;a) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;a + 1:&quot;</span> &lt;&lt; a + <span class="number">1</span> &lt;&lt; <span class="string">&quot;\t&amp;a+1&quot;</span> &lt;&lt; &amp;a + <span class="number">1</span> &lt;&lt; endl;</span><br><span class="line">	</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">a:00AFFCA4      &amp;a:00AFFCA4</span></span><br><span class="line"><span class="comment">size of a:12    size of &amp;a:4</span></span><br><span class="line"><span class="comment">a + 1:00AFFCA8  &amp;a+1:00AFFCB0  这里增加了C，也就是12</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">// 可见</span></span><br></pre></td></tr></table></figure>  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/C-primer/">C++ primer</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://example.com/2022/10/12/C-primer/" data-title="C++ primer | Hexo" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2022/10/21/6_S081lab1/" title="6.S081lab1">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  6.S081lab1</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2022/10/12/STL和泛型编程/"  title="STL和泛型编程">
+ <strong>NEXT:</strong><br/> 
+ <span>STL和泛型编程
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TODO%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">TODO：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#temp"><span class="toc-number"></span> <span class="toc-text">temp</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number"></span> <span class="toc-text">知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-Oriented-Programming"><span class="toc-number">1.</span> <span class="toc-text">Object-Oriented Programming</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E5%88%97%E8%A1%A8"><span class="toc-number">1.1.</span> <span class="toc-text">对象列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#this-%E6%8C%87%E9%92%88"><span class="toc-number">1.2.</span> <span class="toc-text">this 指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-Scope-Constants"><span class="toc-number">1.3.</span> <span class="toc-text">Class Scope Constants</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%A5%E6%9C%89%E7%B1%BB%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B%EF%BC%88C-11%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">拥有类作用域的枚举类型（C++11）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%96%B9%E9%9D%A2%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="toc-number">2.</span> <span class="toc-text">输入输出方面的命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Separate-Compilation"><span class="toc-number">3.</span> <span class="toc-text">Separate Compilation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Storage-Duration-Scope-and-Linkage"><span class="toc-number">4.</span> <span class="toc-text">Storage Duration, Scope, and Linkage</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%88Scope%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">变量的作用域（Scope）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#volatile%E5%85%B3%E9%94%AE%E8%AF%8D"><span class="toc-number">4.1.1.</span> <span class="toc-text">volatile关键词</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mutable"><span class="toc-number">4.1.2.</span> <span class="toc-text">mutable</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#extern"><span class="toc-number">4.1.3.</span> <span class="toc-text">extern</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Functions-and-Linkage"><span class="toc-number">4.2.</span> <span class="toc-text">Functions and Linkage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Language-Linking"><span class="toc-number">4.3.</span> <span class="toc-text">Language Linking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Storage-Schemes-and-Dynamic-Allocation"><span class="toc-number">4.4.</span> <span class="toc-text">Storage Schemes and Dynamic Allocation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8D%E5%AD%97%E5%9F%9F"><span class="toc-number">4.5.</span> <span class="toc-text">名字域</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF"><span class="toc-number">5.</span> <span class="toc-text">函数模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88"><span class="toc-number">6.</span> <span class="toc-text">函数指针</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">6.1.</span> <span class="toc-text">函数指针可能遇到的问题</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/C-primer/" title="C++ primer">C++ primer<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DB/" title="DB">DB<sup>1</sup></a></li>
+		
+			<li><a href="/tags/OS/" title="OS">OS<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Projects/" title="Projects">Projects<sup>1</sup></a></li>
+		
+			<li><a href="/tags/侯捷C/" title="侯捷C++">侯捷C++<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2023 
+		
+		<a href="http://example.com" target="_blank" title="John Doe">John Doe</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

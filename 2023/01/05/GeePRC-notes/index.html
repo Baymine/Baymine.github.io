@@ -1,0 +1,422 @@
+
+ <!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>GeePRC notes | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="项目大纲
+codec.go
+
+报文Header
+消息体编码解码的接口 Codec
+读取报头
+读取主体
+写入报头的方法
+
+
+Codec的构造函数
+可选用的编码方式
+存储在一个map中
+不同的编码方式调用不同的codec构造函数
+
+
+
+
+
+
+gob.go
+
+gob结构体
+GobCodec实现接口code">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Hexo" title="Hexo"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Hexo">Hexo</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:example.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2023/01/05/GeePRC-notes/" title="GeePRC notes" itemprop="url">GeePRC notes</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://example.com" title="John Doe">John Doe</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2023-01-05T08:48:47.000Z" itemprop="datePublished">2023-01-05</time>
+    Updated:<time datetime="2023-01-16T11:35:05.596Z" itemprop="dateModified">2023-01-16</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%A4%A7%E7%BA%B2"><span class="toc-number">1.</span> <span class="toc-text">项目大纲</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bug"><span class="toc-number">2.</span> <span class="toc-text">bug</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chanllenge"><span class="toc-number">3.</span> <span class="toc-text">Chanllenge</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%B2%98%E5%8C%85"><span class="toc-number">3.1.</span> <span class="toc-text">网络粘包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Great-designs"><span class="toc-number">4.</span> <span class="toc-text">Great designs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E9%80%9A%E9%81%93%E5%AE%9E%E7%8E%B0%E8%B6%85%E6%97%B6%E5%88%A4%E6%96%AD"><span class="toc-number">4.1.</span> <span class="toc-text">使用通道实现超时判断</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Knowledges"><span class="toc-number">5.</span> <span class="toc-text">Knowledges</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%BB%93%E6%9D%9F%E4%B8%80%E4%B8%AAgoroutine"><span class="toc-number">5.1.</span> <span class="toc-text">如何结束一个goroutine</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#encoding-x2F-gob"><span class="toc-number">5.2.</span> <span class="toc-text">encoding&#x2F;gob</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84"><span class="toc-number">5.3.</span> <span class="toc-text">反射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Context-package"><span class="toc-number">5.4.</span> <span class="toc-text">Context package</span></a></li></ol></li></ol>
+		</div>
+		
+		<h2 id="项目大纲"><a href="#项目大纲" class="headerlink" title="项目大纲"></a>项目大纲</h2><ul>
+<li><p>codec.go</p>
+<ul>
+<li>报文Header</li>
+<li>消息体编码解码的接口 Codec<ul>
+<li>读取报头</li>
+<li>读取主体</li>
+<li>写入报头的方法</li>
+</ul>
+</li>
+<li>Codec的构造函数</li>
+<li>可选用的编码方式<ul>
+<li>存储在一个map中<ul>
+<li>不同的编码方式调用不同的codec构造函数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>gob.go</p>
+<ul>
+<li>gob结构体</li>
+<li>GobCodec实现接口codec</li>
+</ul>
+</li>
+<li><p>server.go</p>
+<ul>
+<li>Option<ul>
+<li>标识<ul>
+<li>Magic number</li>
+</ul>
+</li>
+<li>编码方式</li>
+<li>默认的Option</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>main.go</p>
+<ul>
+<li>创建一个监听者<ul>
+<li>通过一个协程在执行</li>
+<li>协程中的得到的地址通过管道通知主线程</li>
+</ul>
+</li>
+<li>确定编码方式</li>
+<li>发送接收<ul>
+<li>创建报头</li>
+<li>写入<ul>
+<li>cc.Write()</li>
+</ul>
+</li>
+<li>接收回应<ul>
+<li>cc.ReadHeader()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="bug"><a href="#bug" class="headerlink" title="bug"></a>bug</h2><p>day5, go run main.go:<br>rpc server: register Foo.Sum<br>rpc server debug path: &#x2F;debug&#x2F;geerpc<br>call Foo.Sum error:rpc server: request handle timeout: expect within 10ns<br>exit status 1</p>
+<h2 id="Chanllenge"><a href="#Chanllenge" class="headerlink" title="Chanllenge"></a>Chanllenge</h2><h3 id="网络粘包"><a href="#网络粘包" class="headerlink" title="网络粘包"></a>网络粘包</h3><p>执行 <code>go test -v</code> 会有一定概率出现测试卡死无响应的bug<br><a target="_blank" rel="noopener" href="https://github.com/geektutu/7days-golang/issues/26">issue</a></p>
+<h2 id="Great-designs"><a href="#Great-designs" class="headerlink" title="Great designs"></a>Great designs</h2><h3 id="使用通道实现超时判断"><a href="#使用通道实现超时判断" class="headerlink" title="使用通道实现超时判断"></a>使用通道实现超时判断</h3><p>在goroutine中，完成一步之后往管道内传入<code>struct &#123;&#125;&#123;&#125;</code>这样，在goroutine外部就可以接收到这些信息，这样外部就知道goroutine内部某个函数完成了，</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">callChannel := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">  err := call(args)</span><br><span class="line">  callChannel &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">&#125;()</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> &#123;</span><br><span class="line">  <span class="keyword">case</span> &lt;-time.After(timeout):  <span class="comment">// 处理超时</span></span><br><span class="line">    timeout handling</span><br><span class="line">  <span class="keyword">case</span> &lt;-callChannel:</span><br><span class="line">    function finished</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Knowledges"><a href="#Knowledges" class="headerlink" title="Knowledges"></a>Knowledges</h2><h3 id="如何结束一个goroutine"><a href="#如何结束一个goroutine" class="headerlink" title="如何结束一个goroutine"></a>如何结束一个goroutine</h3><p>利用管道传入一个结束信息（这里是true），然后返回函数即可</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">quit := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">bool</span>)</span><br><span class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> &lt;- quit:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="comment">// Do other stuff</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;()</span><br><span class="line"></span><br><span class="line"><span class="comment">// Do stuff</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Quit goroutine</span></span><br><span class="line">quit &lt;- <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="encoding-x2F-gob"><a href="#encoding-x2F-gob" class="headerlink" title="encoding&#x2F;gob"></a>encoding&#x2F;gob</h3><ul>
+<li>Package gob 管理 gobs 流 - 在编码器（发送器）和解码器（接收器）之间交换的二进制值</li>
+<li><pre><code class="go">enc := gob.NewEncoder(&amp;network) // 将写入网络。
+dec := gob.NewDecoder(&amp;network) // 将从网络上读取。
+// Encoding（发送）一些值。
+err := enc.Encode(P&#123;3, 4, 5, &quot;Pythagoras&quot;&#125;)
+// 接收
+var q Q
+err = dec.Decode(&amp;q)
+</code></pre>
+</li>
+</ul>
+<h3 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h3><h3 id="Context-package"><a href="#Context-package" class="headerlink" title="Context package"></a>Context package</h3><ul>
+<li>context 主要用来在 goroutine 之间传递上下文信息，包括：取消信号、超时时间、截止时间、k-v 等。</li>
+<li>一句话：context 用来解决 goroutine 之间 <code>退出通知</code>、<code>元数据传递</code>的功能。</li>
+<li><img src="https://pic3.zhimg.com/80/v2-6a27526f536505cea08a5813ccce05b2_720w.webp"></li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Projects/">Projects</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://example.com/2023/01/05/GeePRC-notes/" data-title="GeePRC notes | Hexo" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2023/01/12/review-notes/" title="review notes">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  review notes</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2022/12/18/C-Memory-Management/"  title="C++ Memory Management">
+ <strong>NEXT:</strong><br/> 
+ <span>C++ Memory Management
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%A4%A7%E7%BA%B2"><span class="toc-number">1.</span> <span class="toc-text">项目大纲</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bug"><span class="toc-number">2.</span> <span class="toc-text">bug</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chanllenge"><span class="toc-number">3.</span> <span class="toc-text">Chanllenge</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%B2%98%E5%8C%85"><span class="toc-number">3.1.</span> <span class="toc-text">网络粘包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Great-designs"><span class="toc-number">4.</span> <span class="toc-text">Great designs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E9%80%9A%E9%81%93%E5%AE%9E%E7%8E%B0%E8%B6%85%E6%97%B6%E5%88%A4%E6%96%AD"><span class="toc-number">4.1.</span> <span class="toc-text">使用通道实现超时判断</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Knowledges"><span class="toc-number">5.</span> <span class="toc-text">Knowledges</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%BB%93%E6%9D%9F%E4%B8%80%E4%B8%AAgoroutine"><span class="toc-number">5.1.</span> <span class="toc-text">如何结束一个goroutine</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#encoding-x2F-gob"><span class="toc-number">5.2.</span> <span class="toc-text">encoding&#x2F;gob</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84"><span class="toc-number">5.3.</span> <span class="toc-text">反射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Context-package"><span class="toc-number">5.4.</span> <span class="toc-text">Context package</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/C-primer/" title="C++ primer">C++ primer<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DB/" title="DB">DB<sup>1</sup></a></li>
+		
+			<li><a href="/tags/OS/" title="OS">OS<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Projects/" title="Projects">Projects<sup>1</sup></a></li>
+		
+			<li><a href="/tags/侯捷C/" title="侯捷C++">侯捷C++<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2023 
+		
+		<a href="http://example.com" target="_blank" title="John Doe">John Doe</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
