@@ -1,0 +1,355 @@
+
+ <!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>论文笔记 | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="@[toc]
+Multi-band weighted lp norm minimization for image denois内容学习Low rank matrix approximation (LRMA)谱模（Spectral Norm，矩阵的模）：
+\|A\|_{2}=\sqrt{\lambd">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Hexo" title="Hexo"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Hexo">Hexo</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:example.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2021/04/25/论文笔记/" title="论文笔记" itemprop="url">论文笔记</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://example.com" title="John Doe">John Doe</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2021-04-25T07:06:35.000Z" itemprop="datePublished">2021-04-25</time>
+    Updated:<time datetime="2023-03-08T11:54:59.084Z" itemprop="dateModified">2023-03-08</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Multi-band-weighted-lp-norm-minimization-for-image-denois"><span class="toc-number">1.</span> <span class="toc-text">Multi-band weighted lp norm minimization for image denois</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.1.</span> <span class="toc-text">内容学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Low-rank-matrix-approximation-LRMA"><span class="toc-number">1.1.1.</span> <span class="toc-text">Low rank matrix approximation (LRMA)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%B1%E6%A8%A1"><span class="toc-number">1.1.2.</span> <span class="toc-text">谱模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E9%98%88%E5%80%BC%E5%87%BD%E6%95%B0%EF%BC%88Soft-threshold-Function%EF%BC%89"><span class="toc-number">1.1.3.</span> <span class="toc-text">软阈值函数（Soft-threshold Function）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E6%80%A7%E9%AB%98%E6%96%AF%E7%99%BD%E5%99%AA%E5%A3%B0%EF%BC%88additive-white-Gaussian-noise%EF%BC%89"><span class="toc-number">1.1.4.</span> <span class="toc-text">加性高斯白噪声（additive white Gaussian noise）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%EF%BC%88regularization%EF%BC%89"><span class="toc-number">1.1.5.</span> <span class="toc-text">正则化（regularization）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E4%B9%98%E6%95%B0%EF%BC%88Lagrange-multiplier%EF%BC%89"><span class="toc-number">1.1.6.</span> <span class="toc-text">拉格朗日乘数（Lagrange multiplier）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Optimization-by-Simulated-Annealing"><span class="toc-number">2.</span> <span class="toc-text">Optimization by Simulated Annealing</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Metropolis-algorithm"><span class="toc-number">2.1.</span> <span class="toc-text">Metropolis algorithm</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Markvo-Chain"><span class="toc-number">2.1.1.</span> <span class="toc-text">Markvo Chain</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Travelling-salesman-problem"><span class="toc-number">2.2.</span> <span class="toc-text">Travelling salesman problem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Heuristic-computer-science"><span class="toc-number">2.3.</span> <span class="toc-text">Heuristic (computer science)</span></a></li></ol></li></ol>
+		</div>
+		
+		<p>@[toc]</p>
+<h1 id="Multi-band-weighted-lp-norm-minimization-for-image-denois"><a href="#Multi-band-weighted-lp-norm-minimization-for-image-denois" class="headerlink" title="Multi-band weighted lp norm minimization for image denois"></a>Multi-band weighted lp norm minimization for image denois</h1><h2 id="内容学习"><a href="#内容学习" class="headerlink" title="内容学习"></a>内容学习</h2><h3 id="Low-rank-matrix-approximation-LRMA"><a href="#Low-rank-matrix-approximation-LRMA" class="headerlink" title="Low rank matrix approximation (LRMA)"></a>Low rank matrix approximation (LRMA)</h3><h3 id="谱模"><a href="#谱模" class="headerlink" title="谱模"></a>谱模</h3><p>（Spectral Norm，矩阵的模）：</p>
+<script type="math/tex; mode=display">\|A\|_{2}=\sqrt{\lambda_{\max }\left(A^{*} A\right)}=\sigma_{\max }(A)</script><p>范数的下标表示这个模是在欧几里得空间下的。实际上就是说A的谱模就是A的最大奇异值。<br><strong>矩阵的低秩近似</strong>：<br>浅显地理解就是舍弃掉矩阵中地一些行、列，而造成最小的损失。<br><strong>Schatten norms</strong>：</p>
+<blockquote>
+<p>其实这个p值代表的是这个范数所在的空间，当p=2时，即为欧几里得空间。</p>
+</blockquote>
+<p>Schatten p-norm ：（$A\subseteq\mathbb R^{m\times n}$）</p>
+<script type="math/tex; mode=display">\|A\|_{p}=\left(\sum_{i=1}^{\min \{m, n\}} \sigma_{i}^{p}(A)\right)^{\frac{1}{p}}</script><p>当p=2时：Frobenius norm<br>当p=1时：nuclear norm，定义为$\downarrow$</p>
+<script type="math/tex; mode=display">\|A\|_{*}=\operatorname{trace}\left(\sqrt{A^{*} A}\right)=\sum_{i=1}^{\min \{m, n\}} \sigma_{i}(A)</script><p>当p=$\infin$时：Frobenius norm</p>
+<blockquote>
+<p>文中提到了核范数最小化来求解矩阵的低秩逼近，但是容易产生一个问题：”this is likely to overshrink the rank components due to having the same threshold.”<br>所以现在有一个问题，就是如何使用范数最小化来求解矩阵的低秩逼近？</p>
+<p>一个运算符号：arg min在这里表示当这个运算符后面的式子取得最小值的时候，X的值。<br><img src="https://img-blog.csdnimg.cn/20210426163948627.png" alt="在这里插入图片描述"></p>
+<p>复习一下范数：<br>范数实际上就是将一个实数或者虚数向量空间映射到一个非负实数的函数。表现起来像是距离。</p>
+<h3 id="软阈值函数（Soft-threshold-Function）"><a href="#软阈值函数（Soft-threshold-Function）" class="headerlink" title="软阈值函数（Soft-threshold Function）"></a>软阈值函数（Soft-threshold Function）</h3><script type="math/tex; mode=display">
+\operatorname{soft}(x, T)=\left\{\begin{array}{cc}
+x+T & x \leq-T \\
+0 & |x| \leq T \\
+x-T & x \geq T
+\end{array}\right.</script><p><img src="https://img-blog.csdnimg.cn/20210430161914591.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<p>软阈值函数可以用于求解优化问题：</p>
+<script type="math/tex; mode=display">\argmin_x \|\boldsymbol X-\boldsymbol B\|^2_F+\lambda\|\boldsymbol X\|_*</script><p>此问题最终解的形式就是软阈值函数。</p>
+<h3 id="加性高斯白噪声（additive-white-Gaussian-noise）"><a href="#加性高斯白噪声（additive-white-Gaussian-noise）" class="headerlink" title="加性高斯白噪声（additive white Gaussian noise）"></a>加性高斯白噪声（additive white Gaussian noise）</h3><p>一种用于模拟自然噪音的模型。</p>
+<p>Additive white Gaussian noise (AWGN) is a basic noise model used in information theory to <u>mimic the effect of many random processes that occur in nature.</u> The modifiers denote specific characteristics:</p>
+<p><strong>Additive</strong> because it is added to any noise that might be intrinsic to the information system.<br><strong>White</strong> refers to the idea that it has uniform power across the frequency band for the information system. It is an analogy to the color white which has <u>uniform emissions at all frequencies</u> in the visible spectrum.<br><strong>Gaussian</strong> because it has a normal distribution(正态分布) in the time domain with an average time domain value of zero.</p>
+<blockquote>
+<p>时域（Time domain）:描述数学函数或物理信号对时间的关系.<br>就是描述函数随时间变化的情况。</p>
+</blockquote>
+<h3 id="正则化（regularization）"><a href="#正则化（regularization）" class="headerlink" title="正则化（regularization）"></a>正则化（regularization）</h3><p>正则化是为了防止问题过拟合，在拟合方程中加上一些惩罚项，以减少拟合的参数。</p>
+<blockquote>
+<p>regularization is the process of adding information in order to solve an ill-posed problem or to prevent overfitting.<br>The regularization term, or penalty, imposes a cost on the optimization function to make the optimal solution unique.</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210426154729328.png" alt="在这里插入图片描述"><br>一个正则式往往加到代价函数中：</p>
+<script type="math/tex; mode=display">\min_f \sum^n_{i=1}V(f(x_i),y_i)+\lambda R(f)</script><p>其中，V为代价函数，表示预测值$f(x_i)$与$y_i$之间的差距，$\lambda$是一个控制正则式权重的项。$R(f)$为对f函数复杂程度的惩罚函数。</p>
+<h3 id="拉格朗日乘数（Lagrange-multiplier）"><a href="#拉格朗日乘数（Lagrange-multiplier）" class="headerlink" title="拉格朗日乘数（Lagrange multiplier）"></a>拉格朗日乘数（Lagrange multiplier）</h3><p>拉格朗日乘数是一种用于求解线性约束问题中的极大值或者极小值的策略。主要思想就是将一个约束问题转化成一个非约束问题。大致可以描述为：<br><img src="https://img-blog.csdnimg.cn/20210430165406723.png" alt="在这里插入图片描述"><br>一个函数$f(x)$在线性约束$g(x) = 0$下的最优问题，这样可以得到<strong>拉格朗日函数</strong>(Lagrangian Function):</p>
+<script type="math/tex; mode=display">\mathcal L(x,\lambda)=f(x)-\lambda g(x)</script><h1 id="Optimization-by-Simulated-Annealing"><a href="#Optimization-by-Simulated-Annealing" class="headerlink" title="Optimization by Simulated Annealing"></a>Optimization by Simulated Annealing</h1><h2 id="Metropolis-algorithm"><a href="#Metropolis-algorithm" class="headerlink" title="Metropolis algorithm"></a>Metropolis algorithm</h2><h3 id="Markvo-Chain"><a href="#Markvo-Chain" class="headerlink" title="Markvo Chain"></a>Markvo Chain</h3><p>A <strong>Markov chain</strong> is a stochastic model describing a sequence of possible events in which the probability of each event <u>depends only on the state attained in the previous event</u>.<br>概率的<strong>无记忆性</strong>（memorylessness）：<br>In other words, conditional on the present state of the system, its future and past states are independent.<br><img src="https://img-blog.csdnimg.cn/2021051309204215.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<script type="math/tex; mode=display">\Pr(X_{n+1}=x\mid X_{1}=x_{1},X_{2}=x_{2},\ldots ,X_{n}=x_{n})=\Pr(X_{n+1}=x\mid X_{n}=x_{n})</script><h2 id="Travelling-salesman-problem"><a href="#Travelling-salesman-problem" class="headerlink" title="Travelling salesman problem"></a>Travelling salesman problem</h2><blockquote>
+<p>Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visits each city exactly once and returns to the origin city?”</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210513093036114.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="Heuristic-computer-science"><a href="#Heuristic-computer-science" class="headerlink" title="Heuristic (computer science)"></a>Heuristic (computer science)</h2><p>In mathematical optimization and computer science, heuristic (from Greek εὑρίσκω “I find, discover”) is a technique designed for <u>solving a problem more quickly when classic methods are too slow</u>, or for <u>finding an approximate solution</u> when classic methods fail to find any exact solution. </p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://example.com/2021/04/25/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" data-title="论文笔记 | Hexo" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2021/04/26/机器学习中的数学：（三）矩阵分解-Matrix-Decompositions/" title="机器学习中的数学：（三）矩阵分解(Matrix Decompositions)">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  机器学习中的数学：（三）矩阵分解(Matrix Decompositions)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2021/04/22/机器学习中的数学：（二）解析几何/"  title="机器学习中的数学：（二）解析几何">
+ <strong>NEXT:</strong><br/> 
+ <span>机器学习中的数学：（二）解析几何
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Multi-band-weighted-lp-norm-minimization-for-image-denois"><span class="toc-number">1.</span> <span class="toc-text">Multi-band weighted lp norm minimization for image denois</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.1.</span> <span class="toc-text">内容学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Low-rank-matrix-approximation-LRMA"><span class="toc-number">1.1.1.</span> <span class="toc-text">Low rank matrix approximation (LRMA)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%B1%E6%A8%A1"><span class="toc-number">1.1.2.</span> <span class="toc-text">谱模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E9%98%88%E5%80%BC%E5%87%BD%E6%95%B0%EF%BC%88Soft-threshold-Function%EF%BC%89"><span class="toc-number">1.1.3.</span> <span class="toc-text">软阈值函数（Soft-threshold Function）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E6%80%A7%E9%AB%98%E6%96%AF%E7%99%BD%E5%99%AA%E5%A3%B0%EF%BC%88additive-white-Gaussian-noise%EF%BC%89"><span class="toc-number">1.1.4.</span> <span class="toc-text">加性高斯白噪声（additive white Gaussian noise）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%EF%BC%88regularization%EF%BC%89"><span class="toc-number">1.1.5.</span> <span class="toc-text">正则化（regularization）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E4%B9%98%E6%95%B0%EF%BC%88Lagrange-multiplier%EF%BC%89"><span class="toc-number">1.1.6.</span> <span class="toc-text">拉格朗日乘数（Lagrange multiplier）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Optimization-by-Simulated-Annealing"><span class="toc-number">2.</span> <span class="toc-text">Optimization by Simulated Annealing</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Metropolis-algorithm"><span class="toc-number">2.1.</span> <span class="toc-text">Metropolis algorithm</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Markvo-Chain"><span class="toc-number">2.1.1.</span> <span class="toc-text">Markvo Chain</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Travelling-salesman-problem"><span class="toc-number">2.2.</span> <span class="toc-text">Travelling salesman problem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Heuristic-computer-science"><span class="toc-number">2.3.</span> <span class="toc-text">Heuristic (computer science)</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C-primer/" title="C++ primer">C++ primer<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DB/" title="DB">DB<sup>1</sup></a></li>
+		
+			<li><a href="/tags/OS/" title="OS">OS<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Projects/" title="Projects">Projects<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bugs/" title="bugs">bugs<sup>1</sup></a></li>
+		
+			<li><a href="/tags/computer-network/" title="computer network">computer network<sup>2</sup></a></li>
+		
+			<li><a href="/tags/侯捷C/" title="侯捷C++">侯捷C++<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2023 
+		
+		<a href="http://example.com" target="_blank" title="John Doe">John Doe</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

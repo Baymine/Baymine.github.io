@@ -4,12 +4,14 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Hello World | Hexo</title>
+    <title>Bug 记录 | Hexo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="John Doe">
     
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in ">
+    <meta name="description" content="Bug 笔记VS 20191.警告    C6031    返回值被忽略: “scanf”。主要是没有检查输入是否成功。
+12//修改：加上一个条件判断语句if(scanf(&amp;quot;%d&amp;quot;,&amp;amp;a) == 0) return -1;
+2.变量不明确：这多半是因为变量名或者是函数名">
     
     
     
@@ -68,15 +70,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2023/03/08/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+      <a href="/2021/01/04/Bug-记录/" title="Bug 记录" itemprop="url">Bug 记录</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://example.com" title="John Doe">John Doe</a>
     </p>
   <p class="article-time">
-    <time datetime="2023-03-08T11:08:44.816Z" itemprop="datePublished">2023-03-08</time>
-    Updated:<time datetime="2022-09-20T06:50:10.903Z" itemprop="dateModified">2022-09-20</time>
+    <time datetime="2021-01-04T03:49:57.000Z" itemprop="datePublished">2021-01-04</time>
+    Updated:<time datetime="2023-03-08T11:43:38.661Z" itemprop="dateModified">2023-03-08</time>
     
   </p>
 </header>
@@ -85,32 +87,33 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Bug-%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">Bug 笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#VS-2019"><span class="toc-number">1.1.</span> <span class="toc-text">VS 2019</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PAT"><span class="toc-number">1.2.</span> <span class="toc-text">PAT</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ubuntu"><span class="toc-number">2.</span> <span class="toc-text">Ubuntu</span></a></li></ol>
 		</div>
 		
-		<p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+		<h1 id="Bug-笔记"><a href="#Bug-笔记" class="headerlink" title="Bug 笔记"></a>Bug 笔记</h1><h2 id="VS-2019"><a href="#VS-2019" class="headerlink" title="VS 2019"></a>VS 2019</h2><p>1.<strong>警告    C6031    返回值被忽略: “scanf”。</strong><br>主要是没有检查输入是否成功。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//修改：加上一个条件判断语句</span></span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a) == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br></pre></td></tr></table></figure>
+<p>2.<strong>变量不明确</strong>：这多半是因为变量名或者是函数名与现有库中的变量有冲突。</p>
+<p>3.<strong>E0520    应使用“{…}”初始化聚合对象</strong></p>
+<p>4.<strong>C4996    ‘fopen’: This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS</strong>.<br>加上下面的语句，然后在 项目-&gt;属性-&gt;C/C++-&gt;预处理器-&gt;预处理器定义中添加_CRT_SECURE_NO_WARNINGS<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> _CRT_SECURE_NO_WARNINGS</span></span><br></pre></td></tr></table></figure></p>
+<p>5.<strong>C++不允许使用不完整的类型说明</strong><br>不完整类型是这样一种类型，它缺乏足够的信息例如长度去描述一个完整的对象。所以一个数组没有给定长度，直接赋值就会产生这样的错误。</p>
+<p>6.<strong>c++ 非静态成员引用必须与特定对象相对</strong><br>这是在调用类成员函数的时候出现的问题<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">className::<span class="built_in">funcName</span>(para) <span class="comment">// Error</span></span><br><span class="line"></span><br><span class="line">className CN;</span><br><span class="line">CN.<span class="built_in">funcName</span>(para);<span class="comment">//Pass</span></span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20210416082241282.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="PAT"><a href="#PAT" class="headerlink" title="PAT"></a>PAT</h2><p>1.（当输出结果为很大的数字时出现）比较赋值的变量一定要进行初始化，因为PAT编译器不会默认初始化为0.（基本上就是一个很大的随机数）</p>
+<h1 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h1><p>sudo apt-get install g++-multilib<br>遇到一种情况，就是出现缺少一些库</p>
   
 	</div>
 		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/bugs/">bugs</a>
+  </div>
 
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://example.com/2023/03/08/hello-world/" data-title="Hello World | Hexo" data-tsina="" class="share clearfix">
+  <div data-url="http://example.com/2021/01/04/Bug-%E8%AE%B0%E5%BD%95/" data-title="Bug 记录 | Hexo" data-tsina="" class="share clearfix">
   </div>
 
 </div>
@@ -119,11 +122,19 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2021/01/09/《Computer-Systems-A-Programmer-Perspective-3rd-ed》/" title="《Computer Systems: A Programmer Perspective 3rd ed》">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  《Computer Systems: A Programmer Perspective 3rd ed》</span>
+</a>
+</div>
+
 
 <div class="next">
-<a href="/2023/01/12/review-notes/"  title="review notes">
+<a href="/2021/01/03/Wireshark-Lab-HTTP/"  title="Wireshark Lab: HTTP">
  <strong>NEXT:</strong><br/> 
- <span>review notes
+ <span>Wireshark Lab: HTTP
 </span>
 </a>
 </div>
@@ -136,7 +147,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Bug-%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">Bug 笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#VS-2019"><span class="toc-number">1.1.</span> <span class="toc-text">VS 2019</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PAT"><span class="toc-number">1.2.</span> <span class="toc-text">PAT</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ubuntu"><span class="toc-number">2.</span> <span class="toc-text">Ubuntu</span></a></li></ol>
   </div>
 
 <div id="asidepart">
@@ -150,6 +161,8 @@
 	<p class="asidetitle">Tags</p>
 		<ul class="clearfix">
 		
+			<li><a href="/tags/C/" title="C++">C++<sup>1</sup></a></li>
+		
 			<li><a href="/tags/C-primer/" title="C++ primer">C++ primer<sup>1</sup></a></li>
 		
 			<li><a href="/tags/DB/" title="DB">DB<sup>1</sup></a></li>
@@ -157,6 +170,10 @@
 			<li><a href="/tags/OS/" title="OS">OS<sup>2</sup></a></li>
 		
 			<li><a href="/tags/Projects/" title="Projects">Projects<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bugs/" title="bugs">bugs<sup>1</sup></a></li>
+		
+			<li><a href="/tags/computer-network/" title="computer network">computer network<sup>2</sup></a></li>
 		
 			<li><a href="/tags/侯捷C/" title="侯捷C++">侯捷C++<sup>5</sup></a></li>
 		

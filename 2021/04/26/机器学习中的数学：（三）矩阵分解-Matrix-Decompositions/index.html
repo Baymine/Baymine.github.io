@@ -1,0 +1,409 @@
+
+ <!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>机器学习中的数学：（三）矩阵分解(Matrix Decompositions) | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="@[toc]矩阵分解可以用于压缩矩阵，以尽可能少的空间存储一个矩阵，同时损失尽可能少的信息。同时对数据进行降维还可以减少发生维度灾难的发生。
+
+维数灾难： 当数据维度提升的时候，因为空间体积提升过快，因而可用数据变得很稀疏。然而在高维空间中，所有的数据都很稀疏，从很多角度看都不相似，因而平常使用的数">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Hexo" title="Hexo"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Hexo">Hexo</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:example.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2021/04/26/机器学习中的数学：（三）矩阵分解-Matrix-Decompositions/" title="机器学习中的数学：（三）矩阵分解(Matrix Decompositions)" itemprop="url">机器学习中的数学：（三）矩阵分解(Matrix Decompositions)</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://example.com" title="John Doe">John Doe</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2021-04-26T02:32:53.000Z" itemprop="datePublished">2021-04-26</time>
+    Updated:<time datetime="2023-03-08T11:50:17.815Z" itemprop="dateModified">2023-03-08</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F%E4%B8%8E%E8%BF%B9%EF%BC%88Determinant-and-Trace%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">行列式与迹（Determinant and Trace）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F%EF%BC%88Dterminant%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">行列式（Dterminant）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%B9-Trace"><span class="toc-number">1.2.</span> <span class="toc-text">迹(Trace)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E5%80%BC%E4%B8%8E%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="toc-number">2.</span> <span class="toc-text">特征值与特征向量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%AF%E5%88%97%E6%96%AF%E5%9F%BA%E5%88%86%E8%A7%A3%EF%BC%88Cholesky-Decomposition%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">柯列斯基分解（Cholesky Decomposition）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E5%88%86%E8%A7%A3%E5%92%8C%E5%AF%B9%E8%A7%92%E5%8C%96"><span class="toc-number">4.</span> <span class="toc-text">特征分解和对角化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E7%9A%84%E5%87%A0%E4%BD%95%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3"><span class="toc-number">4.1.</span> <span class="toc-text">矩阵分解的几何直观理解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3%EF%BC%88Singular-Value-Decomposition%EF%BC%8CSVD%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">奇异值分解（Singular Value Decomposition，SVD）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SVD%E7%9A%84%E5%87%A0%E4%BD%95%E7%9B%B4%E8%A7%82%E8%A7%A3%E9%87%8A"><span class="toc-number">5.1.</span> <span class="toc-text">SVD的几何直观解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%82%E8%A7%A3%E7%9F%A9%E9%98%B5%E7%9A%84SVD"><span class="toc-number">5.2.</span> <span class="toc-text">求解矩阵的SVD</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E9%80%BC%E8%BF%91%EF%BC%88Matrix-Approximation%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">矩阵逼近（Matrix Approximation）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li></ol>
+		</div>
+		
+		<p>@[toc]<br>矩阵分解可以用于压缩矩阵，以尽可能少的空间存储一个矩阵，同时损失尽可能少的信息。同时对数据进行降维还可以减少发生<strong>维度灾难</strong>的发生。</p>
+<blockquote>
+<p><strong>维数灾难</strong>： 当数据维度提升的时候，因为空间体积提升过快，因而可用数据变得很稀疏。然而在高维空间中，所有的数据都很稀疏，从很多角度看都不相似，因而平常使用的数据组织策略变得极其低效。<br><br><br>在机器学习问题中，需要在高维特征空间（每个特征都能够取一系列可能值）的有限数据样本中学习一种“自然状态”（可能是无穷分布），要求有相当数量的训练数据含有一些样本组合。<u>给定固定数量的训练样本，其预测能力随着维度的增加而减小</u>，这就是所谓的Hughes影响或Hughes现象（以Gordon F. Hughes命名）。<br>        ———Wiki<br>个人理解：随着维度的升高数据之间的距离加大，这导致数据组合而成的用于最终判断的特征难以被发现</p>
+<h1 id="行列式与迹（Determinant-and-Trace）"><a href="#行列式与迹（Determinant-and-Trace）" class="headerlink" title="行列式与迹（Determinant and Trace）"></a>行列式与迹（Determinant and Trace）</h1><h2 id="行列式（Dterminant）"><a href="#行列式（Dterminant）" class="headerlink" title="行列式（Dterminant）"></a>行列式（Dterminant）</h2><p>行列式可以看成将一个方阵映射成一个实数。（只有方阵才有行列式）<br>可以将行列式用于判断一个方阵是否可逆：<br><img src="https://img-blog.csdnimg.cn/20210422212906189.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<p>对于上/下三角矩阵的行列式的值为:</p>
+<script type="math/tex; mode=display">\operatorname{det}(\boldsymbol{T})=\prod_{i=1}^{n} T_{i i}</script><p>对于n阶行列的计算，可以使用<strong>拉普拉斯展开</strong>(Laplace Expansion)<br><img src="https://img-blog.csdnimg.cn/20210422213649972.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210422213733943.png" alt="在这里插入图片描述"></p>
+<p>行列式的几何含义就是带有符号的多边形的体积，这个多边形是由行列式所对应的列向量通过平移之后组成的.注意到当至少其中的两个向量重合的时候，也就是这两个向量线性相关的时候，他们组成的几何体的体积为0，所以这时候他们组成的方阵的行列式为0.<br><img src="https://img-blog.csdnimg.cn/20210422213432734.png" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20210422213436294.png" alt="在这里插入图片描述"><br>行列式的一些性质：<br><img src="https://img-blog.csdnimg.cn/20210422213814612.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt><br><img src="https://img-blog.csdnimg.cn/20210422213949173.png" alt="在这里插入图片描述"></p>
+<h2 id="迹-Trace"><a href="#迹-Trace" class="headerlink" title="迹(Trace)"></a>迹(Trace)</h2><p>假设$f(x)=\prod^k_{i=1}(x-\lambda_i)^{d_i}$是矩阵A的特征多项式，那么A的迹为：</p>
+<script type="math/tex; mode=display">\operatorname{tr}(\boldsymbol A)=\sum^k_{i=1}d_i\lambda_i</script><p>对于一个方阵的迹就是它所有对角线元素的和：</p>
+<script type="math/tex; mode=display">tr(\bold A):=\sum\limits_{i=1}^na_{ii}</script><p>迹的一些性质：<br><img src="https://img-blog.csdnimg.cn/20210422214211626.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210422214251939.png" alt="在这里插入图片描述"><br>假设$\bold B、\bold A$是向量空间U的两个基向量，所以一定存在一个向量$\bold S$,使得$\bold B=\bold S^{-1}\bold A\bold S$:</p>
+<script type="math/tex; mode=display">\operatorname{tr}(\boldsymbol{B})=\operatorname{tr}\left(\boldsymbol{S}^{-1} \boldsymbol{A} \boldsymbol{S}\right) \stackrel{(4.19)}{=} \operatorname{tr}\left(\boldsymbol{A} \boldsymbol{S} \boldsymbol{S}^{-1}\right)=\operatorname{tr}(\boldsymbol{A})</script><p><strong>特征多项式</strong>：<br><img src="https://img-blog.csdnimg.cn/2021042221461996.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>其中：</p>
+<script type="math/tex; mode=display">c_0=det(\bold A) \\ c_{n-1}=(-1)^{n-1}tr(\bold A)</script><p>特征多项式可以用于求解特征值和特征向量。</p>
+<h1 id="特征值与特征向量"><a href="#特征值与特征向量" class="headerlink" title="特征值与特征向量"></a>特征值与特征向量</h1><p><img src="https://img-blog.csdnimg.cn/20210423102704877.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210423102727720.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>特征向量不是唯一的，与特征向量共线的所有向量都是这个矩阵的特征向量。<br>共线与共向：<br><img src="https://img-blog.csdnimg.cn/20210423102845808.png" alt="在这里插入图片描述"><br>特征值是矩阵特征多项式的一个根。<br><strong>代数重度</strong>（algebraic multiplicity）：该特征是特征向量的几重根。<br><strong>特征空间</strong>：特征值对应的特征向量组成的向量空间就是特征空间<br><img src="https://img-blog.csdnimg.cn/20210423103140423.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>有疑问<br><img src="https://img-blog.csdnimg.cn/20210423103537224.png" alt="在这里插入图片描述"><br>特征向量所张成的空间就是特征向量通过线性映射之后得到的。而特征向量所对应的特征值的正负对应着特征向量的指向的方向</p>
+</blockquote>
+<p>特征值的几个非常有用的性质：<br>1.矩阵和他的转置的特征值一样，但是特征向量不一定一样<br>2.观察特征方程$(\bold A-\lambda\bold I)\bold x=\bold 0$,这说明$(\bold A-\lambda\bold I)$对应着核空间<br><img src="https://img-blog.csdnimg.cn/20210423103825435.png" alt="在这里插入图片描述"></p>
+<p>3.相似矩阵（$\widetilde A=S^{-1}AS$）的特征值保持一致，说明特征值是与基向量无关的（拥有这种性质的还有迹和行列式）<br>4.正定矩阵拥有正的实特征值。</p>
+<p><strong>几何重度</strong>（Geometric Multiplicity，特征空间的维度）：<br>$\lambda$对应的线性无关的特征向量的个数。<br><img src="https://img-blog.csdnimg.cn/20210423104316545.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>为什么？<br><img src="https://img-blog.csdnimg.cn/20210423104418946.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<p><strong>二维空间中的几何直观理解</strong>：<br>对于特征方程（$\bold A\bold x=\lambda\bold x$），等式右边是对向量x的一个变换（变换矩阵为A），右边为对x的一个伸展，二者相等，说明在经历过变换之后，x向量只是简单地发生了范数地增长，并没有离开原先地向量空间。而这个变换之后不离开原先向量空间的向量称为<strong>特征向量</strong>。特征向量组成的向量空间，称为<strong>特征空间</strong>，在特征空间中的所有向量经过变换之后也不会离开原先的张成空间。向量延展的倍数为变换矩阵的<strong>特征值</strong><br><img src="https://img-blog.csdnimg.cn/20210423133916529.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>特征向量与特征值的求解过程：<br>由特征方程得到：$(\bold A-\lambda I)\bold v=\bold 0$当$\vec \bold v$为零向量的时候，等式成立，但是我们想要一个非零向量，所以原来的式子的含义就变成，将一个向量压缩成一个零向量，这就是说在经过变换之后原先的向量发生了降维，这就是说$\bold A-\lambda I$不是满秩的，就好像是一个三维体经过变换之后变成了二维，这时候变换之后的几何体的体积变成了0，也就是相对应的行列式变成了0，所以$|\bold A-\lambda I|=0、det(\bold A-\lambda I)=0$<br><img src="https://img-blog.csdnimg.cn/20210423133912252.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>下图是不同类型的线性映射时候特征值和行列式的情况：<br>其中<br>$\bold A_1=\begin{bmatrix}\frac1 2\quad 0\ 0 \quad 2\end{bmatrix}\<br>\bold A_2=\begin{bmatrix}1 \quad\frac 12\ 0 \quad 1\end{bmatrix}\<br>\bold A_3=\begin{bmatrix}\cos(\frac\pi6)\quad -\sin(\frac\pi6)\ \sin(\frac\pi6) \quad \cos(\frac\pi6)\end{bmatrix}=\frac12\begin{bmatrix} \sqrt 3\quad-1\1\quad\sqrt 3\end{bmatrix}\<br>\bold A_4=\begin{bmatrix}1\quad\quad -1\ -1 \quad\quad 1\end{bmatrix}$<br><img src="https://img-blog.csdnimg.cn/20210423134928849.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>为什么最后一个的行列式的值发生了变化？</p>
+</blockquote>
+<p>每一个特征空间在变换中对应着唯一一个特征值（倍数），所以当倍数（特征值）全部都是不同的时候，说明有所有的特征向量都是线性无关的。<br><img src="https://img-blog.csdnimg.cn/20210423141732757.png" alt="在这里插入图片描述"><br><strong>亏损矩阵</strong><br><img src="https://img-blog.csdnimg.cn/20210423142205462.png" alt="在这里插入图片描述"><br>对于一个非亏损矩阵（$\in \mathbb R^{n\times n}$）不一定需要n个不同的特征值，但是一定需要n个特征向量组成$\mathbb R^{n\times n}$的基。（注意到不同的向量在变换的时候延伸的倍数是可以一样的，所以会有一个特征值对应几个特征向量的情况）</p>
+<p><img src="https://img-blog.csdnimg.cn/20210423142559266.png" alt="在这里插入图片描述"><br><strong>谱定律</strong>：<br><img src="https://img-blog.csdnimg.cn/20210423201349436.png" alt="在这里插入图片描述"><br>这说明一个对称矩阵可以进行特征分解,也就是说能够找到特征向量对应的规范正交基，使得$\bold A=\bold P\bold D\bold P^{-1}$其中D为对角矩阵，P由特征向量组成。</p>
+<p><strong>行列式与迹的意义</strong>：分别与面积（体积）和周长相关<br><img src="https://img-blog.csdnimg.cn/20210423201949444.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210423202001438.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="柯列斯基分解（Cholesky-Decomposition）"><a href="#柯列斯基分解（Cholesky-Decomposition）" class="headerlink" title="柯列斯基分解（Cholesky Decomposition）"></a>柯列斯基分解（Cholesky Decomposition）</h1><p><img src="https://img-blog.csdnimg.cn/20210423202734362.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>计算方式：<br><img src="https://img-blog.csdnimg.cn/20210423202908551.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</blockquote>
+<p>这在深度学习中有很多的应用，同时还可以用于计算行列式（上下三角矩阵的行列式非常好计算）</p>
+<h1 id="特征分解和对角化"><a href="#特征分解和对角化" class="headerlink" title="特征分解和对角化"></a>特征分解和对角化</h1><p>可对角化的条件：<br><img src="https://img-blog.csdnimg.cn/20210423203839482.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210423204815898.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这需要P矩阵是满秩的<br><strong>特征分解</strong><br><img src="https://img-blog.csdnimg.cn/20210423205113416.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这实际上就是A与D相似。P由A的特征向量组成，D由A的特征值组成（对角矩阵）</p>
+<blockquote>
+<p>如何理解相似矩阵？<br>如何理解谱定理？<img src="https://img-blog.csdnimg.cn/20210424105653896.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2021042410570861.png" alt="在这里插入图片描述"></p>
+<h2 id="矩阵分解的几何直观理解"><a href="#矩阵分解的几何直观理解" class="headerlink" title="矩阵分解的几何直观理解"></a>矩阵分解的几何直观理解</h2></blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210424121857566.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>各部分对应的变换还是不是很清楚。<br>特征值分解可以这样理解，首先先进行一次基变换，将正交基变换至由特征向量组成的向量空间中，然后进行延展（这就是变换矩阵A对应在特征向量中的变换Ax=$\lambda x$）,最后将向量空间复原到原先的向量空间中。</p>
+</blockquote>
+<p>对待方程$\bold A=\bold P^{-1}\bold D\bold P$,可以这样想，单位矩阵经过A矩阵变换之后等价于$\bold P^{-1}\bold D\bold P$三个矩阵变化之后的结果。<br>将一个矩阵分解之后，可以很方便地计算矩阵地行列式和n次方。</p>
+<script type="math/tex; mode=display">det(\bold A)=det(\bold P\bold D\bold P^{-1})=det(\bold P)*det(\bold D)*det(\bold P^{-1})=\prod_id_{ii}</script><h1 id="奇异值分解（Singular-Value-Decomposition，SVD）"><a href="#奇异值分解（Singular-Value-Decomposition，SVD）" class="headerlink" title="奇异值分解（Singular Value Decomposition，SVD）"></a>奇异值分解（Singular Value Decomposition，SVD）</h1><p>相对于特征值分解，奇异值分解使用范围更广，它不要求分解的矩阵是方阵。<br><img src="https://img-blog.csdnimg.cn/20210424135923640.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>$\mathbb u_i$称为左奇异向量；$\mathbb v_j$称为右奇异向量。</p>
+<p>$\Sigma$矩阵起到拓展维度的作用，所以：<br><img src="https://img-blog.csdnimg.cn/20210424140128695.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="SVD的几何直观解释"><a href="#SVD的几何直观解释" class="headerlink" title="SVD的几何直观解释"></a>SVD的几何直观解释</h2><p><img src="https://img-blog.csdnimg.cn/20210424140421187.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>奇异值分解其实和特征值分解类似，只是在延伸的时候加了一些东西，这是因为矩阵为非方阵的时候，这样的变换会使向量发生维度的变化，所以$\Sigma$矩阵在不是方阵的情况下，不仅仅使向量进行相对应的变换，还将维度进行了提升。</p>
+</blockquote>
+<p>$V^T$起到旋转的作用，$\Sigma$起到拓展上域（codomain，到达域）维度的作用，最后U帮助向量升维。</p>
+<blockquote>
+<p>上域<br><img src="https://img-blog.csdnimg.cn/20210424140700348.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</blockquote>
+<p>一个变换实例：<br><img src="https://img-blog.csdnimg.cn/2021042414101820.png" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210424140923239.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="求解矩阵的SVD"><a href="#求解矩阵的SVD" class="headerlink" title="求解矩阵的SVD"></a>求解矩阵的SVD</h2><p>对于一个对称正定矩阵（SPD矩阵）有:$S=S^T=PDP^{T}$<br><img src="https://img-blog.csdnimg.cn/20210425131251977.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>所以一个SDP矩阵的SVD就是它的特征值分解。</p>
+<p>计算一个矩阵$\bold A\in \mathbb R^{m\times n}$,等价于求解上域（codomain）$\mathbb R^m$和定义域（domain）$\mathbb R^n$的规范正交基</p>
+<blockquote>
+<p>What’s the graphic intuitions?And why?</p>
+</blockquote>
+<p><strong>求解右奇异向量</strong></p>
+<blockquote>
+<p>由谱定理得知，对称矩阵的特征向量组成规范正交基，也就是说对称矩阵能够相似对角化。而我们可以通过$AA^T$的方式得到一个半正定的对称矩阵。</p>
+</blockquote>
+<script type="math/tex; mode=display">\boldsymbol{A}^{\top} \boldsymbol{A}=\boldsymbol{P} \boldsymbol{D} \boldsymbol{P}^{\top}=\boldsymbol{P}\left[\begin{array}{ccc}\lambda_{1} & \cdots & 0 \\ \vdots & \ddots & \vdots \\ 0 & \cdots & \lambda_{n}\end{array}\right] \boldsymbol{P}^{\top}</script><p>将SVD带入：</p>
+<script type="math/tex; mode=display">\boldsymbol{A}^{\top} \boldsymbol{A}=\left(\boldsymbol{U} \boldsymbol{\Sigma} \boldsymbol{V}^{\top}\right)^{\top}\left(\boldsymbol{U} \boldsymbol{\Sigma} \boldsymbol{V}^{\top}\right)=\boldsymbol{V} \boldsymbol{\Sigma}^{\top} \boldsymbol{U}^{\top} \boldsymbol{U} \boldsymbol{\Sigma} \boldsymbol{V}^{\top}</script><p>由于$\boldsymbol U$是正交矩阵，所以$\boldsymbol U\boldsymbol U^\top=\boldsymbol I$:</p>
+<script type="math/tex; mode=display">\boldsymbol{A}^{\top} \boldsymbol{A}=\boldsymbol{V} \boldsymbol{\Sigma}^{\top} \boldsymbol{\Sigma} \boldsymbol{V}^{\top}=\boldsymbol{V}\left[\begin{array}{ccc}\sigma_{1}^{2} & 0 & 0 \\ 0 & \ddots & 0 \\ 0 & 0 & \sigma_{n}^{2}\end{array}\right] \boldsymbol{V}^{\top}</script><p>由此可以得出，A的SVD的奇异值就是$AA^\top$的特征值的开根号的结果。其特征矩阵就是右奇异矩阵。</p>
+<p>对于<strong>左奇异矩阵</strong>采取相似的方式：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\boldsymbol{A} \boldsymbol{A}^{\top} &=\left(\boldsymbol{U} \boldsymbol{\Sigma} \boldsymbol{V}^{\top}\right)\left(\boldsymbol{U} \boldsymbol{\Sigma} \boldsymbol{V}^{\top}\right)^{\top}=\boldsymbol{U} \boldsymbol{\Sigma} \boldsymbol{V}^{\top} \boldsymbol{V} \boldsymbol{\Sigma}^{\top} \boldsymbol{U}^{\top}\\ 
+&=\boldsymbol{U}\left[\begin{array}{ccc}
+\sigma_{1}^{2} & 0 & 0 \\
+0 & \ddots & 0 \\
+0 & 0 & \sigma_{m}^{2}
+\end{array}\right] \boldsymbol{U}^{\top} .
+\end{aligned}</script><p>现在<strong>将左右奇异矩阵</strong>联系起来：<br>由于$\boldsymbol U$中的向量$\mathcal v<em>i$在经过A矩阵变换之后仍旧是正交向量，因为，$$\left(\boldsymbol{A} \boldsymbol{v}</em>{i}\right)^{\top}\left(\boldsymbol{A} \boldsymbol{v}<em>{j}\right)=\boldsymbol{v}</em>{i}^{\top}\left(\boldsymbol{A}^{\top} \boldsymbol{A}\right) \boldsymbol{v}<em>{j}=\boldsymbol{v}</em>{i}^{\top}\left(\lambda<em>{j} \boldsymbol{v}</em>{j}\right)=\lambda<em>{j} \boldsymbol{v}</em>{i}^{\top} \boldsymbol{v}_{j}=0，\quad i\ne j$$<br>单位化右奇异向量的像域：</p>
+<script type="math/tex; mode=display">\boldsymbol{u}_{i}:=\frac{\boldsymbol{A} \boldsymbol{v}_{i}}{\left\|\boldsymbol{A} \boldsymbol{v}_{i}\right\|}=\frac{1}{\sqrt{\lambda_{i}}} \boldsymbol{A} \boldsymbol{v}_{i}=\frac{1}{\sigma_{i}} \boldsymbol{A} \boldsymbol{v}_{i}</script><blockquote>
+<p>二者的关系？</p>
+</blockquote>
+<p>由上得到奇异方程：</p>
+<script type="math/tex; mode=display">\boldsymbol A\boldsymbol v_i=\sigma_i\boldsymbol u_i,\quad i=1,\dots,r</script><p>于是有：</p>
+<script type="math/tex; mode=display">\boldsymbol A\boldsymbol V=\Sigma\boldsymbol U</script><p>移项得：</p>
+<script type="math/tex; mode=display">\boldsymbol A=\boldsymbol U\Sigma\boldsymbol V^\top</script><p>这就是矩阵A的SVD。</p>
+<h1 id="矩阵逼近（Matrix-Approximation）"><a href="#矩阵逼近（Matrix-Approximation）" class="headerlink" title="矩阵逼近（Matrix Approximation）"></a>矩阵逼近（Matrix Approximation）</h1><p><strong>外积</strong>：<br><img src="https://img-blog.csdnimg.cn/20210426100532232.png" alt="在这里插入图片描述"><br>与内积不同，当两个向量相乘的时候，外积得到的是一个矩阵。有之前的SVD分解式，可以得到下式：</p>
+<script type="math/tex; mode=display">\boldsymbol{A}=\sum_{i=1}^{r} \sigma_{i} \boldsymbol{u}_{i} \boldsymbol{v}_{i}^{\top}=\sum_{i=1}^{r} \sigma_{i} \boldsymbol{A}_{i}</script><p>但是加入我们不讲所有的外积都加上的话，得到一个秩为$k(k&lt;r)$的矩阵，这个称为<strong>k秩逼近</strong>（rank-k approximation）</p>
+<script type="math/tex; mode=display">\widehat{\boldsymbol{A}}(k):=\sum_{i=1}^{k} \sigma_{i} \boldsymbol{u}_{i} \boldsymbol{v}_{i}^{\top}=\sum_{i=1}^{k} \sigma_{i} \boldsymbol{A}_{i}</script><p><strong>谱模</strong>（spectral norm）<br><img src="https://img-blog.csdnimg.cn/20210426101036527.png" alt="在这里插入图片描述"><br>谱模表示，一个向量在经历矩阵A的变换之后最长可以变成多长（下标2代表的是欧几里得空间）。可以证明，<u>矩阵A的谱模就是它的最大的奇异值</u></p>
+<p><strong>埃卡特-杨定理</strong><br><img src="https://img-blog.csdnimg.cn/20210426101250788.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这个定理量化了矩阵近似会造成的误差。</p>
+<blockquote>
+<p>证明过程？</p>
+</blockquote>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><img src="https://img-blog.csdnimg.cn/20210426103210671.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://example.com/2021/04/26/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%EF%BC%88%E4%B8%89%EF%BC%89%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3-Matrix-Decompositions/" data-title="机器学习中的数学：（三）矩阵分解(Matrix Decompositions) | Hexo" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2021/04/29/机器学习中的数学：（四）矢量积分-Vector-Calculus/" title="机器学习中的数学：（四）矢量积分(Vector Calculus)">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  机器学习中的数学：（四）矢量积分(Vector Calculus)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2021/04/25/论文笔记/"  title="论文笔记">
+ <strong>NEXT:</strong><br/> 
+ <span>论文笔记
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F%E4%B8%8E%E8%BF%B9%EF%BC%88Determinant-and-Trace%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">行列式与迹（Determinant and Trace）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F%EF%BC%88Dterminant%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">行列式（Dterminant）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%B9-Trace"><span class="toc-number">1.2.</span> <span class="toc-text">迹(Trace)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E5%80%BC%E4%B8%8E%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="toc-number">2.</span> <span class="toc-text">特征值与特征向量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%AF%E5%88%97%E6%96%AF%E5%9F%BA%E5%88%86%E8%A7%A3%EF%BC%88Cholesky-Decomposition%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">柯列斯基分解（Cholesky Decomposition）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E5%88%86%E8%A7%A3%E5%92%8C%E5%AF%B9%E8%A7%92%E5%8C%96"><span class="toc-number">4.</span> <span class="toc-text">特征分解和对角化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E7%9A%84%E5%87%A0%E4%BD%95%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3"><span class="toc-number">4.1.</span> <span class="toc-text">矩阵分解的几何直观理解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3%EF%BC%88Singular-Value-Decomposition%EF%BC%8CSVD%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">奇异值分解（Singular Value Decomposition，SVD）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SVD%E7%9A%84%E5%87%A0%E4%BD%95%E7%9B%B4%E8%A7%82%E8%A7%A3%E9%87%8A"><span class="toc-number">5.1.</span> <span class="toc-text">SVD的几何直观解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%82%E8%A7%A3%E7%9F%A9%E9%98%B5%E7%9A%84SVD"><span class="toc-number">5.2.</span> <span class="toc-text">求解矩阵的SVD</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E9%80%BC%E8%BF%91%EF%BC%88Matrix-Approximation%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">矩阵逼近（Matrix Approximation）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C-primer/" title="C++ primer">C++ primer<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DB/" title="DB">DB<sup>1</sup></a></li>
+		
+			<li><a href="/tags/OS/" title="OS">OS<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Projects/" title="Projects">Projects<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bugs/" title="bugs">bugs<sup>1</sup></a></li>
+		
+			<li><a href="/tags/computer-network/" title="computer network">computer network<sup>2</sup></a></li>
+		
+			<li><a href="/tags/侯捷C/" title="侯捷C++">侯捷C++<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2023 
+		
+		<a href="http://example.com" target="_blank" title="John Doe">John Doe</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

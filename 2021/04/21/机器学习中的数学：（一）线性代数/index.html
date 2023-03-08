@@ -1,0 +1,401 @@
+
+ <!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>机器学习中的数学：（一）线性代数 | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="本博客是对MATHEMATICS FOR MACHINE LEARNING的学习笔记，因为是全英文的书籍，所以在每节之后都会收集一些相关的术语，然后笔记中也可能会加入一些英文。当然，作为一个个人笔记，我会加入一些自己的理解，这些理解可能会因为自己的能力有限而不够深入并且有较大的局限性，但是，我会不断">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Hexo" title="Hexo"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Hexo">Hexo</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:example.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2021/04/21/机器学习中的数学：（一）线性代数/" title="机器学习中的数学：（一）线性代数" itemprop="url">机器学习中的数学：（一）线性代数</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://example.com" title="John Doe">John Doe</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2021-04-21T02:22:36.000Z" itemprop="datePublished">2021-04-21</time>
+    Updated:<time datetime="2023-03-08T11:48:46.712Z" itemprop="dateModified">2023-03-08</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linear-Algebra"><span class="toc-number">2.</span> <span class="toc-text">Linear Algebra</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Foundations"><span class="toc-number">2.1.</span> <span class="toc-text">Foundations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%86"><span class="toc-number">2.1.1.</span> <span class="toc-text">逆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%96%B9%E7%A8%8B"><span class="toc-number">2.1.2.</span> <span class="toc-text">解方程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B-Ax-b"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">计算线性方程$Ax &#x3D; b$</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hadamard-product"><span class="toc-number">2.1.3.</span> <span class="toc-text">Hadamard product</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E7%A9%BA%E9%97%B4%EF%BC%88Vector-Space%EF%BC%89"><span class="toc-number">2.1.4.</span> <span class="toc-text">向量空间（Vector Space）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E5%AD%90%E7%A9%BA%E9%97%B4%EF%BC%88Vector-subspace%EF%BC%89"><span class="toc-number">2.1.4.1.</span> <span class="toc-text">向量子空间（Vector subspace）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%97%A0%E5%85%B3"><span class="toc-number">2.2.</span> <span class="toc-text">线性无关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Basis-and-Rank"><span class="toc-number">2.3.</span> <span class="toc-text">Basis and Rank</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Generating-set-and-basis"><span class="toc-number">2.3.1.</span> <span class="toc-text">Generating set and basis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rank"><span class="toc-number">2.3.2.</span> <span class="toc-text">Rank</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%98%A0%E5%B0%84%EF%BC%88Linear-Mappings-vector-space-homomorphism-linear-transformation%EF%BC%89"><span class="toc-number">2.4.</span> <span class="toc-text">线性映射（Linear Mappings&#x2F;vector space homomorphism&#x2F; linear transformation）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%98%A0%E5%B0%84%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="toc-number">2.4.1.</span> <span class="toc-text">线性映射的矩阵表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E5%8F%98%E6%8D%A2-Basis-Change"><span class="toc-number">2.4.2.</span> <span class="toc-text">基变换(Basis Change)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%83%8F%E9%9B%86%E4%B8%8E%E6%A0%B8%EF%BC%88Image-and-Kernel%EF%BC%89"><span class="toc-number">2.4.3.</span> <span class="toc-text">像集与核（Image and Kernel）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BF%E5%B0%84%E7%A9%BA%E9%97%B4%EF%BC%88Affine-Spaces%EF%BC%89"><span class="toc-number">2.5.</span> <span class="toc-text">仿射空间（Affine Spaces）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BF%E5%B0%84%E5%AD%90%E7%A9%BA%E9%97%B4"><span class="toc-number">2.5.1.</span> <span class="toc-text">仿射子空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BF%E5%B0%84%E6%98%A0%E5%B0%84"><span class="toc-number">2.5.2.</span> <span class="toc-text">仿射映射</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<p><font color="#999AAA">本博客是对MATHEMATICS FOR MACHINE LEARNING的学习笔记，因为是全英文的书籍，所以在每节之后都会收集一些相关的术语，然后笔记中也可能会加入一些英文。当然，作为一个个人笔记，我会加入一些自己的理解，这些理解可能会因为自己的能力有限而不够深入并且有较大的局限性，但是，我会不断复习自己的笔记，并不断更新自己的理解。这正如孔子所说的：温故而知新，可以为师矣。<br>ps:想要这本书的电子版可以私信我。<br>pps:我认为大脑能更加轻易地记忆图片，图片会比文字更好理解，所以我会尽可能的多加一些图片在笔记中。<br><img src="https://img-blog.csdnimg.cn/20210406162047999.jpg?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></font></p>
+<p>&lt;hr style=” border:solid; width:100px; height:1px;” color=#000000 size=1”&gt;</p>
+<p>@[toc]</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这部分讲解了书籍的组成，对书籍的各个章节做了一些简要的介绍，并探讨了书籍的学习方式。<br>总的来说，这本书分为两个部分，上半部分是将一些数学基础包含线性代数(Linear Algebra)、分析几何(Analytic Geometry)、矩阵分解(Matrix Decomposition)和概率论(Probability Theoty)，第二部分是讲解机器学习的四大支柱(pillars)技术。<br><img src="https://img-blog.csdnimg.cn/20210406170211452.jpg?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>文中提及了两种学习模式：自顶向下和自底向上。两种方法都有各自的优势和劣势。我的学习模式类似于自底向上，先完成数学理论知识的学习然后再将学过的数学知识用于机器学习理论的学习中，这个过程帮助我进一步强化学过的数学知识，就当一个复习的过程。</p>
+<p>&lt;hr style=” border:solid; width:100px; height:1px;” color=#000000 size=1”&gt;</p>
+<p><font color="#999AAA">一些题外话：在我接触机器学习的一些理论的时候，我发现这些理论在一定程度上与人类自己的认知过程有一定的相似之处，所以，我觉得将用这些理论去思考自己的学习过程，并且用自己的学习过程去理解这些理论都是可以帮助自己更好地提升对“学习”的理解。</font></p>
+<h1 id="Linear-Algebra"><a href="#Linear-Algebra" class="headerlink" title="Linear Algebra"></a>Linear Algebra</h1><blockquote>
+<p>Linear algebra is the study of vectors and certain algebra rules to manipulate vectors.</p>
+</blockquote>
+<p>线性代数就是向量+对向量的操作。而向量就是一个数据集，对应着具体事物的不同属性。放到空间中，向量就是方向+数量（direction and magnitude）。我们需要弄清楚的是，在不同的情形下，对向量的运算会对这些数字所对应的属性产生什么变化。例如两个向量的相加，可会将原先的向量在长度和方向上的变化。</p>
+<p><div align="center"><br><img src="https://img-blog.csdnimg.cn/20210407165522874.png"></div></p>
+<p><font color="#999AAA"><br>前半部分介绍线性代数的基础知识，我只记录自己不熟悉的部分和大致内容。</font></p>
+<h2 id="Foundations"><a href="#Foundations" class="headerlink" title="Foundations"></a>Foundations</h2><h3 id="逆"><a href="#逆" class="headerlink" title="逆"></a>逆</h3><p> 公式法：$A^{-1} = \frac{A^*}{|A|}$<br>     解方程：$AX=I_n$ 求解   $[A|I_n] - &gt;[I_n|A^{-1}]$</p>
+<h3 id="解方程"><a href="#解方程" class="headerlink" title="解方程"></a>解方程</h3><p> 通解 = 非齐次特解 + 非齐次通解<br><img src="https://img-blog.csdnimg.cn/20210410102846896.png" alt="在这里插入图片描述"><br><strong>The Minus-1 Trick</strong>（快速求解齐次方程通解）<br>在行阶梯矩阵中，添加单位行向量，非零元素对应非主元元素位置，此时原先非主元元素所在的列向量就是通解向量。<br>原矩阵：</p>
+<script type="math/tex; mode=display">A=\begin{bmatrix} 1 & 3 & 0 & 0 & 3 \\ 0&0&1&0&9 \\ 0&0&0&1&-4\end{bmatrix}</script><p>增广矩阵：<br><img src="https://img-blog.csdnimg.cn/20210411130138978.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>通解：</p>
+<script type="math/tex; mode=display">\left\{ x\in \mathbb R^5:x=\lambda_1\begin{bmatrix}3\\-1\\0\\0\\0\end{bmatrix}+ \lambda_2\begin{bmatrix}3\\0\\9\\-1\\-1\end{bmatrix}, \lambda_1,\lambda_2\in \mathbb R
+\right\}</script><h4 id="计算线性方程-Ax-b"><a href="#计算线性方程-Ax-b" class="headerlink" title="计算线性方程$Ax = b$"></a>计算线性方程$Ax = b$</h4><p>如果A是方阵并且可逆，可以通过逆直接求出来：$x = A^{-1}b$<br>推广至一般矩阵，需要用到<strong>伪逆（Moore-Penrose pseudo-inverse）</strong>：</p>
+<script type="math/tex; mode=display">Ax = b \Leftrightarrow A^TAx=A^Tb \Leftrightarrow x = (A^TA)^{-1}A^Tb</script><p>$(A^TA)^{-1}A^T$:Moore-Penrose pseudo-inverse<br>但是这方法需要大量的矩阵运算，可能会在计算精度上有损失</p>
+<blockquote>
+<p>这个逆是泛化的矩阵的逆，标记为$A^+$。这里是巧妙地规避了对非方阵矩阵的求逆，而不改变原先的属性。对于一个任意矩阵$A$, $(A^\top A)^{-1}A^\top=A^{-1}(A^\top)^{-1}A^\top=A^{-1}$<br>它可以用于奇异值分解。</p>
+</blockquote>
+<p>还可以使用<strong>高斯消元法</strong>，这个方法虽然广泛使用，但是需要立方数量级的算数运算，计算较大。</p>
+<p>还有一种<strong>迭代方法</strong>（Iterative method）:</p>
+<script type="math/tex; mode=display">x^{(k+1)}=Cx^{(k)}+d</script><p>在迭代的过程中，残差（residual error）：$|x^{(k+1)}-x<em>*|$,不断减小，最终向$x</em>*$收敛</p>
+<h3 id="Hadamard-product"><a href="#Hadamard-product" class="headerlink" title="Hadamard product"></a>Hadamard product</h3><p>矩阵对应位置元素相乘。<br><img src="https://img-blog.csdnimg.cn/20210410101439335.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210410101504335.png" alt="在这里插入图片描述"></p>
+<h3 id="向量空间（Vector-Space）"><a href="#向量空间（Vector-Space）" class="headerlink" title="向量空间（Vector Space）"></a>向量空间（Vector Space）</h3><p><del>Group: Object + Operations</del> </p>
+<p><img src="https://img-blog.csdnimg.cn/20210413102520215.png" alt="在这里插入图片描述"><br>我对这个定义的理解是，<del>一个向量经过外积和向量积所能表示的所有的向量</del>一个向量经过线性组合和数乘得到的所有的向量，这些所有的向量组成的空间就是这个向量的向量空间。（张成空间：两向量的全部线性组合构成的向量空间）</p>
+<blockquote>
+<p>将一个向量看成向量空间中的一个点，这个点乘以所有的实数得到的所有的向量组成一条直线，这条直线就是这个向量张成的向量空间($\mathbb R$)。它与另外一个不平行的直线的所有的线性组合会得到一个平面，这就是两个向量张成的二维空间($\mathbb R^2$)</p>
+<p><strong>对这个定义的理解还需要补充</strong></p>
+</blockquote>
+<p><strong>线性的严格定义：</strong><script type="math/tex">L(c \vec v) = cL(\vec v)\\ L(\vec v + \vec w) = L(\vec v)+L(\vec w)</script><br>将L当成一种变换，对向量进行数量积之后进行变换和变换之后对向量进行数量积的结果是一致的。<br>拥有这种性质的算子很多， 例如求导：$\frac{d}{dx}(4x^2) = 4\times \frac{d}{dx}(x^2)$</p>
+<h4 id="向量子空间（Vector-subspace）"><a href="#向量子空间（Vector-subspace）" class="headerlink" title="向量子空间（Vector subspace）"></a>向量子空间（Vector subspace）</h4><p>向量子空间需要满足加法封闭性和数乘封闭性。也就是向量子空间中的向量在经过任意的数乘或线性组合之后得到的向量仍在这个子空间中。<br><img src="https://img-blog.csdnimg.cn/20210414105134656.png" alt="在这里插入图片描述"><br><del>判断是否为向量子空间，需要满足封闭性，也就是经过对应的运算之后，向量仍旧属于原先的向量空间。</del> </p>
+<blockquote>
+<p>例：<br><img src="https://img-blog.csdnimg.cn/20210414105953434.png" alt="the closure property is violated;"><br>the closure property is violated;因为向量空间需要满足加法封闭性，也就是说在这个空间中向量之间的运算之后的向量，需要还在这个空间中，上面这个空间显然不满足这个条件。</p>
+</blockquote>
+<h2 id="线性无关"><a href="#线性无关" class="headerlink" title="线性无关"></a>线性无关</h2><p>矩阵线性无关就是说每一个都是相互独立的，不能由其他向量表示出来。表现在公式上：</p>
+<script type="math/tex; mode=display">\sum_{i=1}^{k} \lambda_ix_i = 0</script><p>当且仅当上式中$\lambda$为0时，成立，说明向量$x_i$线性无关。<br>空间上理解就是，每一个向量代表一个维度，少了其中一个就会导致降维,<del>这也就是秩</del>  。当有向量对维度的没有贡献的时候，就说这个向量是线性相关的。</p>
+<h2 id="Basis-and-Rank"><a href="#Basis-and-Rank" class="headerlink" title="Basis and Rank"></a>Basis and Rank</h2><h3 id="Generating-set-and-basis"><a href="#Generating-set-and-basis" class="headerlink" title="Generating set and basis"></a>Generating set and basis</h3><p><strong>生成集</strong>就是能够表示向量空间的向量集合，这也就是说生成集中向量通过线性组合等方式可以表示向量空间中的所有的向量（<u>能通过数乘和线性组合表示整个向量空间的向量</u>）。而生成集所形成的向量空间称为<strong>张成空间</strong>（span）</p>
+<script type="math/tex; mode=display">V = (\mathcal{V},+,\cdot ), \mathcal{A} = \{x_1,x_2,....,x_k\} \subseteq \mathcal{V}</script><p>对于任意$\mathcal{v} \in \mathcal{V}$能被$\mathcal{A}$线性表出，则称$\mathcal{A}$是$\mathcal{V}$的一个生成集。$\mathcal{A}$所能线性表示的所有向量组成的空间成为$\mathcal{A}$的张成空间，表示为$V = span[\mathcal{A}]$<br>生成集中最小的集合成为<strong>基</strong>（basis）</p>
+<p>下图展示了关于这个概念的等价描述：<br><img src="https://img-blog.csdnimg.cn/20210415113357742.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>现在有一个问题，<strong>是不是任意n个n维的线性无关的向量都是n维空间的一个生成集呢？</strong><br>并不是，因为这个n个向量可能只能形成n维空间的一个子空间，并不能表示该空间当中所有的向量，所以并不是这个空间的一个生成集。</p>
+<blockquote>
+<p>How can you describe it in graph?存疑</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210415114048590.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>当向量组是线性无关的时候，每一个向量代表一个维度，将向量空间的维度表示为$dim(\mathcal{V})$,如果，$\mathcal{U} \subseteq \mathcal{V}$是$\mathcal{V}$的一个子空间，则有：</p>
+<script type="math/tex; mode=display">dim({\mathcal{V})} \ge dim(\mathcal{U}), if\ and \ only\ if\ \mathcal{V}=\mathcal{U}\Rightarrow dim({\mathcal{V})} = dim(\mathcal{U})</script><h3 id="Rank"><a href="#Rank" class="headerlink" title="Rank"></a>Rank</h3><p>秩可以表示为向量组中线性无关的列向量的个数，也就是向量组的向量空间的维度。其他还有一些相关的性质：<br><img src="https://img-blog.csdnimg.cn/20210416103201764.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="线性映射（Linear-Mappings-vector-space-homomorphism-linear-transformation）"><a href="#线性映射（Linear-Mappings-vector-space-homomorphism-linear-transformation）" class="headerlink" title="线性映射（Linear Mappings/vector space homomorphism/ linear transformation）"></a>线性映射（Linear Mappings/vector space homomorphism/ linear transformation）</h2><p>对于向量空间$V$和$W$的线性映射$\Phi :V \rightarrow W$有如下定义:</p>
+<script type="math/tex; mode=display">\forall \boldsymbol x,\boldsymbol y \in \boldsymbol V \ \forall \lambda, \psi \in \mathbb R:\boldsymbol\Phi(\lambda \boldsymbol x+\psi \boldsymbol y)=\lambda\boldsymbol\Phi(\boldsymbol x)+\psi\boldsymbol\Phi(\boldsymbol y)</script><p>这样的映射关系可以用矩阵表示：</p>
+<script type="math/tex; mode=display">
+\Phi{(\lambda x+\psi y)}=[\lambda\ \ \ \ \ \psi]\begin{bmatrix} \Phi_{(x)}  \\ \Phi_{(y)} \end{bmatrix}
+\quad</script><p>下面是几个特殊的映射：<br><img src="https://img-blog.csdnimg.cn/20210416105124125.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><code>满射</code>就是y的所有元素都可以由x中的元素映射得来</p>
+<p><strong>逆映射</strong>：对于映射$\Phi:\mathcal W \rightarrow \mathcal V$有 ：$\Phi(x) \circ \Psi = x$,则$\Psi$为$\Phi(x)$的逆映射，表示为$\Phi^{-1}(x)$</p>
+<p>一些特殊的线性映射：<br><img src="https://img-blog.csdnimg.cn/20210416120627532.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="!\](https://img-blog.csdnimg.cn/20210416120533508.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70)"></p>
+<blockquote>
+<p><del>有疑问？需要理解一下</del><br><img src="https://img-blog.csdnimg.cn/20210416121342931.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这里是解释为什么复数可以表示维二维坐标的形式，因为我们可以使用双线性映射将二维坐标数组转化成复数空间中的加法形式(利用一个映射就可以转换了)</p>
+<p><strong>同构</strong>：抓取一个数学对象最本质的信息（比如上面例子里的加法和乘法结构），而忽略其他没那么重要的信息（比如进制），然后把具有相同“本质信息”的对象视为一体。（例如一个对象中包含三个个体，那么所有包含三个个体的对象都可以说是同构的，因为他们都有3这个特征）<br><strong>同态</strong>：它是在两个本质不一定相同的数学对象之间建立联系（两不一定完全一致的对象是更大结构的一部分）</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210416130351294.png" alt="在这里插入图片描述"><br>这个定理表明拥有相同维度的向量空间在一定程度上是相同的。<br>$\mathbb{R}^{n\times m} \ \&amp; \ \ \mathbb{R^{nm}}$：一个是n×m矩阵一个是nm维度向量，二者的维度是一样的，而且他们之间能够通过一种线性映射（双映射）相互转换.</p>
+<blockquote>
+<p>如何在图形上理解n×m矩阵和nm维度向量是同形的？</p>
+<h3 id="线性映射的矩阵表示"><a href="#线性映射的矩阵表示" class="headerlink" title="线性映射的矩阵表示"></a>线性映射的矩阵表示</h3><p>对于一个元组$\bold B = (\bold x_1,\bold x_2,…,\bold x_n)$中,各个向量的位置是不能交换的，也就是说这些向量的位置也是作为这个元组的一个信息，这样的元组称为<strong>有序基</strong>(ordered basis)</p>
+</blockquote>
+<p>在此书中，用$\bold B = (\bold x_1,\bold x_2,…,\bold x_n)$表示有序基； $\bold B = {\bold x_1,\bold x_2,…,\bold x_n}$表示（无序）基； $\bold B = [\bold x_1,\bold x_2,…,\bold x_n]$表示一个矩阵。</p>
+<p>所以对于一个有序基$\bold B = {\bold {b_1},\bold {b_2}…\bold {b_n}} \subseteq \mathbb{R}^n$,对于$\mathbb {R}^n$中的所有向量，都可以由$\bold B$唯一线性表出。即：</p>
+<script type="math/tex; mode=display">x \in \mathbb{R}^n,x = \alpha_1\bold {b_1}+\alpha_2\bold{b_2}+....+\alpha_n\bold {b_n}</script><p>$\bold\alpha$组成的向量就是向量$\bold x$在向量空间中以$\bold B$为基向量的坐标。</p>
+<p>向量的坐标依赖于基向量，在不同的基向量中的坐标不同。<br><img src="https://img-blog.csdnimg.cn/20210416152551695.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>想要完成有一对基向量组成的向量空间中的向量映射到另一对基向量组成的向量空间中的向量，这可以使用一个矩阵完成，这样的矩阵被称为<strong>变换矩阵</strong>（Transformation Matrix）<br><img src="https://img-blog.csdnimg.cn/20210417102738876.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>一个向量空间中的向量可以表示为：$\bold a = x\bold {e_1} +y\bold {e_2}$表示为矩阵形式就是</p>
+<script type="math/tex; mode=display">\bold a = [\bold {e_1} \ \ \bold {e_2}]\begin{bmatrix}\  x \\ y\end{bmatrix}\quad</script><p>假设$e_1、e_2$是$\mathbb{R}^2$向量空间的基向量，所以上式可以表示为：</p>
+<script type="math/tex; mode=display">\bold a = \begin{bmatrix} 1 \ \ \ 0 \\ 0 \ \ \ 1\end{bmatrix} \begin{bmatrix}\  x \\ y\end{bmatrix}\quad</script><p>这一个单位矩阵也可以看成一种变换，但是是一种原封不动的变换，现在假设有一个变换矩阵$\bold b = \begin{bmatrix} 2 \  \ \ 0 \ 0 \  \ \ 1 \end{bmatrix}$。所以，$\bold a \cdot \bold b$就相当于对原先的向量空间y轴上的延伸操作。这也是一种对向量的线性变换</p>
+<h3 id="基变换-Basis-Change"><a href="#基变换-Basis-Change" class="headerlink" title="基变换(Basis Change)"></a>基变换(Basis Change)</h3><p>这部分探寻向量空间发生变化之后，变换矩阵的情况。有几种情形，首先是在同一个向量空间中的基变换，这种变换也成为<strong>恒等映射</strong>（identity mapping）例如：$\Psi = id<em>V$表示在向量空间V中的恒等映射。<br>还有一种向量空间发生变化的情况。在下图中，蓝色的字母代表有序基，箭头上的希腊字母代表着对应的变换矩阵<br><img src="https://img-blog.csdnimg.cn/20210417140801630.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>我们能够通过原先的变换矩阵得到$\widetilde A</em>\Phi$:</p>
+<script type="math/tex; mode=display">\Phi_{\tilde C\tilde B} = \Xi_{\tilde C C}\circ \Phi_{CB}\circ\Psi_{B\tilde B} = \Xi^{-1}_{C\tilde C}\circ \Phi_{CB}\circ\Psi_{B\tilde B}</script><p>这也就是说一个基的多个变换可以等价于某一个单一的变换。</p>
+<p><img src="https://img-blog.csdnimg.cn/20210417140746445.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>对上式的一个粗略的推导：<br><img src="https://img-blog.csdnimg.cn/20210417142201266.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>等价与相似：<br><img src="https://img-blog.csdnimg.cn/2021041813243031.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p><strong>正则矩阵</strong>（Regular Matrix）: 我们常见的实数矩阵和复数矩阵中，正则矩阵=可逆矩阵</p>
+<h3 id="像集与核（Image-and-Kernel）"><a href="#像集与核（Image-and-Kernel）" class="headerlink" title="像集与核（Image and Kernel）"></a>像集与核（Image and Kernel）</h3><p><img src="https://img-blog.csdnimg.cn/20210418133146671.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>零空间</strong>就是一个向量空间中的向量，经过映射$\Phi$之后，变成零向量的所有向量组成的向量空间，e.g: $\bold A \bold x = 0$的解就是A的一个零空间。因为$\Phi(0_V) = \Phi(0_W)$总是成立，所以零空间不会是空的。零空间也可以用于确定列向量之间是否是线性相关的。<br>如何从映射的角度，理解这个线性相关？</p>
+<p>假设存在这样的一个映射使得，$V$中的一个子空间经过线性映射之后变成了一个0空间，说明这个过程发生了降维，<strong>零空间</strong>就是在转换之后损失掉的维度，而变换矩阵所在向量空间的维度，影响变换之后的向量空间的维度，而变换矩阵的列向量就是描述这样的维度的量，所对应的就是<strong>列空间</strong></p>
+</blockquote>
+<p><strong>像集</strong>就是映射之后所对应的向量组成的向量空间。e.g:$\bold A \bold x = \bold b$<br><img src="https://img-blog.csdnimg.cn/20210418133852855.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>从上图知：$\Phi$的核空间是$V$的一个向量子空间，而其像域是$W$的一个向量子空间。所以，像域是$V$在映射之后在$W$的子空间，零空间是$V$中映射之后变成$W$中的零的一个向量子空间。</p>
+<p><strong>列空间</strong><br>变换矩阵列向量所形成的张成空间，就是列空间<br><img src="https://img-blog.csdnimg.cn/20210418135457251.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>秩－零化度定理</strong><br><img src="https://img-blog.csdnimg.cn/20210418140518540.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>思考这个等式为什么会成立？<br><img src="https://img-blog.csdnimg.cn/20210418140707505.png" alt="在这里插入图片描述"><br>其实就是在变换过程中损失的维度和变换后的维度之和等于变换之前的向量空间的维度。而这样的损失是由于变换矩阵导致，这也就是说变换之后的维度等于变换矩阵的维度，这也就是为什么$\Phi$的像域是A的列空间了。<br>上面那个结论其实说的就是在变换之后丢失了一些维度，所以，零空间至少是一维的，在这个空间上的向量又是无限多的，所以就是有无穷解了。</p>
+</blockquote>
+<h2 id="仿射空间（Affine-Spaces）"><a href="#仿射空间（Affine-Spaces）" class="headerlink" title="仿射空间（Affine Spaces）"></a>仿射空间（Affine Spaces）</h2><h3 id="仿射子空间"><a href="#仿射子空间" class="headerlink" title="仿射子空间"></a>仿射子空间</h3><p><img src="https://img-blog.csdnimg.cn/20210418165641673.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>实际上就是一个不经过原点的子空间，描述为一个子空间加上一些偏置，使得这个空间不经过原点。例如。三维空间的一个仿射子空间就是一个不经过原点的点、线或者面。</p>
+<blockquote>
+<p>想想这段话的含义<br><img src="https://img-blog.csdnimg.cn/20210418170047681.png" alt="在这里插入图片描述"><br>想清楚仿射空间与线性非齐次方程之间的关系。</p>
+</blockquote>
+<p>一个实例：<br><img src="https://img-blog.csdnimg.cn/20210418170843921.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>向量可以用向量空间的有序基线性表示，同样的仿射空间中的向量可以由同样的方式表示，只需要在每个向量中加上支持点（support point）即可<br><img src="https://img-blog.csdnimg.cn/20210418171350189.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="仿射映射"><a href="#仿射映射" class="headerlink" title="仿射映射"></a>仿射映射</h3><p>与线性映射类似，仿射映射只不过是在线性映射之后加上一个偏置量（支撑点）。<br><img src="https://img-blog.csdnimg.cn/20210419080833884.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://example.com/2021/04/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%EF%BC%88%E4%B8%80%EF%BC%89%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" data-title="机器学习中的数学：（一）线性代数 | Hexo" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2021/04/22/机器学习中的数学：（二）解析几何/" title="机器学习中的数学：（二）解析几何">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  机器学习中的数学：（二）解析几何</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2021/04/07/python学习笔记/"  title="python学习笔记">
+ <strong>NEXT:</strong><br/> 
+ <span>python学习笔记
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linear-Algebra"><span class="toc-number">2.</span> <span class="toc-text">Linear Algebra</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Foundations"><span class="toc-number">2.1.</span> <span class="toc-text">Foundations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%86"><span class="toc-number">2.1.1.</span> <span class="toc-text">逆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%96%B9%E7%A8%8B"><span class="toc-number">2.1.2.</span> <span class="toc-text">解方程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B-Ax-b"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">计算线性方程$Ax &#x3D; b$</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hadamard-product"><span class="toc-number">2.1.3.</span> <span class="toc-text">Hadamard product</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E7%A9%BA%E9%97%B4%EF%BC%88Vector-Space%EF%BC%89"><span class="toc-number">2.1.4.</span> <span class="toc-text">向量空间（Vector Space）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E5%AD%90%E7%A9%BA%E9%97%B4%EF%BC%88Vector-subspace%EF%BC%89"><span class="toc-number">2.1.4.1.</span> <span class="toc-text">向量子空间（Vector subspace）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%97%A0%E5%85%B3"><span class="toc-number">2.2.</span> <span class="toc-text">线性无关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Basis-and-Rank"><span class="toc-number">2.3.</span> <span class="toc-text">Basis and Rank</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Generating-set-and-basis"><span class="toc-number">2.3.1.</span> <span class="toc-text">Generating set and basis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rank"><span class="toc-number">2.3.2.</span> <span class="toc-text">Rank</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%98%A0%E5%B0%84%EF%BC%88Linear-Mappings-vector-space-homomorphism-linear-transformation%EF%BC%89"><span class="toc-number">2.4.</span> <span class="toc-text">线性映射（Linear Mappings&#x2F;vector space homomorphism&#x2F; linear transformation）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%98%A0%E5%B0%84%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="toc-number">2.4.1.</span> <span class="toc-text">线性映射的矩阵表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E5%8F%98%E6%8D%A2-Basis-Change"><span class="toc-number">2.4.2.</span> <span class="toc-text">基变换(Basis Change)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%83%8F%E9%9B%86%E4%B8%8E%E6%A0%B8%EF%BC%88Image-and-Kernel%EF%BC%89"><span class="toc-number">2.4.3.</span> <span class="toc-text">像集与核（Image and Kernel）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BF%E5%B0%84%E7%A9%BA%E9%97%B4%EF%BC%88Affine-Spaces%EF%BC%89"><span class="toc-number">2.5.</span> <span class="toc-text">仿射空间（Affine Spaces）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BF%E5%B0%84%E5%AD%90%E7%A9%BA%E9%97%B4"><span class="toc-number">2.5.1.</span> <span class="toc-text">仿射子空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BF%E5%B0%84%E6%98%A0%E5%B0%84"><span class="toc-number">2.5.2.</span> <span class="toc-text">仿射映射</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C-primer/" title="C++ primer">C++ primer<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DB/" title="DB">DB<sup>1</sup></a></li>
+		
+			<li><a href="/tags/OS/" title="OS">OS<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Projects/" title="Projects">Projects<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bugs/" title="bugs">bugs<sup>1</sup></a></li>
+		
+			<li><a href="/tags/computer-network/" title="computer network">computer network<sup>2</sup></a></li>
+		
+			<li><a href="/tags/侯捷C/" title="侯捷C++">侯捷C++<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2023 
+		
+		<a href="http://example.com" target="_blank" title="John Doe">John Doe</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

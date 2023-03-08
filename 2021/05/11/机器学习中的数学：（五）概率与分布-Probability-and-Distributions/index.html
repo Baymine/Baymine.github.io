@@ -1,0 +1,515 @@
+
+ <!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>机器学习中的数学：（五）概率与分布(Probability and Distributions) | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="概率空间的构造（Construction of a Probability Space）哲学问题（Philosophical Issues）这部分是对概率的一个解释。概率论是推理系统的一个基础，个人理解就是推理实际上就是找到对某件事情的可能性最大的结果。这里引入了一个合理性（plausibility">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Hexo" title="Hexo"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Hexo">Hexo</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:example.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2021/05/11/机器学习中的数学：（五）概率与分布-Probability-and-Distributions/" title="机器学习中的数学：（五）概率与分布(Probability and Distributions)" itemprop="url">机器学习中的数学：（五）概率与分布(Probability and Distributions)</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://example.com" title="John Doe">John Doe</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2021-05-11T02:17:57.000Z" itemprop="datePublished">2021-05-11</time>
+    Updated:<time datetime="2023-03-08T11:52:08.590Z" itemprop="dateModified">2023-03-08</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E7%9A%84%E6%9E%84%E9%80%A0%EF%BC%88Construction-of-a-Probability-Space%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">概率空间的构造（Construction of a Probability Space）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%B2%E5%AD%A6%E9%97%AE%E9%A2%98%EF%BC%88Philosophical-Issues%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">哲学问题（Philosophical Issues）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E7%8E%87%E5%92%8C%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%EF%BC%88Probability-and-Random-Variables%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">概率和随机变量（Probability and Random Variables）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1%EF%BC%88Statistics%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">统计（Statistics）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E6%A6%82%E7%8E%87%E5%92%8C%E8%BF%9E%E7%BB%AD%E6%A6%82%E7%8E%87%EF%BC%88Discrete-and-Continuous-Probabilities%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">离散概率和连续概率（Discrete and Continuous Probabilities）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E5%9E%8B%E6%A6%82%E7%8E%87%EF%BC%88Discrete-Probabilities%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">离散型概率（Discrete Probabilities）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E6%80%A7%E6%A6%82%E7%8E%87%EF%BC%88Continuous-Probabilities%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">连续性概率（Continuous Probabilities）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A0%E6%B3%95%E6%B3%95%E5%88%99%E3%80%81%E4%B9%98%E6%B3%95%E6%B3%95%E5%88%99%E5%92%8C%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86%EF%BC%88Sum-Rule-Product-Rule-and-Bayes%E2%80%99-Theorem%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">加法法则、乘法法则和贝叶斯定理（Sum Rule, Product Rule, and Bayes’ Theorem）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%91%98%E8%A6%81%E7%BB%9F%E8%AE%A1%E5%92%8C%E7%8B%AC%E7%AB%8B%E6%80%A7%EF%BC%88Summary-Statistics-and-Independence%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">摘要统计和独立性（Summary Statistics and Independence）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%87%E5%80%BC%E5%92%8C%E5%8D%8F%E6%96%B9%E5%B7%AE%EF%BC%88Means-and-Covariances%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">均值和协方差（Means and Covariances）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E6%9C%AC%E5%9D%87%E5%80%BC%E5%92%8C%E6%A0%B7%E6%9C%AC%E6%96%B9%E5%B7%AE%EF%BC%88Empirical-Means-and-Covariances%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">样本均值和样本方差（Empirical Means and Covariances）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E5%B7%AE%E7%9A%84%E4%B8%89%E7%A7%8D%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%88Three-Expressions-for-the-Variance%EF%BC%89"><span class="toc-number">4.3.</span> <span class="toc-text">方差的三种表达式（Three Expressions for the Variance）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E5%8A%A0%E6%B3%95%E8%BF%90%E7%AE%97%E5%92%8C%E5%8F%98%E6%8D%A2%EF%BC%88Sums-and-Transformations-of-Random-Variables%EF%BC%89"><span class="toc-number">4.4.</span> <span class="toc-text">随机变量的加法运算和变换（Sums and Transformations of Random Variables）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1%E7%8B%AC%E7%AB%8B%E6%80%A7-Statistical-Independence"><span class="toc-number">4.5.</span> <span class="toc-text">统计独立性(Statistical Independence)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E5%86%85%E7%A7%AF%EF%BC%88Inner-Products-of-Random-Variables%EF%BC%89"><span class="toc-number">4.6.</span> <span class="toc-text">随机变量的内积（Inner Products of Random Variables）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%EF%BC%88Gaussian-Distribution%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">高斯分布（Gaussian Distribution）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%E7%9A%84%E8%BE%B9%E9%99%85%E5%88%86%E5%B8%83%E5%92%8C%E6%9D%A1%E4%BB%B6%E5%88%86%E5%B8%83%E4%BB%8D%E6%97%A7%E6%98%AF%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%EF%BC%88Marginals-and-Conditionals-of-Gaussians-are-Gaussians%EF%BC%89"><span class="toc-number">5.1.</span> <span class="toc-text">高斯分布的边际分布和条件分布仍旧是高斯分布（Marginals and Conditionals of Gaussians are Gaussians）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0%E7%9A%84%E4%B9%98%E7%A7%AF%EF%BC%88Product-of-Gaussian-Densities%EF%BC%89"><span class="toc-number">5.2.</span> <span class="toc-text">高斯密度函数的乘积（Product of Gaussian Densities）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%92%8C%E8%BF%90%E7%AE%97%E5%92%8C%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2%EF%BC%88Sums-and-Linear-Transformations%EF%BC%89"><span class="toc-number">5.3.</span> <span class="toc-text">和运算和线性变换（Sums and Linear Transformations）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E5%A4%9A%E5%85%83%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%E4%B8%AD%E5%8F%96%E6%A0%B7%EF%BC%88Sampling-from-Multivariate-Gaussian-Distributions%EF%BC%89"><span class="toc-number">5.4.</span> <span class="toc-text">从多元高斯分布中取样（Sampling from Multivariate Gaussian Distributions）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B1%E8%BD%AD%E5%8F%8A%E6%8C%87%E6%95%B0%E6%97%8F%EF%BC%88Conjugacy-and-the-Exponential-Family%EF%BC%89"><span class="toc-number">5.5.</span> <span class="toc-text">共轭及指数族（Conjugacy and the Exponential Family）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AF%E5%8A%AA%E5%88%A9%E5%88%86%E5%B8%83%EF%BC%88Bernoulli-distribution%EF%BC%89"><span class="toc-number">5.5.1.</span> <span class="toc-text">伯努利分布（Bernoulli distribution）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%88%86%E5%B8%83%EF%BC%88Binomial-Distribution%EF%BC%89"><span class="toc-number">5.5.2.</span> <span class="toc-text">二项式分布（Binomial Distribution）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9D%E5%A1%94%E5%88%86%E5%B8%83%EF%BC%88Beta-Distribution%EF%BC%89"><span class="toc-number">5.5.3.</span> <span class="toc-text">贝塔分布（Beta Distribution）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B1%E8%BD%AD%EF%BC%88Conjugacy%EF%BC%89"><span class="toc-number">5.6.</span> <span class="toc-text">共轭（Conjugacy）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%85%E5%88%86%E7%BB%9F%E8%AE%A1%E9%87%8F%EF%BC%88Sufficient-Statistics%EF%BC%89"><span class="toc-number">5.7.</span> <span class="toc-text">充分统计量（Sufficient Statistics）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E6%95%B0%E6%97%8F%EF%BC%88Exponential-Family%EF%BC%89"><span class="toc-number">5.8.</span> <span class="toc-text">指数族（Exponential Family）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%8F%98%E6%8D%A2%E5%92%8C%E9%80%86%E5%8F%98%E6%8D%A2%EF%BC%88Change-of-Variables-Inverse-Transform%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">变量变换和逆变换（Change of Variables&#x2F;Inverse Transform）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E6%B3%95%EF%BC%88Distribution-Function-Technique%EF%BC%89"><span class="toc-number">6.1.</span> <span class="toc-text">分布函数法（Distribution Function Technique）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8D%A2%E5%85%83%EF%BC%88Change-of-Variables%EF%BC%89"><span class="toc-number">6.2.</span> <span class="toc-text">换元（Change of Variables）</span></a></li></ol></li></ol>
+		</div>
+		
+		<p><img src="https://img-blog.csdnimg.cn/20210430095419335.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="概率空间的构造（Construction-of-a-Probability-Space）"><a href="#概率空间的构造（Construction-of-a-Probability-Space）" class="headerlink" title="概率空间的构造（Construction of a Probability Space）"></a>概率空间的构造（Construction of a Probability Space）</h1><h2 id="哲学问题（Philosophical-Issues）"><a href="#哲学问题（Philosophical-Issues）" class="headerlink" title="哲学问题（Philosophical Issues）"></a>哲学问题（Philosophical Issues）</h2><p>这部分是对概率的一个解释。概率论是推理系统的一个基础，个人理解就是推理实际上就是找到对某件事情的可能性最大的结果。这里引入了一个<strong>合理性</strong>（plausibility），并用数学标准描述出来了。</p>
+<p>在机器学习中，对概率的解释有两种，一种是<strong>贝叶斯式</strong>（the Bayesian）还有一种是<strong>频率论</strong>（Frequentist）前者用概率描述事物的不确定性，后者用在特定时间段中发生特定事情的频率。</p>
+<h2 id="概率和随机变量（Probability-and-Random-Variables）"><a href="#概率和随机变量（Probability-and-Random-Variables）" class="headerlink" title="概率和随机变量（Probability and Random Variables）"></a>概率和随机变量（Probability and Random Variables）</h2><p><strong>几个概念</strong>：<br><strong>样品空间$\Omega$</strong>（sample space）：一个实验可能出现的所有的结果的集合。<br><strong>事件空间$\mathcal A$</strong>(event space):样品空间的一个子集<br><strong>概率P</strong>（probability）：$P(A)$,一个事件$A\in \mathcal A$发生的概率。<br><strong>目标空间$\mathcal T$</strong>（target space）和<strong>随机变量$X$</strong>(random variable)：为了找到样品空间中我们关注的量，用一个函数$X: \Omega \rightarrow \mathcal{T}$， 其中,$X$称为<strong>随机变量</strong>。(对，随机变量实际上是一个函数)</p>
+<blockquote>
+<p>One way to understand the transformation of probability from events in $\Omega$ via the random variable X is to associate it with the probability of the pre-image of S<br>对于一个随机变量$X:\Omega\rightarrow\mathcal T$和目标空间的一个子集$S\subseteq\mathcal T$,则$X^{-1}(S)$为$S$经过$X$变换的原象（pre-image），也就是$\Omega$中的$X^{-1}(S)$经过$X$的变换之后得到$S$，所以有：</p>
+<script type="math/tex; mode=display">P_X(S) = P(X\in S)=P(X^{-1}(S))=P(\{\ \omega\in\Omega:X(\omega)\in S \})</script><p>这里称$P_X$或者$P\circ X^{-1}$为随机变量$X$的<strong>分布</strong>（distribution）或者（law？）<br><img src="https://img-blog.csdnimg.cn/20210603100643197.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>个人理解，随机变量实际上就是对样品空间的某些特性的量化描述，例如，对于一个抛两个硬币的实验，在样品空间中，一次实验正面出现的次数可以为0、1、2，可以将这些数字对应到事件上去，这就是随机变量。</p>
+</blockquote>
+<h2 id="统计（Statistics）"><a href="#统计（Statistics）" class="headerlink" title="统计（Statistics）"></a>统计（Statistics）</h2><p>统计和概率往往是一起出现的，但是二者的侧重点不太一样，前者是关注找出能解释观察到的现象的内在过程。后者可以认为是一些过程的模型，其中的不确定性事件被随机变量存储下来，然后用概率的一些规律去弄清楚发生了什么。</p>
+<h1 id="离散概率和连续概率（Discrete-and-Continuous-Probabilities）"><a href="#离散概率和连续概率（Discrete-and-Continuous-Probabilities）" class="headerlink" title="离散概率和连续概率（Discrete and Continuous Probabilities）"></a>离散概率和连续概率（Discrete and Continuous Probabilities）</h1><p>离散型概率和连续型概率的区别就是前者的目标空间是离散的，后者是连续的。也就是前者的随机变量是由一个个数组成，后者则是一个连续的区间。</p>
+<h2 id="离散型概率（Discrete-Probabilities）"><a href="#离散型概率（Discrete-Probabilities）" class="headerlink" title="离散型概率（Discrete Probabilities）"></a>离散型概率（Discrete Probabilities）</h2><p><img src="https://img-blog.csdnimg.cn/20210503091939476.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>由上图可以得到几个概念：<br><strong>联合概率（joint probability）</strong>：两个事件的交集</p>
+<script type="math/tex; mode=display">P(X =x_i, Y = y_i)=\frac {n_{ij}}{N}</script><p>也可以写成$p(x,y)$</p>
+<p><strong>边际概率（marginal probability）</strong>：$P(X=x_i)=\frac {x_i}{N}$<br><strong>条件概率（conditional probability）</strong>：当一个事件发生时另一个事件发生的概率</p>
+<script type="math/tex; mode=display">P(X=x_{i}|Y=y_{ij})=\frac {n_{ij}}{r_j}</script><h2 id="连续性概率（Continuous-Probabilities）"><a href="#连续性概率（Continuous-Probabilities）" class="headerlink" title="连续性概率（Continuous Probabilities）"></a>连续性概率（Continuous Probabilities）</h2><blockquote>
+<p>没弄懂。<br><img src="https://img-blog.csdnimg.cn/20210503122706103.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>还有之后提到的，在连续空间中两个反直觉的问题：<br>1.$\mathcal A$ needs to be restricted to behave well under set complements, set intersections,and set unions<br>2.测量集合的大小。量度（measure）、集的势（cardinality）：集合中的元素的个数，当两个集合中的元素个数相等的时候，称为<strong>等势</strong><br>Sets that behave well under set operations and additionally have a topology are called a <strong>Borel $\sigma$-algebra</strong></p>
+</blockquote>
+<p><strong>概率密度函数</strong><br><img src="https://img-blog.csdnimg.cn/20210503123709953.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>用概率密度函数可以求解在给定区间当中的概率：</p>
+<script type="math/tex; mode=display">P(a\le X\le)=\int^a_bf(x)dx</script><p>注意一点，一个点在连续函数中出现的概率为0，即在上式$a=b$时.</p>
+<p><strong>累积分布函数</strong><br><img src="https://img-blog.csdnimg.cn/20210503124057824.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>即：</p>
+<script type="math/tex; mode=display">F_X(x)=\int^{x_1}_{-\infin}\dots\int^{x_D}_{-\infin}f(z_1,\dots,z_D)dz_1\dots dz_D</script><h1 id="加法法则、乘法法则和贝叶斯定理（Sum-Rule-Product-Rule-and-Bayes’-Theorem）"><a href="#加法法则、乘法法则和贝叶斯定理（Sum-Rule-Product-Rule-and-Bayes’-Theorem）" class="headerlink" title="加法法则、乘法法则和贝叶斯定理（Sum Rule, Product Rule, and Bayes’ Theorem）"></a>加法法则、乘法法则和贝叶斯定理（Sum Rule, Product Rule, and Bayes’ Theorem）</h1><p><strong>加法法则</strong>：</p>
+<script type="math/tex; mode=display">p(\boldsymbol{x})=\left\{\begin{array}{ll}\sum\limits_{\boldsymbol{y} \in \mathcal{Y}} p(\boldsymbol{x}, \boldsymbol{y}) & \text { if } \boldsymbol{y} \text { is discrete } \\ \\ \int_{\mathcal{Y}} p(\boldsymbol{x}, \boldsymbol{y}) \mathrm{d} \boldsymbol{y} & \text { if } \boldsymbol{y} \text { is continuous }\end{array}\right.</script><p>推广至多变量：<br>设$\boldsymbol x=[x_1,x_2,\dots,x_D]^\top$:</p>
+<script type="math/tex; mode=display">p(x_i)=\int p(x_1,\dots,x_D)d\boldsymbol x_{\backslash i}</script><p>其中，$\boldsymbol x_{\backslash i}$,表示除了$i$以外的所有的元素。</p>
+<p><strong>乘法法则</strong></p>
+<script type="math/tex; mode=display">p(x,y) = p(y|x)p(x)\\ p(y,x)=p(x|y)p(y)</script><p>由于随机变量的顺序无关紧要，所以上面两个式子是等价的。</p>
+<p><strong>贝叶斯公式</strong><br>这个公式可以由乘法法则推出。（也被称为<strong>概率逆</strong>（probabilistic inverse））<br><img src="https://img-blog.csdnimg.cn/20210504101801292.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>the posterior distribution is the quantity of interest as it <strong>encapsulates all available information from the prior and the data.</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210504102446691.jpeg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>从上图中理解，最终的后验概率就是浅蓝色部分占蓝色部分的比例。<br>$p(x)$称为<strong>先验概率</strong>，描述的是一些已知事件发生的概率，之后的$p(y|x)$是在这些已知事件中y发生的概率称为<strong>似然概率</strong>，最后是y事件在整体中发生的概率。</p>
+<blockquote>
+<p>举一个例子，想要知道一群人当中脾气好的女生有多少，首先，女生在人群中比例可以看成先验概率$p(girl)$，而女生中脾气好的人数比例可以看成似然概率$p(good_temper|girl)$，所以$p(girl|good_temper)$的意思就是脾气好的人中女生的比例,但是男生中也有脾气好的，所以用女生脾气好的人数，除以所有脾气好的人数就是想要求得概率了。</p>
+<p>似然函数(likelihood function):在该数据下，数据拟合的好坏,也就是在当前参数的情况下对真是数据的匹配情况。具体来说就是在给的那个参数的情况下，取得预期值的概率的大小，即$p(x|\theta)$</p>
+</blockquote>
+<p><strong>边际似然（marginal likelihood/evidence）</strong></p>
+<script type="math/tex; mode=display">p(\boldsymbol y):= \int p(\boldsymbol y|\boldsymbol x)p(\boldsymbol x)d \boldsymbol x=\mathbb E_X[p(\boldsymbol y|\boldsymbol x)]</script><p>由上式可知，边际似然是与x相互独立的，这也被称为期望似然概率。</p>
+<h1 id="摘要统计和独立性（Summary-Statistics-and-Independence）"><a href="#摘要统计和独立性（Summary-Statistics-and-Independence）" class="headerlink" title="摘要统计和独立性（Summary Statistics and Independence）"></a>摘要统计和独立性（Summary Statistics and Independence）</h1><blockquote>
+<p>摘要统计:In descriptive statistics, summary statistics are used to summarize a set of observations, in order to communicate the largest amount of information as simply as possible<br>实际上就是用一种尽可能简洁得方式概括数据的信息。</p>
+</blockquote>
+<h2 id="均值和协方差（Means-and-Covariances）"><a href="#均值和协方差（Means-and-Covariances）" class="headerlink" title="均值和协方差（Means and Covariances）"></a>均值和协方差（Means and Covariances）</h2><p><strong>数学期望</strong>（Expected Value）</p>
+<script type="math/tex; mode=display">g:\mathbb R\rightarrow\mathbb R,\quad X \sim p(x) \\ \\ \mathbb E_X[g(x)]=\left\{\begin{array}{ll}\int_\mathcal Xg(x)p(x)dx,\quad continuous\\ \\ \sum\limits_{x\in\mathcal X}g(x)p(x),\quad discrete\end{array}\right.</script><p>注意这个式子中是函数值乘以对应的概率值，所以最终得到的是映射值得概率均值。对于由有限个一维随机变量组成得数组：</p>
+<script type="math/tex; mode=display">\mathbb{E}_{X}[g(\boldsymbol{x})]=\left[\begin{array}{c}\mathbb{E}_{X_{1}}\left[g\left(x_{1}\right)\right] \\ \vdots \\ \mathbb{E}_{X_{D}}\left[g\left(x_{D}\right)\right]\end{array}\right] \in \mathbb{R}^{D}</script><p>数学期望满足线性算子的性质：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mathbb{E}_{X}[f(\boldsymbol{x})] &=\int f(\boldsymbol{x}) p(\boldsymbol{x}) \mathrm{d} \boldsymbol{x} \\
+&=\int[a g(\boldsymbol{x})+b h(\boldsymbol{x})] p(\boldsymbol{x}) \mathrm{d} \boldsymbol{x} \\
+&=a \int g(\boldsymbol{x}) p(\boldsymbol{x}) \mathrm{d} x+b \int h(\boldsymbol{x}) p(\boldsymbol{x}) \mathrm{d} \boldsymbol{x} \\
+&=a \mathbb{E}_{X}[g(\boldsymbol{x})]+b \mathbb{E}_{X}[h(\boldsymbol{x})]
+\end{aligned}</script><p><strong>均值</strong>（Mean）<br>均值是描述映射前的数据的情况。<br>对于一个随机变量$X$,其中$x\in \mathbb R^D$<br>所以：</p>
+<script type="math/tex; mode=display">\mathbb E_X[\boldsymbol x]=\begin{bmatrix} \mathbb E_{X_1}[x_1]\\\vdots\\ \mathbb E_{X_D}[x_D]\end{bmatrix}\in R^D</script><script type="math/tex; mode=display">
+\mathbb{E}_{X_{d}}\left[x_{d}\right]:=\left\{\begin{array}{ll}
+\int_{\mathcal{X}} x_{d} p\left(x_{d}\right) \mathrm{d} x_{d} & \text { if } X \text { is a continuous random variable } \\
+\sum_{x_{i} \in \mathcal{X}} x_{i} p\left(x_{d}=x_{i}\right) & \text { if } X \text { is a discrete random variable }
+\end{array}\right.</script><p><strong>中位数</strong>（median）<br>一组数据中大于一遍数据而小于另一边数据的数字。中位数能够有效地应对异常值。<br><strong>众数</strong>（mode）<br>一组数据中出现次数最多的数字。在连续随机变量中，众数是概率密度最大的数。</p>
+<blockquote>
+<p>上面两种数字对于高维的数据的处理时比较麻烦? 在高维数据中，各个维度的数值大小判断准则不统一。</p>
+</blockquote>
+<p><strong>协方差</strong>（Covariance）：<br>协方差描述两个随机变量之间的相互关系（衡量两个随机变量的联合变化程度）。<br>单变量：</p>
+<script type="math/tex; mode=display">X,Y\in \mathbb R</script><script type="math/tex; mode=display">\operatorname {Cov}_{X,Y}[x,y]:=\mathbb E_{X,Y}[(x-\mathbb E_X[x])(y-\mathbb E_Y[y])]</script><p>利用线性性质，可以将上式化简为：</p>
+<script type="math/tex; mode=display">Cov[x,y]=\mathbb E[xy]-\mathbb E[x]\mathbb E[y]</script><p>随机变量与自己本身的协方差称为<strong>方差</strong>(variance)，即$Cov[x,x]$,表示为$\mathbb V_X[x]$,方差的开根之后的值称为<strong>标准偏差</strong>(standard deviation)，表示为$\sigma (x)$<br>多变量：<br><img src="https://img-blog.csdnimg.cn/20210504140000942.png" alt="在这里插入图片描述"><br>多变量方差：<br><img src="https://img-blog.csdnimg.cn/20210504140614642.png" alt="在这里插入图片描述"><br>设随机变量$X$有$x\in \mathbb R^D$, 均值向量$\mu\in \mathbb R^D$:</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mathbb{V}_{X}[\boldsymbol{x}] &=\operatorname{Cov}_{X}[\boldsymbol{x}, \boldsymbol{x}] \\
+&=\mathbb{E}_{X}\left[(\boldsymbol{x}-\boldsymbol{\mu})(\boldsymbol{x}-\boldsymbol{\mu})^{\top}\right]=\mathbb{E}_{X}\left[\boldsymbol{x} \boldsymbol{x}^{\top}\right]-\mathbb{E}_{X}[\boldsymbol{x}] \mathbb{E}_{X}[\boldsymbol{x}]^{\top} \\
+&=\left[\begin{array}{cccc}
+\operatorname{Cov}\left[x_{1}, x_{1}\right] & \operatorname{Cov}\left[x_{1}, x_{2}\right] & \ldots & \operatorname{Cov}\left[x_{1}, x_{D}\right] \\
+\operatorname{Cov}\left[x_{2}, x_{1}\right] & \operatorname{Cov}\left[x_{2}, x_{2}\right] & \ldots & \operatorname{Cov}\left[x_{2}, x_{D}\right] \\
+\vdots & \vdots & \ddots & \vdots \\
+\operatorname{Cov}\left[x_{D}, x_{1}\right] & \ldots & \ldots & \operatorname{Cov}\left[x_{D}, x_{D}\right]
+\end{array}\right]
+\end{aligned}</script><p>上式中的矩阵称为<strong>协方差矩阵</strong>（covariance matrix），是一个对称半正定的矩阵。它描述了数据的分散情况。对角线元素为<strong>方差</strong>，非对角线元素为<strong>互协方差</strong>（cross-covariance）</p>
+<p><strong>相关性</strong>（Correlation）<br>相关性描述两个随机变量之间的关系。</p>
+<script type="math/tex; mode=display">\operatorname{corr}[x, y]=\frac{\operatorname{Cov}[x, y]}{\sqrt{\mathbb{V}[x] \mathbb{V}[y]}} \in[-1,1] .</script><p>相关性矩阵就是标准化的随机变量（standardized random variables），即$x/\sigma(x)$</p>
+<blockquote>
+<p>If the greater values of one variable mainly correspond with the greater values of the other variable, and the same holds for the lesser values (that is, the variables tend to show similar behavior), the covariance is positive.</p>
+</blockquote>
+<p><strong>正相关与负相关</strong><br><img src="https://img-blog.csdnimg.cn/20210504141614657.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="样本均值和样本方差（Empirical-Means-and-Covariances）"><a href="#样本均值和样本方差（Empirical-Means-and-Covariances）" class="headerlink" title="样本均值和样本方差（Empirical Means and Covariances）"></a>样本均值和样本方差（Empirical Means and Covariances）</h2><p>就是将原先的数据中拿出一部分的数据作为样本，所得出的均值和方差。之前提到的均值是<strong>全平均值</strong>（population mean），方差也一样。<br><img src="https://img-blog.csdnimg.cn/20210504205458237.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="方差的三种表达式（Three-Expressions-for-the-Variance）"><a href="#方差的三种表达式（Three-Expressions-for-the-Variance）" class="headerlink" title="方差的三种表达式（Three Expressions for the Variance）"></a>方差的三种表达式（Three Expressions for the Variance）</h2><p>方差的定义式，但是因为需要求均值，又要将样本数逐一进行运算，所以需要将数据遍历两遍。</p>
+<script type="math/tex; mode=display">\mathbb{V}_{X}[x]:=\mathbb{E}_{X}\left[(x-\mu)^{2}\right]</script><p>对原始式进行整理得到下式，这个式子称为<strong>变量的原始分数形式</strong>（raw-score formula for variance），虽然这样可以避免对数据进行两次的遍历，但是这在数值上是不稳定的（numerically unstable）。（？精度上的损失？）</p>
+<script type="math/tex; mode=display">\mathbb{V}_{X}[x]=\mathbb{E}_{X}\left[x^{2}\right]-\left(\mathbb{E}_{X}[x]\right)^{2}</script><p>方差还可以理解成数据中的所有数字与其他所有的数字之间的差距的均值。</p>
+<script type="math/tex; mode=display">\frac{1}{N^{2}} \sum_{i, j=1}^{N}\left(x_{i}-x_{j}\right)^{2}=2\left[\frac{1}{N} \sum_{i=1}^{N} x_{i}^{2}-\left(\frac{1}{N} \sum_{i=1}^{N} x_{i}\right)^{2}\right]</script><blockquote>
+<p>there is an equivalence between the pairwise distances and the distances from the center of the set of points</p>
+</blockquote>
+<h2 id="随机变量的加法运算和变换（Sums-and-Transformations-of-Random-Variables）"><a href="#随机变量的加法运算和变换（Sums-and-Transformations-of-Random-Variables）" class="headerlink" title="随机变量的加法运算和变换（Sums and Transformations of Random Variables）"></a>随机变量的加法运算和变换（Sums and Transformations of Random Variables）</h2><p><img src="https://img-blog.csdnimg.cn/20210504210352549.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>对于一个仿射变换$\boldsymbol y=\boldsymbol A x+\boldsymbol b$有：<br><img src="https://img-blog.csdnimg.cn/20210504210531613.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2021050421054520.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="统计独立性-Statistical-Independence"><a href="#统计独立性-Statistical-Independence" class="headerlink" title="统计独立性(Statistical Independence)"></a>统计独立性(Statistical Independence)</h2><p><img src="https://img-blog.csdnimg.cn/20210504210704491.png" alt="在这里插入图片描述"><br>当两个随机变量相互独立的时候，有以下性质。注意最后一个，当两个随机变量相互独立的时候，相关性等于0，但是相关性等于0的时候，不能说明两个随机变量相互独立，因为独立性是描述随机变量之间的线性独立，假设随机变量之间的关系不是线性的，那么相关性为0时，不能说这两个随机变量是相互独立的。</p>
+<p>两随机变量相互独立时的一些性质：</p>
+<script type="math/tex; mode=display">\begin{aligned}&p(\boldsymbol{y} \mid \boldsymbol{x})=p(\boldsymbol{y})\\&p(\boldsymbol{x} \mid \boldsymbol{y})=p(\boldsymbol{x}) \\ &\mathbb{V}_{X, Y}[\boldsymbol{x}+\boldsymbol{y}]=\mathbb{V}_{X}[\boldsymbol{x}]+\mathbb{V}_{Y}[\boldsymbol{y}]\\ &\operatorname{Cov}_{X, Y}[\boldsymbol{x}, \boldsymbol{y}]=\mathbf{0}\end{aligned}</script><p><strong>独立均匀分布</strong>（independent and identically distributed (i.i.d.)）<br>变量之间相互独立，而且来自于同一个分布中。<br><strong>条件独立</strong>（conditional independence）<br><img src="https://img-blog.csdnimg.cn/20210504211427767.png" alt="在这里插入图片描述"><br>表示为$X \perp!!! \perp Y \mid Z$</p>
+<script type="math/tex; mode=display">p(x,y)=p(y|x)p(x)\\ p(x,y|z)=p(x|z)p(y|z),\quad z\in \mathcal Z</script><p>利用第一个式子将第二个式子的左边展开，得到：</p>
+<script type="math/tex; mode=display">p(\boldsymbol x, \boldsymbol y|z)=p(\boldsymbol x|\boldsymbol y,z)p(\boldsymbol y|z)</script><p>与原始比较可以得到：</p>
+<script type="math/tex; mode=display">p(x|y,z)=p(x|z)</script><p>这样可以得到条件独立的另一个定义，也就是我们知道y这个结论，对最终的结果没有影响。原式可以理解为在z的条件下，两个随机变量相互独立。统计独立可以看成条件独立的一个特例：$X \perp!!! \perp Y \mid \not!0$</p>
+<h2 id="随机变量的内积（Inner-Products-of-Random-Variables）"><a href="#随机变量的内积（Inner-Products-of-Random-Variables）" class="headerlink" title="随机变量的内积（Inner Products of Random Variables）"></a>随机变量的内积（Inner Products of Random Variables）</h2><p>两个相互独立的随机变量$X,Y$,有以下性质：($\operatorname {Cov}[x,y]=0$)</p>
+<script type="math/tex; mode=display">\mathbb V(x+y)=\mathbb V(x)+\mathbb V(y)</script><p>由于方差是立方项，所以上式可以联想到勾股定理（the Pythagorean theorem）。<br>（每一个随机变量都可以看成一个向量空间中的向量）假设对于随机变量之间的内积的定义如下：</p>
+<script type="math/tex; mode=display"><X,Y> :=\operatorname{Cov}[x,y]</script><p>根据这个定义可以得到随机变量的长度：</p>
+<script type="math/tex; mode=display">\| X\| = \sqrt{\operatorname{Cov}[x,x]}=\sqrt{\mathbb V[x]}=\sigma[x]</script><p>这里可以看到，随机变量“越长”，所对应的数据就越分散。<br>还可以根据两向量的角度的定义得到：</p>
+<script type="math/tex; mode=display">\cos \theta=\frac{\langle X, Y\rangle}{\|X\|\|Y\|}=\frac{\operatorname{Cov}[x, y]}{\sqrt{\mathbb{V}[x] \mathbb{V}[y]}}</script><p>可以看到两个随机变量的“夹角”的余弦值就是相关性（$\operatorname{corr}[x, y]=\frac{\operatorname{Cov}[x, y]}{\sqrt{\mathbb{V}[x] \mathbb{V}[y]}} \in[-1,1] .$）<br>所以，当两个随机变量相会垂直的时候，也就是$X\perp Y$时，$\langle X,Y\rangle=0$这时候二者的夹角为90°，对应的余弦值为0，也就是说这两个随机变量时不相关的。</p>
+<blockquote>
+<p>之后提到用用欧几里得距离去比较两个随机变量的分布并不是最好的方式，这里提到了一个领域<strong>信息几何</strong>（information geometry）一个新名词<strong>廖</strong>（manifold），这部分没有弄得很清楚，留到后续再进行深入学习</p>
+</blockquote>
+<h1 id="高斯分布（Gaussian-Distribution）"><a href="#高斯分布（Gaussian-Distribution）" class="headerlink" title="高斯分布（Gaussian Distribution）"></a>高斯分布（Gaussian Distribution）</h1><p>一维随机变量的高斯分布：</p>
+<script type="math/tex; mode=display">p\left(x \mid \mu, \sigma^{2}\right)=\frac{1}{\sqrt{2 \pi \sigma^{2}}} \exp \left(-\frac{(x-\mu)^{2}}{2 \sigma^{2}}\right)</script><p>其中，$\mu$代表均值，$\sigma$代表随机变量得方差。<br>对于多元正态分布：（multivariate Gaussian distribution）（$\mu$为均值向量，$\Sigma$为协方差矩阵）</p>
+<script type="math/tex; mode=display">p(\boldsymbol{x} \mid \boldsymbol{\mu}, \boldsymbol{\Sigma})=(2 \pi)^{-\frac{D}{2}}|\boldsymbol{\Sigma}|^{-\frac{1}{2}} \exp \left(-\frac{1}{2}(\boldsymbol{x}-\boldsymbol{\mu})^{\top} \boldsymbol{\Sigma}^{-1}(\boldsymbol{x}-\boldsymbol{\mu})\right)</script><p>其中，$x\in\mathbb R^D,p(x)=\mathcal N(x|\mu,\Sigma) \ or \ X \sim\mathcal N(\mu,\Sigma)$<br>在图像中表示为：<br><img src="https://img-blog.csdnimg.cn/20210506154612837.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>当$\mu=0,\Sigma=I$时，将这种分布称为<strong>标准正态分布</strong>（standard normal distribution.）</p>
+<h2 id="高斯分布的边际分布和条件分布仍旧是高斯分布（Marginals-and-Conditionals-of-Gaussians-are-Gaussians）"><a href="#高斯分布的边际分布和条件分布仍旧是高斯分布（Marginals-and-Conditionals-of-Gaussians-are-Gaussians）" class="headerlink" title="高斯分布的边际分布和条件分布仍旧是高斯分布（Marginals and Conditionals of Gaussians are Gaussians）"></a>高斯分布的边际分布和条件分布仍旧是高斯分布（Marginals and Conditionals of Gaussians are Gaussians）</h2><p>假设$X、Y$是多维随机变量，则有：</p>
+<script type="math/tex; mode=display">p(\boldsymbol{x}, \boldsymbol{y})=\mathcal{N}\left(\left[\begin{array}{l}\boldsymbol{\mu}_{x} \\ \boldsymbol{\mu}_{y}\end{array}\right],\left[\begin{array}{ll}\boldsymbol{\Sigma}_{x x} & \boldsymbol{\Sigma}_{x y} \\ \boldsymbol{\Sigma}_{y x} & \boldsymbol{\Sigma}_{y y}\end{array}\right]\right)</script><p><img src="https://img-blog.csdnimg.cn/20210506161213884.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>$X、Y$的条件分布也是高斯分布：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+p(\boldsymbol{x} \mid \boldsymbol{y}) &=\mathcal{N}\left(\boldsymbol{\mu}_{x \mid y}, \boldsymbol{\Sigma}_{x \mid y}\right) \\
+\boldsymbol{\mu}_{x \mid y} &=\boldsymbol{\mu}_{x}+\boldsymbol{\Sigma}_{x y} \boldsymbol{\Sigma}_{y y}^{-1}\left(\boldsymbol{y}-\boldsymbol{\mu}_{y}\right) \\
+\boldsymbol{\Sigma}_{x \mid y} &=\Sigma_{x x}-\boldsymbol{\Sigma}_{x y} \boldsymbol{\Sigma}_{y y}^{-1} \Sigma_{y x}
+\end{aligned}</script><p><img src="https://img-blog.csdnimg.cn/20210506161230791.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这是$x_2=-1$是的条件分布。</p>
+<p>边际分布：</p>
+<script type="math/tex; mode=display">p(\boldsymbol{x})=\int p(\boldsymbol{x}, \boldsymbol{y}) \mathrm{d} \boldsymbol{y}=\mathcal{N}\left(\boldsymbol{x} \mid \boldsymbol{\mu}_{x}, \boldsymbol{\Sigma}_{x x}\right)</script><p><img src="https://img-blog.csdnimg.cn/20210506161330927.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="高斯密度函数的乘积（Product-of-Gaussian-Densities）"><a href="#高斯密度函数的乘积（Product-of-Gaussian-Densities）" class="headerlink" title="高斯密度函数的乘积（Product of Gaussian Densities）"></a>高斯密度函数的乘积（Product of Gaussian Densities）</h2><p>对于两个高斯函数$\mathcal N(x|a,A),\mathcal N(x|b,B)$二者的乘积为：$c\mathcal N(x|c,C)$,其中：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+C &=\left(A^{-1}+B^{-1}\right)^{-1} \\
+c &=C\left(A^{-1} a+B^{-1} b\right) \\
+c &=(2 \pi)^{-\frac{D}{2}}|A+B|^{-\frac{1}{2}} \exp \left(-\frac{1}{2}(a-b)^{\top}(A+B)^{-1}(a-b)\right)
+\end{aligned}</script><p>比例常数c也可以写成：</p>
+<script type="math/tex; mode=display">c=\mathcal N(a|b,A+B)=\mathcal N(b|a,A+B)</script><h2 id="和运算和线性变换（Sums-and-Linear-Transformations）"><a href="#和运算和线性变换（Sums-and-Linear-Transformations）" class="headerlink" title="和运算和线性变换（Sums and Linear Transformations）"></a>和运算和线性变换（Sums and Linear Transformations）</h2><p>当两个相互独立的且满足高斯分布的随机变量相加所得到的随机变量也满足高斯分布：</p>
+<script type="math/tex; mode=display">p(x+y)=\mathcal N(\mu_x+\mu_y,\Sigma_x+\Sigma_y)</script><p>$x+y$的均值和协方差可以通过之前提到的和运算的性质得到（$\mathbb E(x+y)=\mathbb E(x)+\mathbb E(y), etc$）</p>
+<blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210506211126726.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<p>可以利用加权和来定义一个满足高斯分布的随机变量（或者是将一个高斯随机变量分解成两个不同的满足高斯分布的随机变量）;</p>
+<script type="math/tex; mode=display">p(x)=\alpha p_1(x)+(1-\alpha)p_2(x), \ 1\gt\alpha\gt0,(\mu_1,\sigma^2_1)\ne (\mu_2,\sigma_2^2)</script><p>其期望值和方差可以表示为：</p>
+<script type="math/tex; mode=display">\mathbb{E}[x]=\alpha \mu_{1}+(1-\alpha) \mu_{2}</script><script type="math/tex; mode=display">\mathbb{V}[x]=\left[\alpha \sigma_{1}^{2}+(1-\alpha) \sigma_{2}^{2}\right]+\left(\left[\alpha \mu_{1}^{2}+(1-\alpha) \mu_{2}^{2}\right]-\left[\alpha \mu_{1}+(1-\alpha) \mu_{2}\right]^{2}\right)</script><blockquote>
+<p>原书p202有上面两个公式的推导过程，主要就是利用写出对应的定义式，也就是积分的形式，然后再利用积分的性质进行变换。对于方差公式的推导，可以利用方差与期望值之间的关系式。</p>
+</blockquote>
+<p><strong>总方差定律</strong>（law of total variance）</p>
+<script type="math/tex; mode=display">\mathbb V_X[x]=\mathbb E_Y[\mathbb V_X[x|y]]+\mathbb V_Y[\mathbb E_X[x|y]]</script><p>对一个满足高斯分布的随机变量进行线性变换，即对$X$进行线性变换$Ax$,可以得到一个均值为0，方差为$AA^\top$的高斯变量。而对一个高斯随机变量加上一个常数向量，高斯随机变量的均值会发生变化，但是方差会不发生变化。所以，对一个高斯变量进行线性变换或者是仿射变换都不会改变这个变量的分布。</p>
+<p>假设随机变量Y为X经过线性变换之后的随机变量，即$Ax = y$,所以有：</p>
+<script type="math/tex; mode=display">\mathbb E[y]=\mathbb E[Ax]=A\mathbb E[x]=A\mu</script><script type="math/tex; mode=display">\mathbb V[y]=\mathbb V[Ax]=A\mathbb V[x]A^\top=A\Sigma A^\top</script><p>所以随机变量Y可以写成：</p>
+<script type="math/tex; mode=display">p(y) = \mathbb N(y|A\mu, A\Sigma A^\top)</script><p>假设一个随机变量的均值是另一个随机变量经过线性变换之后得到的。假设变换矩阵$\boldsymbol A\in\mathbb R^{M\times N}, M\ge N$高斯随机变量$Y$有$y\in\mathbb R^M$，其均值为$\boldsymbol A\boldsymbol x$，可以表示为：</p>
+<script type="math/tex; mode=display">p(\boldsymbol y)=\mathcal N(y|\boldsymbol A\boldsymbol x,\Sigma)</script><p>当我们想要求$p(\boldsymbol x)$的概率分布时，可以由$X、Y$的关系得到$x=A^{-1}y$,但是当A不可逆时，这时候需要用到伪逆，所以有：</p>
+<script type="math/tex; mode=display">x = (AA^\top)^{-1}A^\top y</script><p>所以随机变量$X$的分布为：</p>
+<script type="math/tex; mode=display">p(\boldsymbol{x})=\mathcal{N}\left(\boldsymbol{x} \mid\left(\boldsymbol{A}^{\top} \boldsymbol{A}\right)^{-1} \boldsymbol{A}^{\top} \boldsymbol{y},\left(\boldsymbol{A}^{\top} \boldsymbol{A}\right)^{-1} \boldsymbol{A}^{\top} \boldsymbol{\Sigma} \boldsymbol{A}\left(\boldsymbol{A}^{\top} \boldsymbol{A}\right)^{-1}\right)</script><h2 id="从多元高斯分布中取样（Sampling-from-Multivariate-Gaussian-Distributions）"><a href="#从多元高斯分布中取样（Sampling-from-Multivariate-Gaussian-Distributions）" class="headerlink" title="从多元高斯分布中取样（Sampling from Multivariate Gaussian Distributions）"></a>从多元高斯分布中取样（Sampling from Multivariate Gaussian Distributions）</h2><blockquote>
+<p>取样步骤：<br>In the case of a multivariate Gaussian, this process consists of three stages:<br><strong>first</strong>, we need a source of pseudo-random numbers that provide a uniform sample in the interval [0,1];<br><strong>second</strong>, we use a non-linear transformation such as the Box-Muller transform (Devroye, 1986) to obtain a sample from a univariate Gaussian;<br>and <strong>third</strong>, we collate a vector of these samples to obtain a sample from a multivariate standard normal $\mathcal N(0,I)$</p>
+</blockquote>
+<p>想要从多维高斯分布$\mathcal N(\mu,\Sigma)$中取样，可以利用高斯随机变量线性变换的性质：<br>假设：$x\sim \mathcal N(0,I)$，所以$y=Ax+\mu，where\ AA^\top=\Sigma.$<br>所以$y\sim\mathcal N(\mu,\Sigma)$。<br>其中一种选取A矩阵的方法是使用Cholesky decomposition将协方差矩阵进行拆分。（但是需要矩阵是对称且正定的）</p>
+<h2 id="共轭及指数族（Conjugacy-and-the-Exponential-Family）"><a href="#共轭及指数族（Conjugacy-and-the-Exponential-Family）" class="headerlink" title="共轭及指数族（Conjugacy and the Exponential Family）"></a>共轭及指数族（Conjugacy and the Exponential Family）</h2><blockquote>
+<p>对概率分布的目标：<br><img src="https://img-blog.csdnimg.cn/20210507153156614.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>指数族的优点：<br>provides the right balance of generality while retaining favorable computation and inference properties</p>
+</blockquote>
+<h3 id="伯努利分布（Bernoulli-distribution）"><a href="#伯努利分布（Bernoulli-distribution）" class="headerlink" title="伯努利分布（Bernoulli distribution）"></a>伯努利分布（Bernoulli distribution）</h3><p>一次伯努利试验的结果的概率：<br>对于一个二元随机变量$X$有$x\in{0,1}$,伯努利分布是由一个连续的参数$\mu\in[0,1]$控制，可以表示为$\operatorname{Ber}(\mu)$:</p>
+<script type="math/tex; mode=display">\begin{aligned} &p(x|\mu)=\mu^x(1-\mu)^{1-x},\quad x\in\{0,1\}\\
+&\mathbb E[x] = \mu,\\ &\mathbb V[x]=\mu(1-\mu)\end{aligned}</script><h3 id="二项式分布（Binomial-Distribution）"><a href="#二项式分布（Binomial-Distribution）" class="headerlink" title="二项式分布（Binomial Distribution）"></a>二项式分布（Binomial Distribution）</h3><p>多个伯努利实验的概率分布称为二项式分布：$\operatorname{Bin}(N,\mu)$（简单来说第一个参数就是实验次数，第二个参数就是成功概率）</p>
+<script type="math/tex; mode=display">\begin{aligned} p(m \mid N, \mu) &=\left(\begin{array}{l}N \\ m\end{array}\right) \mu^{m}(1-\mu)^{N-m} \\ \mathbb{E}[m] &=N \mu \\ \mathbb{V}[m] &=N \mu(1-\mu) \end{aligned}</script><h3 id="贝塔分布（Beta-Distribution）"><a href="#贝塔分布（Beta-Distribution）" class="headerlink" title="贝塔分布（Beta Distribution）"></a>贝塔分布（Beta Distribution）</h3><p>$\operatorname{Beta}(\alpha, \beta)$:</p>
+<script type="math/tex; mode=display">p(\mu|\alpha,\beta) = \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\mu^{\alpha-1}(1-\mu)^{\beta-1}</script><script type="math/tex; mode=display">\mathbb E[\mu] = \frac{\alpha}{\alpha+\beta},\quad \mathbb V[\mu] = \frac{\alpha \beta}{(\alpha+\beta)^2(\alpha+\beta+1)}</script><p>其中$\Gamma(\cdot)$定义为：</p>
+<script type="math/tex; mode=display">\begin{aligned}&\Gamma(t):=\int^\infin_0x^{t-1}\operatorname{exp}(-x)dx,\quad t\gt0 \\ &\Gamma(t+1)=t\Gamma(t)\end{aligned}</script><p>贝塔函数在不同参数下的图像：<br><img src="https://img-blog.csdnimg.cn/20210508155710268.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>贝塔分布在不同参数下的一些特性：<br><img src="https://img-blog.csdnimg.cn/20210508155742699.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="共轭（Conjugacy）"><a href="#共轭（Conjugacy）" class="headerlink" title="共轭（Conjugacy）"></a>共轭（Conjugacy）</h2><p><strong>先验分布</strong>(Prior distribution)<br>先验分布就是你在取得实验观测值以前对一个参数概率分布的 主观判断</p>
+<blockquote>
+<p>比如说你在抛硬币之前，你会认为取得正面的结果的 概率为为0.5<br>当我们假设实验结果的分布满足均匀分布，这时候称为<strong>无信息先验</strong>(noninformative prior) 也就是说（继续上面的例子）你抛的硬币是不均匀的，所以，取得正面的概率为$0\sim 1$上的均匀分布，也就是说什么可能都有。随着实验的进行，这样的分布会根据实验结果被不断矫正。<br><img src="https://img-blog.csdnimg.cn/20210509104732714.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210509104742674.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这样的概率分布也不会排除一些极端的结果的出现的概率。</p>
+</blockquote>
+<p><strong>共轭先验</strong>（Conjugacy Prior）<br><img src="https://img-blog.csdnimg.cn/202105081602298.png" alt="在这里插入图片描述"><br>也就是对于一个似然函数的先验分布假设成某种分布，然后利用贝叶斯公式计算出对应的后验分布，有时候得到的结果的形式是一致的。</p>
+<p>假设一个二项式分布$x\sim\operatorname{Bin}(N, \mu)$:</p>
+<script type="math/tex; mode=display">p(x|N,\mu)=\begin{pmatrix}N\\ x \end{pmatrix}\mu^x(1-\mu)^{N-x},\quad x=0,1,\dots,N</script><p>它的参数$\mu$满足$\mu \sim\operatorname{Beta}(\alpha,\beta)$:</p>
+<script type="math/tex; mode=display">p(\mu|\alpha,\beta) = \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\mu^{\alpha-1}(1-\mu)^{\beta-1}</script><p>假设在x=h时：</p>
+<script type="math/tex; mode=display">\begin{aligned}p(\mu|x=h,N,\alpha,\beta)&\propto p(x|N,\mu)p(\mu|\alpha,\beta)\\ &\propto\mu^h(1-\mu)^{(N-h)}\mu^{\alpha-1}(1-\mu)^{\beta-1}\\ &= \mu^{h+\alpha-1}(1-\mu)^{(N-h)+\beta-1} \\ &\propto \operatorname{Beta}(h+\alpha,N-h+\beta)\end{aligned}</script><p>所以，可以注意到这里的先验概率分布与后验概率分布的形式是一致的。</p>
+<blockquote>
+<p><strong>似然函数</strong>（Likelihood Function）:$f(x|\theta)$说明我们观测的数据$x$是在参数$\theta$下得来的。</p>
+</blockquote>
+<p>由于利用贝叶斯公式计算后验概率分布的时候，需要用到边际分布概率，如果随机变量是连续的，那么就会需要使用积分，这会导致很多不必要的计算。有了先验共轭，我们就 不用计算复杂的含有积分的贝叶斯公式 便可得到后验分布。<br>以下是常见的似然函数的先验共轭：<br><img src="https://img-blog.csdnimg.cn/20210509154352999.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="充分统计量（Sufficient-Statistics）"><a href="#充分统计量（Sufficient-Statistics）" class="headerlink" title="充分统计量（Sufficient Statistics）"></a>充分统计量（Sufficient Statistics）</h2><blockquote>
+<p>充分统计量：(一个通俗的比喻解释)<br>假设你辛辛苦苦收集的500个数据全都写在了一张纸上，这些数据是给你写论文用的，非常重要。突然有一天你的狗把你这张写满数据的纸吃掉了，这个时候假如你的数据满足正态分布，且你已经提前把这些数据的均值和方差记录在另外一张纸上了，那你的狗也没坏了什么大事——因为这两个充分统计量包含了这500个数据的所有有用信息。<br><strong>sufficient statistics</strong>: the idea that there are statistics that will <strong>contain all available information that can be inferred from data</strong> corresponding to the distribution under consideration. In other words, <strong>sufficient statistics carry all the information needed to make inference about the population</strong>, that is, they are the statistics that are sufficient to represent the distribution.(像是原先的数据中的一个子集，而这个子集可以代表所有的数据，也就是去除了一些冗余的数据)</p>
+</blockquote>
+<p>如果向量$\phi(x)$包含$\theta_0$的所有的信息，那么将$\phi(x)$称为<strong>充分统计量</strong></p>
+<p>接下来是充分统计的严格定义：<br><img src="https://img-blog.csdnimg.cn/20210509155659498.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>也就是说一个概率密度函数可以被分解为独立于参数$\theta$的部分和虽然依赖于$\theta$但仅仅是依附于$\phi(x)$的（？）</p>
+<blockquote>
+<p>The more interesting case is that p(x | θ) is dependent only on φ(x) and not x itself. In this case, φ(x) is a sufficient statistic for θ.</p>
+<p>Explain this<br><img src="https://img-blog.csdnimg.cn/20210509160841758.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<p>所以我们可以使用一部分数据去估计样品分布的参数。</p>
+<h2 id="指数族（Exponential-Family）"><a href="#指数族（Exponential-Family）" class="headerlink" title="指数族（Exponential Family）"></a>指数族（Exponential Family）</h2><p>对分布的三种可能的抽象：<br>1.已知分布类型和对应的参数<br>2.已知类型，需要根据数据确定此分布类型的参数值。<br>3.考虑这种分布的族。<br><strong>指数族</strong>：<br><img src="https://img-blog.csdnimg.cn/20210510141147420.png" alt="在这里插入图片描述"><br>这里的内积可以是任何类型的内积。但在本节当中只考虑点积。其中的$A(\boldsymbol \theta)$被称为<strong>对数分割函数</strong>（log-partition function）是一个归一化常数，能保证分布汇总成或者积分成1.<br>为了更好地理解指数族，我们可以将原先的定义式写成：</p>
+<script type="math/tex; mode=display">p(\boldsymbol x|\boldsymbol\theta)\propto\operatorname{exp}(\boldsymbol\theta^\top\phi(\boldsymbol x))</script><p>这里的参数$\theta$被称为<strong>特征参数</strong>或<strong>自然参数</strong>（natural parameters）</p>
+<blockquote>
+<p>之后给出了几个例子，但是我还是没有形成深刻的理解（待补充）</p>
+</blockquote>
+<p>指数族能够很方便地找出分布的共轭对（conjugate pairs）<br>对于一个随机变量$X$属于指数族，所以有：</p>
+<script type="math/tex; mode=display">p(\boldsymbol{x} \mid \boldsymbol{\theta})=h(\boldsymbol{x}) \exp (\langle\boldsymbol{\theta}, \boldsymbol{\phi}(\boldsymbol{x})\rangle-A(\boldsymbol{\theta}))</script><p>对于所有的指数族成员都能找到一个先验共轭</p>
+<script type="math/tex; mode=display">p(\boldsymbol{\theta} \mid \gamma)=h_{c}(\boldsymbol{\theta}) \exp \left(\left\langle\left[\begin{array}{l}\gamma_{1} \\ \gamma_{2}\end{array}\right],\left[\begin{array}{c}\boldsymbol{\theta} \\ -A(\boldsymbol{\theta})\end{array}\right]\right\rangle-A_{c}(\boldsymbol{\gamma})\right)</script><p>其中,$\gamma=\begin{bmatrix}\gamma_1\ \gamma_2\end{bmatrix}$,其维度为$\operatorname{dim}(\theta)+1$。充分统计量的共轭先验为$\begin{bmatrix}\theta\-A(\theta)\end{bmatrix}$<br>这是指数族成员的共轭先验的一般形式，可以通过这个一般形式得到指数族成员的共轭先验。</p>
+<h1 id="变量变换和逆变换（Change-of-Variables-Inverse-Transform）"><a href="#变量变换和逆变换（Change-of-Variables-Inverse-Transform）" class="headerlink" title="变量变换和逆变换（Change of Variables/Inverse Transform）"></a>变量变换和逆变换（Change of Variables/Inverse Transform）</h1><p>在本节当中，我们主要讨论当一个随机变量发生变换之后的分布情况。书中主要介绍了两种方法，一种是直接使用定义，另一种是使用<strong>换元法/变数法</strong>（change-of-variable approach）</p>
+<blockquote>
+<p>$X、Y$表示随机变量，$x、y$表示随机变量在目标空间$\mathcal T$中的取值。</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210510150955972.png" alt="在这里插入图片描述"><br>假设两个随机变量$X、Y$满足关系$y = U(X)$,根据定义可以得到$Y=y$的概率分布：</p>
+<script type="math/tex; mode=display">P(Y=y) = P(U(X)=y)=P(X=U^{-1}(y))</script><h2 id="分布函数法（Distribution-Function-Technique）"><a href="#分布函数法（Distribution-Function-Technique）" class="headerlink" title="分布函数法（Distribution Function Technique）"></a>分布函数法（Distribution Function Technique）</h2><p>这里是使用累积分布函数，因为累积分布函数的对变量的偏导就是概率密度函数，所以在运算的过程中可以直接将两个随机变量之间的关系带入即可。<br><img src="https://img-blog.csdnimg.cn/2021051015160139.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>假设两个随机变量$Y:=U(X),X$的分布情况已知:</p>
+<script type="math/tex; mode=display">F_Y(y) = P(Y\le y)=P(U(X)\le y)=P(X\le U^{-1}(y))=F_X(U^{-1}(y))</script><script type="math/tex; mode=display">f(y)=\frac{d}{dy}F_Y(y)</script><p><strong>概率积分变换</strong>（probability integral transform）<br><img src="https://img-blog.csdnimg.cn/20210510153852298.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>需要补充</p>
+</blockquote>
+<p>通过这个变换，我们可以先从均匀分布中抽样，然后对抽样样品做对应的变换之后得到目标分布中的抽样结果。同样也可以用于假设性检验，检查样品是否来源于某一种分布当中。</p>
+<h2 id="换元（Change-of-Variables）"><a href="#换元（Change-of-Variables）" class="headerlink" title="换元（Change of Variables）"></a>换元（Change of Variables）</h2><script type="math/tex; mode=display">\int f(g(x))g'(x)dx=\int f(u)du, \quad u=g(x)</script><p>假设一个随机变量$X:x\in [a,b]$和可逆函数$U$,可以得到：$Y=U(X)$,由概率密度函数的定义：</p>
+<script type="math/tex; mode=display">F_Y(y)=P(Y\le y)=P(U(X)\le y)</script><p>因为一个可逆函数在一个区间内严格单调，且如果原函数单调递增则反函数也会是单调递增的，所以：</p>
+<script type="math/tex; mode=display">P(U(X)\le y)=P(U^{-1}(U(X))\le U^{-1}(y))=P(X\le U^{-1}(y))=\int^{U^{-1}(y)}_af(x)dx</script><p>所以可以得到随机变量Y的累积概率函数：</p>
+<script type="math/tex; mode=display">F_Y(y)=\int^{U^{-1}(y)}_af(x)dx</script><p>因为概率密度函数可以通过累积概率函数求导得到，即：</p>
+<script type="math/tex; mode=display">f(y) = \frac{d}{dy}F_y(y)=\frac{d}{dy}\int^{U^{-1}(y)}_af(x)dx</script><p>又因为：</p>
+<script type="math/tex; mode=display">\int f\left(U^{-1}(y)\right) U^{-1^{\prime}}(y) \mathrm{d} y=\int f(x) \mathrm{d} x \quad where \quad x=U^{-1}(y)</script><p>将上面二式联立：</p>
+<script type="math/tex; mode=display">f(y)=\frac{\mathrm{d}}{\mathrm{d} y} \int_{a}^{U^{-1}(y)} f_{x}\left(U^{-1}(y)\right) U^{-1^{\prime}}(y) \mathrm{d} y</script><p>注意到$f_x(U^{-1}(y))$不是y的函数，所以可以将上式的积分为：</p>
+<script type="math/tex; mode=display">f(y)=f_{x}\left(U^{-1}(y)\right) \cdot\left(\frac{\mathrm{d}}{\mathrm{d} y} U^{-1}(y)\right)</script><p>为了让U为增函数和减函数的时候保持形式一致，可以将上式写成下面的形式：</p>
+<script type="math/tex; mode=display">f(y)=f_{x}\left(U^{-1}(y)\right) \cdot\left|\frac{\mathrm{d}}{\mathrm{d} y} U^{-1}(y)\right|</script><p>上面这种方法称为<strong>换元法</strong>（change-of-variable technique）<br>其中，$|\frac{d}{dy}U^{-1}(y)|$描述了经过变换U之后的体积变化。</p>
+<p>对于多元随机变量的也是类似的，但是由于绝对值不能用于多元方程，但是我们可以使用雅可比行列式代替原先的绝对值。由于雅可比矩阵是一个偏导矩阵，且其行列式的值不为0，所以雅可比矩阵的逆是存在的。<br><img src="https://img-blog.csdnimg.cn/20210511101438167.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://example.com/2021/05/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%EF%BC%88%E4%BA%94%EF%BC%89%E6%A6%82%E7%8E%87%E4%B8%8E%E5%88%86%E5%B8%83-Probability-and-Distributions/" data-title="机器学习中的数学：（五）概率与分布(Probability and Distributions) | Hexo" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2021/05/14/机器学习中的数学：（六）连续优化-Continuous-Optimization/" title="机器学习中的数学：（六）连续优化(Continuous Optimization)">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  机器学习中的数学：（六）连续优化(Continuous Optimization)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2021/04/29/机器学习中的数学：（四）矢量积分-Vector-Calculus/"  title="机器学习中的数学：（四）矢量积分(Vector Calculus)">
+ <strong>NEXT:</strong><br/> 
+ <span>机器学习中的数学：（四）矢量积分(Vector Calculus)
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E7%8E%87%E7%A9%BA%E9%97%B4%E7%9A%84%E6%9E%84%E9%80%A0%EF%BC%88Construction-of-a-Probability-Space%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">概率空间的构造（Construction of a Probability Space）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%B2%E5%AD%A6%E9%97%AE%E9%A2%98%EF%BC%88Philosophical-Issues%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">哲学问题（Philosophical Issues）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E7%8E%87%E5%92%8C%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%EF%BC%88Probability-and-Random-Variables%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">概率和随机变量（Probability and Random Variables）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1%EF%BC%88Statistics%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">统计（Statistics）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E6%A6%82%E7%8E%87%E5%92%8C%E8%BF%9E%E7%BB%AD%E6%A6%82%E7%8E%87%EF%BC%88Discrete-and-Continuous-Probabilities%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">离散概率和连续概率（Discrete and Continuous Probabilities）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E5%9E%8B%E6%A6%82%E7%8E%87%EF%BC%88Discrete-Probabilities%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">离散型概率（Discrete Probabilities）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E6%80%A7%E6%A6%82%E7%8E%87%EF%BC%88Continuous-Probabilities%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">连续性概率（Continuous Probabilities）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A0%E6%B3%95%E6%B3%95%E5%88%99%E3%80%81%E4%B9%98%E6%B3%95%E6%B3%95%E5%88%99%E5%92%8C%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86%EF%BC%88Sum-Rule-Product-Rule-and-Bayes%E2%80%99-Theorem%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">加法法则、乘法法则和贝叶斯定理（Sum Rule, Product Rule, and Bayes’ Theorem）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%91%98%E8%A6%81%E7%BB%9F%E8%AE%A1%E5%92%8C%E7%8B%AC%E7%AB%8B%E6%80%A7%EF%BC%88Summary-Statistics-and-Independence%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">摘要统计和独立性（Summary Statistics and Independence）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%87%E5%80%BC%E5%92%8C%E5%8D%8F%E6%96%B9%E5%B7%AE%EF%BC%88Means-and-Covariances%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">均值和协方差（Means and Covariances）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E6%9C%AC%E5%9D%87%E5%80%BC%E5%92%8C%E6%A0%B7%E6%9C%AC%E6%96%B9%E5%B7%AE%EF%BC%88Empirical-Means-and-Covariances%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">样本均值和样本方差（Empirical Means and Covariances）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E5%B7%AE%E7%9A%84%E4%B8%89%E7%A7%8D%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%88Three-Expressions-for-the-Variance%EF%BC%89"><span class="toc-number">4.3.</span> <span class="toc-text">方差的三种表达式（Three Expressions for the Variance）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E5%8A%A0%E6%B3%95%E8%BF%90%E7%AE%97%E5%92%8C%E5%8F%98%E6%8D%A2%EF%BC%88Sums-and-Transformations-of-Random-Variables%EF%BC%89"><span class="toc-number">4.4.</span> <span class="toc-text">随机变量的加法运算和变换（Sums and Transformations of Random Variables）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1%E7%8B%AC%E7%AB%8B%E6%80%A7-Statistical-Independence"><span class="toc-number">4.5.</span> <span class="toc-text">统计独立性(Statistical Independence)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E5%86%85%E7%A7%AF%EF%BC%88Inner-Products-of-Random-Variables%EF%BC%89"><span class="toc-number">4.6.</span> <span class="toc-text">随机变量的内积（Inner Products of Random Variables）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%EF%BC%88Gaussian-Distribution%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">高斯分布（Gaussian Distribution）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%E7%9A%84%E8%BE%B9%E9%99%85%E5%88%86%E5%B8%83%E5%92%8C%E6%9D%A1%E4%BB%B6%E5%88%86%E5%B8%83%E4%BB%8D%E6%97%A7%E6%98%AF%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%EF%BC%88Marginals-and-Conditionals-of-Gaussians-are-Gaussians%EF%BC%89"><span class="toc-number">5.1.</span> <span class="toc-text">高斯分布的边际分布和条件分布仍旧是高斯分布（Marginals and Conditionals of Gaussians are Gaussians）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E6%96%AF%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0%E7%9A%84%E4%B9%98%E7%A7%AF%EF%BC%88Product-of-Gaussian-Densities%EF%BC%89"><span class="toc-number">5.2.</span> <span class="toc-text">高斯密度函数的乘积（Product of Gaussian Densities）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%92%8C%E8%BF%90%E7%AE%97%E5%92%8C%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2%EF%BC%88Sums-and-Linear-Transformations%EF%BC%89"><span class="toc-number">5.3.</span> <span class="toc-text">和运算和线性变换（Sums and Linear Transformations）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E5%A4%9A%E5%85%83%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%E4%B8%AD%E5%8F%96%E6%A0%B7%EF%BC%88Sampling-from-Multivariate-Gaussian-Distributions%EF%BC%89"><span class="toc-number">5.4.</span> <span class="toc-text">从多元高斯分布中取样（Sampling from Multivariate Gaussian Distributions）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B1%E8%BD%AD%E5%8F%8A%E6%8C%87%E6%95%B0%E6%97%8F%EF%BC%88Conjugacy-and-the-Exponential-Family%EF%BC%89"><span class="toc-number">5.5.</span> <span class="toc-text">共轭及指数族（Conjugacy and the Exponential Family）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AF%E5%8A%AA%E5%88%A9%E5%88%86%E5%B8%83%EF%BC%88Bernoulli-distribution%EF%BC%89"><span class="toc-number">5.5.1.</span> <span class="toc-text">伯努利分布（Bernoulli distribution）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%88%86%E5%B8%83%EF%BC%88Binomial-Distribution%EF%BC%89"><span class="toc-number">5.5.2.</span> <span class="toc-text">二项式分布（Binomial Distribution）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9D%E5%A1%94%E5%88%86%E5%B8%83%EF%BC%88Beta-Distribution%EF%BC%89"><span class="toc-number">5.5.3.</span> <span class="toc-text">贝塔分布（Beta Distribution）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B1%E8%BD%AD%EF%BC%88Conjugacy%EF%BC%89"><span class="toc-number">5.6.</span> <span class="toc-text">共轭（Conjugacy）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%85%E5%88%86%E7%BB%9F%E8%AE%A1%E9%87%8F%EF%BC%88Sufficient-Statistics%EF%BC%89"><span class="toc-number">5.7.</span> <span class="toc-text">充分统计量（Sufficient Statistics）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E6%95%B0%E6%97%8F%EF%BC%88Exponential-Family%EF%BC%89"><span class="toc-number">5.8.</span> <span class="toc-text">指数族（Exponential Family）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%8F%98%E6%8D%A2%E5%92%8C%E9%80%86%E5%8F%98%E6%8D%A2%EF%BC%88Change-of-Variables-Inverse-Transform%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">变量变换和逆变换（Change of Variables&#x2F;Inverse Transform）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0%E6%B3%95%EF%BC%88Distribution-Function-Technique%EF%BC%89"><span class="toc-number">6.1.</span> <span class="toc-text">分布函数法（Distribution Function Technique）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8D%A2%E5%85%83%EF%BC%88Change-of-Variables%EF%BC%89"><span class="toc-number">6.2.</span> <span class="toc-text">换元（Change of Variables）</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C-primer/" title="C++ primer">C++ primer<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DB/" title="DB">DB<sup>1</sup></a></li>
+		
+			<li><a href="/tags/OS/" title="OS">OS<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Projects/" title="Projects">Projects<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bugs/" title="bugs">bugs<sup>1</sup></a></li>
+		
+			<li><a href="/tags/computer-network/" title="computer network">computer network<sup>2</sup></a></li>
+		
+			<li><a href="/tags/侯捷C/" title="侯捷C++">侯捷C++<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2023 
+		
+		<a href="http://example.com" target="_blank" title="John Doe">John Doe</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

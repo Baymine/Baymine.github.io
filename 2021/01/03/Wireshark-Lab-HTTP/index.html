@@ -1,0 +1,389 @@
+
+ <!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Wireshark Lab: HTTP | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="Wireshark Lab: HTTP预备知识
+
+坚持型连接&amp;非坚持型连接：是否在同一个TCP连接上完成所有的请求/应答报文的传输？Y：坚持型，N:非坚持型。
+
+#### HTTP的非坚持型连接
+现在来看看当你点击一个超链接的时候会发生什么。
+1.客户机会对超链接的服务器通过80端口（TCP默认端口">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Hexo" title="Hexo"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Hexo">Hexo</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:example.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2021/01/03/Wireshark-Lab-HTTP/" title="Wireshark Lab: HTTP" itemprop="url">Wireshark Lab: HTTP</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://example.com" title="John Doe">John Doe</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2021-01-03T00:16:33.000Z" itemprop="datePublished">2021-01-03</time>
+    Updated:<time datetime="2023-03-08T11:40:01.165Z" itemprop="dateModified">2023-03-08</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Wireshark-Lab-HTTP"><span class="toc-number">1.</span> <span class="toc-text">Wireshark Lab: HTTP</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86"><span class="toc-number">2.</span> <span class="toc-text">预备知识</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+		</div>
+		
+		<h1 id="Wireshark-Lab-HTTP"><a href="#Wireshark-Lab-HTTP" class="headerlink" title="Wireshark Lab: HTTP"></a>Wireshark Lab: HTTP</h1><h1 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h1><font color="#999AAA">
+
+坚持型连接&非坚持型连接：是否在同一个TCP连接上完成所有的请求/应答报文的传输？Y：坚持型，N:非坚持型。
+
+#### HTTP的非坚持型连接
+现在来看看当你点击一个超链接的时候会发生什么。
+1.客户机会对超链接的服务器通过80端口（TCP默认端口号）发起一个TCP连接
+2.客户机通过套接字向服务器发送HTTP请求报文
+3.服务器收到报文之后，从自己的内存（RAM or disk）中获取被请求的对象，并将这些对象封装至HTTP请求报文（HTLM）中，然后通过套接字发送给客户机。
+4.HTTP服务器请求关闭TCP连接
+5.客户机获取请求的对象，TCP连接彻底关闭。客户机从恢复报文中获取文件
+6.获取其他的对象，继续循环上面的步骤
+
+由此可见，每当一个对象被正确接收的时候，之前的建立的TCP连接都会被关闭。一般情况下，浏览器会建立5到10个并行TCP连接，这样的平行连接可以减短响应时间。
+
+![HTLM相应时间](https://img-blog.csdnimg.cn/20210102200933336.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70#pic_center)
+由上图，非坚持型下的HTLM的相应时间为：
+$$
+t_{total} = 2*t_{RTT} + t_{trans}
+$$
+
+#### HTTP的坚持型连接
+非坚持型连接有以下几个缺点：
+1.每一个请求对象都需要建立一次TCP连接，这样会导致额外的内存消耗
+
+> For each of these connections, TCP buffers must be allocated and TCP variables must be kept in both the client and server.
+
+2.每一个对象的递交过程会导致两个RTT的时间消耗
+##### 坚持型HTTP连接的断开
+
+在HTTP1.1中，当TCP连接建立之后，剩余的对象都通过这个TCP连接递交。当递交结束之后，当这条TCP连接在一定的时间(a configurable timeout interval)没有被使用时，这条连接会自动关闭。
+
+> HTTP/2  builds on HTTP 1.1 by allowing multiple requests and replies to be interleaved in the same connection, and a mechanism for prioritizing HTTP message requests and replies within this connection.
+（存疑）
+
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20210102184014664.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70#pic_center)
+
+#### HTTP的报文格式
+###### 请求报文
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一个例子</span></span><br><span class="line"><span class="comment">//The great majority of HTTP request messages use the GET method.</span></span><br><span class="line">GET /somedir/page.html HTTP/<span class="number">1.1</span> <span class="comment">//the method field, the URL field, and the HTTP version field.</span></span><br><span class="line">Host: www.someschool.edu  <span class="comment">//对象所在的主机地址（Web代理缓存中需要）</span></span><br><span class="line">Connection: close<span class="comment">//表示非坚持型</span></span><br><span class="line">User-agent: Mozilla/<span class="number">5.0</span> <span class="comment">//浏览器的类型</span></span><br><span class="line">Accept-language: fr<span class="comment">//许多协商首部(negotiation header)中的一种</span></span><br></pre></td></tr></table></figure>
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20210102204106878.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70#pic_center)
+注意到上图出现的实体（Entity Body）部分，在GET方法中是空的，他在POST方法中，例如当用户提供搜索关键词的时候，POST仍然是向服务器请求获取网页，但是是网页特定的内容。
+但是HTML表单（HTML form）通常用GET方法，并在URL（统一资源定位器）中加上输入的文本，就像这样：
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//当你在某个网站上面搜索“monkeys” 和“bananas”的时候，URL会变成下面这个样子</span></span><br><span class="line"> www.somesite.com/animalsearch?monkeys&amp;bananas</span><br></pre></td></tr></table></figure>
+###### 应答报文
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一个例子</span></span><br><span class="line">HTTP/<span class="number">1.1</span> <span class="number">200</span> OK<span class="comment">//the protocol version field, a status code（状态码：请求结果）, and a corresponding status message.</span></span><br><span class="line">Connection: close<span class="comment">//非坚持型</span></span><br><span class="line">Date: Tue, <span class="number">18</span> Aug <span class="number">2015</span> <span class="number">15</span>:<span class="number">44</span>:<span class="number">04</span> GMT<span class="comment">//服务器从自己的文件系统中获取被请求对象，并将它插入到回应报文中，后将它发送给客户机时的时间</span></span><br><span class="line">Server: Apache/<span class="number">2.2</span><span class="number">.3</span> (CentOS)<span class="comment">//服务器类型</span></span><br><span class="line">Last-Modified: Tue, <span class="number">18</span> Aug <span class="number">2015</span> <span class="number">15</span>:<span class="number">11</span>:<span class="number">03</span> GMT<span class="comment">// It is critical for object caching, both in the local client and in network cache servers (also known as proxy servers).</span></span><br><span class="line">Content-Length: <span class="number">6821</span><span class="comment">//被发送对象的比特数</span></span><br><span class="line">Content-Type: text/html<span class="comment">//发送主题的类型（HTML 文本）(The object type is officially indicated by the Content-Type: header and not by the file extension.)</span></span><br><span class="line">(data data data data data ...)<span class="comment">//报文核心部分（the meat of message）包含被请求的对象</span></span><br></pre></td></tr></table></figure>
+报文请求结果类型：
+
+> 
+> **200 OK**: Request succeeded and the information is returned in the response.
+**301 Moved Permanently**: Requested object has been permanently moved; the new URL is specified in Location : header of the response message. The client software will automatically retrieve the new URL.
+**400 Bad Request**: This is a generic error code indicating that the request could not be understood by the server
+**404 Not Found**: The requested document does not exist on this server.
+**505 HTTP Version Not Supported**: The requested HTTP protocol version is not supported by the server.
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20210102210031696.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70#pic_center)
+状态行（state line）
+表头行（header line）
+(待续....)
+</font>
+
+<p>&lt;hr style=” border:solid; width:100px; height:1px;” color=#000000 size=1”&gt;</p>
+<font color="#999AAA">
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><font color="#999AAA"><br>问题：<br>1.HTTP/2？（unsolved）</font></p>
+</font>  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/computer-network/">computer network</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://example.com/2021/01/03/Wireshark-Lab-HTTP/" data-title="Wireshark Lab: HTTP | Hexo" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2021/01/04/Bug-记录/" title="Bug 记录">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  Bug 记录</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2021/01/02/Wireshark-Lab-Getting-Started/"  title="Wireshark Lab:Getting Started">
+ <strong>NEXT:</strong><br/> 
+ <span>Wireshark Lab:Getting Started
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Wireshark-Lab-HTTP"><span class="toc-number">1.</span> <span class="toc-text">Wireshark Lab: HTTP</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86"><span class="toc-number">2.</span> <span class="toc-text">预备知识</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C-primer/" title="C++ primer">C++ primer<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DB/" title="DB">DB<sup>1</sup></a></li>
+		
+			<li><a href="/tags/OS/" title="OS">OS<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Projects/" title="Projects">Projects<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bugs/" title="bugs">bugs<sup>1</sup></a></li>
+		
+			<li><a href="/tags/computer-network/" title="computer network">computer network<sup>2</sup></a></li>
+		
+			<li><a href="/tags/侯捷C/" title="侯捷C++">侯捷C++<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2023 
+		
+		<a href="http://example.com" target="_blank" title="John Doe">John Doe</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

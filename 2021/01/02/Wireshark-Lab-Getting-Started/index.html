@@ -4,13 +4,14 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>review notes | Hexo</title>
+    <title>Wireshark Lab:Getting Started | Hexo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="John Doe">
     
-    <meta name="description" content="网络编程为什么选epoll关键点： epoll与select、poll之间相比的优势
-写一个线程池">
+    <meta name="description" content="Wireshark Lab:Getting Started《计算机网络自顶向下方法7e》实验
+前言第一次实验主要就是介绍Wireshark应该怎么用，还有大致讲了Wireshark的工作原理。
+一、How Wireshark Works?包嗅探器（Packet Sniffer）其本身不主动运行，只是">
     
     
     
@@ -69,15 +70,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2023/01/12/review-notes/" title="review notes" itemprop="url">review notes</a>
+      <a href="/2021/01/02/Wireshark-Lab-Getting-Started/" title="Wireshark Lab:Getting Started" itemprop="url">Wireshark Lab:Getting Started</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://example.com" title="John Doe">John Doe</a>
     </p>
   <p class="article-time">
-    <time datetime="2023-01-12T02:50:00.000Z" itemprop="datePublished">2023-01-12</time>
-    Updated:<time datetime="2023-01-12T03:05:41.679Z" itemprop="dateModified">2023-01-12</time>
+    <time datetime="2021-01-02T08:46:57.000Z" itemprop="datePublished">2021-01-02</time>
+    Updated:<time datetime="2023-03-08T11:39:26.231Z" itemprop="dateModified">2023-03-08</time>
     
   </p>
 </header>
@@ -86,20 +87,39 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">网络编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89epoll"><span class="toc-number">1.1.</span> <span class="toc-text">为什么选epoll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-number">1.3.</span> <span class="toc-text">写一个线程池</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Wireshark-Lab-Getting-Started"><span class="toc-number">1.</span> <span class="toc-text">Wireshark Lab:Getting Started</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">2.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81How-Wireshark-Works"><span class="toc-number">3.</span> <span class="toc-text">一、How Wireshark Works?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Wireshark%E7%9A%84%E7%95%8C%E9%9D%A2%E4%BB%8B%E7%BB%8D"><span class="toc-number">4.</span> <span class="toc-text">二、Wireshark的界面介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">三、实验过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
 		</div>
 		
-		<h1 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h1><h2 id="为什么选epoll"><a href="#为什么选epoll" class="headerlink" title="为什么选epoll"></a><a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/442794943883509760?sourceSSR=%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5">为什么选epoll</a></h2><p><strong>关键点：</strong> epoll与select、poll之间相比的优势</p>
-<h2 id><a href="#" class="headerlink" title></a></h2><h2 id="写一个线程池"><a href="#写一个线程池" class="headerlink" title="写一个线程池"></a>写一个线程池</h2>  
+		<h1 id="Wireshark-Lab-Getting-Started"><a href="#Wireshark-Lab-Getting-Started" class="headerlink" title="Wireshark Lab:Getting Started"></a>Wireshark Lab:Getting Started</h1><p><font color="#999AAA">《计算机网络自顶向下方法7e》实验</font></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><font color="#999AAA">第一次实验主要就是介绍Wireshark应该怎么用，还有大致讲了Wireshark的工作原理。</font></p>
+<h1 id="一、How-Wireshark-Works"><a href="#一、How-Wireshark-Works" class="headerlink" title="一、How Wireshark Works?"></a>一、How Wireshark Works?</h1><p><img src="https://img-blog.csdnimg.cn/20201231213649334.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_12,color_FFFFFF,t_70" alt><br>包嗅探器（Packet Sniffer）<br>其本身不主动运行，只是观察应用发送和接收的数据包，并保存这些数据包的一个备份。</p>
+<blockquote>
+<p>嗅探（Sniffers）是一种黑客的窃听手段，一般是指使用嗅探器对数据流的数据截获与封包分析（Packet analysis）。</p>
+</blockquote>
+<p>包捕捉器：接受数据链路层的帧，因为在这一层，数据包是最完整的（发送来的数据报没有被解封装，发送的数据报在这一层完成了所有的封装）。<br>包分析器：能够识别数据包的协议，以便将各层的协议部分从下一层的数据报中分离出来。</p>
+<font color="#999AAA">
+
+
+
+<h1 id="二、Wireshark的界面介绍"><a href="#二、Wireshark的界面介绍" class="headerlink" title="二、Wireshark的界面介绍"></a>二、Wireshark的界面介绍</h1><p><img src="https://img-blog.csdnimg.cn/20210102162028414.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h1 id="三、实验过程"><a href="#三、实验过程" class="headerlink" title="三、实验过程"></a>三、实验过程</h1><p>i）运行Wireshark，然后在浏览器中访问<a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark-labs/INTRO-wireshark-file1.html">http://gaia.cs.umass.edu/wireshark-labs/INTRO-wireshark-file1.html</a><br>ii）停止Wireshak，在过滤器中输入http。<br><img src="https://img-blog.csdnimg.cn/20210102163534330.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>在对应层可以看到对应协议的一些信息，例如在IP层可以看到数据包的发送者和接收者的IP地址。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><font color="#999AAA">How long did it take from when the HTTP GET message was sent until the HTTP<br>OK reply was received?（Unsolved）</font></p>
+</font>  
 	</div>
 		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/computer-network/">computer network</a>
+  </div>
 
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://example.com/2023/01/12/review-notes/" data-title="review notes | Hexo" data-tsina="" class="share clearfix">
+  <div data-url="http://example.com/2021/01/02/Wireshark-Lab-Getting-Started/" data-title="Wireshark Lab:Getting Started | Hexo" data-tsina="" class="share clearfix">
   </div>
 
 </div>
@@ -109,18 +129,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2023/03/08/hello-world/" title="Hello World">
+ <a href="/2021/01/03/Wireshark-Lab-HTTP/" title="Wireshark Lab: HTTP">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  Hello World</span>
+  Wireshark Lab: HTTP</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2023/01/05/GeePRC-notes/"  title="GeePRC notes">
+<a href="/2020/12/31/《算法笔记》第一部分C-C-语言基础/"  title="《算法笔记》第一部分C/C++语言基础">
  <strong>NEXT:</strong><br/> 
- <span>GeePRC notes
+ <span>《算法笔记》第一部分C/C++语言基础
 </span>
 </a>
 </div>
@@ -133,7 +153,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">网络编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89epoll"><span class="toc-number">1.1.</span> <span class="toc-text">为什么选epoll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-number">1.3.</span> <span class="toc-text">写一个线程池</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Wireshark-Lab-Getting-Started"><span class="toc-number">1.</span> <span class="toc-text">Wireshark Lab:Getting Started</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">2.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81How-Wireshark-Works"><span class="toc-number">3.</span> <span class="toc-text">一、How Wireshark Works?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Wireshark%E7%9A%84%E7%95%8C%E9%9D%A2%E4%BB%8B%E7%BB%8D"><span class="toc-number">4.</span> <span class="toc-text">二、Wireshark的界面介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">三、实验过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
   </div>
 
 <div id="asidepart">
@@ -147,6 +167,8 @@
 	<p class="asidetitle">Tags</p>
 		<ul class="clearfix">
 		
+			<li><a href="/tags/C/" title="C++">C++<sup>1</sup></a></li>
+		
 			<li><a href="/tags/C-primer/" title="C++ primer">C++ primer<sup>1</sup></a></li>
 		
 			<li><a href="/tags/DB/" title="DB">DB<sup>1</sup></a></li>
@@ -154,6 +176,10 @@
 			<li><a href="/tags/OS/" title="OS">OS<sup>2</sup></a></li>
 		
 			<li><a href="/tags/Projects/" title="Projects">Projects<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bugs/" title="bugs">bugs<sup>1</sup></a></li>
+		
+			<li><a href="/tags/computer-network/" title="computer network">computer network<sup>2</sup></a></li>
 		
 			<li><a href="/tags/侯捷C/" title="侯捷C++">侯捷C++<sup>5</sup></a></li>
 		
