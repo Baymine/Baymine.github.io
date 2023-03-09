@@ -1,94 +1,317 @@
-
- <!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="C++ STL栈123456789101112#include &lt;stack&gt;using namespace std;&#x2F;&#x2F;定义一个栈stack &lt;typename&gt; name;&#x2F;&#x2F;stack函数实例stack.push(x);&#x2F;&#x2F;将元素x加入到栈中stack.top();&#x2F;&#x2F;获取栈顶元素stack.pop();&#x2F;&#x2F;将栈顶元素弹出stack.empty();&#x2F;&#x2F;判断栈是否为空">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《算法笔记》数据结构部分(STL&amp;链表&amp;树)">
+<meta property="og:url" content="http://example.com/2021/02/25/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%83%A8%E5%88%86-STL-%E9%93%BE%E8%A1%A8-%E6%A0%91/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="C++ STL栈123456789101112#include &lt;stack&gt;using namespace std;&#x2F;&#x2F;定义一个栈stack &lt;typename&gt; name;&#x2F;&#x2F;stack函数实例stack.push(x);&#x2F;&#x2F;将元素x加入到栈中stack.top();&#x2F;&#x2F;获取栈顶元素stack.pop();&#x2F;&#x2F;将栈顶元素弹出stack.empty();&#x2F;&#x2F;判断栈是否为空">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210401083819611.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210223093952989.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210223094002206.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="article:published_time" content="2021-02-25T02:46:43.000Z">
+<meta property="article:modified_time" content="2023-03-08T11:44:22.495Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210401083819611.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+
+<link rel="canonical" href="http://example.com/2021/02/25/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%83%A8%E5%88%86-STL-%E9%93%BE%E8%A1%A8-%E6%A0%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>《算法笔记》数据结构部分(STL&链表&树) | Hexo</title>
   
-    <title>《算法笔记》数据结构部分(STL&amp;链表&amp;树) | Hexo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="John Doe">
-    
-    <meta name="description" content="C++ STL栈123456789101112#include &amp;lt;stack&amp;gt;using namespace std;//定义一个栈stack &amp;lt;typename&amp;gt; name;//stack函数实例stack.push(x);//将元素x加入到栈中stack.top();//">
-    
-    
-    
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/pacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
-    
-    
-<link rel="stylesheet" href="/css/style.css">
 
-<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head>
 
-  <body>
-    <header>
-      <div>
-		
-			<div id="imglogo">
-				<a href="/"><img src="/img/logo.svg" alt="Hexo" title="Hexo"/></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="Hexo">Hexo</a></h1>
-				<h2 class="blog-motto"></h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					
-						<li><a href="/">Home</a></li>
-					
-						<li><a href="/archives">Archives</a></li>
-					
-					<li>
-					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
-						<input type="hidden" name="q" value="site:example.com">
-					</form>
-					
-					</li>
-				</ul>
-			</nav>			
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
     </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
+
     
-      <a href="/2021/02/25/《算法笔记》数据结构部分-STL-链表-树/" title="《算法笔记》数据结构部分(STL&amp;链表&amp;树)" itemprop="url">《算法笔记》数据结构部分(STL&amp;链表&amp;树)</a>
-  </h1>
-  <p class="article-author">By
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
     
-      <a href="http://example.com" title="John Doe">John Doe</a>
-    </p>
-  <p class="article-time">
-    <time datetime="2021-02-25T02:46:43.000Z" itemprop="datePublished">2021-02-25</time>
-    Updated:<time datetime="2023-03-08T11:44:22.495Z" itemprop="dateModified">2023-03-08</time>
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/25/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%83%A8%E5%88%86-STL-%E9%93%BE%E8%A1%A8-%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          《算法笔记》数据结构部分(STL&链表&树)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-25 10:46:43" itemprop="dateCreated datePublished" datetime="2021-02-25T10:46:43+08:00">2021-02-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-03-08 19:44:22" itemprop="dateModified" datetime="2023-03-08T19:44:22+08:00">2023-03-08</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
     
-  </p>
-</header>
-	<div class="article-content">
-		
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#C-STL"><span class="toc-number">1.</span> <span class="toc-text">C++ STL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%88"><span class="toc-number">1.1.</span> <span class="toc-text">栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%9F%E5%88%97"><span class="toc-number">1.2.</span> <span class="toc-text">队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%EF%BC%88Priority-queue%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">优先队列（Priority_queue）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pair%E9%87%87%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">pair采用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pair%E5%87%BD%E6%95%B0%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">1.3.1.</span> <span class="toc-text">pair函数的操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%91%E9%87%8F"><span class="toc-number">1.4.</span> <span class="toc-text">向量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E5%90%88set"><span class="toc-number">1.5.</span> <span class="toc-text">集合set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8BString"><span class="toc-number">1.6.</span> <span class="toc-text">字符串类型String</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE"><span class="toc-number">1.6.1.</span> <span class="toc-text">访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%AE%9E%E4%BE%8B"><span class="toc-number">1.6.2.</span> <span class="toc-text">函数实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8"><span class="toc-number">2.</span> <span class="toc-text">链表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">2.0.1.</span> <span class="toc-text">链表的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E8%8A%82%E7%82%B9%E7%9A%84%E7%A9%BA%E9%97%B4%E5%88%86%E9%85%8D"><span class="toc-number">2.0.2.</span> <span class="toc-text">链表节点的空间分配</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#malloc%E5%87%BD%E6%95%B0"><span class="toc-number">2.0.2.1.</span> <span class="toc-text">malloc函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#new%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="toc-number">2.0.2.2.</span> <span class="toc-text">new运算符（推荐使用）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">2.0.3.</span> <span class="toc-text">链表的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%93%BE%E8%A1%A8%EF%BC%88%E8%BF%90%E7%94%A8for%E8%AF%AD%E5%8F%A5%E5%AE%9E%E7%8E%B0%EF%BC%89"><span class="toc-number">2.0.3.1.</span> <span class="toc-text">创建链表（运用for语句实现）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8"><span class="toc-number">2.0.4.</span> <span class="toc-text">静态链表</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2"><span class="toc-number">3.</span> <span class="toc-text">搜索</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%EF%BC%88DFS%EF%BC%89"><span class="toc-number">3.0.1.</span> <span class="toc-text">深度优先搜索（DFS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88"><span class="toc-number">3.0.2.</span> <span class="toc-text">广度优先</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">4.</span> <span class="toc-text">二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AD%98%E5%82%A8%E5%92%8C%E6%93%8D%E4%BD%9C"><span class="toc-number">4.0.1.</span> <span class="toc-text">二叉树的存储和操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86"><span class="toc-number">4.0.2.</span> <span class="toc-text">二叉树的遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%91%E7%9A%84%E9%9D%99%E6%80%81%E5%AE%9E%E7%8E%B0-%E9%9D%9E%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">4.0.3.</span> <span class="toc-text">树的静态实现(非二叉树)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86"><span class="toc-number">4.0.4.</span> <span class="toc-text">树的遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91"><span class="toc-number">4.0.5.</span> <span class="toc-text">二叉查找树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">4.0.6.</span> <span class="toc-text">平衡二叉树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E6%9F%A5%E9%9B%86"><span class="toc-number">4.0.7.</span> <span class="toc-text">并查集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86"><span class="toc-number">4.0.8.</span> <span class="toc-text">堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91"><span class="toc-number">4.0.9.</span> <span class="toc-text">哈夫曼树</span></a></li></ol></li></ol></li></ol>
-		</div>
-		
-		<h1 id="C-STL"><a href="#C-STL" class="headerlink" title="C++ STL"></a>C++ STL</h1><h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义一个栈</span></span><br><span class="line">stack &lt;<span class="keyword">typename</span>&gt; name;</span><br><span class="line"></span><br><span class="line"><span class="comment">//stack函数实例</span></span><br><span class="line">stack.<span class="built_in">push</span>(x);<span class="comment">//将元素x加入到栈中</span></span><br><span class="line">stack.<span class="built_in">top</span>();<span class="comment">//获取栈顶元素</span></span><br><span class="line">stack.<span class="built_in">pop</span>();<span class="comment">//将栈顶元素弹出</span></span><br><span class="line">stack.<span class="built_in">empty</span>();<span class="comment">//判断栈是否为空，返回值类型为空</span></span><br><span class="line">stack.<span class="built_in">size</span>();<span class="comment">//返回栈内元素</span></span><br></pre></td></tr></table></figure>
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="C-STL"><a href="#C-STL" class="headerlink" title="C++ STL"></a>C++ STL</h1><h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义一个栈</span></span><br><span class="line">stack &lt;<span class="keyword">typename</span>&gt; name;</span><br><span class="line"></span><br><span class="line"><span class="comment">//stack函数实例</span></span><br><span class="line">stack.<span class="built_in">push</span>(x);<span class="comment">//将元素x加入到栈中</span></span><br><span class="line">stack.<span class="built_in">top</span>();<span class="comment">//获取栈顶元素</span></span><br><span class="line">stack.<span class="built_in">pop</span>();<span class="comment">//将栈顶元素弹出</span></span><br><span class="line">stack.<span class="built_in">empty</span>();<span class="comment">//判断栈是否为空，返回值类型为空</span></span><br><span class="line">stack.<span class="built_in">size</span>();<span class="comment">//返回栈内元素</span></span><br></pre></td></tr></table></figure>
 <h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">//队列的定义</span></span><br><span class="line">queue&lt; <span class="keyword">typename</span> &gt; name;</span><br><span class="line"></span><br><span class="line">queue&lt;<span class="type">int</span>&gt; Q;</span><br><span class="line"><span class="comment">//queue函数实例</span></span><br><span class="line">Q.<span class="built_in">push</span>(x);<span class="comment">//将元素x入队</span></span><br><span class="line">Q.<span class="built_in">front</span>();<span class="comment">//获取队首元素</span></span><br><span class="line">Q.<span class="built_in">back</span>();<span class="comment">//获取队尾元素</span></span><br><span class="line">Q.<span class="built_in">pop</span>();<span class="comment">//将队首元素出队</span></span><br><span class="line">Q.<span class="built_in">empty</span>();<span class="comment">//判断队列是否为空</span></span><br><span class="line">Q.<span class="built_in">size</span>();<span class="comment">//队列中元素的个数</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h3 id="优先队列（Priority-queue）"><a href="#优先队列（Priority-queue）" class="headerlink" title="优先队列（Priority_queue）"></a>优先队列（Priority_queue）</h3><p>优先队列就是按照元素的优先级来确定对首部的元素的队列，它是由堆实现的，这种优先级的规则可以自定义。优先队列可以用于计算哈夫曼树最短路径权值，可以对Dijkstra算法进行优化，还可以解决一些贪心问题。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	priority_queue&lt;<span class="type">int</span>&gt;q;</span><br><span class="line">	q.<span class="built_in">push</span>(<span class="number">3</span>);<span class="comment">//将3入队</span></span><br><span class="line">	q.<span class="built_in">empty</span>();<span class="comment">//检查队列是否为空</span></span><br><span class="line">	q.<span class="built_in">pop</span>();<span class="comment">//将优先级最高的元素出队</span></span><br><span class="line">	q.<span class="built_in">size</span>();<span class="comment">//队列的大小</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//第一个参数是元素类型，第二个是承载底层数据结构堆的容器，第三个是参数的比较类，less&lt;int&gt;表示数字越大优先级越高</span></span><br><span class="line">	priority_queue&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;, greater&lt;<span class="type">int</span>&gt;&gt;q_1;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//当想以结构体中的数据作为优先级的时候，应该堆操作符进行重载</span></span><br><span class="line"><span class="comment">//使用时直接将相应的结构体定义的变量直接入队即可</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">fruit</span> &#123;</span><br><span class="line">	string name;</span><br><span class="line">	<span class="type">int</span> price;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//价格高的优先级高</span></span><br><span class="line">	<span class="comment">//由于队列默认将优先级高的放在队首，如果将小于号重载为大于号，最后会将规则反向</span></span><br><span class="line">	<span class="keyword">friend</span> <span class="type">bool</span> <span class="keyword">operator</span> &lt; (fruit f1, fruit f2) &#123;</span><br><span class="line">		<span class="keyword">return</span> f1.price &lt; f2.price;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//也可以将比较函数写在结构体外面</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">cmp</span>&#123;	</span><br><span class="line">	<span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(fruit f1, fruit f2)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> f1.price &gt; f2.price;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">priority_queue&lt;fruit, vector&lt;<span class="type">int</span>&gt;, cmp&gt;p_2;</span><br><span class="line"></span><br><span class="line"><span class="comment">//当结构体数据较大应该使用引用来提高效率</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">friend bool operator &lt; (const fruit&amp; f1, const fruit&amp; f2) &#123;</span></span><br><span class="line"><span class="comment">	....</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="pair采用方法"><a href="#pair采用方法" class="headerlink" title="pair采用方法"></a>pair采用方法</h2><p>pair可以用于快速定义一个相当于拥有两个变量的结构体。使用pair需要添加函数头utility.当然map函数头中包含前者。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义一个pair变量，并初始化</span></span><br><span class="line">pair&lt;typename1, typename2&gt;<span class="built_in">name</span>(initial1, initial2);</span><br><span class="line"><span class="comment">//定义一个临时pair变量</span></span><br><span class="line">name = <span class="built_in">make_pair</span>(initial1, initial2);</span><br></pre></td></tr></table></figure></p>
@@ -129,225 +352,193 @@
 <p>以下是并查集得一些基本操作。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> father[N];</span><br><span class="line"><span class="comment">//初始化</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">initialSet</span><span class="params">(<span class="type">int</span> father[], <span class="type">int</span> N)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">		father[i] = i;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//查找:根节点的父节点就是其本身</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">findFather</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (x != father[x]) &#123;</span><br><span class="line">		x = father[x];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//递归版本</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">findFatherRe</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//递归出口</span></span><br><span class="line">	<span class="keyword">if</span> (x == father[x])<span class="keyword">return</span> x;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> <span class="built_in">findFather</span>(father[x]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//并查集合并：先判断两节点是否再同一并查集中（判断根节点是否相同），然后再将其中一个根节点的父节点指向另一个根节点</span></span><br><span class="line"><span class="comment">//这样能能够保证并查集是个树型结构，不会出现环</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Union</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> faA = <span class="built_in">findFather</span>(a);</span><br><span class="line">	<span class="type">int</span> faB = <span class="built_in">findFather</span>(b);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//当二者不是统一并查集时合并</span></span><br><span class="line">	<span class="keyword">if</span> (faA != faB)&#123;</span><br><span class="line">		father[faA] = father[faB];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//路径压缩：将搜索的时间复杂度由O(n)变为O(1)，其实就是将所有节点的父节点全部指向根节点</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">findFatherPatheShorten</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> a = x;<span class="comment">//找到根节点，同时保存初始节点</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//找到根节点</span></span><br><span class="line">	<span class="keyword">while</span> (x != father[x]) &#123;</span><br><span class="line">		x = father[x];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//将该节点的父节点指向根节点，并保存该节点原先的父节点的信息</span></span><br><span class="line">	<span class="keyword">while</span> (a != father[a]) &#123;</span><br><span class="line">		<span class="type">int</span> z = a;</span><br><span class="line">		a = father[a];</span><br><span class="line">		father[z] = x;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//递归版本</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">findFatherRSRec</span><span class="params">(<span class="type">int</span> v)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (v == father[v])<span class="keyword">return</span> v;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="type">int</span> F = <span class="built_in">findFather</span>(father[v]);</span><br><span class="line">		father[v] = F;</span><br><span class="line">		<span class="keyword">return</span> F;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><p>堆本质上就是满足父节点大于（或小于）孩子节点的二叉树。所有节点存储在一个数组当中，这样i节点的孩子节点分别为$2<em>i$和$2</em>i+1$。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> heap[maxn], n = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap</span><span class="params">(<span class="type">int</span> &amp;a, <span class="type">int</span> &amp;b)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> temp = a;</span><br><span class="line">	a = b;</span><br><span class="line">	b = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//向下调整O(logn)：从low到high。找出该节点得该子节点中最大得节点，然后于该节点进行比较，若孩子节点较大，则与孩子节点进行交换</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">downAdjust</span><span class="params">(<span class="type">int</span> low, <span class="type">int</span> high)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> i = low, j = i * <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">while</span> (j &lt;= high) &#123;</span><br><span class="line">		<span class="comment">//找出孩子节点中较大的</span></span><br><span class="line">		<span class="keyword">if</span> (j + <span class="number">1</span> &lt;= high &amp;&amp; heap[j + <span class="number">1</span>] &gt; heap[j]) ++j;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//与父节点进行比较</span></span><br><span class="line">		<span class="keyword">if</span> (heap[j] &gt; heap[i]) &#123;</span><br><span class="line">			<span class="built_in">swap</span>(heap[j], heap[i]);</span><br><span class="line">			i = j;</span><br><span class="line">			j = i * <span class="number">2</span>;<span class="comment">//这里只去检查被调整的元素是否满足堆的条件，因为为改动的节点应该是满足堆的要求的</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//建堆O(n):从最后一个非叶节点往后进行循环，这是对原先数组进行了排序，以满足堆的要求</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">createHeap</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = n / <span class="number">2</span>; i &gt;= <span class="number">1</span>; --i)<span class="built_in">downAdjust</span>(i, n);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除堆顶元素O(logn)</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">deleteTop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//将最后一个元素代替堆顶元素，然后减少节点数量</span></span><br><span class="line">	heap[<span class="number">1</span>] = heap[n--];</span><br><span class="line">	<span class="built_in">downAdjust</span>(<span class="number">1</span>, n);<span class="comment">//改动了这个节点就从这个节点进行调整</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//向上调整：当插入一个节点的时候，这个节点被放到最后，逐个与其父节点比较，直到该节点小于父节点</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">upAdjust</span><span class="params">(<span class="type">int</span> low, <span class="type">int</span> high)</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> i = high, j = i / <span class="number">2</span>;<span class="comment">//high就是最后一个节点，即插入的节点</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//父节点在范围之内</span></span><br><span class="line">	<span class="keyword">while</span> (j &gt;= low) &#123;</span><br><span class="line">		<span class="keyword">if</span> (heap[j] &lt; heap[i]) &#123;</span><br><span class="line">			<span class="built_in">swap</span>(heap[j], heap[i]);</span><br><span class="line">			i = j;</span><br><span class="line">			j = i / <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加元素，借用上面的函数:加入节点，然后进行相应的调整</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">	heap[++n] = x;</span><br><span class="line">	<span class="built_in">upAdjust</span>(<span class="number">1</span>, n);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//堆排序:将头节点与最后一个节点进行交换，然后对堆进行调整</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">heapSort</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">createHeap</span>();</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = n; i &gt; <span class="number">1</span>; i--)&#123;</span><br><span class="line">		<span class="built_in">swap</span>(heap[i], heap[<span class="number">1</span>]);</span><br><span class="line">		<span class="built_in">downAdjust</span>(<span class="number">1</span>, i - <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="哈夫曼树"><a href="#哈夫曼树" class="headerlink" title="哈夫曼树"></a>哈夫曼树</h3><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.iwiki.eu.org/wiki/File:Huffman_algorithm.gif">哈夫曼树构建过程</a><br>用语言描述就是，先将队列中权值最小的两个节点合并成新的节点，加入到队列中，然后一直按照这个规律执行，直到队列中只剩下一个节点。这个时候头节点的权值就是最短路径权值<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以下是求一个实例的最短路径的权值的算法</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">priority_queue&lt;<span class="type">long</span> <span class="type">long</span>, vector&lt;<span class="type">long</span> <span class="type">long</span>&gt;, greater&lt;<span class="type">long</span> <span class="type">long</span>&gt;&gt; q;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> n;</span><br><span class="line">	<span class="type">long</span> <span class="type">long</span> temp, x, y, ans = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;&amp;d&quot;</span>, &amp;n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;temp);</span><br><span class="line">		q.<span class="built_in">push</span>(temp);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (q.<span class="built_in">size</span>()&gt;<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//获取前两个最大节点</span></span><br><span class="line">		x = q.<span class="built_in">top</span>();</span><br><span class="line">		q.<span class="built_in">pop</span>();</span><br><span class="line">		y = q.<span class="built_in">top</span>();</span><br><span class="line">		q.<span class="built_in">pop</span>();</span><br><span class="line"></span><br><span class="line">		<span class="comment">//将节点合并之后再入队</span></span><br><span class="line">		q.<span class="built_in">push</span>(x + y);</span><br><span class="line">		<span class="comment">//统计最短路径权值</span></span><br><span class="line">		ans += x + y;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>哈夫曼编码是一种用于无损数据压缩的熵编码（权编码）算法，它可以根据数据的一些特点（如出现频率）来制定相应长度的编码从而达到数据压缩的目的。</p>
-  
-	</div>
-		<footer class="article-footer clearfix">
 
-
-
-
-<div class="article-share" id="share">
-
-  <div data-url="http://example.com/2021/02/25/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%83%A8%E5%88%86-STL-%E9%93%BE%E8%A1%A8-%E6%A0%91/" data-title="《算法笔记》数据结构部分(STL&amp;链表&amp;树) | Hexo" data-tsina="" class="share clearfix">
-  </div>
-
-</div>
-</footer>   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2021/02/27/《算法笔记》第四章：算法初步（算法思想）/" title="《算法笔记》第四章：算法初步（算法思想）">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  《算法笔记》第四章：算法初步（算法思想）</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2021/01/09/Java学习笔记/"  title="Java学习笔记">
- <strong>NEXT:</strong><br/> 
- <span>Java学习笔记
-</span>
-</a>
-</div>
-
-</nav>
-
-	
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#C-STL"><span class="toc-number">1.</span> <span class="toc-text">C++ STL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%88"><span class="toc-number">1.1.</span> <span class="toc-text">栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%9F%E5%88%97"><span class="toc-number">1.2.</span> <span class="toc-text">队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%EF%BC%88Priority-queue%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">优先队列（Priority_queue）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pair%E9%87%87%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">pair采用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pair%E5%87%BD%E6%95%B0%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">1.3.1.</span> <span class="toc-text">pair函数的操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%91%E9%87%8F"><span class="toc-number">1.4.</span> <span class="toc-text">向量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E5%90%88set"><span class="toc-number">1.5.</span> <span class="toc-text">集合set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8BString"><span class="toc-number">1.6.</span> <span class="toc-text">字符串类型String</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE"><span class="toc-number">1.6.1.</span> <span class="toc-text">访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%AE%9E%E4%BE%8B"><span class="toc-number">1.6.2.</span> <span class="toc-text">函数实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8"><span class="toc-number">2.</span> <span class="toc-text">链表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">2.0.1.</span> <span class="toc-text">链表的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E8%8A%82%E7%82%B9%E7%9A%84%E7%A9%BA%E9%97%B4%E5%88%86%E9%85%8D"><span class="toc-number">2.0.2.</span> <span class="toc-text">链表节点的空间分配</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#malloc%E5%87%BD%E6%95%B0"><span class="toc-number">2.0.2.1.</span> <span class="toc-text">malloc函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#new%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="toc-number">2.0.2.2.</span> <span class="toc-text">new运算符（推荐使用）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">2.0.3.</span> <span class="toc-text">链表的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%93%BE%E8%A1%A8%EF%BC%88%E8%BF%90%E7%94%A8for%E8%AF%AD%E5%8F%A5%E5%AE%9E%E7%8E%B0%EF%BC%89"><span class="toc-number">2.0.3.1.</span> <span class="toc-text">创建链表（运用for语句实现）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8"><span class="toc-number">2.0.4.</span> <span class="toc-text">静态链表</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2"><span class="toc-number">3.</span> <span class="toc-text">搜索</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%EF%BC%88DFS%EF%BC%89"><span class="toc-number">3.0.1.</span> <span class="toc-text">深度优先搜索（DFS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88"><span class="toc-number">3.0.2.</span> <span class="toc-text">广度优先</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">4.</span> <span class="toc-text">二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AD%98%E5%82%A8%E5%92%8C%E6%93%8D%E4%BD%9C"><span class="toc-number">4.0.1.</span> <span class="toc-text">二叉树的存储和操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86"><span class="toc-number">4.0.2.</span> <span class="toc-text">二叉树的遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%91%E7%9A%84%E9%9D%99%E6%80%81%E5%AE%9E%E7%8E%B0-%E9%9D%9E%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">4.0.3.</span> <span class="toc-text">树的静态实现(非二叉树)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86"><span class="toc-number">4.0.4.</span> <span class="toc-text">树的遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91"><span class="toc-number">4.0.5.</span> <span class="toc-text">二叉查找树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">4.0.6.</span> <span class="toc-text">平衡二叉树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E6%9F%A5%E9%9B%86"><span class="toc-number">4.0.7.</span> <span class="toc-text">并查集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86"><span class="toc-number">4.0.8.</span> <span class="toc-text">堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91"><span class="toc-number">4.0.9.</span> <span class="toc-text">哈夫曼树</span></a></li></ol></li></ol></li></ol>
-  </div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
-<aside class="clearfix">
-
-  
-
-  
-<div class="tagslist">
-	<p class="asidetitle">Tags</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/C/" title="C++">C++<sup>1</sup></a></li>
-		
-			<li><a href="/tags/C-primer/" title="C++ primer">C++ primer<sup>1</sup></a></li>
-		
-			<li><a href="/tags/DB/" title="DB">DB<sup>1</sup></a></li>
-		
-			<li><a href="/tags/OS/" title="OS">OS<sup>2</sup></a></li>
-		
-			<li><a href="/tags/Projects/" title="Projects">Projects<sup>1</sup></a></li>
-		
-			<li><a href="/tags/bugs/" title="bugs">bugs<sup>1</sup></a></li>
-		
-			<li><a href="/tags/computer-network/" title="computer network">computer network<sup>2</sup></a></li>
-		
-			<li><a href="/tags/侯捷C/" title="侯捷C++">侯捷C++<sup>5</sup></a></li>
-		
-		</ul>
-</div>
-
-
-  <div class="rsspart">
-	<a href="" target="_blank" title="rss">RSS</a>
-</div>
-
-</aside>
-</div>
     </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<div class="social-font clearfix">
-		
-		
-		
-		
-		
-	</div>
-		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2023 
-		
-		<a href="http://example.com" target="_blank" title="John Doe">John Doe</a>
-		
-		</p>
-</div>
-</footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
+
+    
+    
+    
+
+      <footer class="post-footer">
+
         
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/09/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="Java学习笔记">
+      <i class="fa fa-chevron-left"></i> Java学习笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/02/27/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A%E7%AE%97%E6%B3%95%E5%88%9D%E6%AD%A5%EF%BC%88%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3%EF%BC%89/" rel="next" title="《算法笔记》第四章：算法初步（算法思想）">
+      《算法笔记》第四章：算法初步（算法思想） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
     }
   });
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-});
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      h  = $('article h2')
-      ah = $('article h2'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  if(ah.length==0){
-    t.css('display','none');
-  }else{
-    c.click(function(){
-      ta.css('display', 'block').addClass('fadeIn');
-    });
-    o.click(function(){
-      ta.css('display', 'none');
-    });
-    $(window).scroll(function(){
-      ta.css("top",Math.max(140,320-$(this).scrollTop()));
-    });
-  };
-});
-</script>
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
 
+  <aside class="sidebar">
+    <div class="sidebar-inner">
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina');
-  var html = [
-  '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-  $('.article-share-qrcode').click(function(){
-    var imgSrc = $('#qrcode-pic').attr('data-src');
-    $('#qrcode-pic').attr('src', imgSrc);
-    $('#qrcode-pic').load(function(){
-        $('.qrcode strong').text(' ');
-    });
-  });
-});     
-</script>
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-STL"><span class="nav-number">1.</span> <span class="nav-text">C++ STL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%88"><span class="nav-number">1.1.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%9F%E5%88%97"><span class="nav-number">1.2.</span> <span class="nav-text">队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%EF%BC%88Priority-queue%EF%BC%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">优先队列（Priority_queue）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pair%E9%87%87%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">pair采用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pair%E5%87%BD%E6%95%B0%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">1.3.1.</span> <span class="nav-text">pair函数的操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%91%E9%87%8F"><span class="nav-number">1.4.</span> <span class="nav-text">向量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E5%90%88set"><span class="nav-number">1.5.</span> <span class="nav-text">集合set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8BString"><span class="nav-number">1.6.</span> <span class="nav-text">字符串类型String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE"><span class="nav-number">1.6.1.</span> <span class="nav-text">访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.6.2.</span> <span class="nav-text">函数实例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8"><span class="nav-number">2.</span> <span class="nav-text">链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">2.0.1.</span> <span class="nav-text">链表的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8%E8%8A%82%E7%82%B9%E7%9A%84%E7%A9%BA%E9%97%B4%E5%88%86%E9%85%8D"><span class="nav-number">2.0.2.</span> <span class="nav-text">链表节点的空间分配</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#malloc%E5%87%BD%E6%95%B0"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">malloc函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#new%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">new运算符（推荐使用）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">2.0.3.</span> <span class="nav-text">链表的基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%93%BE%E8%A1%A8%EF%BC%88%E8%BF%90%E7%94%A8for%E8%AF%AD%E5%8F%A5%E5%AE%9E%E7%8E%B0%EF%BC%89"><span class="nav-number">2.0.3.1.</span> <span class="nav-text">创建链表（运用for语句实现）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8"><span class="nav-number">2.0.4.</span> <span class="nav-text">静态链表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2"><span class="nav-number">3.</span> <span class="nav-text">搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%EF%BC%88DFS%EF%BC%89"><span class="nav-number">3.0.1.</span> <span class="nav-text">深度优先搜索（DFS）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88"><span class="nav-number">3.0.2.</span> <span class="nav-text">广度优先</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">4.</span> <span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AD%98%E5%82%A8%E5%92%8C%E6%93%8D%E4%BD%9C"><span class="nav-number">4.0.1.</span> <span class="nav-text">二叉树的存储和操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86"><span class="nav-number">4.0.2.</span> <span class="nav-text">二叉树的遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E9%9D%99%E6%80%81%E5%AE%9E%E7%8E%B0-%E9%9D%9E%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">4.0.3.</span> <span class="nav-text">树的静态实现(非二叉树)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86"><span class="nav-number">4.0.4.</span> <span class="nav-text">树的遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91"><span class="nav-number">4.0.5.</span> <span class="nav-text">二叉查找树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">4.0.6.</span> <span class="nav-text">平衡二叉树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E6%9F%A5%E9%9B%86"><span class="nav-number">4.0.7.</span> <span class="nav-text">并查集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86"><span class="nav-number">4.0.8.</span> <span class="nav-text">堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91"><span class="nav-number">4.0.9.</span> <span class="nav-text">哈夫曼树</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
 
 
 
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
 
 
 
-  </body>
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
 </html>

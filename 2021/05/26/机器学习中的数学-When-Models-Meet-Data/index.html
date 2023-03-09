@@ -1,95 +1,327 @@
-
- <!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Data, Models, and LearningThe title contains three major components of a machine learning system. Data as VectorsFirst, we need to make information as number, so as to we can use it as training data.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习中的数学: When Models Meet Data">
+<meta property="og:url" content="http://example.com/2021/05/26/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6-When-Models-Meet-Data/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Data, Models, and LearningThe title contains three major components of a machine learning system. Data as VectorsFirst, we need to make information as number, so as to we can use it as training data.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210517101400415.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210518102941859.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210521104544345.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210521104758825.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210524173813873.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210524174426163.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021052515431295.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210525154505655.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210526093453995.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210526095407220.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210526101506995.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210526101352294.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210526104142218.png">
+<meta property="article:published_time" content="2021-05-26T02:51:34.000Z">
+<meta property="article:modified_time" content="2023-03-09T10:48:23.791Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210517101400415.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+
+<link rel="canonical" href="http://example.com/2021/05/26/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6-When-Models-Meet-Data/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>机器学习中的数学: When Models Meet Data | Hexo</title>
   
-    <title>机器学习中的数学: When Models Meet Data | Hexo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="John Doe">
-    
-    <meta name="description" content="Data, Models, and LearningThe title contains three major components of a machine learning system.
-Data as VectorsFirst, we need to make information as">
-    
-    
-    
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/pacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
-    
-    
-<link rel="stylesheet" href="/css/style.css">
 
-<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head>
 
-  <body>
-    <header>
-      <div>
-		
-			<div id="imglogo">
-				<a href="/"><img src="/img/logo.svg" alt="Hexo" title="Hexo"/></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="Hexo">Hexo</a></h1>
-				<h2 class="blog-motto"></h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					
-						<li><a href="/">Home</a></li>
-					
-						<li><a href="/archives">Archives</a></li>
-					
-					<li>
-					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
-						<input type="hidden" name="q" value="site:example.com">
-					</form>
-					
-					</li>
-				</ul>
-			</nav>			
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
     </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
+
     
-      <a href="/2021/05/26/机器学习中的数学-When-Models-Meet-Data/" title="机器学习中的数学: When Models Meet Data" itemprop="url">机器学习中的数学: When Models Meet Data</a>
-  </h1>
-  <p class="article-author">By
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
     
-      <a href="http://example.com" title="John Doe">John Doe</a>
-    </p>
-  <p class="article-time">
-    <time datetime="2021-05-26T02:51:34.000Z" itemprop="datePublished">2021-05-26</time>
-    Updated:<time datetime="2023-03-09T10:48:23.791Z" itemprop="dateModified">2023-03-09</time>
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/26/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6-When-Models-Meet-Data/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          机器学习中的数学: When Models Meet Data
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-05-26 10:51:34" itemprop="dateCreated datePublished" datetime="2021-05-26T10:51:34+08:00">2021-05-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-03-09 18:48:23" itemprop="dateModified" datetime="2023-03-09T18:48:23+08:00">2023-03-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
     
-  </p>
-</header>
-	<div class="article-content">
-		
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Data-Models-and-Learning"><span class="toc-number">1.</span> <span class="toc-text">Data, Models, and Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-as-Vectors"><span class="toc-number">1.1.</span> <span class="toc-text">Data as Vectors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Models-as-Functions"><span class="toc-number">1.2.</span> <span class="toc-text">Models as Functions</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%8F%E9%AA%8C%E9%A3%8E%E9%99%A9%E6%9C%80%E5%B0%8F%E5%8C%96%EF%BC%88Empirical-Risk-Minimization%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">经验风险最小化（Empirical Risk Minimization）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%81%87%E8%AE%BE%E5%87%BD%E6%95%B0%E7%9A%84%E7%A7%8D%E7%B1%BB%EF%BC%88Hypothesis-Class-of-Functions%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">假设函数的种类（Hypothesis Class of Functions）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0-Loss-Function-for-Training"><span class="toc-number">2.2.</span> <span class="toc-text">代价函数(Loss Function for Training)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%E5%87%8F%E5%B0%8F%E8%BF%87%E6%8B%9F%E5%90%88-Regularization-to-Reduce-Overfitting"><span class="toc-number">2.3.</span> <span class="toc-text">正则化减小过拟合(Regularization to Reduce Overfitting)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%E8%AF%84%E4%BC%B0%E6%B3%9B%E5%8C%96%E6%80%A7%E8%83%BD-Cross-Validation-to-Assess-the-Generalization-Performance"><span class="toc-number">2.4.</span> <span class="toc-text">用交叉验证评估泛化性能(Cross-Validation to Assess the Generalization Performance)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1%EF%BC%88Parameter-Estimation%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">参数估计（Parameter Estimation）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%EF%BC%88Maximum-Likelihood-Estimation%EF%BC%89"><span class="toc-number">3.1.</span> <span class="toc-text">最大似然估计（Maximum Likelihood Estimation）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1%EF%BC%88Maximum-A-Posteriori-Estimation%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">最大后验估计（Maximum A Posteriori Estimation）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E6%8B%9F%E5%90%88%EF%BC%88Model-Fitting%EF%BC%89"><span class="toc-number">3.3.</span> <span class="toc-text">模型拟合（Model Fitting）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%EF%BC%88Bayesian-Inference%EF%BC%89"><span class="toc-number">3.4.</span> <span class="toc-text">贝叶斯推断（Bayesian Inference）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BD%9C%E5%8F%98%E9%87%8F%E6%A8%A1%E5%9E%8B%EF%BC%88Latent-Variable-Models%EF%BC%89"><span class="toc-number">3.5.</span> <span class="toc-text">潜变量模型（Latent-Variable Models）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%89%E5%90%91%E5%9B%BE%E6%A8%A1%E5%9E%8B%EF%BC%88Directed-Graphical-Models-Bayesian-networks%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">有向图模型（Directed Graphical Models&#x2F;Bayesian networks）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E8%AF%AD%E4%B9%89%EF%BC%88Graph-Semantics%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">图的语义（Graph Semantics）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%92%8Cd-%E5%88%86%E7%A6%BB%EF%BC%88%E6%9C%89%E5%90%91%E5%88%86%E7%A6%BB%EF%BC%89%EF%BC%88Conditional-Independence-and-d-Separation%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">条件概率分布和d-分离（有向分离）（Conditional Independence and d-Separation）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9%EF%BC%88Model-Selection%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">模型选择（Model Selection）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B5%8C%E5%A5%97%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%EF%BC%88Nested-Cross-Validation%EF%BC%89"><span class="toc-number">5.1.</span> <span class="toc-text">嵌套交叉验证（Nested Cross-Validation）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9%EF%BC%88Bayesian-Model-Selection%EF%BC%89"><span class="toc-number">5.2.</span> <span class="toc-text">贝叶斯模型选择（Bayesian Model Selection）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E6%AF%94%E8%BE%83%E4%B8%AD%E7%9A%84%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%9B%A0%E5%AD%90%EF%BC%88Bayes-Factors-for-Model-Comparison%EF%BC%89"><span class="toc-number">5.3.</span> <span class="toc-text">模型比较中的贝叶斯因子（Bayes Factors for Model Comparison）</span></a></li></ol></li></ol>
-		</div>
-		
-		<h1 id="Data-Models-and-Learning"><a href="#Data-Models-and-Learning" class="headerlink" title="Data, Models, and Learning"></a>Data, Models, and Learning</h1><p>The title contains three major components of a machine learning system.</p>
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Data-Models-and-Learning"><a href="#Data-Models-and-Learning" class="headerlink" title="Data, Models, and Learning"></a>Data, Models, and Learning</h1><p>The title contains three major components of a machine learning system.</p>
 <h2 id="Data-as-Vectors"><a href="#Data-as-Vectors" class="headerlink" title="Data as Vectors"></a>Data as Vectors</h2><p>First, we need to make information as number, so as to we can use it as training data.</p>
 <h2 id="Models-as-Functions"><a href="#Models-as-Functions" class="headerlink" title="Models as Functions"></a>Models as Functions</h2><p>There are two main school relative to the machine learning, function and probabilistic model. The former one gives a specific value, the later one would give the distribution of the result.<br><img src="https://img-blog.csdnimg.cn/20210517101400415.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>And in order to value a model, we use cost function or loss function to discribe it.</p>
 <h1 id="经验风险最小化（Empirical-Risk-Minimization）"><a href="#经验风险最小化（Empirical-Risk-Minimization）" class="headerlink" title="经验风险最小化（Empirical Risk Minimization）"></a>经验风险最小化（Empirical Risk Minimization）</h1><p>本节主要探讨几个问题：那些函数可以被用作预测函数？如何衡量一个模型的好坏？如何让一个从已知训练集中训练出来的模型很好地预测未见得数据？在找合适的模型时，应该遵循什么样的步骤？</p>
@@ -179,225 +411,193 @@ Data as VectorsFirst, we need to make information as">
 <p><strong>信息准则</strong>（information criteria）：<br><strong>Akaike information criterion</strong>：$\log p(x|\theta)-M$corrects for the bias of the maximum likelihood estimator by addition of a penalty term to compensate for the overfitting of more complex models with lots of parameters.<br>其中，M表示参数的个数<br><strong>Bayesian information criterion (BIC)</strong></p>
 <script type="math/tex; mode=display">\log p(x)=\log\int p(x|\boldsymbol\theta)p(\boldsymbol\theta)d\boldsymbol\theta\approx\log p(x|\boldsymbol\theta)-\frac{1}{2}M\log N</script><p>这里N表示数据集，M表示参数个数<br><u><strong>这部分遇到的时候在详细学习</strong></u></p>
 </blockquote>
-  
-	</div>
-		<footer class="article-footer clearfix">
 
-
-
-
-<div class="article-share" id="share">
-
-  <div data-url="http://example.com/2021/05/26/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6-When-Models-Meet-Data/" data-title="机器学习中的数学: When Models Meet Data | Hexo" data-tsina="" class="share clearfix">
-  </div>
-
-</div>
-</footer>   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2021/06/15/机器学习中的数学：线性回归Linear-Regression/" title="机器学习中的数学：线性回归Linear Regression">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  机器学习中的数学：线性回归Linear Regression</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2021/05/14/机器学习中的数学：（六）连续优化-Continuous-Optimization/"  title="机器学习中的数学：（六）连续优化(Continuous Optimization)">
- <strong>NEXT:</strong><br/> 
- <span>机器学习中的数学：（六）连续优化(Continuous Optimization)
-</span>
-</a>
-</div>
-
-</nav>
-
-	
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Data-Models-and-Learning"><span class="toc-number">1.</span> <span class="toc-text">Data, Models, and Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-as-Vectors"><span class="toc-number">1.1.</span> <span class="toc-text">Data as Vectors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Models-as-Functions"><span class="toc-number">1.2.</span> <span class="toc-text">Models as Functions</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%8F%E9%AA%8C%E9%A3%8E%E9%99%A9%E6%9C%80%E5%B0%8F%E5%8C%96%EF%BC%88Empirical-Risk-Minimization%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">经验风险最小化（Empirical Risk Minimization）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%81%87%E8%AE%BE%E5%87%BD%E6%95%B0%E7%9A%84%E7%A7%8D%E7%B1%BB%EF%BC%88Hypothesis-Class-of-Functions%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">假设函数的种类（Hypothesis Class of Functions）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0-Loss-Function-for-Training"><span class="toc-number">2.2.</span> <span class="toc-text">代价函数(Loss Function for Training)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%E5%87%8F%E5%B0%8F%E8%BF%87%E6%8B%9F%E5%90%88-Regularization-to-Reduce-Overfitting"><span class="toc-number">2.3.</span> <span class="toc-text">正则化减小过拟合(Regularization to Reduce Overfitting)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%E8%AF%84%E4%BC%B0%E6%B3%9B%E5%8C%96%E6%80%A7%E8%83%BD-Cross-Validation-to-Assess-the-Generalization-Performance"><span class="toc-number">2.4.</span> <span class="toc-text">用交叉验证评估泛化性能(Cross-Validation to Assess the Generalization Performance)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1%EF%BC%88Parameter-Estimation%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">参数估计（Parameter Estimation）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%EF%BC%88Maximum-Likelihood-Estimation%EF%BC%89"><span class="toc-number">3.1.</span> <span class="toc-text">最大似然估计（Maximum Likelihood Estimation）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1%EF%BC%88Maximum-A-Posteriori-Estimation%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">最大后验估计（Maximum A Posteriori Estimation）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E6%8B%9F%E5%90%88%EF%BC%88Model-Fitting%EF%BC%89"><span class="toc-number">3.3.</span> <span class="toc-text">模型拟合（Model Fitting）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%EF%BC%88Bayesian-Inference%EF%BC%89"><span class="toc-number">3.4.</span> <span class="toc-text">贝叶斯推断（Bayesian Inference）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BD%9C%E5%8F%98%E9%87%8F%E6%A8%A1%E5%9E%8B%EF%BC%88Latent-Variable-Models%EF%BC%89"><span class="toc-number">3.5.</span> <span class="toc-text">潜变量模型（Latent-Variable Models）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%89%E5%90%91%E5%9B%BE%E6%A8%A1%E5%9E%8B%EF%BC%88Directed-Graphical-Models-Bayesian-networks%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">有向图模型（Directed Graphical Models&#x2F;Bayesian networks）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E8%AF%AD%E4%B9%89%EF%BC%88Graph-Semantics%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">图的语义（Graph Semantics）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%92%8Cd-%E5%88%86%E7%A6%BB%EF%BC%88%E6%9C%89%E5%90%91%E5%88%86%E7%A6%BB%EF%BC%89%EF%BC%88Conditional-Independence-and-d-Separation%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">条件概率分布和d-分离（有向分离）（Conditional Independence and d-Separation）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9%EF%BC%88Model-Selection%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">模型选择（Model Selection）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B5%8C%E5%A5%97%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%EF%BC%88Nested-Cross-Validation%EF%BC%89"><span class="toc-number">5.1.</span> <span class="toc-text">嵌套交叉验证（Nested Cross-Validation）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9%EF%BC%88Bayesian-Model-Selection%EF%BC%89"><span class="toc-number">5.2.</span> <span class="toc-text">贝叶斯模型选择（Bayesian Model Selection）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E6%AF%94%E8%BE%83%E4%B8%AD%E7%9A%84%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%9B%A0%E5%AD%90%EF%BC%88Bayes-Factors-for-Model-Comparison%EF%BC%89"><span class="toc-number">5.3.</span> <span class="toc-text">模型比较中的贝叶斯因子（Bayes Factors for Model Comparison）</span></a></li></ol></li></ol>
-  </div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
-<aside class="clearfix">
-
-  
-
-  
-<div class="tagslist">
-	<p class="asidetitle">Tags</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/C/" title="C++">C++<sup>1</sup></a></li>
-		
-			<li><a href="/tags/C-primer/" title="C++ primer">C++ primer<sup>1</sup></a></li>
-		
-			<li><a href="/tags/DB/" title="DB">DB<sup>1</sup></a></li>
-		
-			<li><a href="/tags/OS/" title="OS">OS<sup>2</sup></a></li>
-		
-			<li><a href="/tags/Projects/" title="Projects">Projects<sup>1</sup></a></li>
-		
-			<li><a href="/tags/bugs/" title="bugs">bugs<sup>1</sup></a></li>
-		
-			<li><a href="/tags/computer-network/" title="computer network">computer network<sup>2</sup></a></li>
-		
-			<li><a href="/tags/侯捷C/" title="侯捷C++">侯捷C++<sup>5</sup></a></li>
-		
-		</ul>
-</div>
-
-
-  <div class="rsspart">
-	<a href="" target="_blank" title="rss">RSS</a>
-</div>
-
-</aside>
-</div>
     </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<div class="social-font clearfix">
-		
-		
-		
-		
-		
-	</div>
-		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2023 
-		
-		<a href="http://example.com" target="_blank" title="John Doe">John Doe</a>
-		
-		</p>
-</div>
-</footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
+
+    
+    
+    
+
+      <footer class="post-footer">
+
         
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/14/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%EF%BC%88%E5%85%AD%EF%BC%89%E8%BF%9E%E7%BB%AD%E4%BC%98%E5%8C%96-Continuous-Optimization/" rel="prev" title="机器学习中的数学：（六）连续优化(Continuous Optimization)">
+      <i class="fa fa-chevron-left"></i> 机器学习中的数学：（六）连续优化(Continuous Optimization)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92Linear-Regression/" rel="next" title="机器学习中的数学：线性回归Linear Regression">
+      机器学习中的数学：线性回归Linear Regression <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
     }
   });
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-});
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      h  = $('article h2')
-      ah = $('article h2'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  if(ah.length==0){
-    t.css('display','none');
-  }else{
-    c.click(function(){
-      ta.css('display', 'block').addClass('fadeIn');
-    });
-    o.click(function(){
-      ta.css('display', 'none');
-    });
-    $(window).scroll(function(){
-      ta.css("top",Math.max(140,320-$(this).scrollTop()));
-    });
-  };
-});
-</script>
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
 
+  <aside class="sidebar">
+    <div class="sidebar-inner">
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina');
-  var html = [
-  '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-  $('.article-share-qrcode').click(function(){
-    var imgSrc = $('#qrcode-pic').attr('data-src');
-    $('#qrcode-pic').attr('src', imgSrc);
-    $('#qrcode-pic').load(function(){
-        $('.qrcode strong').text(' ');
-    });
-  });
-});     
-</script>
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Models-and-Learning"><span class="nav-number">1.</span> <span class="nav-text">Data, Models, and Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-as-Vectors"><span class="nav-number">1.1.</span> <span class="nav-text">Data as Vectors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Models-as-Functions"><span class="nav-number">1.2.</span> <span class="nav-text">Models as Functions</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%8F%E9%AA%8C%E9%A3%8E%E9%99%A9%E6%9C%80%E5%B0%8F%E5%8C%96%EF%BC%88Empirical-Risk-Minimization%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">经验风险最小化（Empirical Risk Minimization）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%87%E8%AE%BE%E5%87%BD%E6%95%B0%E7%9A%84%E7%A7%8D%E7%B1%BB%EF%BC%88Hypothesis-Class-of-Functions%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">假设函数的种类（Hypothesis Class of Functions）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0-Loss-Function-for-Training"><span class="nav-number">2.2.</span> <span class="nav-text">代价函数(Loss Function for Training)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%E5%87%8F%E5%B0%8F%E8%BF%87%E6%8B%9F%E5%90%88-Regularization-to-Reduce-Overfitting"><span class="nav-number">2.3.</span> <span class="nav-text">正则化减小过拟合(Regularization to Reduce Overfitting)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%E8%AF%84%E4%BC%B0%E6%B3%9B%E5%8C%96%E6%80%A7%E8%83%BD-Cross-Validation-to-Assess-the-Generalization-Performance"><span class="nav-number">2.4.</span> <span class="nav-text">用交叉验证评估泛化性能(Cross-Validation to Assess the Generalization Performance)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1%EF%BC%88Parameter-Estimation%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">参数估计（Parameter Estimation）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%EF%BC%88Maximum-Likelihood-Estimation%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">最大似然估计（Maximum Likelihood Estimation）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1%EF%BC%88Maximum-A-Posteriori-Estimation%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">最大后验估计（Maximum A Posteriori Estimation）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E6%8B%9F%E5%90%88%EF%BC%88Model-Fitting%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">模型拟合（Model Fitting）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%EF%BC%88Bayesian-Inference%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">贝叶斯推断（Bayesian Inference）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BD%9C%E5%8F%98%E9%87%8F%E6%A8%A1%E5%9E%8B%EF%BC%88Latent-Variable-Models%EF%BC%89"><span class="nav-number">3.5.</span> <span class="nav-text">潜变量模型（Latent-Variable Models）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%89%E5%90%91%E5%9B%BE%E6%A8%A1%E5%9E%8B%EF%BC%88Directed-Graphical-Models-Bayesian-networks%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">有向图模型（Directed Graphical Models&#x2F;Bayesian networks）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E8%AF%AD%E4%B9%89%EF%BC%88Graph-Semantics%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">图的语义（Graph Semantics）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%92%8Cd-%E5%88%86%E7%A6%BB%EF%BC%88%E6%9C%89%E5%90%91%E5%88%86%E7%A6%BB%EF%BC%89%EF%BC%88Conditional-Independence-and-d-Separation%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">条件概率分布和d-分离（有向分离）（Conditional Independence and d-Separation）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9%EF%BC%88Model-Selection%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">模型选择（Model Selection）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%EF%BC%88Nested-Cross-Validation%EF%BC%89"><span class="nav-number">5.1.</span> <span class="nav-text">嵌套交叉验证（Nested Cross-Validation）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9%EF%BC%88Bayesian-Model-Selection%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">贝叶斯模型选择（Bayesian Model Selection）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E6%AF%94%E8%BE%83%E4%B8%AD%E7%9A%84%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%9B%A0%E5%AD%90%EF%BC%88Bayes-Factors-for-Model-Comparison%EF%BC%89"><span class="nav-number">5.3.</span> <span class="nav-text">模型比较中的贝叶斯因子（Bayes Factors for Model Comparison）</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
 
 
 
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
 
 
 
-  </body>
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
 </html>

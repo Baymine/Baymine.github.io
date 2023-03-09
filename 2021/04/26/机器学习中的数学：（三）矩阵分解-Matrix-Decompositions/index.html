@@ -1,96 +1,360 @@
-
- <!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="@[toc]矩阵分解可以用于压缩矩阵，以尽可能少的空间存储一个矩阵，同时损失尽可能少的信息。同时对数据进行降维还可以减少发生维度灾难的发生。  维数灾难： 当数据维度提升的时候，因为空间体积提升过快，因而可用数据变得很稀疏。然而在高维空间中，所有的数据都很稀疏，从很多角度看都不相似，因而平常使用的数据组织策略变得极其低效。在机器学习问题中，需要在高维特征空间（每个特征都能够取一系列可能值）的有限数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习中的数学：（三）矩阵分解(Matrix Decompositions)">
+<meta property="og:url" content="http://example.com/2021/04/26/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%EF%BC%88%E4%B8%89%EF%BC%89%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3-Matrix-Decompositions/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="@[toc]矩阵分解可以用于压缩矩阵，以尽可能少的空间存储一个矩阵，同时损失尽可能少的信息。同时对数据进行降维还可以减少发生维度灾难的发生。  维数灾难： 当数据维度提升的时候，因为空间体积提升过快，因而可用数据变得很稀疏。然而在高维空间中，所有的数据都很稀疏，从很多角度看都不相似，因而平常使用的数据组织策略变得极其低效。在机器学习问题中，需要在高维特征空间（每个特征都能够取一系列可能值）的有限数">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210422212906189.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210422213649972.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210422213733943.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210422213432734.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210422213436294.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210422213814612.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210422213949173.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210422214211626.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210422214251939.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021042221461996.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423102704877.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423102727720.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423102845808.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423103140423.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423103537224.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423103825435.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423104316545.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423104418946.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423133916529.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423133912252.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423134928849.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423141732757.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423142205462.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423142559266.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423201349436.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423201949444.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423202001438.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423202734362.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423202908551.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423203839482.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423204815898.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210423205113416.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210424105653896.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021042410570861.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210424121857566.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210424135923640.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210424140128695.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210424140421187.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210424140700348.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021042414101820.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210424140923239.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210425131251977.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210426100532232.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210426101036527.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210426101250788.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210426103210671.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-04-26T02:32:53.000Z">
+<meta property="article:modified_time" content="2023-03-08T11:50:17.815Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210422212906189.png">
+
+<link rel="canonical" href="http://example.com/2021/04/26/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%EF%BC%88%E4%B8%89%EF%BC%89%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3-Matrix-Decompositions/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>机器学习中的数学：（三）矩阵分解(Matrix Decompositions) | Hexo</title>
   
-    <title>机器学习中的数学：（三）矩阵分解(Matrix Decompositions) | Hexo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="John Doe">
-    
-    <meta name="description" content="@[toc]矩阵分解可以用于压缩矩阵，以尽可能少的空间存储一个矩阵，同时损失尽可能少的信息。同时对数据进行降维还可以减少发生维度灾难的发生。
 
-维数灾难： 当数据维度提升的时候，因为空间体积提升过快，因而可用数据变得很稀疏。然而在高维空间中，所有的数据都很稀疏，从很多角度看都不相似，因而平常使用的数">
-    
-    
-    
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/pacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
-    
-    
-<link rel="stylesheet" href="/css/style.css">
 
-<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head>
 
-  <body>
-    <header>
-      <div>
-		
-			<div id="imglogo">
-				<a href="/"><img src="/img/logo.svg" alt="Hexo" title="Hexo"/></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="Hexo">Hexo</a></h1>
-				<h2 class="blog-motto"></h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					
-						<li><a href="/">Home</a></li>
-					
-						<li><a href="/archives">Archives</a></li>
-					
-					<li>
-					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
-						<input type="hidden" name="q" value="site:example.com">
-					</form>
-					
-					</li>
-				</ul>
-			</nav>			
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
     </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
+
     
-      <a href="/2021/04/26/机器学习中的数学：（三）矩阵分解-Matrix-Decompositions/" title="机器学习中的数学：（三）矩阵分解(Matrix Decompositions)" itemprop="url">机器学习中的数学：（三）矩阵分解(Matrix Decompositions)</a>
-  </h1>
-  <p class="article-author">By
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
     
-      <a href="http://example.com" title="John Doe">John Doe</a>
-    </p>
-  <p class="article-time">
-    <time datetime="2021-04-26T02:32:53.000Z" itemprop="datePublished">2021-04-26</time>
-    Updated:<time datetime="2023-03-08T11:50:17.815Z" itemprop="dateModified">2023-03-08</time>
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/26/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%EF%BC%88%E4%B8%89%EF%BC%89%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3-Matrix-Decompositions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          机器学习中的数学：（三）矩阵分解(Matrix Decompositions)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-26 10:32:53" itemprop="dateCreated datePublished" datetime="2021-04-26T10:32:53+08:00">2021-04-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-03-08 19:50:17" itemprop="dateModified" datetime="2023-03-08T19:50:17+08:00">2023-03-08</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
     
-  </p>
-</header>
-	<div class="article-content">
-		
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F%E4%B8%8E%E8%BF%B9%EF%BC%88Determinant-and-Trace%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">行列式与迹（Determinant and Trace）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F%EF%BC%88Dterminant%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">行列式（Dterminant）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%B9-Trace"><span class="toc-number">1.2.</span> <span class="toc-text">迹(Trace)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E5%80%BC%E4%B8%8E%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="toc-number">2.</span> <span class="toc-text">特征值与特征向量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%AF%E5%88%97%E6%96%AF%E5%9F%BA%E5%88%86%E8%A7%A3%EF%BC%88Cholesky-Decomposition%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">柯列斯基分解（Cholesky Decomposition）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E5%88%86%E8%A7%A3%E5%92%8C%E5%AF%B9%E8%A7%92%E5%8C%96"><span class="toc-number">4.</span> <span class="toc-text">特征分解和对角化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E7%9A%84%E5%87%A0%E4%BD%95%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3"><span class="toc-number">4.1.</span> <span class="toc-text">矩阵分解的几何直观理解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3%EF%BC%88Singular-Value-Decomposition%EF%BC%8CSVD%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">奇异值分解（Singular Value Decomposition，SVD）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SVD%E7%9A%84%E5%87%A0%E4%BD%95%E7%9B%B4%E8%A7%82%E8%A7%A3%E9%87%8A"><span class="toc-number">5.1.</span> <span class="toc-text">SVD的几何直观解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%82%E8%A7%A3%E7%9F%A9%E9%98%B5%E7%9A%84SVD"><span class="toc-number">5.2.</span> <span class="toc-text">求解矩阵的SVD</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E9%80%BC%E8%BF%91%EF%BC%88Matrix-Approximation%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">矩阵逼近（Matrix Approximation）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li></ol>
-		</div>
-		
-		<p>@[toc]<br>矩阵分解可以用于压缩矩阵，以尽可能少的空间存储一个矩阵，同时损失尽可能少的信息。同时对数据进行降维还可以减少发生<strong>维度灾难</strong>的发生。</p>
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>@[toc]<br>矩阵分解可以用于压缩矩阵，以尽可能少的空间存储一个矩阵，同时损失尽可能少的信息。同时对数据进行降维还可以减少发生<strong>维度灾难</strong>的发生。</p>
 <blockquote>
 <p><strong>维数灾难</strong>： 当数据维度提升的时候，因为空间体积提升过快，因而可用数据变得很稀疏。然而在高维空间中，所有的数据都很稀疏，从很多角度看都不相似，因而平常使用的数据组织策略变得极其低效。<br><br><br>在机器学习问题中，需要在高维特征空间（每个特征都能够取一系列可能值）的有限数据样本中学习一种“自然状态”（可能是无穷分布），要求有相当数量的训练数据含有一些样本组合。<u>给定固定数量的训练样本，其预测能力随着维度的增加而减小</u>，这就是所谓的Hughes影响或Hughes现象（以Gordon F. Hughes命名）。<br>        ———Wiki<br>个人理解：随着维度的升高数据之间的距离加大，这导致数据组合而成的用于最终判断的特征难以被发现</p>
 <h1 id="行列式与迹（Determinant-and-Trace）"><a href="#行列式与迹（Determinant-and-Trace）" class="headerlink" title="行列式与迹（Determinant and Trace）"></a>行列式与迹（Determinant and Trace）</h1><h2 id="行列式（Dterminant）"><a href="#行列式（Dterminant）" class="headerlink" title="行列式（Dterminant）"></a>行列式（Dterminant）</h2><p>行列式可以看成将一个方阵映射成一个实数。（只有方阵才有行列式）<br>可以将行列式用于判断一个方阵是否可逆：<br><img src="https://img-blog.csdnimg.cn/20210422212906189.png" alt="在这里插入图片描述"></p>
@@ -185,225 +449,193 @@
 <p>证明过程？</p>
 </blockquote>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><img src="https://img-blog.csdnimg.cn/20210426103210671.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-  
-	</div>
-		<footer class="article-footer clearfix">
 
-
-
-
-<div class="article-share" id="share">
-
-  <div data-url="http://example.com/2021/04/26/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%EF%BC%88%E4%B8%89%EF%BC%89%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3-Matrix-Decompositions/" data-title="机器学习中的数学：（三）矩阵分解(Matrix Decompositions) | Hexo" data-tsina="" class="share clearfix">
-  </div>
-
-</div>
-</footer>   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2021/04/29/机器学习中的数学：（四）矢量积分-Vector-Calculus/" title="机器学习中的数学：（四）矢量积分(Vector Calculus)">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  机器学习中的数学：（四）矢量积分(Vector Calculus)</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2021/04/25/论文笔记/"  title="论文笔记">
- <strong>NEXT:</strong><br/> 
- <span>论文笔记
-</span>
-</a>
-</div>
-
-</nav>
-
-	
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F%E4%B8%8E%E8%BF%B9%EF%BC%88Determinant-and-Trace%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">行列式与迹（Determinant and Trace）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F%EF%BC%88Dterminant%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">行列式（Dterminant）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%B9-Trace"><span class="toc-number">1.2.</span> <span class="toc-text">迹(Trace)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E5%80%BC%E4%B8%8E%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="toc-number">2.</span> <span class="toc-text">特征值与特征向量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%AF%E5%88%97%E6%96%AF%E5%9F%BA%E5%88%86%E8%A7%A3%EF%BC%88Cholesky-Decomposition%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">柯列斯基分解（Cholesky Decomposition）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E5%88%86%E8%A7%A3%E5%92%8C%E5%AF%B9%E8%A7%92%E5%8C%96"><span class="toc-number">4.</span> <span class="toc-text">特征分解和对角化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E7%9A%84%E5%87%A0%E4%BD%95%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3"><span class="toc-number">4.1.</span> <span class="toc-text">矩阵分解的几何直观理解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3%EF%BC%88Singular-Value-Decomposition%EF%BC%8CSVD%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">奇异值分解（Singular Value Decomposition，SVD）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SVD%E7%9A%84%E5%87%A0%E4%BD%95%E7%9B%B4%E8%A7%82%E8%A7%A3%E9%87%8A"><span class="toc-number">5.1.</span> <span class="toc-text">SVD的几何直观解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%82%E8%A7%A3%E7%9F%A9%E9%98%B5%E7%9A%84SVD"><span class="toc-number">5.2.</span> <span class="toc-text">求解矩阵的SVD</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5%E9%80%BC%E8%BF%91%EF%BC%88Matrix-Approximation%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">矩阵逼近（Matrix Approximation）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li></ol>
-  </div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
-<aside class="clearfix">
-
-  
-
-  
-<div class="tagslist">
-	<p class="asidetitle">Tags</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/C/" title="C++">C++<sup>1</sup></a></li>
-		
-			<li><a href="/tags/C-primer/" title="C++ primer">C++ primer<sup>1</sup></a></li>
-		
-			<li><a href="/tags/DB/" title="DB">DB<sup>1</sup></a></li>
-		
-			<li><a href="/tags/OS/" title="OS">OS<sup>2</sup></a></li>
-		
-			<li><a href="/tags/Projects/" title="Projects">Projects<sup>1</sup></a></li>
-		
-			<li><a href="/tags/bugs/" title="bugs">bugs<sup>1</sup></a></li>
-		
-			<li><a href="/tags/computer-network/" title="computer network">computer network<sup>2</sup></a></li>
-		
-			<li><a href="/tags/侯捷C/" title="侯捷C++">侯捷C++<sup>5</sup></a></li>
-		
-		</ul>
-</div>
-
-
-  <div class="rsspart">
-	<a href="" target="_blank" title="rss">RSS</a>
-</div>
-
-</aside>
-</div>
     </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<div class="social-font clearfix">
-		
-		
-		
-		
-		
-	</div>
-		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2023 
-		
-		<a href="http://example.com" target="_blank" title="John Doe">John Doe</a>
-		
-		</p>
-</div>
-</footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
+
+    
+    
+    
+
+      <footer class="post-footer">
+
         
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/25/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" rel="prev" title="论文笔记">
+      <i class="fa fa-chevron-left"></i> 论文笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%EF%BC%88%E5%9B%9B%EF%BC%89%E7%9F%A2%E9%87%8F%E7%A7%AF%E5%88%86-Vector-Calculus/" rel="next" title="机器学习中的数学：（四）矢量积分(Vector Calculus)">
+      机器学习中的数学：（四）矢量积分(Vector Calculus) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
     }
   });
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-});
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      h  = $('article h2')
-      ah = $('article h2'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  if(ah.length==0){
-    t.css('display','none');
-  }else{
-    c.click(function(){
-      ta.css('display', 'block').addClass('fadeIn');
-    });
-    o.click(function(){
-      ta.css('display', 'none');
-    });
-    $(window).scroll(function(){
-      ta.css("top",Math.max(140,320-$(this).scrollTop()));
-    });
-  };
-});
-</script>
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
 
+  <aside class="sidebar">
+    <div class="sidebar-inner">
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina');
-  var html = [
-  '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-  $('.article-share-qrcode').click(function(){
-    var imgSrc = $('#qrcode-pic').attr('data-src');
-    $('#qrcode-pic').attr('src', imgSrc);
-    $('#qrcode-pic').load(function(){
-        $('.qrcode strong').text(' ');
-    });
-  });
-});     
-</script>
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F%E4%B8%8E%E8%BF%B9%EF%BC%88Determinant-and-Trace%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">行列式与迹（Determinant and Trace）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F%EF%BC%88Dterminant%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">行列式（Dterminant）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%B9-Trace"><span class="nav-number">1.2.</span> <span class="nav-text">迹(Trace)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E5%80%BC%E4%B8%8E%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">特征值与特征向量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%AF%E5%88%97%E6%96%AF%E5%9F%BA%E5%88%86%E8%A7%A3%EF%BC%88Cholesky-Decomposition%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">柯列斯基分解（Cholesky Decomposition）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E5%88%86%E8%A7%A3%E5%92%8C%E5%AF%B9%E8%A7%92%E5%8C%96"><span class="nav-number">4.</span> <span class="nav-text">特征分解和对角化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3%E7%9A%84%E5%87%A0%E4%BD%95%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3"><span class="nav-number">4.1.</span> <span class="nav-text">矩阵分解的几何直观理解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3%EF%BC%88Singular-Value-Decomposition%EF%BC%8CSVD%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">奇异值分解（Singular Value Decomposition，SVD）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SVD%E7%9A%84%E5%87%A0%E4%BD%95%E7%9B%B4%E8%A7%82%E8%A7%A3%E9%87%8A"><span class="nav-number">5.1.</span> <span class="nav-text">SVD的几何直观解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%82%E8%A7%A3%E7%9F%A9%E9%98%B5%E7%9A%84SVD"><span class="nav-number">5.2.</span> <span class="nav-text">求解矩阵的SVD</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E9%80%BC%E8%BF%91%EF%BC%88Matrix-Approximation%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">矩阵逼近（Matrix Approximation）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
 
 
 
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
 
 
 
-  </body>
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
 </html>
