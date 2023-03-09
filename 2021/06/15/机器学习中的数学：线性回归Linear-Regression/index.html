@@ -1,0 +1,562 @@
+
+ <!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>机器学习中的数学：线性回归Linear Regression | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="@[toc]回归的目的就是找到一个函数$f$,将输入的数据$\boldsymbol x\in \mathbb R^n$映射成$f(\boldsymbol x)\in \mathbb R$.数据的观测噪音为：$y_n=f(x_n)+\epsilon$,其中$\epsilon$是一个独立均匀分布的随机变">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Hexo" title="Hexo"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Hexo">Hexo</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:example.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2021/06/15/机器学习中的数学：线性回归Linear-Regression/" title="机器学习中的数学：线性回归Linear Regression" itemprop="url">机器学习中的数学：线性回归Linear Regression</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://example.com" title="John Doe">John Doe</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2021-06-15T01:12:40.000Z" itemprop="datePublished">2021-06-15</time>
+    Updated:<time datetime="2023-03-09T10:48:22.852Z" itemprop="dateModified">2023-03-09</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0%EF%BC%88Problem-Formulation%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">问题描述（Problem Formulation）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1%EF%BC%88Parameter-Estimation%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">参数估计（Parameter Estimation）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%EF%BC%88Maximum-Likelihood-Estimation%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">极大似然估计（Maximum Likelihood Estimation）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E7%89%B9%E5%BE%81%E7%9A%84%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%EF%BC%88Maximum-Likelihood-Estimation-with-Features%EF%BC%89"><span class="toc-number">2.1.1.</span> <span class="toc-text">基于特征的极大似然估计（Maximum Likelihood Estimation with Features）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%99%AA%E5%A3%B0%E6%96%B9%E5%B7%AE%EF%BC%88Estimating-the-Noise-Variance%EF%BC%89"><span class="toc-number">2.1.2.</span> <span class="toc-text">噪声方差（Estimating the Noise Variance）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E4%B8%AD%E7%9A%84%E8%BF%87%E6%8B%9F%E5%90%88%EF%BC%88Overfitting-in-Linear-Regression%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">线性回归中的过拟合（Overfitting in Linear Regression）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%81%E5%A4%A7%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1%EF%BC%88Maximum-A-Posteriori-Estimation%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">极大后验估计（Maximum A Posteriori Estimation）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%A4%A7%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1%E4%BD%9C%E4%B8%BA%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-number">2.3.1.</span> <span class="toc-text">极大后验估计作为正则化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%EF%BC%88Bayesian-Linear-Regression%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">贝叶斯线性回归（Bayesian Linear Regression）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%EF%BC%88Model%EF%BC%89"><span class="toc-number">3.1.</span> <span class="toc-text">模型（Model）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%84%E6%B5%8B%E5%85%88%E9%AA%8C%EF%BC%88Prior-Predictions%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">预测先验（Prior Predictions）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E9%AA%8C%E5%88%86%E5%B8%83%EF%BC%88Posterior-Distribution%EF%BC%89"><span class="toc-number">3.3.</span> <span class="toc-text">后验分布（Posterior Distribution）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E9%AA%8C%E9%A2%84%E6%B5%8B%EF%BC%88Posterior-Predictions%EF%BC%89"><span class="toc-number">3.4.</span> <span class="toc-text">后验预测（Posterior Predictions）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%B9%E9%99%85%E4%BC%BC%E7%84%B6%E7%9A%84%E8%AE%A1%E7%AE%97%EF%BC%88Computing-the-Marginal-Likelihood%EF%BC%89"><span class="toc-number">3.5.</span> <span class="toc-text">边际似然的计算（Computing the Marginal Likelihood）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%AD%A3%E4%BA%A4%E6%8A%95%E5%BD%B1%E8%A7%A3%E9%87%8A%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%EF%BC%88Maximum-Likelihood-as-Orthogonal-Projection%EF%BC%89"><span class="toc-number">3.6.</span> <span class="toc-text">用正交投影解释极大似然估计（Maximum Likelihood as Orthogonal Projection）</span></a></li></ol></li></ol>
+		</div>
+		
+		<p>@[toc]<br>回归的目的就是找到一个函数$f$,将输入的数据$\boldsymbol x\in \mathbb R^n$映射成$f(\boldsymbol x)\in \mathbb R$.数据的观测噪音为：$y_n=f(x_n)+\epsilon$,其中$\epsilon$是一个独立均匀分布的随机变量，描述数据噪音。</p>
+<blockquote>
+<p>噪音理解成预测值与观测值的偏差，准不准确？</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210527102646532.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="问题描述（Problem-Formulation）"><a href="#问题描述（Problem-Formulation）" class="headerlink" title="问题描述（Problem Formulation）"></a>问题描述（Problem Formulation）</h1><p>因为观测噪音的缘故，我们使用概率模型，并且用一个似然函数对噪音进行建模。具体来说，我们考虑以下回归问题的的似然函数：</p>
+<script type="math/tex; mode=display">p(y|\boldsymbol x)=\mathcal N(y|f(\boldsymbol x),\sigma^2)</script><p>其中，$\boldsymbol x\in \mathbb R^n$是输入值,$y\in \mathbb R$为噪音函数值（目标）<br>$\boldsymbol x$与$y$之间的关系为：</p>
+<script type="math/tex; mode=display">y= f(\boldsymbol x)+\epsilon</script><p>其中，$\epsilon \sim\mathcal N(0,\sigma^2)$是一个独立均匀的高斯分布。</p>
+<blockquote>
+<p>Our objective is to find a function that is close (similar) to <u>the unknown function $f$ </u>that generated the data and that generalizes well.</p>
+<p>假设在线性模型的条件下：</p>
+<script type="math/tex; mode=display">p(y|\boldsymbol x,\boldsymbol \theta)=\mathcal N(y|\boldsymbol x^\top\boldsymbol\theta,\sigma^2)\Leftrightarrow y=\boldsymbol x^\top\boldsymbol\theta+\epsilon,\quad \epsilon \sim \mathcal N(0,\sigma^2)</script><p>Why?<br><img src="https://img-blog.csdnimg.cn/20210527104841262.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<p>这里说明一下线性模型的意思，线性代表的是输入数据的线性组合，所以对于$y=\phi^\top(\boldsymbol x)\boldsymbol\theta$,即使$\phi^\top(\boldsymbol x)$是非线性函数，这个模型也是线性模型。</p>
+<h1 id="参数估计（Parameter-Estimation）"><a href="#参数估计（Parameter-Estimation）" class="headerlink" title="参数估计（Parameter Estimation）"></a>参数估计（Parameter Estimation）</h1><p>给定一个训练集$\mathcal D :={(x_1,y_1),\cdots,(x_N,y_N)$,包含$N$个输入$x_n\in \mathbb R^D$和观测值$y_n\in \mathbb R,n=1,\cdots, N$.<br>用概率图模型（Probabilistic graphical model）可以表示为：</p>
+<p><div align="center"><br><img src="https://img-blog.csdnimg.cn/20210527154036716.png"> </div></p>
+<p>又因为每一个样本又是相互独立的，所以可以将似然方程进行分解：</p>
+<script type="math/tex; mode=display">p(\mathcal Y|\mathcal X,\boldsymbol\theta)=p(y_1,\cdots,y_N|\boldsymbol x_1,\cdots,\boldsymbol x_N,\boldsymbol\theta)=\prod^N_{n=1}p(y_n|\boldsymbol x_n,\boldsymbol\theta) = \prod^N_{n=1}\mathcal N(y_n|\boldsymbol x_n^\top\boldsymbol\theta,\sigma^2)</script><p>接下来详细介绍获取最优化参数的方法。</p>
+<h2 id="极大似然估计（Maximum-Likelihood-Estimation）"><a href="#极大似然估计（Maximum-Likelihood-Estimation）" class="headerlink" title="极大似然估计（Maximum Likelihood Estimation）"></a>极大似然估计（Maximum Likelihood Estimation）</h2><p>我们可以通过极大似然估计得到参数：</p>
+<script type="math/tex; mode=display">\boldsymbol \theta_{ML}=\arg \max_\theta p(\mathcal Y|\mathcal X,\boldsymbol\theta)</script><p>上面的似然概率不是参数$\theta$的分布，而是函数。极大似然估计的目的就是最大化训练数据的概率分布。<br>在实际过程中，我们常常采用似然对数转换（Log-Transformation）的方式，将问题转化成最小化负对数似然：</p>
+<script type="math/tex; mode=display">-\log p(\mathcal Y|\mathcal X,\boldsymbol\theta)=-\log \prod_{n=1}^N p(y_n|\boldsymbol x_n,\boldsymbol\theta)=-\sum^N_{n=1}\log p(y_n|\boldsymbol x_n,\boldsymbol\theta)</script><p>这样做可以将原先的乘积转换成和，</p>
+<blockquote>
+<p><strong>What does this suppose means?</strong><br>More specifically, numerical underflow will be a problem when we multiply N probabilities, where N is the number of data points, since we cannot represent very small numbers, such as $10^{256}$.</p>
+</blockquote>
+<p>由于在线性规划中，似然概率分布满足高斯分布（噪音项$\epsilon$满足高斯分布），所以可以得到：</p>
+<blockquote>
+<p>?？需要补充<br>Note that:</p>
+<script type="math/tex; mode=display">p(y|x,\theta)=\mathcal N(y|x^\top\theta,\sigma^2)=\frac{1}{\sqrt{2\pi \sigma^2}}e^{-\frac{(y-x^\top)^2}{2\sigma^2}}</script></blockquote>
+<script type="math/tex; mode=display">\log p(y_n|\boldsymbol x_n,\boldsymbol\theta)=-\frac{1}{2\sigma^2}(y_n-\boldsymbol x_n^\top\boldsymbol\theta)^2+\operatorname {const}</script><p>于是得到损失函数：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mathcal{L}(\boldsymbol{\theta}) &:=\frac{1}{2 \sigma^{2}} \sum_{n=1}^{N}\left(y_{n}-\boldsymbol{x}_{n}^{\top} \boldsymbol{\theta}\right)^{2} \\
+&=\frac{1}{2 \sigma^{2}}(\boldsymbol{y}-\boldsymbol{X} \boldsymbol{\theta})^{\top}(\boldsymbol{y}-\boldsymbol{X} \boldsymbol{\theta})=\frac{1}{2 \sigma^{2}}\|\boldsymbol{y}-\boldsymbol{X} \boldsymbol{\theta}\|^{2}
+\end{aligned}</script><p>我们将$\boldsymbol X:=[x_1,x_2,\cdots,x_N]^\top\in \mathbb R^{N\times D}$定义为<strong>设计矩阵</strong>（Design Matrix）<br>可以通过求导求解损失函数的最小值：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{\mathrm{d} \mathcal{L}}{\mathrm{d} \boldsymbol{\theta}} &=\frac{\mathrm{d}}{\mathrm{d} \boldsymbol{\theta}}\left(\frac{1}{2 \sigma^{2}}(\boldsymbol{y}-\boldsymbol{X} \boldsymbol{\theta})^{\top}(\boldsymbol{y}-\boldsymbol{X} \boldsymbol{\theta})\right) \\
+&=\frac{1}{2 \sigma^{2}} \frac{\mathrm{d}}{\mathrm{d} \boldsymbol{\theta}}\left(\boldsymbol{y}^{\top} \boldsymbol{y}-2 \boldsymbol{y}^{\top} \boldsymbol{X} \boldsymbol{\theta}+\boldsymbol{\theta}^{\top} \boldsymbol{X}^{\top} \boldsymbol{X} \boldsymbol{\theta}\right) \\
+&=\frac{1}{\sigma^{2}}\left(-\boldsymbol{y}^{\top} \boldsymbol{X}+\boldsymbol{\theta}^{\top} \boldsymbol{X}^{\top} \boldsymbol{X}\right) \in \mathbb{R}^{1 \times D}
+\end{aligned}</script><p>（$\frac {d\boldsymbol X^\top B\boldsymbol X}{d\boldsymbol X}=(B+B^\top)\boldsymbol X$）<br>令上式等于0：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{\mathrm{d} \mathcal{L}}{\mathrm{d} \boldsymbol{\theta}}=\mathbf{0}^{\top} {\longrightarrow} \boldsymbol{\theta}_{\mathrm{ML}}^{\top} \boldsymbol{X}^{\top} \boldsymbol{X}=\boldsymbol{y}^{\top} \boldsymbol{X} \\
+ \Longleftrightarrow \boldsymbol{\theta}_{\mathrm{ML}}^{\top}=\boldsymbol{y}^{\top} \boldsymbol{X}\left(\boldsymbol{X}^{\top} \boldsymbol{X}\right)^{-1} \\
+ \Longleftrightarrow \boldsymbol{\theta}_{\mathrm{ML}}=\left(\boldsymbol{X}^{\top} \boldsymbol{X}\right)^{-1} \boldsymbol{X}^{\top} \boldsymbol{y} .
+\end{aligned}</script><p><img src="https://img-blog.csdnimg.cn/2021052906543623.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>Normal equation is derived by MLE.——Ng</p>
+<h3 id="基于特征的极大似然估计（Maximum-Likelihood-Estimation-with-Features）"><a href="#基于特征的极大似然估计（Maximum-Likelihood-Estimation-with-Features）" class="headerlink" title="基于特征的极大似然估计（Maximum Likelihood Estimation with Features）"></a>基于特征的极大似然估计（Maximum Likelihood Estimation with Features）</h3><p>当遇到更复杂的数据时，一次函数模型有时候很难很好地拟合数据，但是由于线性回归模型只是对”参数的线性”(“linear in the parameters”),所以可以在线性回归模型中对非线性模型进行拟合。这就是说我们可以先将输入值进行非线性变换之后，再放到线性模型中。<br>In Ng’s courses he said this is Linear regression with higher order features. We can alse use SVM to derive new features.</p>
+</blockquote>
+<script type="math/tex; mode=display">p(y|\boldsymbol x,\theta)=\mathcal N(y|\phi^\top(x)\boldsymbol\theta,\sigma^2)\Longleftrightarrow y=\phi^\top(x)\boldsymbol\theta+\epsilon=\sum^{K-1}_{k=0}\theta_k\phi_k(x)+\epsilon</script><p>其中，$\phi:\mathbb R^D\rightarrow\mathbb R^K$是一个对$x$的（非）线性变换，$\phi_k:\mathbb R^D\rightarrow\mathbb R$是特征向量的第k个分量。</p>
+<p>一个实例：<br>一种对输入数据常用的变换如下</p>
+<script type="math/tex; mode=display">
+\phi(x)=\left[\begin{array}{c}
+\phi_{0}(x) \\
+\phi_{1}(x) \\
+\vdots \\
+\phi_{K-1}(x)
+\end{array}\right]=\left[\begin{array}{c}
+1 \\
+x \\
+x^{2} \\
+x^{3} \\
+\vdots \\
+x^{K-1}
+\end{array}\right] \in \mathbb{R}^{K}</script><p>所以：</p>
+<script type="math/tex; mode=display">f(x)=\sum\limits^{K-1}_{k=0}\theta_kx^k=\phi^\top(x)\boldsymbol\theta</script><p>现在看看参数$\theta$在线性回归模型下的极大似然估计：</p>
+<script type="math/tex; mode=display">
+\Phi:=\left[\begin{array}{c}
+\phi^{\top}\left(x_{1}\right) \\
+\vdots \\
+\phi^{\top}\left(x_{N}\right)
+\end{array}\right]=\left[\begin{array}{ccc}
+\phi_{0}\left(x_{1}\right) & \cdots & \phi_{K-1}\left(x_{1}\right) \\
+\phi_{0}\left(x_{2}\right) & \cdots & \phi_{K-1}\left(x_{2}\right) \\
+\vdots & & \vdots \\
+\phi_{0}\left(x_{N}\right) & \cdots & \phi_{K-1}\left(x_{N}\right)
+\end{array}\right] \in \mathbb{R}^{N \times K}</script><p>where $\Phi<em>{i j}=\phi</em>{j}\left(\boldsymbol{x}<em>{i}\right)$ and $\phi</em>{j}: \mathbb{R}^{D} \rightarrow \mathbb{R}$.<br>这个矩阵被称为<strong>特征矩阵</strong>（feature matrix）或<strong>设计矩阵</strong>(design matrix)<br>有了上面这个矩阵，我们可以将线性回归模型：</p>
+<script type="math/tex; mode=display">p(y|\boldsymbol x,\boldsymbol \theta)=\mathcal N(y|\boldsymbol x^\top\boldsymbol\theta,\sigma^2)\Leftrightarrow y=\boldsymbol x^\top\boldsymbol\theta+\epsilon,\quad \epsilon \sim \mathcal N(0,\sigma^2)</script><blockquote>
+<p>从这个式子中可以看出，预测值的结果主要分布于均值的周围</p>
+</blockquote>
+<p>写成：</p>
+<script type="math/tex; mode=display">-\log p(\mathcal Y|\mathcal X,\boldsymbol\theta)=\frac{1}{2\sigma^2}(y-\Phi\boldsymbol\theta)^\top(y-\Phi\boldsymbol\theta)+\operatorname{const}</script><p>将两式子进行比较，发现二者只是将$\phi$欢成了$\Phi$,所以直接利用模型的结论，得到$\theta$的估计值：</p>
+<script type="math/tex; mode=display">\theta_{ML}=(\Phi^\top\Phi)^{-1}\Phi^\top y</script><blockquote>
+<p>需要讨论$\Phi$的可逆性<br>这个是不是支持向量机中的多项式核函数？</p>
+<script type="math/tex; mode=display">(x_1\times x_2 + r)^d</script><p>其中，r为多项式的参数，d为多项式的次数，$x_1、x_2$为观测值</p>
+<h3 id="噪声方差（Estimating-the-Noise-Variance）"><a href="#噪声方差（Estimating-the-Noise-Variance）" class="headerlink" title="噪声方差（Estimating the Noise Variance）"></a>噪声方差（Estimating the Noise Variance）</h3><p>我们之前的讨论都是假定$\sigma^2$是已知的，但是实际上可以利用极大似然估计的方式对噪声方差进行估计，所有的步骤与之前一致：<br>将$p(\mathcal y|\mathcal x,\theta,\sigma^2)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}$带入到似然函数中：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}
+\log p\left(\mathcal{Y} \mid \mathcal{X}, \boldsymbol{\theta}, \sigma^{2}\right)=\sum\limits_{n=1}^{N} \log \mathcal{N}\left(y_{n} \mid \phi^{\top}\left(\boldsymbol{x}_{n}\right) \boldsymbol{\theta}, \sigma^{2}\right) \\
+=\sum\limits_{n=1}^{N}\left(-\frac{1}{2} \log (2 \pi)-\frac{1}{2} \log \sigma^{2}-\frac{1}{2 \sigma^{2}}\left(y_{n}-\phi^{\top}\left(\boldsymbol{x}_{n}\right) \boldsymbol{\theta}\right)^{2}\right) \\
+=-\frac{N}{2} \log \sigma^{2}-\frac{1}{2 \sigma^{2}} \underbrace{\sum_{n=1}^{N}\left(y_{n}-\boldsymbol{\phi}^{\top}\left(\boldsymbol{x}_{n}\right) \boldsymbol{\theta}\right)^{2}}_{=: s}+\text { const. }
+\end{array}</script><p>对$\sigma^2$求偏导：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+& \frac{\partial \log p\left(\mathcal{Y} \mid \mathcal{X}, \boldsymbol{\theta}, \sigma^{2}\right)}{\partial \sigma^{2}}=-\frac{N}{2 \sigma^{2}}+\frac{1}{2 \sigma^{4}} s=0 \\
+\Longleftrightarrow & \frac{N}{2 \sigma^{2}}=\frac{s}{2 \sigma^{4}}
+\end{aligned}</script></blockquote>
+<p>所以得到$\sigma^2$的极大似然估计的结果为：</p>
+<script type="math/tex; mode=display">\sigma^2=\frac{s}{N}=\frac{1}{N}\sum^N_{n-1}(y_n-\phi^\top(\boldsymbol x_n)\theta)^2</script><blockquote>
+<p>the maximum likelihood estimate of the noise variance is <strong>the empirical mean of the squared distances</strong> between the noise-free function values $\phi^\top(x_n)\theta$and the corresponding noisy observations $y_n$ at input locations $x_n$.</p>
+</blockquote>
+<h2 id="线性回归中的过拟合（Overfitting-in-Linear-Regression）"><a href="#线性回归中的过拟合（Overfitting-in-Linear-Regression）" class="headerlink" title="线性回归中的过拟合（Overfitting in Linear Regression）"></a>线性回归中的过拟合（Overfitting in Linear Regression）</h2><p>我们可以使用均方根误差（root mean square error，RMSE）来衡量一个模型的好坏：</p>
+<script type="math/tex; mode=display">\sqrt{\frac{1}{N}\|y-\Phi\boldsymbol\theta\|^2}=\sqrt{\frac{1}{N}\sum^N_{n=1}(y_n-\phi^\top(x_n)\boldsymbol\theta)^2}</script><p>噪声参数$\sigma^2$不是一个自由模型参数，所以没有直接加到上式，所以没有包含到上面，这样做的好处就是能够使得计算前后的量纲保持一致。<br>当多项式的次数小于训练样本数量的时候，可以得到一个唯一的极大似然估计值，当大于的时候，需要求解一个欠定方程组（有无穷多解的方程组），这样得到无穷多的估计值。<br>采用不同级别的多项式模型拟合10个数据的结果如下图：<br><img src="https://img-blog.csdnimg.cn/20210529085722190.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>各个模型的均方根误差：<br><img src="https://img-blog.csdnimg.cn/20210529085737340.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>注意一点，训练集的RMSE不会增加。</p>
+<h2 id="极大后验估计（Maximum-A-Posteriori-Estimation）"><a href="#极大后验估计（Maximum-A-Posteriori-Estimation）" class="headerlink" title="极大后验估计（Maximum A Posteriori Estimation）"></a>极大后验估计（Maximum A Posteriori Estimation）</h2><p>当出现过拟合的时候，参数的数值会变得很大，为了解决这个问题，我们可以使用先验分布$p(\theta)$。这个先验分布标明了参数值在什么范围内是合理的。例如一个高斯先验$p(\theta)=\mathcal N(0,1)$,这个信息中暗示了参数的范围应该在$[-2,2]$之间（$\mu\pm2\sigma$）.当数据集可用的时候，我们需要去找能够最大化后验分布$p(\theta|\mathcal X,\mathcal Y)$的参数值$\theta$,这个过程称为<strong>极大后验估计</strong>（Maximum a Posteriori Estimation,MAP）,后验分布可以利用贝叶斯公式求解：</p>
+<script type="math/tex; mode=display">p(\theta|\mathcal X,\mathcal Y)=\frac{p(\mathcal Y|\mathcal X, \theta)p(\theta)}{p(\mathcal Y|\mathcal X)}</script><blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210606102552583.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</blockquote>
+<p>要求出参数向量$\theta_{MAP}$,我们需要遵循与极大似然估计一致的方法，首先，先自然对数转换（log-transform）：</p>
+<script type="math/tex; mode=display">\log p(\theta|\mathcal X,\mathcal Y)=\log p(\mathcal Y|\mathcal X,\theta)+\log p(\theta)+\operatorname{const}</script><p>其中，$\operatorname {const}$中包含独立于$\theta$的项。可以看到，后验似然估计是参数先验（在输入数据之前的对参数的认知）和依赖于数据的似然之间的折中。<br>要求的参数向量，我们要：</p>
+<script type="math/tex; mode=display">\theta_{MAP}\in\arg \min_\theta\{-\log p(\mathcal Y|\mathcal X,\theta)-\log p(\theta)\}</script><p>将负对数后验对$\theta$进行求导：</p>
+<script type="math/tex; mode=display">
+-\frac{\mathrm{d} \log p(\boldsymbol{\theta} \mid \mathcal{X}, \mathcal{Y})}{\mathrm{d} \boldsymbol{\theta}}=-\frac{\mathrm{d} \log p(\mathcal{Y} \mid \mathcal{X}, \boldsymbol{\theta})}{\mathrm{d} \theta}-\frac{\mathrm{d} \log p(\boldsymbol{\theta})}{\mathrm{d} \theta}</script><blockquote>
+<p>第一项是之前提到的负自然对数似然的梯度：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{\mathrm{d} \mathcal{L}}{\mathrm{d} \theta} &=\frac{\mathrm{d}}{\mathrm{d} \theta}\left(\frac{1}{2 \sigma^{2}}(y-X \theta)^{\top}(y-X \theta)\right) \\
+&=\frac{1}{2 \sigma^{2}} \frac{\mathrm{d}}{\mathrm{d} \theta}\left(y^{\top} y-2 y^{\top} X \theta+\theta^{\top} \boldsymbol{X}^{\top} \boldsymbol{X} \theta\right) \\
+&=\frac{1}{\sigma^{2}}\left(-\boldsymbol{y}^{\top} \boldsymbol{X}+\boldsymbol{\theta}^{\top} \boldsymbol{X}^{\top} \boldsymbol{X}\right) \in \mathbb{R}^{1 \times D}
+\end{aligned}</script></blockquote>
+<p>利用参数的一个（共轭）高斯先验$p(\theta)=\mathcal N(0,b^2\boldsymbol I)$:</p>
+<script type="math/tex; mode=display">
+-\log p(\theta \mid \mathcal{X}, \mathcal{Y})=\frac{1}{2 \sigma^{2}}(y-\Phi \theta)^{\top}(y-\Phi \theta)+\frac{1}{2 b^{2}} \theta^{\top} \theta+\text { const }</script><blockquote>
+<p>这里有点疑问，利用了</p>
+<script type="math/tex; mode=display">p(y|\boldsymbol x,\theta)=\mathcal N(y|\phi^\top(x)\boldsymbol\theta,\sigma^2)\Longleftrightarrow y=\phi^\top(x)\boldsymbol\theta+\epsilon=\sum^{K-1}_{k=0}\theta_k\phi_k(x)+\epsilon</script><p>？？</p>
+</blockquote>
+<p>上式右边的第一个式子来源于自然对数似然，第二个式子来源于自然对数先验。所以自然对数先验对$\theta$的先验为：</p>
+<script type="math/tex; mode=display">-\frac{d\log p(\theta|\mathcal X,\mathcal Y)}{d\theta}=\frac{1}{\sigma^2}(\theta^\top\Phi^\top\Phi-y^\top\Phi)+\frac{1}{b^2}\theta^\top</script><p>将梯度设置为0：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+& \frac{1}{\sigma^{2}}\left(\theta^{\top} \Phi^{\top} \Phi-y^{\top} \Phi\right)+\frac{1}{b^{2}} \theta^{\top}=0^{\top} \\
+\Longleftrightarrow & \theta^{\top}\left(\frac{1}{\sigma^{2}} \Phi^{\top} \Phi+\frac{1}{b^{2}} I\right)-\frac{1}{\sigma^{2}} y^{\top} \Phi=0^{\top} \\
+\Longleftrightarrow & \theta^{\top}\left(\Phi^{\top} \Phi+\frac{\sigma^{2}}{b^{2}} I\right)=y^{\top} \Phi \\
+\Longleftrightarrow & \theta^{\top}=y^{\top} \Phi\left(\Phi^{\top} \Phi+\frac{\sigma^{2}}{b^{2}} I\right)^{-1}
+\end{aligned}</script><p>整理得：</p>
+<script type="math/tex; mode=display">\theta_{MAP}=(\Phi^\top\Phi+\frac{\sigma^2}{b^2}I)^{-1}\Phi^\top y</script><p>与极大似然估计的结果：$\theta_{ML}=(\Phi^\top\Phi)^{-1}\Phi^\top y$相比较，只是在逆当中多了一项$\frac{\sigma^2}{b^2}I$，这一项保证了$\Phi^\top\Phi+\frac{\sigma^2}{b^2}I$是一个对称严格正定的。也就是说这个矩阵是可逆的，而且是线性方程的唯一解。同时他也反应了<strong>正则项</strong>(regularizer)的影响的大小</p>
+<blockquote>
+<p>虽然先验能够让高次多项式变得更加光滑，但也是仅仅将过拟合的边界向后推移了，想要解决过拟合的问题需要其他的方法。<br><img src="https://img-blog.csdnimg.cn/20210529160218756.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="极大后验估计作为正则化"><a href="#极大后验估计作为正则化" class="headerlink" title="极大后验估计作为正则化"></a>极大后验估计作为正则化</h3><p>带正则项的最小二乘的损失函数为：</p>
+<script type="math/tex; mode=display">\|\boldsymbol y-\boldsymbol\Phi\boldsymbol\theta\|^2+\lambda\|\boldsymbol\theta\|_2^2</script><p>这里的范数采用的是$p$-范数,当$p$的值越小，得到的结果中$\theta=0$的个数就越多。当$p=1$时，被称为<strong>最小绝对收缩和选择算子</strong>（least absolute shrinkage and selection operator，LASSO）<br><img src="https://img-blog.csdnimg.cn/20210608202819264.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</blockquote>
+<p>上式中的正则项可以理解为极大后验估计中的<strong>高斯自然对数先验</strong>（negative log-Gaussian prior），具体来说，对于一个正态分布$p(\boldsymbol\theta)=\mathcal N(\boldsymbol0,b^2\boldsymbol I)$的高斯自然对数先验为：</p>
+<script type="math/tex; mode=display">-\log p(\boldsymbol\theta)=\frac{1}{2b^2}\|\boldsymbol \theta\|^2_2+\operatorname{const}</script><p>这里的正则项为$\frac{1}{2b^2}$与极大后验估计的先验一致。这样看来，正则化后的最小二乘损失函数包含的项与负自然对数似然和负自然对数先验有紧密关系，所以最小化最小二乘损失函数的过程与极大后验估计一致.<br>最小化带正则项的最小二乘损失函数（regularized least-squares loss function）：</p>
+<script type="math/tex; mode=display">\boldsymbol\theta_{RLS}=(\boldsymbol\Phi^\top\boldsymbol\Phi+\lambda \boldsymbol I)^{-1}\boldsymbol\Phi^\top \boldsymbol y</script><p>这个与极大后验估计一致，这里的正则项为$\lambda=\frac{\sigma^2}{b^2}$,其中，$\sigma^2$是噪声方差，$b^2$为（各向同性）高斯先验方差$p(\boldsymbol\theta)=\mathcal N(\boldsymbol0,b^2\boldsymbol I)$<br>至此，我们讨论的都是点估计得到$\theta^*$，以对目标函数进行优化。接下来我们讨论使用贝叶斯推断，通过获得所有合理的参数的均值得到优化结果。</p>
+<h1 id="贝叶斯线性回归（Bayesian-Linear-Regression）"><a href="#贝叶斯线性回归（Bayesian-Linear-Regression）" class="headerlink" title="贝叶斯线性回归（Bayesian Linear Regression）"></a>贝叶斯线性回归（Bayesian Linear Regression）</h1><p>先前讨论的是采用极大似然估计和极大后验估计来估计模型的参数，极大似然估计容易出现过拟合的现象，尤其是在训练集比较小的时候。极大后验估计使用一个概率先验来解决这个问题。而贝叶斯回归不求出单一的参数，而是选择求所有合理的参数的均值。</p>
+<h2 id="模型（Model）"><a href="#模型（Model）" class="headerlink" title="模型（Model）"></a>模型（Model）</h2><script type="math/tex; mode=display">\begin{aligned}&prior \quad p(\boldsymbol\theta)=\mathcal N(\boldsymbol m_0,\boldsymbol S_0)\\ & likelihood\quad p(y|\boldsymbol x,\boldsymbol\theta)=\mathcal (y|\phi^\top(x)\boldsymbol\theta,\sigma)\end{aligned}</script><p>对应的图模型：</p>
+<p><div align="center"></div></p>
+<image src="https://img-blog.csdnimg.cn/20210531102756290.png">
+
+<p>已观测变量与未观测变量的联合概率分布为：</p>
+<script type="math/tex; mode=display">p(y,\boldsymbol\theta|x)=p(y|\theta,x)p(\boldsymbol\theta)</script><blockquote>
+<p>推导过程</p>
+<script type="math/tex; mode=display">p(y,\theta|x)=\frac{p(y|\theta,x)p(\theta ,x)}{p(x)}=p(y|\theta,x)\cdot p(\theta|x)</script><p>所以x与$\theta$是相互独立的？应该是$\theta$与验证数据无关</p>
+</blockquote>
+<h2 id="预测先验（Prior-Predictions）"><a href="#预测先验（Prior-Predictions）" class="headerlink" title="预测先验（Prior Predictions）"></a>预测先验（Prior Predictions）</h2><p>预测的最终目的不是获得模型的参数，而是获得预测值，在贝叶斯回归中，预测值是所有合理参数的预测值的均值：</p>
+<script type="math/tex; mode=display">p(y_*|x_*)=\int p(y_*|\boldsymbol x_*,\boldsymbol\theta)p(\boldsymbol\theta)d\boldsymbol\theta=\mathbb E_\theta[p(y_*|\boldsymbol x_*,\boldsymbol\theta)]</script><blockquote>
+<p>连续概率分布的均值，样品值乘以样品出现的概率，将他们之和加起来，得到均值</p>
+<p>我们选取一个$\theta$的（共轭）高斯先验作为模型，于是可以知道预测结果也是高斯分布，对于一个先验分布$p(\boldsymbol\theta)=\mathcal N(\boldsymbol m_0,\boldsymbol S_0)$,对应的预测结果的分布为：</p>
+<script type="math/tex; mode=display">p(y_*|\boldsymbol x_*)=\mathcal N(\boldsymbol\phi^\top(\boldsymbol x_*)\boldsymbol m_0,\phi^\top(\boldsymbol x_*)\boldsymbol S_0\phi(\boldsymbol x_*)+\sigma^2)</script><p>贝叶斯回归模型为：</p>
+<script type="math/tex; mode=display">p(\theta) =\mathcal N(m_0,S_0)\\ p(y|x,\theta)=\mathcal N(y|\phi^\top\theta,\sigma^2)</script><p>x与y的对应关系为：$y^<em>=\phi^\top(x^</em>)\theta$<br>所以对应y的均值为：$\phi^\top m<em>0$<br>由$\mathbb V_Y[y]=\mathbb V_X[Ax+b]=\mathbb V_X[Ax]=A\mathbb V_X A^\top=A\Sigma A^\top$:<br>y的对应的方差为：$\phi^\top(x</em><em>)S<em>0\phi(x</em></em>)$,加上噪声项即为上式</p>
+</blockquote>
+<p>上式中的$\sigma^2$是由于测量误差导致的不确定分布。<br>这里预测值是高斯分布是因为高斯共轭和边际化的性质。由于高斯噪音是相互独立的，所以：</p>
+<script type="math/tex; mode=display">\mathbb V[y_*]=\mathbb V_\boldsymbol\theta[\phi^\top(x_*)\boldsymbol\theta]+\mathbb V_\epsilon[\epsilon]</script><p>如果我们考虑无噪音函数：$f(\boldsymbol x<em>*)=\phi^\top(x</em>*)\boldsymbol\theta$</p>
+<script type="math/tex; mode=display">p(f(x_*))=\mathcal N(\phi^\top(x_*)m_0,\phi^\top(x_*)S_0\phi(x_*))</script><p>这个式子与原先式子不同之处在于少了噪音项$\sigma^2$<br><strong>函数分布</strong>（Distribution over Functions）：<br>我们可以用一系列的参数$\theta_i$表示参数分布$p(\boldsymbol\theta)$,而每一个参数对应一个函数$f(\cdot)=\boldsymbol\theta^\top_i\phi(\cdot)$于是可以得到对应函数的分布$p(f(\cdot))$</p>
+<blockquote>
+<p>p305 没弄清楚<br><img src="https://img-blog.csdnimg.cn/2021053117070927.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>置信区间和置信边界</p>
+</blockquote>
+<h2 id="后验分布（Posterior-Distribution）"><a href="#后验分布（Posterior-Distribution）" class="headerlink" title="后验分布（Posterior Distribution）"></a>后验分布（Posterior Distribution）</h2><p>利用贝叶斯公式可以计算参数的后验分布：</p>
+<script type="math/tex; mode=display">p(\theta|\mathcal X,\mathcal Y)=\frac{p(\mathcal Y|\mathcal X, \theta)p(\theta)}{p(\mathcal Y|\mathcal X)}</script><p>其中$\mathcal X$是训练的输入值，$\mathcal Y$是训练目标。<br>其中的边际似然（marginal likelihood/evidence）与参数无关：</p>
+<script type="math/tex; mode=display">p(\mathcal Y|\mathcal X)=\int p(\mathcal Y|\mathcal X, \theta)p(\theta)d\theta=\mathbb E_\theta[p(\mathcal Y|\mathcal X,\theta)]</script><p>边际似然可以被看成是所有合理参数下预测值的均值。<br><strong>参数后验</strong>：</p>
+<script type="math/tex; mode=display">\begin{aligned}p(\boldsymbol\theta|\mathcal X, \mathcal Y) & =\mathcal N(\boldsymbol\theta |\boldsymbol m_N,\boldsymbol S_N)\\ \boldsymbol S_N &=(\boldsymbol S_0^{-1}{+\sigma^{-2}}\Phi^\top\Phi)^{-1}\\\boldsymbol m_N&=\boldsymbol S_N(\boldsymbol S_0^{-1}\boldsymbol m_0+\sigma^{-2}\Phi^\top \boldsymbol y)\end{aligned}</script><p>其中的N代表的是训练集的大小。<br><strong>证明</strong>：</p>
+<blockquote>
+<p>证明思路类似是用两种方式将参数后验表示出来，然后将对应部分的进行对比，得到想要的参数。</p>
+</blockquote>
+<p>由贝叶斯公式可以得知，后验概率分布与似然概率分布和先验概率分布成比例</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}
+\text { Posterior } & p(\boldsymbol{\theta} \mid \mathcal{X}, \mathcal{Y})=\frac{p(\mathcal{Y} \mid \mathcal{X}, \boldsymbol{\theta}) p(\boldsymbol{\theta})}{p(\mathcal{Y} \mid \mathcal{X})} \\
+\text { Likelihood } & p(\mathcal{Y} \mid \mathcal{X}, \boldsymbol{\theta})=\mathcal{N}\left(\boldsymbol{y} \mid \boldsymbol{\Phi} \boldsymbol{\theta}, \sigma^{2} \boldsymbol{I}\right) \\
+\text { Prior } & p(\boldsymbol{\theta})=\mathcal{N}\left(\boldsymbol{\theta} \mid \boldsymbol{m}_{0}, \boldsymbol{S}_{0}\right)
+\end{array}</script><p>现在考虑自然对数先验与自然对数似然之和：</p>
+<script type="math/tex; mode=display">\begin{aligned}&\log \mathcal N(y|\Phi\theta,\sigma^2 I)+\log \mathcal N(\theta|m_0,S_0)\\&=-\frac{1}{2}(\sigma^{-2}(y-\Phi\theta)^\top(y-\Phi\theta)+(\theta-m_0)^\top S_0^{-1}(\theta-m_0))+\operatorname{const}\end{aligned}</script><p>其中的const包含一些独立于$\theta$的项。<br>将上式进行展开：（将式子中的二次项一次项进行整合）</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&-\frac{1}{2}\left(\sigma^{-2} \boldsymbol{y}^{\top} \boldsymbol{y}-2 \sigma^{-2} \boldsymbol{y}^{\top} \Phi \theta+\boldsymbol{\theta}^{\top} \sigma^{-2} \boldsymbol{\Phi}^{\top} \boldsymbol{\Phi} \boldsymbol{\theta}+\boldsymbol{\theta}^{\top} \boldsymbol{S}_{0}^{-1} \boldsymbol{\theta}\right.\\
+&\left.-2 m_{0}^{\top} S_{0}^{-1} \theta+\boldsymbol{m}_{0}^{\top} \boldsymbol{S}_{0}^{-1} \boldsymbol{m}_{0}\right) \\
+=&-\frac{1}{2}\left(\boldsymbol{\theta}^{\top}\left(\sigma^{-2} \boldsymbol{\Phi}^{\top} \boldsymbol{\Phi}+\boldsymbol{S}_{0}^{-1}\right) \boldsymbol{\theta}-2\left(\sigma^{-2} \Phi^{\top} y+S_{0}^{-1} m_{0}\right)^{\top} \theta\right)+\mathrm{const}
+\end{aligned}</script><p>我们可以发现上式与$\theta$呈二次关系。</p>
+<blockquote>
+<p>The fact that the unnormalized log-posterior distribution is a (negative) quadratic form implies that the posterior is Gaussian</p>
+</blockquote>
+<script type="math/tex; mode=display">p(\theta|\mathcal X,\mathcal Y)=\exp(\log p(\theta|\mathcal X,\mathcal Y))\propto \exp(\log p(\mathcal Y|\mathcal X,\theta)+\log p(\theta))\\ \propto \exp(-\frac{1}{2}(\theta^\top(\sigma^{-2}\Phi^\top\Phi+S_0^{-1})\theta-2(\sigma^{-2}\Phi^\top y+S_0^{-1}m_0)^\top \theta))</script><p>最后需要从上式中找到均值和方差矩阵($\mathcal N(\theta|m_N,S_N)$)：</p>
+<script type="math/tex; mode=display">\log \mathcal{N}\left(\boldsymbol{\theta} \mid \boldsymbol{m}_{N}, \boldsymbol{S}_{N}\right)=-\frac{1}{2}\left(\boldsymbol{\theta}-\boldsymbol{m}_{N}\right)^{\top} \boldsymbol{S}_{N}^{-1}\left(\boldsymbol{\theta}-\boldsymbol{m}_{N}\right)+ const\\=-\frac{1}{2}\left(\theta^{\top} S_{N}^{-1} \theta-2 m_{N}^{\top} S_{N}^{-1} \theta+\boldsymbol{m}_{N}^{\top} \boldsymbol{S}_{N}^{-1} \boldsymbol{m}_{N}\right)</script><p>通过比较上面二式可以得到：</p>
+<script type="math/tex; mode=display">
+\begin{array}{c}
+S_{N}^{-1}=\Phi^{\top} \sigma^{-2} \boldsymbol{I} \Phi+S_{0}^{-1} \\
+\Longleftrightarrow \boldsymbol{S}_{N}=\left(\sigma^{-2} \boldsymbol{\Phi}^{\top} \boldsymbol{\Phi}+\boldsymbol{S}_{0}^{-1}\right)^{-1} \\ \\
+\boldsymbol{m}_{N}^{\top} \boldsymbol{S}_{N}^{-1}=\left(\sigma^{-2} \boldsymbol{\Phi}^{\top} \boldsymbol{y}+\boldsymbol{S}_{0}^{-1} \boldsymbol{m}_{0}\right)^{\top} \\
+\Longleftrightarrow \boldsymbol{m}_{N}=\boldsymbol{S}_{N}\left(\sigma^{-2} \boldsymbol{\Phi}^{\top} \boldsymbol{y}+\boldsymbol{S}_{0}^{-1} \boldsymbol{m}_{0}\right)
+\end{array}</script><blockquote>
+<p><strong>完全平方的一般方法</strong>（General Approach to Completing the Squares）<br>对于一个等式($A$是一个堆成正定矩阵)：</p>
+<script type="math/tex; mode=display">x^\top A^\top x-2a^\top x+const_1</script><p>可以得到：</p>
+<script type="math/tex; mode=display">(x-\mu)^\top \Sigma(x-\mu)+const_2</script><p>其中，$\Sigma := A;\mu := \Sigma^{-1}a;const_2 = const_1-\mu^\top\Sigma\mu$<br><strong>这部分需要补充</strong></p>
+</blockquote>
+<h2 id="后验预测（Posterior-Predictions）"><a href="#后验预测（Posterior-Predictions）" class="headerlink" title="后验预测（Posterior Predictions）"></a>后验预测（Posterior Predictions）</h2><script type="math/tex; mode=display">
+\begin{aligned}
+p\left(y_{*} \mid \mathcal{X}, \mathcal{Y}, \boldsymbol{x}_{*}\right) &=\int p\left(y_{*} \mid \boldsymbol{x}_{*}, \boldsymbol{\theta}\right) p(\boldsymbol{\theta} \mid \mathcal{X}, \mathcal{Y}) \mathrm{d} \boldsymbol{\theta} \\
+&=\int \mathcal{N}\left(y_{*} \mid \phi^{\top}\left(\boldsymbol{x}_{*}\right) \boldsymbol{\theta}, \sigma^{2}\right) \mathcal{N}\left(\boldsymbol{\theta} \mid \boldsymbol{m}_{N}, \boldsymbol{S}_{N}\right) \mathrm{d} \boldsymbol{\theta} \\
+&=\mathcal{N}\left(y_{*} \mid \phi^{\top}\left(\boldsymbol{x}_{*}\right) \boldsymbol{m}_{N}, \boldsymbol{\phi}^{\top}\left(\boldsymbol{x}_{*}\right) \boldsymbol{S}_{N} \phi\left(\boldsymbol{x}_{*}\right)+\sigma^{2}\right)
+\end{aligned}</script><p>右式中的第一个分布式利用训练得到的参数和输入值计算之后得到的结果的分布（$y^<em>=\phi(x^</em>)\theta$）,第二个分布是用训练集训练得到的参数$\theta$,$\phi^\top(x<em>*)S_N\phi(x</em>*)$表示关于后验的不确定性.<br>上式可以等价地写成</p>
+<script type="math/tex; mode=display">\mathbb E_{\theta|\mathcal X,\mathcal Y}[p(y_*|x_*,\theta)]</script><blockquote>
+<p><strong>分布方程</strong>（Distribution over Functions）<br>当我们使用积分将参数$\theta$消掉时，我们得到了一个分布函数：如果我们从$\theta<em>i \sim p(\theta|\mathcal X, \mathcal Y)$中取样，我们可以得到方程$\theta^\top_i\phi(\cdot)$。均值方程为所有预测值的期望$\mathbb E</em>\theta[f(\cdot)|\theta,\mathcal X,\mathcal Y]=m^\top_N\phi(\cdot)$,函数的方差为$\phi^\top(\cdot) S_N\phi(\cdot)$<br>从$p(\theta)=\mathcal N(0,\frac14I)$中对参数进行抽样,表示为第三张图：<br><img src="https://img-blog.csdnimg.cn/20210610124325373.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>无噪音函数值的均值和方差</strong>（Mean and Variance of Noise-Free Function Values）<br>在很多情况下，我们并不关心(含噪音的)预测值的分布$p(y<em>*|\mathcal X, \mathcal Y,x</em><em>)$。我们更关注于无噪音的函数值$f(x_</em>)=\phi^\top(x_*)\theta$,可以得到该函数的均值和方差：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mathbb{E}\left[f\left(\boldsymbol{x}_{*}\right) \mid \mathcal{X}, \mathcal{Y}\right]=& \mathbb{E}_{\boldsymbol{\theta}}\left[\phi^{\top}\left(\boldsymbol{x}_{*}\right) \boldsymbol{\theta} \mid \mathcal{X}, \mathcal{Y}\right]=\phi^{\top}\left(\boldsymbol{x}_{*}\right) \mathbb{E}_{\boldsymbol{\theta}}[\boldsymbol{\theta} \mid \mathcal{X}, \mathcal{Y}] \\
+&=\phi^{\top}\left(\boldsymbol{x}_{*}\right) \boldsymbol{m}_{N}=\boldsymbol{m}_{N}^{\top} \phi\left(\boldsymbol{x}_{*}\right), \\
+\mathbb{V}_{\boldsymbol{\theta}}\left[f\left(\boldsymbol{x}_{*}\right) \mid \mathcal{X}, \mathcal{Y}\right] &=\mathbb{V}_{\boldsymbol{\theta}}\left[\phi^{\top}\left(\boldsymbol{x}_{*}\right) \boldsymbol{\theta} \mid \mathcal{X}, \mathcal{Y}\right] \\
+&=\phi^{\top}\left(\boldsymbol{x}_{*}\right) \mathbb{V}_{\boldsymbol{\theta}}[\boldsymbol{\theta} \mid \mathcal{X}, \mathcal{Y}] \phi\left(\boldsymbol{x}_{*}\right) \\
+&=\phi^{\top}\left(\boldsymbol{x}_{*}\right) \boldsymbol{S}_{N} \phi\left(\boldsymbol{x}_{*}\right)
+\end{aligned}</script><p>我们可以发现均值与含噪音观测的均值一致，因为噪音的均值为0，因为噪音的方差为$\sigma^2$,所以当预测含噪音的函数值时，需要加上，无噪音的时候则不需要。<br><strong>还是没能很好地理解噪音这个概念</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210610130744637.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>上图是由参数后验得到的后验分布。由上图可知，当多项式为低阶的时候，参数的分布不会很分散。而对于高阶的贝叶斯回归模型，后验概率的不确定性很大，这个信息对于<strong>决策系统</strong>（decision-making system）很重要。</p>
+<h2 id="边际似然的计算（Computing-the-Marginal-Likelihood）"><a href="#边际似然的计算（Computing-the-Marginal-Likelihood）" class="headerlink" title="边际似然的计算（Computing the Marginal Likelihood）"></a>边际似然的计算（Computing the Marginal Likelihood）</h2><p>在本节中，我们介绍参数为共轭高斯先验的贝叶斯线性回归的边际似然的计算。<br>考虑以下参数形成的过程：</p>
+<script type="math/tex; mode=display">\begin{aligned}\theta&\sim \mathcal N(m_0,S_0)\\y_n|x_n, \theta&\sim\mathcal N(x_n^\top\theta,\sigma^2),\quad n=1,\dots,N\end{aligned}</script><p>则对应的边际似然为：</p>
+<script type="math/tex; mode=display">\begin{aligned} p(\mathcal Y|\mathcal X)&=\int p(\mathcal Y|\mathcal X, \theta)p(\theta)d\theta\\&=\int \mathcal N(y|X\theta,\sigma^2I)\mathcal N(\theta|m_0,S_0)d\theta\end{aligned}</script><p>上面这个式子可以理解为参数先验下的似然的期望：$\mathbb E_\theta[p(\mathcal Y|\mathcal X,\theta)]$<br>计算边际似然需要两个步骤，首先先确定边际似然是高斯分布，然后计算出这个高斯分布的均值和方差。<br>由高斯分布的性质，两个高斯分布的乘积仍旧是高斯分布。<br>下面开始计算这个高斯分布的均值和方差：</p>
+<script type="math/tex; mode=display">\mathbb E[\mathcal Y|\mathcal X]=\mathbb E_{\theta,\epsilon}[X\theta+\epsilon]=X\mathbb E_\theta[\theta]=Xm_0,\quad \epsilon \sim \mathcal N(0,\sigma^2I)</script><p>方差为：</p>
+<script type="math/tex; mode=display">\begin{aligned}\operatorname{Cov}[\mathcal Y|\mathcal X]&=\operatorname{Cov}_{\theta,\epsilon}[X\theta+\epsilon]=\operatorname{Cov}[X\theta]+\sigma^2I\\ &=X\operatorname{Cov}_\theta[\theta]X^\top+\sigma^2I=XS_0X^\top+\sigma^2I\end{aligned}</script><p>所以，边际似然为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+p(\mathcal{Y} \mid \mathcal{X})=&(2 \pi)^{-\frac{N}{2}} \operatorname{det}\left(\boldsymbol{X} \boldsymbol{S}_{0} \boldsymbol{X}^{\top}+\sigma^{2} \boldsymbol{I}\right)^{-\frac{1}{2}} \\
+& \cdot \exp \left(-\frac{1}{2}\left(\boldsymbol{y}-\boldsymbol{X} \boldsymbol{m}_{0}\right)^{\top}\left(\boldsymbol{X} \boldsymbol{S}_{0} \boldsymbol{X}^{\top}+\sigma^{2} \boldsymbol{I}\right)^{-1}\left(\boldsymbol{y}-\boldsymbol{X} \boldsymbol{m}_{0}\right)\right)
+\\&=\mathcal N(y|Xm_0,XS_0X^\top+\sigma^2I)
+\end{aligned}</script><blockquote>
+<p>与之前的内容进行联系，为什么形式是这样的？</p>
+</blockquote>
+<h2 id="用正交投影解释极大似然估计（Maximum-Likelihood-as-Orthogonal-Projection）"><a href="#用正交投影解释极大似然估计（Maximum-Likelihood-as-Orthogonal-Projection）" class="headerlink" title="用正交投影解释极大似然估计（Maximum Likelihood as Orthogonal Projection）"></a>用正交投影解释极大似然估计（Maximum Likelihood as Orthogonal Projection）</h2><p>考虑一个简单的线性规划模型：</p>
+<script type="math/tex; mode=display">y=x\theta+\epsilon,\quad \epsilon \sim \mathcal N(0,\sigma^2)</script><p>由原先的提到的极大似然估计，得到斜率参数：</p>
+<script type="math/tex; mode=display">\theta_{ML}=(X^\top X)^{-1}X^\top y=\frac{X^\top y}{X^\top X}\in \mathbb R</script><p>其中，$X\in \mathbb R^N$和$y\in \mathbb R^N$为训练集中的元素(都是向量，所以$X^\top X$为标量，这也是将这一项放到分母的原因)。<br>所以对应的目标为：</p>
+<script type="math/tex; mode=display">X\theta_{ML}=X\frac{X^\top y}{X^\top X}=\frac{XX^\top}{X^\top X}y</script><p>所以可以理解为，我们的目标是找到$y=X\theta$的解。由原先的线性代数和解析几何，可以将上式理解为<u>y在X张成的一维子空间的正交投影</u>，其中$\frac{XX^\top}{X^\top X}$为投影矩阵,$\theta<em>{ML}$为y在一维子空间中的正交投影的坐标，$X\theta</em>{ML}$为$y$在这个子空间中的正交投影。<br>所以，极大似然估计的解得到的是在$X$子空间中找到一个与观测值$y$最接近的向量。这里的距离表示$y_n$和 $x_n\theta$的最短（平方）距离<br><img src="https://img-blog.csdnimg.cn/20210615071428677.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>在广义的线性规划中：</p>
+<script type="math/tex; mode=display">y=\phi^\top(x)\theta+\epsilon,\quad \epsilon \sim \mathcal N(0,\sigma^2)</script><p>其中,$\phi(x)\in \mathbb R^K$,利用极大似然估计得到参数结果：</p>
+<script type="math/tex; mode=display">\boldsymbol y\approx \Phi\theta_{ML}\\\theta_{ML}=(\Phi^\top\Phi)^{-1}\Phi^\top \boldsymbol y</script><p>上式实际上就是一个往特征矩阵$\Phi$张成的K维子空间的投影。若将特征矩阵$\Phi$构造成规范正交，这时候$\Phi$就形成了一个规范正交基。因为$\Phi^\top\Phi=I$所以，对应的投影为：</p>
+<script type="math/tex; mode=display">\Phi(\Phi^\top\Phi)^{-1}\Phi^\top \boldsymbol y = \Phi\Phi^\top \boldsymbol y=\begin{pmatrix} \sum\limits^K_{k=1}\phi_k\phi_k^\top\end{pmatrix}\boldsymbol y</script><p>所以极大似然的投影这时候就是y向基向量$\phi_k$的投影的和。</p>
+<blockquote>
+<p>这部分需要深入理解一下，为什么？<br>the coupling between different features has disappeared due to the orthogonality of the basis.</p>
+<p><strong>Further Reading:</strong><br>1.In deffenrent cases we may choose deffenrent model functions which corresponding to the likelihood function<br>2.<strong>generalized linear models</strong>:there is a a smooth and invertible function $\sigma(\cdot)$(which could be nonlinear), so that $y = \sigma(f(x))$,where $f(x)=\theta^\top \phi(x)$ which also $f(x)=\sigma\circ f$. The first one is activate function, and the later one is linear function model. This can form a neural network model.<br>$y=\sigma(Ax+b)$,where A is <strong>weight matrix</strong>, b is <strong>bias vector</strong> so:</p>
+<script type="math/tex; mode=display">\begin{aligned} x_{k+1}&=f_k(x_k)\\f_k(x_k)&=\sigma_k(A_kx_k+b_k)\end{aligned}</script><p>This is a K-layer deep neural network($f_{K-1}\circ\cdots\circ f_0$)</p>
+</blockquote>
+</image>  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://example.com/2021/06/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92Linear-Regression/" data-title="机器学习中的数学：线性回归Linear Regression | Hexo" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2021/07/02/MML-ch-10-主成分分析降维（Dimensionality-Reduction-with-Principal-Component-Analysis）/" title="MML ch 10 主成分分析降维（Dimensionality Reduction with Principal Component Analysis）">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  MML ch 10 主成分分析降维（Dimensionality Reduction with Principal Component Analysis）</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2021/05/26/机器学习中的数学-When-Models-Meet-Data/"  title="机器学习中的数学: When Models Meet Data">
+ <strong>NEXT:</strong><br/> 
+ <span>机器学习中的数学: When Models Meet Data
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0%EF%BC%88Problem-Formulation%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">问题描述（Problem Formulation）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1%EF%BC%88Parameter-Estimation%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">参数估计（Parameter Estimation）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%EF%BC%88Maximum-Likelihood-Estimation%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">极大似然估计（Maximum Likelihood Estimation）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E7%89%B9%E5%BE%81%E7%9A%84%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%EF%BC%88Maximum-Likelihood-Estimation-with-Features%EF%BC%89"><span class="toc-number">2.1.1.</span> <span class="toc-text">基于特征的极大似然估计（Maximum Likelihood Estimation with Features）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%99%AA%E5%A3%B0%E6%96%B9%E5%B7%AE%EF%BC%88Estimating-the-Noise-Variance%EF%BC%89"><span class="toc-number">2.1.2.</span> <span class="toc-text">噪声方差（Estimating the Noise Variance）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E4%B8%AD%E7%9A%84%E8%BF%87%E6%8B%9F%E5%90%88%EF%BC%88Overfitting-in-Linear-Regression%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">线性回归中的过拟合（Overfitting in Linear Regression）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%81%E5%A4%A7%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1%EF%BC%88Maximum-A-Posteriori-Estimation%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">极大后验估计（Maximum A Posteriori Estimation）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%A4%A7%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1%E4%BD%9C%E4%B8%BA%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-number">2.3.1.</span> <span class="toc-text">极大后验估计作为正则化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%EF%BC%88Bayesian-Linear-Regression%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">贝叶斯线性回归（Bayesian Linear Regression）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%EF%BC%88Model%EF%BC%89"><span class="toc-number">3.1.</span> <span class="toc-text">模型（Model）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%84%E6%B5%8B%E5%85%88%E9%AA%8C%EF%BC%88Prior-Predictions%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">预测先验（Prior Predictions）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E9%AA%8C%E5%88%86%E5%B8%83%EF%BC%88Posterior-Distribution%EF%BC%89"><span class="toc-number">3.3.</span> <span class="toc-text">后验分布（Posterior Distribution）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E9%AA%8C%E9%A2%84%E6%B5%8B%EF%BC%88Posterior-Predictions%EF%BC%89"><span class="toc-number">3.4.</span> <span class="toc-text">后验预测（Posterior Predictions）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%B9%E9%99%85%E4%BC%BC%E7%84%B6%E7%9A%84%E8%AE%A1%E7%AE%97%EF%BC%88Computing-the-Marginal-Likelihood%EF%BC%89"><span class="toc-number">3.5.</span> <span class="toc-text">边际似然的计算（Computing the Marginal Likelihood）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%AD%A3%E4%BA%A4%E6%8A%95%E5%BD%B1%E8%A7%A3%E9%87%8A%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%EF%BC%88Maximum-Likelihood-as-Orthogonal-Projection%EF%BC%89"><span class="toc-number">3.6.</span> <span class="toc-text">用正交投影解释极大似然估计（Maximum Likelihood as Orthogonal Projection）</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C-primer/" title="C++ primer">C++ primer<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DB/" title="DB">DB<sup>1</sup></a></li>
+		
+			<li><a href="/tags/OS/" title="OS">OS<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Projects/" title="Projects">Projects<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bugs/" title="bugs">bugs<sup>1</sup></a></li>
+		
+			<li><a href="/tags/computer-network/" title="computer network">computer network<sup>2</sup></a></li>
+		
+			<li><a href="/tags/侯捷C/" title="侯捷C++">侯捷C++<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2023 
+		
+		<a href="http://example.com" target="_blank" title="John Doe">John Doe</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

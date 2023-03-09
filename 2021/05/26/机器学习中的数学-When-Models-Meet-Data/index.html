@@ -1,0 +1,403 @@
+
+ <!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>机器学习中的数学: When Models Meet Data | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="Data, Models, and LearningThe title contains three major components of a machine learning system.
+Data as VectorsFirst, we need to make information as">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Hexo" title="Hexo"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Hexo">Hexo</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:example.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2021/05/26/机器学习中的数学-When-Models-Meet-Data/" title="机器学习中的数学: When Models Meet Data" itemprop="url">机器学习中的数学: When Models Meet Data</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://example.com" title="John Doe">John Doe</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2021-05-26T02:51:34.000Z" itemprop="datePublished">2021-05-26</time>
+    Updated:<time datetime="2023-03-09T10:48:23.791Z" itemprop="dateModified">2023-03-09</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Data-Models-and-Learning"><span class="toc-number">1.</span> <span class="toc-text">Data, Models, and Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-as-Vectors"><span class="toc-number">1.1.</span> <span class="toc-text">Data as Vectors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Models-as-Functions"><span class="toc-number">1.2.</span> <span class="toc-text">Models as Functions</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%8F%E9%AA%8C%E9%A3%8E%E9%99%A9%E6%9C%80%E5%B0%8F%E5%8C%96%EF%BC%88Empirical-Risk-Minimization%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">经验风险最小化（Empirical Risk Minimization）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%81%87%E8%AE%BE%E5%87%BD%E6%95%B0%E7%9A%84%E7%A7%8D%E7%B1%BB%EF%BC%88Hypothesis-Class-of-Functions%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">假设函数的种类（Hypothesis Class of Functions）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0-Loss-Function-for-Training"><span class="toc-number">2.2.</span> <span class="toc-text">代价函数(Loss Function for Training)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%E5%87%8F%E5%B0%8F%E8%BF%87%E6%8B%9F%E5%90%88-Regularization-to-Reduce-Overfitting"><span class="toc-number">2.3.</span> <span class="toc-text">正则化减小过拟合(Regularization to Reduce Overfitting)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%E8%AF%84%E4%BC%B0%E6%B3%9B%E5%8C%96%E6%80%A7%E8%83%BD-Cross-Validation-to-Assess-the-Generalization-Performance"><span class="toc-number">2.4.</span> <span class="toc-text">用交叉验证评估泛化性能(Cross-Validation to Assess the Generalization Performance)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1%EF%BC%88Parameter-Estimation%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">参数估计（Parameter Estimation）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%EF%BC%88Maximum-Likelihood-Estimation%EF%BC%89"><span class="toc-number">3.1.</span> <span class="toc-text">最大似然估计（Maximum Likelihood Estimation）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1%EF%BC%88Maximum-A-Posteriori-Estimation%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">最大后验估计（Maximum A Posteriori Estimation）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E6%8B%9F%E5%90%88%EF%BC%88Model-Fitting%EF%BC%89"><span class="toc-number">3.3.</span> <span class="toc-text">模型拟合（Model Fitting）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%EF%BC%88Bayesian-Inference%EF%BC%89"><span class="toc-number">3.4.</span> <span class="toc-text">贝叶斯推断（Bayesian Inference）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BD%9C%E5%8F%98%E9%87%8F%E6%A8%A1%E5%9E%8B%EF%BC%88Latent-Variable-Models%EF%BC%89"><span class="toc-number">3.5.</span> <span class="toc-text">潜变量模型（Latent-Variable Models）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%89%E5%90%91%E5%9B%BE%E6%A8%A1%E5%9E%8B%EF%BC%88Directed-Graphical-Models-Bayesian-networks%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">有向图模型（Directed Graphical Models&#x2F;Bayesian networks）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E8%AF%AD%E4%B9%89%EF%BC%88Graph-Semantics%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">图的语义（Graph Semantics）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%92%8Cd-%E5%88%86%E7%A6%BB%EF%BC%88%E6%9C%89%E5%90%91%E5%88%86%E7%A6%BB%EF%BC%89%EF%BC%88Conditional-Independence-and-d-Separation%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">条件概率分布和d-分离（有向分离）（Conditional Independence and d-Separation）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9%EF%BC%88Model-Selection%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">模型选择（Model Selection）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B5%8C%E5%A5%97%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%EF%BC%88Nested-Cross-Validation%EF%BC%89"><span class="toc-number">5.1.</span> <span class="toc-text">嵌套交叉验证（Nested Cross-Validation）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9%EF%BC%88Bayesian-Model-Selection%EF%BC%89"><span class="toc-number">5.2.</span> <span class="toc-text">贝叶斯模型选择（Bayesian Model Selection）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E6%AF%94%E8%BE%83%E4%B8%AD%E7%9A%84%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%9B%A0%E5%AD%90%EF%BC%88Bayes-Factors-for-Model-Comparison%EF%BC%89"><span class="toc-number">5.3.</span> <span class="toc-text">模型比较中的贝叶斯因子（Bayes Factors for Model Comparison）</span></a></li></ol></li></ol>
+		</div>
+		
+		<h1 id="Data-Models-and-Learning"><a href="#Data-Models-and-Learning" class="headerlink" title="Data, Models, and Learning"></a>Data, Models, and Learning</h1><p>The title contains three major components of a machine learning system.</p>
+<h2 id="Data-as-Vectors"><a href="#Data-as-Vectors" class="headerlink" title="Data as Vectors"></a>Data as Vectors</h2><p>First, we need to make information as number, so as to we can use it as training data.</p>
+<h2 id="Models-as-Functions"><a href="#Models-as-Functions" class="headerlink" title="Models as Functions"></a>Models as Functions</h2><p>There are two main school relative to the machine learning, function and probabilistic model. The former one gives a specific value, the later one would give the distribution of the result.<br><img src="https://img-blog.csdnimg.cn/20210517101400415.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>And in order to value a model, we use cost function or loss function to discribe it.</p>
+<h1 id="经验风险最小化（Empirical-Risk-Minimization）"><a href="#经验风险最小化（Empirical-Risk-Minimization）" class="headerlink" title="经验风险最小化（Empirical Risk Minimization）"></a>经验风险最小化（Empirical Risk Minimization）</h1><p>本节主要探讨几个问题：那些函数可以被用作预测函数？如何衡量一个模型的好坏？如何让一个从已知训练集中训练出来的模型很好地预测未见得数据？在找合适的模型时，应该遵循什么样的步骤？</p>
+<h2 id="假设函数的种类（Hypothesis-Class-of-Functions）"><a href="#假设函数的种类（Hypothesis-Class-of-Functions）" class="headerlink" title="假设函数的种类（Hypothesis Class of Functions）"></a>假设函数的种类（Hypothesis Class of Functions）</h2><p>我们训练的目的是找到一个参数列表$\theta^*$,使得函数的输出结果能够更接近真实值，即：</p>
+<script type="math/tex; mode=display">f(x_n,\theta^*)\approx y_n\quad for \ all\ \ a = 1,\cdots,N</script><p>在本节中使用$\hat y_n=f(x_n,\theta^*)$代表模型的预测值。</p>
+<h2 id="代价函数-Loss-Function-for-Training"><a href="#代价函数-Loss-Function-for-Training" class="headerlink" title="代价函数(Loss Function for Training)"></a>代价函数(Loss Function for Training)</h2><p><strong>经验风险</strong>（empirical risk）：真实值与预测值的偏差</p>
+<p>对于一个给定的训练集${(x_1,y_1),\cdots,(x_N,y_N) }$,实例矩阵（example matrix）：$\boldsymbol X :=[x_1,\cdots,x_N]^\top\in \mathbb R^{N\times D}$,标签矩阵$y:=[y_1,\cdots,y_N]^\top\in \mathbb R^N$,对应的平均损失为：</p>
+<script type="math/tex; mode=display">R_{emp}(f,\boldsymbol X, y)=\frac{1}{N}\sum\limits^N_{n-1} l(y_n,\hat y_n)</script><p>我们希望模型不仅仅能够很好地拟合训练数据，还希望模型能够很好地预测数据，所以能够找到一个<strong>期望风险</strong>（Expected Risk）</p>
+<script type="math/tex; mode=display">\bold R_{true}(f)=\boldsymbol{\mathbb E_{x,y}}[l(y,f(\boldsymbol x))]</script><h2 id="正则化减小过拟合-Regularization-to-Reduce-Overfitting"><a href="#正则化减小过拟合-Regularization-to-Reduce-Overfitting" class="headerlink" title="正则化减小过拟合(Regularization to Reduce Overfitting)"></a>正则化减小过拟合(Regularization to Reduce Overfitting)</h2><p>如果有足够的参数，给定地模型一般能够很好地拟合测试数据，但是预测数据却与实际数据有较大的偏差，这时候就是模型发生了<strong>过拟合</strong>。<br>一般情况下，已知的数据分为测试数据和训练数据，分别用于测试和训练模型。</p>
+<blockquote>
+<p>Regularization is a way to compromise between accurate solution of empirical risk minimization and the size or complexity of the solution.<br>对于一个最小二乘问题：$\min\limits_\theta\frac{1}{N}|y-X\theta|^2$,加上正则项则是：</p>
+<script type="math/tex; mode=display">\min\limits_\theta\frac{1}{N}\|y-X\theta\|^2+\lambda \|\theta\|</script></blockquote>
+<h2 id="用交叉验证评估泛化性能-Cross-Validation-to-Assess-the-Generalization-Performance"><a href="#用交叉验证评估泛化性能-Cross-Validation-to-Assess-the-Generalization-Performance" class="headerlink" title="用交叉验证评估泛化性能(Cross-Validation to Assess the Generalization Performance)"></a>用交叉验证评估泛化性能(Cross-Validation to Assess the Generalization Performance)</h2><p>我们将已知数据进行拆分，一部分用于模型训练，一部分用于模型性能测试，这个称为<strong>验证集</strong>（validation set）。但是如果训练数据太少，可能导致得不到好的模型，如果训练数据太少可能导致噪声估计。所以应该对已有的数据进行合理的划分，这就有<strong>K-折交叉验证</strong>（K-fold cross-validation）<br><img src="https://img-blog.csdnimg.cn/20210518102941859.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>这样得到的<strong>期望泛化误差</strong>（expected generalization error）为：</p>
+<script type="math/tex; mode=display">\mathbb E_\mathcal V[R(f,\mathcal V)]\approx\frac{1}{K}\sum^K_{k=1}R(f^{(k)},\mathcal V^{(k)})</script><p>其中，$R(f^{(k)},\mathcal V^{(k)})$为预测值与真实值之间的误差。<br>但是这个方法有几个缺点，首先是不合理的数据划分可能会导致的几个不好的结果，与之前的训练集和测试集之间的大小关系导致不同后果一致。同时需要对模型进行K次训练，可能需要大量的计算资源。</p>
+<blockquote>
+<p>Evaluating the quality of the model, depending on these hyperparameters, may result in a number of training runs that is exponential in the number of model parameters. </p>
+</blockquote>
+<h1 id="参数估计（Parameter-Estimation）"><a href="#参数估计（Parameter-Estimation）" class="headerlink" title="参数估计（Parameter Estimation）"></a>参数估计（Parameter Estimation）</h1><h2 id="最大似然估计（Maximum-Likelihood-Estimation）"><a href="#最大似然估计（Maximum-Likelihood-Estimation）" class="headerlink" title="最大似然估计（Maximum Likelihood Estimation）"></a>最大似然估计（Maximum Likelihood Estimation）</h2><p>定义一个关于参数的函数，去评估模型对数据的拟合的好坏。一般使用<strong>负对数似然</strong>（negative log-likelihood）：</p>
+<script type="math/tex; mode=display">\mathcal L_x(\boldsymbol\theta)=-\log p(\boldsymbol x|\boldsymbol\theta)</script><p>在上式中，样品值是固定的，变化的是参数,这个函数彰显的是给定参数的情况下，取得样品值的概率。<br>假设两个相互独立且均匀分布的数据集，$\mathcal X={x_1,\cdots,x_N }$,$\mathcal Y={y_1,\cdots,y_N }$,他们的似然方程可以呗分解为：</p>
+<script type="math/tex; mode=display">p(\mathcal Y|\mathcal X,\theta)=\prod^N_{n=1}p(y_n|\boldsymbol x_n,\boldsymbol\theta)</script><p>但是从优化的角度来看，和比乘积更容易处理：</p>
+<script type="math/tex; mode=display">\mathcal L(\theta)=-\log p(\mathcal Y|\mathcal X, \theta)=-\sum^N_{n=1}\log p(y_n|x_n,\theta)</script><blockquote>
+<p>hence should be interpreted as observed and fixed, this interpretation is incorrect.</p>
+</blockquote>
+<h2 id="最大后验估计（Maximum-A-Posteriori-Estimation）"><a href="#最大后验估计（Maximum-A-Posteriori-Estimation）" class="headerlink" title="最大后验估计（Maximum A Posteriori Estimation）"></a>最大后验估计（Maximum A Posteriori Estimation）</h2><p>如果我们有关于参数的先验知识，这样可以利用贝叶斯公式更新后验概率，以对参数进行估计。这个与之前提到的正则项类似，在似然概率之后乘以一个对参数的先验概率分布。</p>
+<blockquote>
+<p>这部分需要补充</p>
+</blockquote>
+<h2 id="模型拟合（Model-Fitting）"><a href="#模型拟合（Model-Fitting）" class="headerlink" title="模型拟合（Model Fitting）"></a>模型拟合（Model Fitting）</h2><p>拟合的意思就是优化模型的参数，以最小化代价函数。<br><strong>参数化</strong>（arametrization）：一种描述模型的方式。</p>
+<script type="math/tex; mode=display">y = ax+b\rightarrow \theta:=\{a,b\}</script><p><img src="https://img-blog.csdnimg.cn/20210521104544345.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>书中使用$M_\theta$表示参数化的模型，$M^<em>$为真实值，上图中的红线可以认为是代价函数。<br><em>*拟合的三种结果</em></em>：<br><img src="https://img-blog.csdnimg.cn/20210521104758825.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>泛化线性模型(generalized generalized linear)：<br>In statistics, the generalized linear model (GLM) is a flexible generalization of ordinary linear regression that allows for response variables that have error distribution models other than a normal distribution.<br>连接函数（Link Function）：<br>The link function provides the relationship between the linear predictor and the mean of the distribution function.</p>
+</blockquote>
+<h2 id="贝叶斯推断（Bayesian-Inference）"><a href="#贝叶斯推断（Bayesian-Inference）" class="headerlink" title="贝叶斯推断（Bayesian Inference）"></a>贝叶斯推断（Bayesian Inference）</h2><p>之前提到的极大似然估计和极大后验估计最后都是在解决一个优化问题，通过解决这个优化问题，我们可以得到模型参数，利用这个参数我们可以得到预测值的分布$p(x|\theta^*)$<br>由于仅仅是关注于部分数据的后验分布会损失部分的信息，而损失的信息可能对决策系统至关重要，所以得到一个完成数据的后验分布十分重要</p>
+<blockquote>
+<p>这部分需要补充，关于信息损失</p>
+</blockquote>
+<p>对于一个数据集$\mathcal X$、一个参数先验$p(\theta)$和一个似然方程的后验分布为：</p>
+<script type="math/tex; mode=display">p(\theta|\mathcal X)=\frac{p(\mathcal X|\theta)p(\theta)}{p(\mathcal X)},\quad p(\mathcal X)=\int p(\mathcal X|\theta)p(\theta)d\theta</script><p>利用参数的后验分布，我们可以将对参数的不确定性转移到数据上,也就是我们的预测值不再依赖于参数了：</p>
+<script type="math/tex; mode=display">p(\boldsymbol x)=\int p(\boldsymbol x|\boldsymbol\theta)p(\boldsymbol\theta)d\boldsymbol\theta=\mathbb E_\boldsymbol\theta[p(\boldsymbol x|\boldsymbol\theta)]</script><p>上式说明，预测值是所有参数下的预测值的均值。</p>
+<h2 id="潜变量模型（Latent-Variable-Models）"><a href="#潜变量模型（Latent-Variable-Models）" class="headerlink" title="潜变量模型（Latent-Variable Models）"></a>潜变量模型（Latent-Variable Models）</h2><blockquote>
+<p>Mathematical models that aim to explain observed variables in terms of latent variables are called <strong>latent variable models</strong></p>
+<p><strong>潜变量</strong>（Latent-Variable）<br>These could in principle be measured, but may not be for practical reasons. In this situation, the term hidden variables is commonly used (reflecting the fact that the variables are meaningful, but not observable).</p>
+</blockquote>
+<p>想要简化模型，最简单的方法就是减少模型的参数的数量。但是利用潜变量模型（expectation maximization (EM) algorithm），可以更加规范地简化模型。<br>潜变量模型能够帮助我们描述从参数中获取预测值地过程：<br>将数据表示为$\boldsymbol x$,模型的参数表示为$\boldsymbol\theta$,潜变量表示为$z$,我们可以得到条件分布：</p>
+<script type="math/tex; mode=display">p(\boldsymbol x|\boldsymbol z,\boldsymbol\theta)</script><p>想要得到给定模型参数下的预测数据，我们需要消去潜变量：</p>
+<script type="math/tex; mode=display">p(x|\theta)=\int p(x|z,\theta)p(z)dz</script><p>注意到似然方程与潜变量无关，有了上面这个式子，我们可以直接使用极大似然估计来进行参数估计。<br>用上式带入到贝叶斯公式中：</p>
+<script type="math/tex; mode=display">p(\theta|\mathcal X)=\frac{p(\mathcal X|\theta)p(\theta)}{p(\mathcal X)}</script><p>其中，$\mathcal X$为给定的数据集。这样得到了后验概率分布，可以用于贝叶斯推断。<br>与上式类似，我们可以得到潜变量的后验分布：</p>
+<script type="math/tex; mode=display">p(z|\mathcal X)=\frac{p(\mathcal X|z)p(z)}{p(\mathcal X)},\quad p(\mathcal X|z)=\int p(\mathcal X|z,\theta)p(\theta)d\theta</script><p>但是还是遇到了积分。而且同时将参数和潜变量消掉也非常困难。<br>下面这个式子相对好计算：</p>
+<script type="math/tex; mode=display">p(z|\mathcal X,\theta)=\frac{p(\mathcal X|z,\theta)p(z)}{p(\mathcal X|\theta)}</script><blockquote>
+<p>补充一下这部分？含义？</p>
+</blockquote>
+<h1 id="有向图模型（Directed-Graphical-Models-Bayesian-networks）"><a href="#有向图模型（Directed-Graphical-Models-Bayesian-networks）" class="headerlink" title="有向图模型（Directed Graphical Models/Bayesian networks）"></a>有向图模型（Directed Graphical Models/Bayesian networks）</h1><p>将一个随机变量表示为一个有向图的节点，随机变量之间的关系表示为有向图的边，这样可以很好的得出随机变量之间的关系，而且可以将随机变量之间的关系变换转换成有向图的操作.</p>
+<h2 id="图的语义（Graph-Semantics）"><a href="#图的语义（Graph-Semantics）" class="headerlink" title="图的语义（Graph Semantics）"></a>图的语义（Graph Semantics）</h2><p>下图表示的是a、b、c三个随机变量，边代表条件概率分布，例如a、b节点，代表$p(b|a)$<br><img src="https://img-blog.csdnimg.cn/20210524173813873.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>所以，一个联合概率分布可以表示为：</p>
+<script type="math/tex; mode=display">p(\boldsymbol x)=\prod^K_{k=1}p(x_k|Pa_k)</script><p>其中，$Pa_k$表示节点$x_k$的父节点。<br>对于一个重复N次的伯努利实验的联合概率分布为：<br><img src="https://img-blog.csdnimg.cn/20210524174426163.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>图(b)是一种更加紧凑的表示方法，图 (c)中的$\alpha 、\beta$是潜变量$\mu$的<strong>超参数</strong>（Hyperparameter）也是$\mu$的一个超前驱（hyperprior）</p>
+<h2 id="条件概率分布和d-分离（有向分离）（Conditional-Independence-and-d-Separation）"><a href="#条件概率分布和d-分离（有向分离）（Conditional-Independence-and-d-Separation）" class="headerlink" title="条件概率分布和d-分离（有向分离）（Conditional Independence and d-Separation）"></a>条件概率分布和d-分离（有向分离）（Conditional Independence and d-Separation）</h2><p>假设一个互不相交的节点集，$\mathcal A,\mathcal B,\mathcal C$,在$\mathcal C$下，$\mathcal A$与$\mathcal B$条件独立，表示为：</p>
+<script type="math/tex; mode=display">\mathcal A \perp \!\!\!\perp\mathcal B\ |\ \mathcal C</script><p><code>有向分离</code>(d-separation)的基本思想：通过贝叶斯网中看两个事件的关系（两个事件是否条件独立），从而简化概率计算。（利用两时间的相互独立的性质）<br>当三个节点满足下面地条件之一的时候，则表示$\mathcal A,\mathcal B$是d-分离的。<br><img src="https://img-blog.csdnimg.cn/2021052515431295.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20210525154505655.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>下面的参考博客中有对应结论的推导</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ybdesire/article/details/78998398?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162190960216780264053425%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=162190960216780264053425&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-78998398.first_rank_v2_pc_rank_v29&amp;utm_term=d%E5%88%86%E7%A6%BB&amp;spm=1018.2226.3001.4187">参考</a><br>这里两种情况：</p>
+<ol>
+<li>若$\mathcal C$不观测，则$P(\mathcal X, \mathcal Y)=\Sigma_\mathcal Z(\mathcal X,\mathcal Y,\mathcal Z)$,只有$P(\mathcal X,\mathcal Y)=P(\mathcal X)P(\mathcal Y)$才能说明$\mathcal X,\mathcal Y$相互独立，也就是$X,Y$<code>有向独立</code>（d-separation）</li>
+<li>若观测$\mathcal C$,则使用条件概率公式$P(\mathcal X,\mathcal Y|\mathcal C)=\frac{P(\mathcal X)P(\mathcal C|\mathcal X)P(\mathcal Y|\mathcal C)}{P(\mathcal C)}$,只有满足$P(\mathcal X,\mathcal Y|\mathcal C)=P(\mathcal X|\mathcal Z)P(\mathcal Y|\mathcal C)$才能说明$\mathcal X,\mathcal Y$相互独立，也就是$\mathcal X,\mathcal Y$<code>有向独立</code>（d-separation）</li>
+</ol>
+<h1 id="模型选择（Model-Selection）"><a href="#模型选择（Model-Selection）" class="headerlink" title="模型选择（Model Selection）"></a>模型选择（Model Selection）</h1><p>越复杂的模型能够表示的数据之间的关系就越多，例如一个二次函数模型，除了能够表示线性关系之外，还可以表示数据之间的二次关系。虽然复杂的模型能够表示更多的数据关系，但是有时候因为数据量比较小，可能会导致<code>过拟合</code>的现象。我们还需要知道如何评估模型在泛化数据下的性能。</p>
+<h2 id="嵌套交叉验证（Nested-Cross-Validation）"><a href="#嵌套交叉验证（Nested-Cross-Validation）" class="headerlink" title="嵌套交叉验证（Nested Cross-Validation）"></a>嵌套交叉验证（Nested Cross-Validation）</h2><p><img src="https://img-blog.csdnimg.cn/20210526093453995.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>将数据分为三个部分，第一部分用于训练模型，第二部分用于计算误差：</p>
+<script type="math/tex; mode=display">\mathbb E_\mathcal V[\boldsymbol R(\mathcal V| M)]\approx = \frac{1}{K}\sum^K_{k=1}\boldsymbol R(\mathcal V^{(k)}|M)</script><p>其中$\boldsymbol R$代表的是<strong>经验风险</strong>(empirical risk)<br>计算所有模型的经验风险，然后选取经验风险最小的模型作为最终模型，然后利用测试数据计算模型的泛化误差。</p>
+<h2 id="贝叶斯模型选择（Bayesian-Model-Selection）"><a href="#贝叶斯模型选择（Bayesian-Model-Selection）" class="headerlink" title="贝叶斯模型选择（Bayesian Model Selection）"></a>贝叶斯模型选择（Bayesian Model Selection）</h2><p>简单的模型较复杂的模型不容易出现过拟合的现象，所以在能够合理拟合数据的情况下，应该尽可能选取简单的模型，这被称为<strong>奥卡姆剃刀</strong>（Occam’s razor）。在贝叶斯概率的应用过程中，定量地体现了一个“自动奥卡姆剃刀”</p>
+<blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210526095407220.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="贝叶斯推断中的奥卡姆剃刀"><br>上图中，横坐标表示所有的可能的数据集，纵坐标表示模型对对应数据的拟合程度。我们会选用拟合程度更好的模拟作为最终的模型。</p>
+</blockquote>
+<p>下图是数据生成过程：<br><img src="https://img-blog.csdnimg.cn/20210526101506995.png" div align="left"><br>第一个表示模型的先验概率，表示模型被选取的概率，第二个表示模型对应的参数的分布，最后一个是模型的生成数据。</p>
+<p>用贝叶斯网可以表示为：<br><img src="https://img-blog.csdnimg.cn/20210526101352294.png" div align="left"><br>我们可以利用贝叶斯公式计算后验分布：</p>
+<script type="math/tex; mode=display">p(M_k|\mathcal D)\propto p(M_k)p(\mathcal D|M_k)，\quad(*)</script><p>其中的后验分布不依赖于参数$\boldsymbol\theta_i$,因为：</p>
+<script type="math/tex; mode=display">p(\mathcal D|M_k)=\int p(\mathcal D|\boldsymbol \theta_k)p(\boldsymbol \theta_k|M_k)d\boldsymbol \theta_k</script><p>这个式子被称为<strong>边际似然</strong>（marginal likelihood）<br>利用(*)式，可以得到极大后验估计：</p>
+<script type="math/tex; mode=display">M^*=\operatorname {arg}\max_{M_k}p(M_k|\mathcal D)</script><blockquote>
+<p>似然与边际似然有些不同点，前者更容易出现过拟合的现象，后者因为参数被边际化掉了，出现过拟合的现象更小。而且边际似然中嵌套着模型复杂度和数据拟合之间的一个折中。</p>
+</blockquote>
+<h2 id="模型比较中的贝叶斯因子（Bayes-Factors-for-Model-Comparison）"><a href="#模型比较中的贝叶斯因子（Bayes-Factors-for-Model-Comparison）" class="headerlink" title="模型比较中的贝叶斯因子（Bayes Factors for Model Comparison）"></a>模型比较中的贝叶斯因子（Bayes Factors for Model Comparison）</h2><p>在给定数据集$\mathcal D$和两个模型$M_1,M_2$,想要计算后验分布$p(M_1|\mathcal D) \&amp; \  p(M_2|\mathcal D)$</p>
+<script type="math/tex; mode=display">
+\underbrace{\frac{p\left(M_{1} \mid \mathcal{D}\right)}{p\left(M_{2} \mid \mathcal{D}\right)}}_{\text {posterior odds(后验相对风险) }}=\frac{\frac{p\left(\mathcal{D} \mid M_{1}\right) p\left(M_{1}\right)}{p(\mathcal{D})}}{\frac{p\left(\mathcal{D} \mid M_{2}\right) p\left(M_{2}\right)}{p(\mathcal{D})}}=\underbrace{\frac{p\left(M_{1}\right)}{p\left(M_{2}\right)}}_{\text {prior odds }} \underbrace{\frac{p\left(\mathcal{D} \mid M_{1}\right)}{p\left(\mathcal{D} \mid M_{2}\right)}}_{\text {Bayes factor }}</script><blockquote>
+<p>???<br><img src="https://img-blog.csdnimg.cn/20210526104142218.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<p>如果选择每一个模型的概率相等，即$\frac {p(M_1)}{p(M_2)}=1$,则可以根据贝叶斯因子与1的关系，选择模型。</p>
+<blockquote>
+<p><strong>信息准则</strong>（information criteria）：<br><strong>Akaike information criterion</strong>：$\log p(x|\theta)-M$corrects for the bias of the maximum likelihood estimator by addition of a penalty term to compensate for the overfitting of more complex models with lots of parameters.<br>其中，M表示参数的个数<br><strong>Bayesian information criterion (BIC)</strong></p>
+<script type="math/tex; mode=display">\log p(x)=\log\int p(x|\boldsymbol\theta)p(\boldsymbol\theta)d\boldsymbol\theta\approx\log p(x|\boldsymbol\theta)-\frac{1}{2}M\log N</script><p>这里N表示数据集，M表示参数个数<br><u><strong>这部分遇到的时候在详细学习</strong></u></p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://example.com/2021/05/26/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6-When-Models-Meet-Data/" data-title="机器学习中的数学: When Models Meet Data | Hexo" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2021/06/15/机器学习中的数学：线性回归Linear-Regression/" title="机器学习中的数学：线性回归Linear Regression">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  机器学习中的数学：线性回归Linear Regression</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2021/05/14/机器学习中的数学：（六）连续优化-Continuous-Optimization/"  title="机器学习中的数学：（六）连续优化(Continuous Optimization)">
+ <strong>NEXT:</strong><br/> 
+ <span>机器学习中的数学：（六）连续优化(Continuous Optimization)
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Data-Models-and-Learning"><span class="toc-number">1.</span> <span class="toc-text">Data, Models, and Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-as-Vectors"><span class="toc-number">1.1.</span> <span class="toc-text">Data as Vectors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Models-as-Functions"><span class="toc-number">1.2.</span> <span class="toc-text">Models as Functions</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%8F%E9%AA%8C%E9%A3%8E%E9%99%A9%E6%9C%80%E5%B0%8F%E5%8C%96%EF%BC%88Empirical-Risk-Minimization%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">经验风险最小化（Empirical Risk Minimization）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%81%87%E8%AE%BE%E5%87%BD%E6%95%B0%E7%9A%84%E7%A7%8D%E7%B1%BB%EF%BC%88Hypothesis-Class-of-Functions%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">假设函数的种类（Hypothesis Class of Functions）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0-Loss-Function-for-Training"><span class="toc-number">2.2.</span> <span class="toc-text">代价函数(Loss Function for Training)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%E5%87%8F%E5%B0%8F%E8%BF%87%E6%8B%9F%E5%90%88-Regularization-to-Reduce-Overfitting"><span class="toc-number">2.3.</span> <span class="toc-text">正则化减小过拟合(Regularization to Reduce Overfitting)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%E8%AF%84%E4%BC%B0%E6%B3%9B%E5%8C%96%E6%80%A7%E8%83%BD-Cross-Validation-to-Assess-the-Generalization-Performance"><span class="toc-number">2.4.</span> <span class="toc-text">用交叉验证评估泛化性能(Cross-Validation to Assess the Generalization Performance)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1%EF%BC%88Parameter-Estimation%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">参数估计（Parameter Estimation）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%EF%BC%88Maximum-Likelihood-Estimation%EF%BC%89"><span class="toc-number">3.1.</span> <span class="toc-text">最大似然估计（Maximum Likelihood Estimation）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1%EF%BC%88Maximum-A-Posteriori-Estimation%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">最大后验估计（Maximum A Posteriori Estimation）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E6%8B%9F%E5%90%88%EF%BC%88Model-Fitting%EF%BC%89"><span class="toc-number">3.3.</span> <span class="toc-text">模型拟合（Model Fitting）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%EF%BC%88Bayesian-Inference%EF%BC%89"><span class="toc-number">3.4.</span> <span class="toc-text">贝叶斯推断（Bayesian Inference）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BD%9C%E5%8F%98%E9%87%8F%E6%A8%A1%E5%9E%8B%EF%BC%88Latent-Variable-Models%EF%BC%89"><span class="toc-number">3.5.</span> <span class="toc-text">潜变量模型（Latent-Variable Models）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%89%E5%90%91%E5%9B%BE%E6%A8%A1%E5%9E%8B%EF%BC%88Directed-Graphical-Models-Bayesian-networks%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">有向图模型（Directed Graphical Models&#x2F;Bayesian networks）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E8%AF%AD%E4%B9%89%EF%BC%88Graph-Semantics%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">图的语义（Graph Semantics）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%92%8Cd-%E5%88%86%E7%A6%BB%EF%BC%88%E6%9C%89%E5%90%91%E5%88%86%E7%A6%BB%EF%BC%89%EF%BC%88Conditional-Independence-and-d-Separation%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">条件概率分布和d-分离（有向分离）（Conditional Independence and d-Separation）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9%EF%BC%88Model-Selection%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">模型选择（Model Selection）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B5%8C%E5%A5%97%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%EF%BC%88Nested-Cross-Validation%EF%BC%89"><span class="toc-number">5.1.</span> <span class="toc-text">嵌套交叉验证（Nested Cross-Validation）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9%EF%BC%88Bayesian-Model-Selection%EF%BC%89"><span class="toc-number">5.2.</span> <span class="toc-text">贝叶斯模型选择（Bayesian Model Selection）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E6%AF%94%E8%BE%83%E4%B8%AD%E7%9A%84%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%9B%A0%E5%AD%90%EF%BC%88Bayes-Factors-for-Model-Comparison%EF%BC%89"><span class="toc-number">5.3.</span> <span class="toc-text">模型比较中的贝叶斯因子（Bayes Factors for Model Comparison）</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C-primer/" title="C++ primer">C++ primer<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DB/" title="DB">DB<sup>1</sup></a></li>
+		
+			<li><a href="/tags/OS/" title="OS">OS<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Projects/" title="Projects">Projects<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bugs/" title="bugs">bugs<sup>1</sup></a></li>
+		
+			<li><a href="/tags/computer-network/" title="computer network">computer network<sup>2</sup></a></li>
+		
+			<li><a href="/tags/侯捷C/" title="侯捷C++">侯捷C++<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2023 
+		
+		<a href="http://example.com" target="_blank" title="John Doe">John Doe</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
