@@ -1523,7 +1523,7 @@ err = dec.Decode(&amp;q)
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-01-13 20:25:06" itemprop="dateModified" datetime="2023-01-13T20:25:06+08:00">2023-01-13</time>
+                <time title="Modified: 2023-03-13 15:22:38" itemprop="dateModified" datetime="2023-03-13T15:22:38+08:00">2023-03-13</time>
               </span>
 
           
@@ -1540,10 +1540,8 @@ err = dec.Decode(&amp;q)
           <h1 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h1><ul>
 <li><p>Small tricks</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取中间的数：</span></span><br><span class="line"><span class="type">int</span> mid = (left + right) / <span class="number">2</span>; <span class="comment">// 有溢出的风险</span></span><br><span class="line"><span class="type">int</span> mid = left + ((right - left) &gt;&gt; <span class="number">1</span>); <span class="comment">// 这样更好</span></span><br></pre></td></tr></table></figure></li>
-<li><p>当异常发⽣时，C++通常会调⽤对象的析构函数来释放资源</p>
-</li>
-<li><p>指向虚函数表的指针 <code>vptr</code>需要在构造函数中进⾏初始化</p>
-</li>
+<li>当异常发⽣时，C++通常会调⽤对象的析构函数来释放资源</li>
+<li>指向虚函数表的指针 <code>vptr</code>需要在构造函数中进⾏初始化</li>
 <li><p>如何让类不能实例化</p>
 <ul>
 <li>将类定义位抽象类（包含纯虚函数）</li>
@@ -1555,46 +1553,37 @@ err = dec.Decode(&amp;q)
 <li>在菱形继承的场景下，会产生两份基类数据，浪费空间，同时访问基类还需要通过域运算符</li>
 <li>利用虚继承，在间接继承共同基类时是保留一份基类成员。创建派生类实例的时候，只需要调用一次基类的构造函数</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>&#123;&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> : <span class="keyword">virtual</span> <span class="keyword">public</span> A&#123;&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>在 C 语言中，数据类型指的是用于声明不同类型的变量或函数的一个广泛的系统。变量的类型决定了变量存储占用的空间，以及如何解释存储的位模式。</p>
-</li>
-<li><h4 id="Linux-和-UNIX-的关系-x2F-区别"><a href="#Linux-和-UNIX-的关系-x2F-区别" class="headerlink" title="Linux 和 UNIX 的关系&#x2F;区别"></a>Linux 和 UNIX 的关系&#x2F;区别</h4><ul>
-<li>Linux 是一个类似 Unix 的操作系统，Unix 要早于 Linux，Linux 的初衷就是要替代 UNIX，并在功能和用户体验上进行优化，所以 Linux 模仿了 UNIX（但并没有抄袭 UNIX 的源码），使得 Linux 在外观和交互上与 UNIX 非常类似。</li>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>{}</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> : <span class="keyword">virtual</span> <span class="keyword">public</span> A{}</span><br></pre></td></tr></table></figure></li>
+<li>在 C 语言中，数据类型指的是用于声明不同类型的变量或函数的一个广泛的系统。变量的类型决定了变量存储占用的空间，以及如何解释存储的位模式。</li>
+<li><h4 id="Linux-和-UNIX-的关系-区别"><a href="#Linux-和-UNIX-的关系-区别" class="headerlink" title="Linux 和 UNIX 的关系/区别"></a>Linux 和 UNIX 的关系/区别</h4></li>
+</ul>
+<ul>
+<li><p>Linux 是一个类似 Unix 的操作系统，Unix 要早于 Linux，Linux 的初衷就是要替代 UNIX，并在功能和用户体验上进行优化，所以 Linux 模仿了 UNIX（但并没有抄袭 UNIX 的源码），使得 Linux 在外观和交互上与 UNIX 非常类似。</p>
+<ul>
+<li>析构函数</li>
 </ul>
 </li>
-<li><p>析构函数</p>
+<li><p>类类型：如 <code>struct</code>、<code>class</code>、<code>union</code></p>
 <ul>
-<li>类类型：如 <code>struct</code>、<code>class</code>、<code>union</code><ul>
 <li>没有自定义析构函数，那么编译器就会为它们生成内联(inline)、public 的析构函数。</li>
 </ul>
 </li>
 <li>对于析构函数的调用，需要是 public 的访问权限，否则会导致编译错误。</li>
 </ul>
-</li>
-</ul>
-<h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><p>$$<br>\text{工作区}\stackrel{add}{\rightarrow}\text{暂存区}\stackrel{commit}{\rightarrow}\text{本地仓库}\stackrel{push}{\rightarrow}\text{远程仓库}\stackrel{pull}{\rightarrow}\text{本地}<br>$$</p>
-<p><img src="/.com//Basic-Knoledge/1672140678237.png" alt="1672140678237"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># In the work directory</span></span><br><span class="line">git config --global user.name <span class="string">&quot;yourName&quot;</span></span><br><span class="line">git config --global user.email yourEmail</span><br><span class="line"></span><br><span class="line">git init <span class="comment"># initialize the repository</span></span><br><span class="line">git status <span class="comment"># repository information</span></span><br><span class="line">git add fileName</span><br><span class="line">git commit -m <span class="string">&quot;commit msg&quot;</span>EADADWE</span><br><span class="line">git <span class="built_in">log</span>  <span class="comment"># 查看以前的版本</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">touch</span> .gitignore  <span class="comment"># 不追踪的文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建新分支</span></span><br><span class="line">git branch branchName</span><br><span class="line"></span><br><span class="line"><span class="comment"># 两种切换分支的命令</span></span><br><span class="line">git checkout branchName</span><br><span class="line">	- git checkout -d branchName  <span class="comment"># 删除分支</span></span><br><span class="line">	- git checkout -b temp  <span class="comment"># 创建并切换到新建的分支</span></span><br><span class="line">git switch branchName</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并分支</span></span><br><span class="line">git merge temp</span><br><span class="line"></span><br><span class="line"><span class="comment"># add 和 commit合在一起写</span></span><br><span class="line">git commit -a -m <span class="string">&quot;msg&quot;</span>  <span class="comment"># 或者-am</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载远程内容</span></span><br><span class="line"><span class="comment">#### 直接下载zip是不会下载版本信息的，所以需要使用以下命令</span></span><br><span class="line">git <span class="built_in">clone</span></span><br><span class="line"></span><br><span class="line"> ESDAW</span><br></pre></td></tr></table></figure>
-
-<h1 id="C-x2F-C"><a href="#C-x2F-C" class="headerlink" title="C&#x2F;C++"></a>C&#x2F;C++</h1><h3 id="条件变量的虚假唤醒"><a href="#条件变量的虚假唤醒" class="headerlink" title="条件变量的虚假唤醒"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tqyysm/articles/9765667.html">条件变量的虚假唤醒</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// wait 端</span></span><br><span class="line"><span class="built_in">lock</span>(mutex);</span><br><span class="line"><span class="keyword">while</span>(queue.<span class="built_in">empty</span>())&#123;  <span class="comment">// 如果使用if可能会导致虚假唤醒</span></span><br><span class="line">	cond.<span class="built_in">wait</span>();</span><br><span class="line">&#125;</span><br><span class="line">x = queue.<span class="built_in">pop</span>();</span><br><span class="line"><span class="built_in">unlock</span>(mutex);</span><br><span class="line"></span><br><span class="line"><span class="comment">// signal/broadcast端</span></span><br><span class="line"><span class="built_in">lock</span>(mutex);</span><br><span class="line">queue.<span class="built_in">push_back</span>(x);</span><br><span class="line"><span class="built_in">unlock</span>(mutex);</span><br><span class="line">cond.<span class="built_in">notify</span>();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><script type="math/tex; mode=display">
+\text{工作区}\stackrel{add}{\rightarrow}\text{暂存区}\stackrel{commit}{\rightarrow}\text{本地仓库}\stackrel{push}{\rightarrow}\text{远程仓库}\stackrel{pull}{\rightarrow}\text{本地}</script><p><img src="/.com//Basic-Knoledge/1672140678237.png" alt="1672140678237"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># In the work directory</span></span><br><span class="line">git config --global user.name <span class="string">"yourName"</span></span><br><span class="line">git config --global user.email yourEmail</span><br><span class="line"></span><br><span class="line">git init <span class="comment"># initialize the repository</span></span><br><span class="line">git status <span class="comment"># repository information</span></span><br><span class="line">git add fileName</span><br><span class="line">git commit -m <span class="string">"commit msg"</span>EADADWE</span><br><span class="line">git <span class="built_in">log</span>  <span class="comment"># 查看以前的版本</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">touch</span> .gitignore  <span class="comment"># 不追踪的文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建新分支</span></span><br><span class="line">git branch branchName</span><br><span class="line"></span><br><span class="line"><span class="comment"># 两种切换分支的命令</span></span><br><span class="line">git checkout branchName</span><br><span class="line">	- git checkout -d branchName  <span class="comment"># 删除分支</span></span><br><span class="line">	- git checkout -b temp  <span class="comment"># 创建并切换到新建的分支</span></span><br><span class="line">git switch branchName</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并分支</span></span><br><span class="line">git merge temp</span><br><span class="line"></span><br><span class="line"><span class="comment"># add 和 commit合在一起写</span></span><br><span class="line">git commit -a -m <span class="string">"msg"</span>  <span class="comment"># 或者-am</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载远程内容</span></span><br><span class="line"><span class="comment">#### 直接下载zip是不会下载版本信息的，所以需要使用以下命令</span></span><br><span class="line">git <span class="built_in">clone</span></span><br><span class="line"></span><br><span class="line"> ESDAW</span><br></pre></td></tr></table></figure>
+<h1 id="C-C"><a href="#C-C" class="headerlink" title="C/C++"></a>C/C++</h1><h3 id="条件变量的虚假唤醒"><a href="#条件变量的虚假唤醒" class="headerlink" title="条件变量的虚假唤醒"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tqyysm/articles/9765667.html">条件变量的虚假唤醒</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// wait 端</span></span><br><span class="line"><span class="built_in">lock</span>(mutex);</span><br><span class="line"><span class="keyword">while</span>(queue.<span class="built_in">empty</span>()){  <span class="comment">// 如果使用if可能会导致虚假唤醒</span></span><br><span class="line">	cond.<span class="built_in">wait</span>();</span><br><span class="line">}</span><br><span class="line">x = queue.<span class="built_in">pop</span>();</span><br><span class="line"><span class="built_in">unlock</span>(mutex);</span><br><span class="line"></span><br><span class="line"><span class="comment">// signal/broadcast端</span></span><br><span class="line"><span class="built_in">lock</span>(mutex);</span><br><span class="line">queue.<span class="built_in">push_back</span>(x);</span><br><span class="line"><span class="built_in">unlock</span>(mutex);</span><br><span class="line">cond.<span class="built_in">notify</span>();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>当条件变量满足的时候，挂起的线程会被唤醒，当他准备获取锁之前，有其他线程将变量改变了，这时候条件变量不满足了，所以这次唤醒是虚假的。</p>
 <p>当某个条件满足的时候（即wait端中while中的条件），之后就进入挂起状态，用if语句那么挂起状态结束以后，就会继续往下，但是这个时候条件不一定满足（虚假唤醒时），所以应该利用while，这样可以<strong>进行第二次判断</strong>，这样就不会因为虚假唤醒的情况而被唤醒。</p>
-<h3 id="Function-pointer"><a href="#Function-pointer" class="headerlink" title="Function pointer"></a><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/840501/how-do-function-pointers-in-c-work">Function pointer</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">addInt</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> m)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> n+m;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> (*functionPtr)(<span class="type">int</span>,<span class="type">int</span>); <span class="comment">// Declare</span></span><br><span class="line">functionPtr = &amp;addInt;  <span class="comment">// Assigment</span></span><br><span class="line"><span class="type">int</span> sum = (*functionPtr)(<span class="number">2</span>, <span class="number">3</span>); <span class="comment">// usage: sum == 5</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// As a parameter</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">add2to3</span><span class="params">(<span class="type">int</span> (*functionPtr)(<span class="type">int</span>, <span class="type">int</span>))</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (*functionPtr)(<span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// this is a function called functionFactory which receives parameter n</span></span><br><span class="line"><span class="comment">// and returns a pointer to another function which receives two ints</span></span><br><span class="line"><span class="comment">// and it returns another int</span></span><br><span class="line"><span class="built_in">int</span> (*<span class="built_in">functionFactory</span>(<span class="type">int</span> n))(<span class="type">int</span>, <span class="type">int</span>) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Got parameter %d&quot;</span>, n);</span><br><span class="line">    <span class="built_in">int</span> (*functionPtr)(<span class="type">int</span>,<span class="type">int</span>) = &amp;addInt;</span><br><span class="line">    <span class="keyword">return</span> functionPtr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// note that the typedef name is indeed myFuncDef</span></span><br><span class="line"><span class="comment">// Confused here ???????</span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*myFuncDef)</span><span class="params">(<span class="type">int</span>, <span class="type">int</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">myFuncDef <span class="title">functionFactory</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Got parameter %d&quot;</span>, n);</span><br><span class="line">    myFuncDef functionPtr = &amp;addInt;</span><br><span class="line">    <span class="keyword">return</span> functionPtr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">addInt</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> m)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> n+m;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> (*functionPtr)(<span class="type">int</span>,<span class="type">int</span>); <span class="comment">// Declare</span></span><br><span class="line">functionPtr = &amp;addInt;  <span class="comment">// Assigment</span></span><br><span class="line"></span><br><span class="line">cout &lt;&lt; addInt &lt;&lt; endl; <span class="comment">// Return 1</span></span><br></pre></td></tr></table></figure>
-
+<h3 id="Function-pointer"><a href="#Function-pointer" class="headerlink" title="Function pointer"></a><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/840501/how-do-function-pointers-in-c-work">Function pointer</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">addInt</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> m)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> n+m;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> (*functionPtr)(<span class="type">int</span>,<span class="type">int</span>); <span class="comment">// Declare</span></span><br><span class="line">functionPtr = &amp;addInt;  <span class="comment">// Assigment</span></span><br><span class="line"><span class="type">int</span> sum = (*functionPtr)(<span class="number">2</span>, <span class="number">3</span>); <span class="comment">// usage: sum == 5</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// As a parameter</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">add2to3</span><span class="params">(<span class="type">int</span> (*functionPtr)(<span class="type">int</span>, <span class="type">int</span>))</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> (*functionPtr)(<span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// this is a function called functionFactory which receives parameter n</span></span><br><span class="line"><span class="comment">// and returns a pointer to another function which receives two ints</span></span><br><span class="line"><span class="comment">// and it returns another int</span></span><br><span class="line"><span class="built_in">int</span> (*<span class="built_in">functionFactory</span>(<span class="type">int</span> n))(<span class="type">int</span>, <span class="type">int</span>) {</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Got parameter %d"</span>, n);</span><br><span class="line">    <span class="built_in">int</span> (*functionPtr)(<span class="type">int</span>,<span class="type">int</span>) = &amp;addInt;</span><br><span class="line">    <span class="keyword">return</span> functionPtr;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// note that the typedef name is indeed myFuncDef</span></span><br><span class="line"><span class="comment">// Confused here ???????</span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*myFuncDef)</span><span class="params">(<span class="type">int</span>, <span class="type">int</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">myFuncDef <span class="title">functionFactory</span><span class="params">(<span class="type">int</span> n)</span> </span>{</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Got parameter %d"</span>, n);</span><br><span class="line">    myFuncDef functionPtr = &amp;addInt;</span><br><span class="line">    <span class="keyword">return</span> functionPtr;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">addInt</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> m)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> n+m;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> (*functionPtr)(<span class="type">int</span>,<span class="type">int</span>); <span class="comment">// Declare</span></span><br><span class="line">functionPtr = &amp;addInt;  <span class="comment">// Assigment</span></span><br><span class="line"></span><br><span class="line">cout &lt;&lt; addInt &lt;&lt; endl; <span class="comment">// Return 1</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>cout 打印函数返回1的<a target="_blank" rel="noopener" href="https://blog.csdn.net/Q_1849805767/article/details/107391572">原因</a>：<br>C++调用非静态的成员函数时，采用的是一种 __thiscall 的函数调用方式。采用这种调用方式，编译器在编译的时候，会在调用的函数形参表中增加一个指向调用该成员函数的指针，也就是我们经常说的this指针。调用的形式类似于Base::f1(Base* this, otherparam…)，在函数体中，涉及到对象的成员变量或者其他成员函数，都会通过这个this指针来调用，从而达到在成员函数中处理调用对象所对应的数据，而不会错误处理其他对象的数据。可见，虽然我们必须通过对象来调用动态函数，但是其实我们访问的都是同一个成员函数。所以我们采用&amp;Base::f1来获取成员函数地址是没错的，动态函数同样是跟类绑定而不是跟对象绑定的。</p>
-</blockquote>
-<blockquote>
 <p>出错的原因是，<code>输出操作符&lt;&lt;没有对void(__thiscall A:: *)()类型重载，编译器将这种类型转换为bool类型，所以输出了1；</code></p>
+<p>对于静态函数，其调用方式并非<strong>thiscall，&lt;&lt;有对它的重载，因此类的静态函数可以直接用cout输出函数地址。我们可以用printf输出，因为他可以接收任意类型的参数，包括</strong>thiscall类型</p>
 </blockquote>
-<blockquote>
-<p>对于静态函数，其调用方式并非__thiscall，&lt;&lt;有对它的重载，因此类的静态函数可以直接用cout输出函数地址。我们可以用printf输出，因为他可以接收任意类型的参数，包括__thiscall类型</p>
-</blockquote>
-<h2 id="Upcasting"><a href="#Upcasting" class="headerlink" title="Upcasting"></a><a target="_blank" rel="noopener" href="http://c.biancheng.net/view/2284.html">Upcasting</a></h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123; <span class="function"><span class="type">void</span> <span class="title">func1</span><span class="params">()</span></span>; &#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> : A&#123; <span class="function"><span class="type">void</span> <span class="title">func1</span><span class="params">()</span></span>; &#125;</span><br><span class="line"></span><br><span class="line">A a; B b;</span><br><span class="line"><span class="comment">// b = a; // Downcasting</span></span><br><span class="line">a = b; <span class="comment">// Upcasting. 派生类成员变量将会被舍去，只保留基类成员变量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象之间的赋值不会影响成员函数，也不会影响 this 指针</span></span><br><span class="line">a.<span class="built_in">func1</span>(); <span class="comment">// 调用的是A中的函数。</span></span><br></pre></td></tr></table></figure>
-
+<h2 id="Upcasting"><a href="#Upcasting" class="headerlink" title="Upcasting"></a><a target="_blank" rel="noopener" href="http://c.biancheng.net/view/2284.html">Upcasting</a></h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> { <span class="function"><span class="type">void</span> <span class="title">func1</span><span class="params">()</span></span>; }</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> : A{ <span class="function"><span class="type">void</span> <span class="title">func1</span><span class="params">()</span></span>; }</span><br><span class="line"></span><br><span class="line">A a; B b;</span><br><span class="line"><span class="comment">// b = a; // Downcasting</span></span><br><span class="line">a = b; <span class="comment">// Upcasting. 派生类成员变量将会被舍去，只保留基类成员变量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象之间的赋值不会影响成员函数，也不会影响 this 指针</span></span><br><span class="line">a.<span class="built_in">func1</span>(); <span class="comment">// 调用的是A中的函数。</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>这种转换关系是不可逆的，只能 <code>用派生类对象给基类对象赋值</code>，而 <code>不能</code>用基类对象给派生类对象赋值。理由很简单，基类不包含派生类的成员变量，无法对派生类的成员变量赋值。同理，同一基类的不同派生类对象之间也不能赋值。(如果多出数据，编译器会舍弃，但是少数据了，那么编译器就不知道如何填充剩下的内存了)</p>
 </blockquote>
@@ -1608,10 +1597,8 @@ err = dec.Decode(&amp;q)
 <h2 id="MMAP"><a href="#MMAP" class="headerlink" title="MMAP"></a><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/357820303">MMAP</a></h2><ul>
 <li><p>传统IO</p>
 <ul>
-<li><p>整个过程发生了<strong>4次用户态和内核态的上下文切换</strong>和<strong>4次拷贝(1.用户发起read，2.读缓存拷贝到用户缓存，3.用户发起write，4.拷贝到网卡)</strong></p>
-</li>
-<li><p><img src="/.com//readio.webp" alt="img"></p>
-</li>
+<li>整个过程发生了<strong>4次用户态和内核态的上下文切换</strong>和<strong>4次拷贝(1.用户发起read，2.读缓存拷贝到用户缓存，3.用户发起write，4.拷贝到网卡)</strong></li>
+<li><img src="/.com//readio.webp" alt="img"></li>
 <li><p>DMA拷贝</p>
 <ul>
 <li>IO操作，都是通过CPU发出对应的指令来完成，但是相比CPU来说，IO的速度太慢了，CPU有大量的时间处于等待IO的状态。因此就产生了<strong>DMA（Direct Memory Access</strong>)直接内存访问技术，本质上来说他就是一块 <code>主板上独立的芯片</code>，通过它来进行内存和IO设备的数据传输，从而减少CPU的等待时间。</li>
@@ -1621,10 +1608,8 @@ err = dec.Decode(&amp;q)
 </li>
 <li><p>零拷贝</p>
 <ul>
-<li><p>计算机执行操作时，CPU不需要先将数据从某处内存复制到另一个特定区域，这种技术通常用于通过网络传输文件时节省CPU周期和内存带宽。</p>
-</li>
-<li><p>减少用户态和内核态的切换次数以及CPU拷贝的次数。</p>
-</li>
+<li>计算机执行操作时，CPU不需要先将数据从某处内存复制到另一个特定区域，这种技术通常用于通过网络传输文件时节省CPU周期和内存带宽。</li>
+<li>减少用户态和内核态的切换次数以及CPU拷贝的次数。</li>
 <li><p>常见的几种零拷贝技术</p>
 <ul>
 <li>mmap + write<ul>
@@ -1642,16 +1627,66 @@ err = dec.Decode(&amp;q)
 <li>sendfile方法IO数据对用户空间完全不可见，所以只能适用于完全不需要用户空间处理的情况，比如静态文件服务器。</li>
 </ul>
 </li>
-<li>sendfile + DMA Scatter&#x2F;Gather<ul>
-<li>对 <code>sendfile</code>做了进一步优化，通过引入新的硬件支持，这个方式叫做DMA Scatter&#x2F;Gather 分散&#x2F;收集功能。</li>
+<li>sendfile + DMA Scatter/Gather<ul>
+<li>对 <code>sendfile</code>做了进一步优化，通过引入新的硬件支持，这个方式叫做DMA Scatter/Gather 分散/收集功能。</li>
 <li><strong>2次用户态和内核态的上下文切换</strong>和 <strong>2次拷贝</strong> ，其中更重要的是完全没有CPU拷贝</li>
-<li><img src="/.com//DMS.webp"></li>
+<li><img src="/.com//DMS.webp" alt></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+<p><em>**</em>## <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/385410196">惊群效应</a></p>
+<ul>
+<li>应用程序是通过 socket 和协议栈交互的，socket 隔离了应用程序和协议栈，socket 是两者之间的接口，对于应用程序，它代表协议栈；而对于协议栈，它又代表应用程序</li>
+<li><p>一个典型的accept惊群现象，及解决措施</p>
+<ul>
+<li>inux 内核通过睡眠队列来组织所有等待某个事件的 task，而wakeup 机制则可以异步唤醒整个睡眠队列上的 task</li>
+<li>在唤醒睡眠队列的时候，会遍历队列链表上的每一个节点，并调用对应的callback，这样一个connect到达的时候，会将队列中所有的线程唤醒，但只有一个返回task，其他返回-1(EAGAIN: Resource temporarily unavailable)</li>
+<li>添加了一个 WQ_FLAG_EXCLUSIVE 标记告诉内核进行排他性的唤醒，即唤醒一个进程后即退出唤醒的过程</li>
+</ul>
+</li>
+<li><p>select/poll/Epoll “惊群”现象</p>
+<ul>
+<li>某一时刻多个进程(线程)阻塞在 select/poll/epoll_wait 系统调用上，当一个请求上来的时候，多个进程都会被 select/poll/epoll_wait 唤醒去 accept，但只有一个是有效的。</li>
+<li>Niginx的解决方法<ul>
+<li>一次仅允许一个进程将 listen fd 放入自己的 epoll 来监听其 READ 事件的方式来达到 listen fd”惊群”避免</li>
+<li>同一时刻仅允许一个 worker 进程监听 listen fd 的可读事件的方式<!-- - 不太清楚这部分，实现起来比较复杂，要避免新请求不能及时处理而导致的现象 --></li>
+</ul>
+</li>
+<li>Epoll”惊群”之 LT(水平触发模式)、ET(边沿触发模式)</li>
+<li>被Poll的fd, 必须在实现上支持内核的Poll技术，比如fd是某个字符设备,或者是个socket, 它必须实现file_operations中的poll操作, 给自己分配有一个等待队列头wait_queue_head_t，主动poll fd的某个进程task必须分配一个等待队列成员, 添加到fd的等待队列里面去, 并指定资源ready时的回调函数，用socket做例子, 它必须有实现一个poll操作, 这个Poll是发起轮询的代码必须主动调用的, 该函数中必须调用poll_wait(),poll_wait会将发起者作为等待队列成员加入到socket的等待队列中去，这样socket发生事件时可以通过队列头逐个通知所有关心它的进程。</li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/37861062">简易版本</a></p>
+<ul>
+<li>出现场景<ul>
+<li>accept<ul>
+<li>多线程中的accept函数同时监听一个listenfd，当这个fd可读的时候，等待队列中的所有进程就会被唤醒</li>
+<li>解决：当内核接受到一个连接之后，只会唤醒等待队列上的第一个线程</li>
+</ul>
+</li>
+<li>epoll<ul>
+<li>使用多线程epoll对同一个fd进行监控的时候，当fd事件到来时，内核会把所有epoll线程唤醒</li>
+<li>由于当事件来临的时候，不清楚需要几个线程，所以只能将所有线程唤醒（而在accept中，已知只会需要一个线程）</li>
+<li>解决：多个进程将listenfd加入到epoll之前，首先尝试获取一个全局的accept_mutex互斥锁，只有获得该锁的进程才可以把listenfd加入到epoll中</li>
+</ul>
+</li>
+<li>线程池<ul>
+<li>当我们往任务队列中放入任务时，需要唤醒等待的线程来处理任务，如果我们使用C++标准库中的函数notify_all()来唤醒线程，则会将所有的线程都唤醒</li>
+<li>解决方案：对于只需要唤醒一个线程的情况，我们需要使用notify_one()函数代替notify_all()只唤醒一个线程，从而避免惊群问题。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="CPU调度算法"><a href="#CPU调度算法" class="headerlink" title="CPU调度算法"></a><a href>CPU调度算法</a></h2><h2 id="QUIC"><a href="#QUIC" class="headerlink" title="QUIC"></a><a href>QUIC</a></h2><p><img src="/.com//QUIC封装过程.png" alt></p>
+<ul>
+<li>0-RTT</li>
 </ul>
 
       
