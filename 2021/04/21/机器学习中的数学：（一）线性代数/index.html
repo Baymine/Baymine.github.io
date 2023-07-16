@@ -1,116 +1,30 @@
-<!DOCTYPE html>
+
+ <!DOCTYPE HTML>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="本博客是对MATHEMATICS FOR MACHINE LEARNING的学习笔记，因为是全英文的书籍，所以在每节之后都会收集一些相关的术语，然后笔记中也可能会加入一些英文。当然，作为一个个人笔记，我会加入一些自己的理解，这些理解可能会因为自己的能力有限而不够深入并且有较大的局限性，但是，我会不断复习自己的笔记，并不断更新自己的理解。这正如孔子所说的：温故而知新，可以为师矣。ps:想要这本书的电">
-<meta property="og:type" content="article">
-<meta property="og:title" content="机器学习中的数学：（一）线性代数">
-<meta property="og:url" content="http://example.com/2021/04/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%EF%BC%88%E4%B8%80%EF%BC%89%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="本博客是对MATHEMATICS FOR MACHINE LEARNING的学习笔记，因为是全英文的书籍，所以在每节之后都会收集一些相关的术语，然后笔记中也可能会加入一些英文。当然，作为一个个人笔记，我会加入一些自己的理解，这些理解可能会因为自己的能力有限而不够深入并且有较大的局限性，但是，我会不断复习自己的笔记，并不断更新自己的理解。这正如孔子所说的：温故而知新，可以为师矣。ps:想要这本书的电">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210406162047999.jpg?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210406170211452.jpg?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210407165522874.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210410102846896.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210411130138978.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210410101439335.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210410101504335.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210413102520215.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210414105134656.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210414105953434.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210415113357742.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210415114048590.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210416103201764.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210416105124125.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210416120627532.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210416121342931.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210416130351294.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210416152551695.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210417102738876.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210417140801630.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210417140746445.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210417142201266.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2021041813243031.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418133146671.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418133852855.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418135457251.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418140518540.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418140707505.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418165641673.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418170047681.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418170843921.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210418171350189.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210419080833884.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="article:published_time" content="2021-04-21T02:22:36.000Z">
-<meta property="article:modified_time" content="2023-03-08T11:48:46.712Z">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210406162047999.jpg?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-
-<link rel="canonical" href="http://example.com/2021/04/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%EF%BC%88%E4%B8%80%EF%BC%89%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
-
-  <title>机器学习中的数学：（一）线性代数 | Hexo</title>
   
+    <title>机器学习中的数学：（一）线性代数 | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="本博客是对MATHEMATICS FOR MACHINE LEARNING的学习笔记，因为是全英文的书籍，所以在每节之后都会收集一些相关的术语，然后笔记中也可能会加入一些英文。当然，作为一个个人笔记，我会加入一些自己的理解，这些理解可能会因为自己的能力有限而不够深入并且有较大的局限性，但是，我会不断">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
 
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<style>mjx-container[jax="SVG"] {
+<meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -225,123 +139,68 @@ mjx-container[display="true"] + br {
 </style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Hexo" title="Hexo"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Hexo">Hexo</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:example.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
 </div>
 
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
     </header>
-
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
+      <a href="/2021/04/21/机器学习中的数学：（一）线性代数/" title="机器学习中的数学：（一）线性代数" itemprop="url">机器学习中的数学：（一）线性代数</a>
+  </h1>
+  <p class="article-author">By
     
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%EF%BC%88%E4%B8%80%EF%BC%89%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          机器学习中的数学：（一）线性代数
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-04-21 10:22:36" itemprop="dateCreated datePublished" datetime="2021-04-21T10:22:36+08:00">2021-04-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-08 19:48:46" itemprop="dateModified" datetime="2023-03-08T19:48:46+08:00">2023-03-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
+      <a href="http://example.com" title="John Doe">John Doe</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2021-04-21T02:22:36.000Z" itemprop="datePublished">2021-04-21</time>
+    Updated:<time datetime="2023-03-08T11:48:46.712Z" itemprop="dateModified">2023-03-08</time>
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <p><font color="#999AAA">本博客是对MATHEMATICS FOR MACHINE LEARNING的学习笔记，因为是全英文的书籍，所以在每节之后都会收集一些相关的术语，然后笔记中也可能会加入一些英文。当然，作为一个个人笔记，我会加入一些自己的理解，这些理解可能会因为自己的能力有限而不够深入并且有较大的局限性，但是，我会不断复习自己的笔记，并不断更新自己的理解。这正如孔子所说的：温故而知新，可以为师矣。<br>ps:想要这本书的电子版可以私信我。<br>pps:我认为大脑能更加轻易地记忆图片，图片会比文字更好理解，所以我会尽可能的多加一些图片在笔记中。<br><img src="https://img-blog.csdnimg.cn/20210406162047999.jpg?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></font></p>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linear-Algebra"><span class="toc-number">2.</span> <span class="toc-text">Linear Algebra</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Foundations"><span class="toc-number">2.1.</span> <span class="toc-text">Foundations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%86"><span class="toc-number">2.1.1.</span> <span class="toc-text">逆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%96%B9%E7%A8%8B"><span class="toc-number">2.1.2.</span> <span class="toc-text">解方程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B-Ax-b"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">计算线性方程$Ax &#x3D; b$</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hadamard-product"><span class="toc-number">2.1.3.</span> <span class="toc-text">Hadamard product</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E7%A9%BA%E9%97%B4%EF%BC%88Vector-Space%EF%BC%89"><span class="toc-number">2.1.4.</span> <span class="toc-text">向量空间（Vector Space）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E5%AD%90%E7%A9%BA%E9%97%B4%EF%BC%88Vector-subspace%EF%BC%89"><span class="toc-number">2.1.4.1.</span> <span class="toc-text">向量子空间（Vector subspace）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%97%A0%E5%85%B3"><span class="toc-number">2.2.</span> <span class="toc-text">线性无关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Basis-and-Rank"><span class="toc-number">2.3.</span> <span class="toc-text">Basis and Rank</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Generating-set-and-basis"><span class="toc-number">2.3.1.</span> <span class="toc-text">Generating set and basis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rank"><span class="toc-number">2.3.2.</span> <span class="toc-text">Rank</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%98%A0%E5%B0%84%EF%BC%88Linear-Mappings-vector-space-homomorphism-linear-transformation%EF%BC%89"><span class="toc-number">2.4.</span> <span class="toc-text">线性映射（Linear Mappings&#x2F;vector space homomorphism&#x2F; linear transformation）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%98%A0%E5%B0%84%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="toc-number">2.4.1.</span> <span class="toc-text">线性映射的矩阵表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E5%8F%98%E6%8D%A2-Basis-Change"><span class="toc-number">2.4.2.</span> <span class="toc-text">基变换(Basis Change)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%83%8F%E9%9B%86%E4%B8%8E%E6%A0%B8%EF%BC%88Image-and-Kernel%EF%BC%89"><span class="toc-number">2.4.3.</span> <span class="toc-text">像集与核（Image and Kernel）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BF%E5%B0%84%E7%A9%BA%E9%97%B4%EF%BC%88Affine-Spaces%EF%BC%89"><span class="toc-number">2.5.</span> <span class="toc-text">仿射空间（Affine Spaces）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BF%E5%B0%84%E5%AD%90%E7%A9%BA%E9%97%B4"><span class="toc-number">2.5.1.</span> <span class="toc-text">仿射子空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BF%E5%B0%84%E6%98%A0%E5%B0%84"><span class="toc-number">2.5.2.</span> <span class="toc-text">仿射映射</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<p><font color="#999AAA">本博客是对MATHEMATICS FOR MACHINE LEARNING的学习笔记，因为是全英文的书籍，所以在每节之后都会收集一些相关的术语，然后笔记中也可能会加入一些英文。当然，作为一个个人笔记，我会加入一些自己的理解，这些理解可能会因为自己的能力有限而不够深入并且有较大的局限性，但是，我会不断复习自己的笔记，并不断更新自己的理解。这正如孔子所说的：温故而知新，可以为师矣。<br>ps:想要这本书的电子版可以私信我。<br>pps:我认为大脑能更加轻易地记忆图片，图片会比文字更好理解，所以我会尽可能的多加一些图片在笔记中。<br><img src="https://img-blog.csdnimg.cn/20210406162047999.jpg?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></font></p>
 <p>&lt;hr style=” border:solid; width:100px; height:1px;” color=#000000 size=1”&gt;</p>
 <p>@[toc]</p>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这部分讲解了书籍的组成，对书籍的各个章节做了一些简要的介绍，并探讨了书籍的学习方式。<br>总的来说，这本书分为两个部分，上半部分是将一些数学基础包含线性代数(Linear Algebra)、分析几何(Analytic Geometry)、矩阵分解(Matrix Decomposition)和概率论(Probability Theoty)，第二部分是讲解机器学习的四大支柱(pillars)技术。<br><img src="https://img-blog.csdnimg.cn/20210406170211452.jpg?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>文中提及了两种学习模式：自顶向下和自底向上。两种方法都有各自的优势和劣势。我的学习模式类似于自底向上，先完成数学理论知识的学习然后再将学过的数学知识用于机器学习理论的学习中，这个过程帮助我进一步强化学过的数学知识，就当一个复习的过程。</p>
@@ -430,193 +289,241 @@ mjx-container[display="true"] + br {
 <p>一个实例：<br><img src="https://img-blog.csdnimg.cn/20210418170843921.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <p>向量可以用向量空间的有序基线性表示，同样的仿射空间中的向量可以由同样的方式表示，只需要在每个向量中加上支持点（support point）即可<br><img src="https://img-blog.csdnimg.cn/20210418171350189.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <h3 id="仿射映射"><a href="#仿射映射" class="headerlink" title="仿射映射"></a>仿射映射</h3><p>与线性映射类似，仿射映射只不过是在线性映射之后加上一个偏置量（支撑点）。<br><img src="https://img-blog.csdnimg.cn/20210419080833884.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
 
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://example.com/2021/04/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%EF%BC%88%E4%B8%80%EF%BC%89%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" data-title="机器学习中的数学：（一）线性代数 | Hexo" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2021/04/22/机器学习中的数学：（二）解析几何/" title="机器学习中的数学：（二）解析几何">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  机器学习中的数学：（二）解析几何</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2021/04/07/python学习笔记/"  title="python学习笔记">
+ <strong>NEXT:</strong><br/> 
+ <span>python学习笔记
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linear-Algebra"><span class="toc-number">2.</span> <span class="toc-text">Linear Algebra</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Foundations"><span class="toc-number">2.1.</span> <span class="toc-text">Foundations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%86"><span class="toc-number">2.1.1.</span> <span class="toc-text">逆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E6%96%B9%E7%A8%8B"><span class="toc-number">2.1.2.</span> <span class="toc-text">解方程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B-Ax-b"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">计算线性方程$Ax &#x3D; b$</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hadamard-product"><span class="toc-number">2.1.3.</span> <span class="toc-text">Hadamard product</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E7%A9%BA%E9%97%B4%EF%BC%88Vector-Space%EF%BC%89"><span class="toc-number">2.1.4.</span> <span class="toc-text">向量空间（Vector Space）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E5%AD%90%E7%A9%BA%E9%97%B4%EF%BC%88Vector-subspace%EF%BC%89"><span class="toc-number">2.1.4.1.</span> <span class="toc-text">向量子空间（Vector subspace）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%97%A0%E5%85%B3"><span class="toc-number">2.2.</span> <span class="toc-text">线性无关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Basis-and-Rank"><span class="toc-number">2.3.</span> <span class="toc-text">Basis and Rank</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Generating-set-and-basis"><span class="toc-number">2.3.1.</span> <span class="toc-text">Generating set and basis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rank"><span class="toc-number">2.3.2.</span> <span class="toc-text">Rank</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%98%A0%E5%B0%84%EF%BC%88Linear-Mappings-vector-space-homomorphism-linear-transformation%EF%BC%89"><span class="toc-number">2.4.</span> <span class="toc-text">线性映射（Linear Mappings&#x2F;vector space homomorphism&#x2F; linear transformation）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%98%A0%E5%B0%84%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="toc-number">2.4.1.</span> <span class="toc-text">线性映射的矩阵表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E5%8F%98%E6%8D%A2-Basis-Change"><span class="toc-number">2.4.2.</span> <span class="toc-text">基变换(Basis Change)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%83%8F%E9%9B%86%E4%B8%8E%E6%A0%B8%EF%BC%88Image-and-Kernel%EF%BC%89"><span class="toc-number">2.4.3.</span> <span class="toc-text">像集与核（Image and Kernel）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BF%E5%B0%84%E7%A9%BA%E9%97%B4%EF%BC%88Affine-Spaces%EF%BC%89"><span class="toc-number">2.5.</span> <span class="toc-text">仿射空间（Affine Spaces）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BF%E5%B0%84%E5%AD%90%E7%A9%BA%E9%97%B4"><span class="toc-number">2.5.1.</span> <span class="toc-text">仿射子空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BF%E5%B0%84%E6%98%A0%E5%B0%84"><span class="toc-number">2.5.2.</span> <span class="toc-text">仿射映射</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C-primer/" title="C++ primer">C++ primer<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DB/" title="DB">DB<sup>1</sup></a></li>
+		
+			<li><a href="/tags/OS/" title="OS">OS<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Projects/" title="Projects">Projects<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bugs/" title="bugs">bugs<sup>1</sup></a></li>
+		
+			<li><a href="/tags/computer-network/" title="computer network">computer network<sup>2</sup></a></li>
+		
+			<li><a href="/tags/侯捷C/" title="侯捷C++">侯捷C++<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
     </div>
-
-    
-    
-    
-
-      <footer class="post-footer">
-
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2023 
+		
+		<a href="http://example.com" target="_blank" title="John Doe">John Doe</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2021/04/07/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="python学习笔记">
-      <i class="fa fa-chevron-left"></i> python学习笔记
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/04/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%EF%BC%88%E4%BA%8C%EF%BC%89%E8%A7%A3%E6%9E%90%E5%87%A0%E4%BD%95/" rel="next" title="机器学习中的数学：（二）解析几何">
-      机器学习中的数学：（二）解析几何 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
     }
   });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
 </script>
 
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linear-Algebra"><span class="nav-number">2.</span> <span class="nav-text">Linear Algebra</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Foundations"><span class="nav-number">2.1.</span> <span class="nav-text">Foundations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%86"><span class="nav-number">2.1.1.</span> <span class="nav-text">逆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%96%B9%E7%A8%8B"><span class="nav-number">2.1.2.</span> <span class="nav-text">解方程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B-Ax-b"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">计算线性方程$Ax &#x3D; b$</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hadamard-product"><span class="nav-number">2.1.3.</span> <span class="nav-text">Hadamard product</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E7%A9%BA%E9%97%B4%EF%BC%88Vector-Space%EF%BC%89"><span class="nav-number">2.1.4.</span> <span class="nav-text">向量空间（Vector Space）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E5%AD%90%E7%A9%BA%E9%97%B4%EF%BC%88Vector-subspace%EF%BC%89"><span class="nav-number">2.1.4.1.</span> <span class="nav-text">向量子空间（Vector subspace）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%97%A0%E5%85%B3"><span class="nav-number">2.2.</span> <span class="nav-text">线性无关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Basis-and-Rank"><span class="nav-number">2.3.</span> <span class="nav-text">Basis and Rank</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Generating-set-and-basis"><span class="nav-number">2.3.1.</span> <span class="nav-text">Generating set and basis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rank"><span class="nav-number">2.3.2.</span> <span class="nav-text">Rank</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%98%A0%E5%B0%84%EF%BC%88Linear-Mappings-vector-space-homomorphism-linear-transformation%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">线性映射（Linear Mappings&#x2F;vector space homomorphism&#x2F; linear transformation）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%98%A0%E5%B0%84%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.4.1.</span> <span class="nav-text">线性映射的矩阵表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E5%8F%98%E6%8D%A2-Basis-Change"><span class="nav-number">2.4.2.</span> <span class="nav-text">基变换(Basis Change)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%83%8F%E9%9B%86%E4%B8%8E%E6%A0%B8%EF%BC%88Image-and-Kernel%EF%BC%89"><span class="nav-number">2.4.3.</span> <span class="nav-text">像集与核（Image and Kernel）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BF%E5%B0%84%E7%A9%BA%E9%97%B4%EF%BC%88Affine-Spaces%EF%BC%89"><span class="nav-number">2.5.</span> <span class="nav-text">仿射空间（Affine Spaces）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BF%E5%B0%84%E5%AD%90%E7%A9%BA%E9%97%B4"><span class="nav-number">2.5.1.</span> <span class="nav-text">仿射子空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BF%E5%B0%84%E6%98%A0%E5%B0%84"><span class="nav-number">2.5.2.</span> <span class="nav-text">仿射映射</span></a></li></ol></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">John Doe</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">39</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">8</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
 
 
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
-  </div>
-
-        
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
 
 
 
 
 
 
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

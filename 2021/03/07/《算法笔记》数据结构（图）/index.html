@@ -1,85 +1,32 @@
-<!DOCTYPE html>
+
+ <!DOCTYPE HTML>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="图的存储图有两种存储方式：邻接表和邻接矩阵。邻接矩阵需要的空间较大，一般适用于顶点数目不超过1000的情况 邻接矩阵相当于一个离散的平面直角坐标系，每一个坐标代表一对节点的相互之间的关系，当两节点不直接相连的时候，这个坐标上的值可以设为0、-1或者是无穷大。否则可以在该点上赋值为这两点之间的权值。 邻接表将这些节点之间的关系保存在几个链表中，每一个链表都是在描述一个节点的连接情况。可以将这些数据保">
-<meta property="og:type" content="article">
-<meta property="og:title" content="《算法笔记》数据结构（图）">
-<meta property="og:url" content="http://example.com/2021/03/07/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E5%9B%BE%EF%BC%89/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="图的存储图有两种存储方式：邻接表和邻接矩阵。邻接矩阵需要的空间较大，一般适用于顶点数目不超过1000的情况 邻接矩阵相当于一个离散的平面直角坐标系，每一个坐标代表一对节点的相互之间的关系，当两节点不直接相连的时候，这个坐标上的值可以设为0、-1或者是无穷大。否则可以在该点上赋值为这两点之间的权值。 邻接表将这些节点之间的关系保存在几个链表中，每一个链表都是在描述一个节点的连接情况。可以将这些数据保">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210227084657192.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210302185505437.gif">
-<meta property="article:published_time" content="2021-03-07T08:48:19.000Z">
-<meta property="article:modified_time" content="2023-03-08T11:48:52.198Z">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210227084657192.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70">
-
-<link rel="canonical" href="http://example.com/2021/03/07/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E5%9B%BE%EF%BC%89/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
-
-  <title>《算法笔记》数据结构（图） | Hexo</title>
   
+    <title>《算法笔记》数据结构（图） | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="图的存储图有两种存储方式：邻接表和邻接矩阵。邻接矩阵需要的空间较大，一般适用于顶点数目不超过1000的情况
+邻接矩阵相当于一个离散的平面直角坐标系，每一个坐标代表一对节点的相互之间的关系，当两节点不直接相连的时候，这个坐标上的值可以设为0、-1或者是无穷大。否则可以在该点上赋值为这两点之间的权值。
+">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
 
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<style>mjx-container[jax="SVG"] {
+<meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -194,123 +141,68 @@ mjx-container[display="true"] + br {
 </style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Hexo" title="Hexo"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Hexo">Hexo</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:example.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
 </div>
 
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
     </header>
-
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
+      <a href="/2021/03/07/《算法笔记》数据结构（图）/" title="《算法笔记》数据结构（图）" itemprop="url">《算法笔记》数据结构（图）</a>
+  </h1>
+  <p class="article-author">By
     
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/07/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E5%9B%BE%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          《算法笔记》数据结构（图）
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-03-07 16:48:19" itemprop="dateCreated datePublished" datetime="2021-03-07T16:48:19+08:00">2021-03-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-08 19:48:52" itemprop="dateModified" datetime="2023-03-08T19:48:52+08:00">2023-03-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
+      <a href="http://example.com" title="John Doe">John Doe</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2021-03-07T08:48:19.000Z" itemprop="datePublished">2021-03-07</time>
+    Updated:<time datetime="2023-03-08T11:48:52.198Z" itemprop="dateModified">2023-03-08</time>
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <h1 id="图的存储"><a href="#图的存储" class="headerlink" title="图的存储"></a>图的存储</h1><p>图有两种存储方式：邻接表和邻接矩阵。邻接矩阵需要的空间较大，一般适用于顶点数目不超过1000的情况</p>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8"><span class="toc-number">1.</span> <span class="toc-text">图的存储</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5"><span class="toc-number">1.1.</span> <span class="toc-text">邻接矩阵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%82%BB%E6%8E%A5%E8%A1%A8"><span class="toc-number">1.2.</span> <span class="toc-text">邻接表</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86"><span class="toc-number">2.</span> <span class="toc-text">图的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88"><span class="toc-number">2.1.</span> <span class="toc-text">深度优先</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88"><span class="toc-number">2.2.</span> <span class="toc-text">广度优先</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="toc-number">2.3.</span> <span class="toc-text">最短路径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dijkstra%E7%AE%97%E6%B3%95"><span class="toc-number">2.3.1.</span> <span class="toc-text">Dijkstra算法</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<h1 id="图的存储"><a href="#图的存储" class="headerlink" title="图的存储"></a>图的存储</h1><p>图有两种存储方式：邻接表和邻接矩阵。邻接矩阵需要的空间较大，一般适用于顶点数目不超过1000的情况</p>
 <h2 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h2><p>相当于一个离散的平面直角坐标系，每一个坐标代表一对节点的相互之间的关系，当两节点不直接相连的时候，这个坐标上的值可以设为0、-1或者是无穷大。否则可以在该点上赋值为这两点之间的权值。<img src="https://img-blog.csdnimg.cn/20210227084657192.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <h2 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h2><p>将这些节点之间的关系保存在几个链表中，每一个链表都是在描述一个节点的连接情况。可以将这些数据保存在向量中。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">10</span>;<span class="comment">//顶点个数</span></span><br><span class="line"></span><br><span class="line">vector&lt;<span class="type">int</span>&gt;Adj[N];</span><br><span class="line"><span class="comment">//之后直接将节点的信息连接到相应的向量之后</span></span><br><span class="line"><span class="type">int</span> x;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Create</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">10</span>; ++i) &#123;</span><br><span class="line">		Adj[i].<span class="built_in">push_back</span>(x);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//当需要存放更多节点信息的时候，可以用结构体+构造函数</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> v, w;</span><br><span class="line">	<span class="built_in">Node</span>(<span class="type">int</span> _v, <span class="type">int</span> _w) :<span class="built_in">v</span>(_v), <span class="built_in">w</span>(_w) &#123;&#125;;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//赋值：Adj[1].push_back(Node(3,4));</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
 <h1 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h1><p>遍历就是将图中所有的节点都访问一遍，要做到不重复访问，不遗漏。主要的方法有深度优先和广度优先。</p>
@@ -318,193 +210,241 @@ mjx-container[display="true"] + br {
 <h2 id="广度优先"><a href="#广度优先" class="headerlink" title="广度优先"></a>广度优先</h2><p>&#8195; 在遍历过程中优先访问一个节点的所有的相邻的节点。这个时候需要借助队列，将该节点的所有相连节点加入到队列中，在队列中的节点顺序就是最终的广度优先遍历的顺序。同时，为了防止重复访问，需要建立一个数组，将节点的序号作为数组的下标，作为该节点是否被访问的标识。<br><br> &#8195; <strong>算法思想</strong>：先将起始节点加入到队列中，然后不断取出队列中的元素，访问并加入到队列中，并将该点相连的节点加入到队列中，直到队列中的元素为空。<br><br>&#8195;判断一个节点v1是否与另一个节点v2是否相连：<br>&#8195;邻接矩阵中，只需要确定[v1,v2]所对应的值是否为1，是则为相连，反之不相连。<br><br>&#8195;在邻接表中，只需要遍历这个节点所连接的那一条邻接表即可。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n, G[MAXV][MAXV];</span><br><span class="line"><span class="type">bool</span> inq[MAXV] = &#123; <span class="literal">false</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//广度优先邻接矩阵版：先将首个节点入队，</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BFS_AdjMatrix</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">BFS</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">		queue&lt;<span class="type">int</span>&gt;q;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//将首节点放到队列中</span></span><br><span class="line">		q.<span class="built_in">push</span>(u);</span><br><span class="line">		inq[u] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//将相邻的节点加入到队列中</span></span><br><span class="line">		<span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">			<span class="type">int</span> u = q.<span class="built_in">front</span>();</span><br><span class="line">			q.<span class="built_in">pop</span>();</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> v = <span class="number">0</span>; v &lt; n; ++v) &#123;</span><br><span class="line">				<span class="keyword">if</span> (inq[v] == <span class="literal">false</span> &amp;&amp; G[u][v] != INF) &#123;</span><br><span class="line">					q.<span class="built_in">push</span>(v);</span><br><span class="line">					inq[v] = <span class="literal">true</span>;<span class="comment">//访问之后加入队列，改变标识</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">BFSTrave</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">//将未被访问过的节点全部访问一遍</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> u = <span class="number">0</span>; u &lt; n; ++u) &#123;</span><br><span class="line">			<span class="keyword">if</span> (inq[u] == <span class="literal">false</span>)<span class="built_in">BFS</span>(u);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//邻接表：访问节点的方式为遍历该向量的所有节点</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BFS_AdjList</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt;Adj[MAXV];<span class="comment">//这其实相当于一个二维向量</span></span><br><span class="line">	<span class="type">int</span> n;</span><br><span class="line">	<span class="type">bool</span> inq[MAXV] = &#123; <span class="literal">false</span> &#125;;<span class="comment">//判断节点是否在队列中</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">BFS</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">		queue&lt;<span class="type">int</span>&gt;q;</span><br><span class="line">		q.<span class="built_in">push</span>(u);</span><br><span class="line">		inq[u] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">while</span> (!q.<span class="built_in">empty</span>())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> u = q.<span class="built_in">front</span>();</span><br><span class="line">			q.<span class="built_in">pop</span>();</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; Adj[u].<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">				<span class="type">int</span> v = Adj[u][i];</span><br><span class="line">				<span class="keyword">if</span> (inq[v] == <span class="literal">false</span>) &#123;</span><br><span class="line">					q.<span class="built_in">push</span>(v);</span><br><span class="line">					inq[v] = <span class="literal">true</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">BFSTravel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> u = <span class="number">0</span>; u &lt; n; ++u) &#123;</span><br><span class="line">			<span class="keyword">if</span> (inq[u] == <span class="literal">false</span>)<span class="built_in">BFS</span>(u);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//当想要得出所有节点的所在层的信息的时候：利用结构体，在其中加上层次这一变量</span></span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">Node</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> v;<span class="comment">//节点编号</span></span><br><span class="line">		<span class="type">int</span> layer;<span class="comment">//所在层次，头节点为第0层</span></span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">BFS</span><span class="params">(<span class="type">int</span> s)</span> </span>&#123;</span><br><span class="line">		vector&lt;Node&gt;Adj[MAXV];</span><br><span class="line">		<span class="type">int</span> n;</span><br><span class="line">		<span class="type">bool</span> inq[MAXV] = &#123; <span class="literal">false</span> &#125;;</span><br><span class="line">		queue&lt;Node&gt;q;</span><br><span class="line">		Node start;<span class="comment">//第一个访问的节点</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//初始化首个节点</span></span><br><span class="line">		start.v = s;</span><br><span class="line">		start.layer = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		q.<span class="built_in">push</span>(start);</span><br><span class="line">		inq[start.v] = <span class="literal">true</span>;<span class="comment">//做好相应的标识</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">while</span> (!q.<span class="built_in">empty</span>())</span><br><span class="line">		&#123;</span><br><span class="line">			Node topNode = q.<span class="built_in">front</span>();</span><br><span class="line">			q.<span class="built_in">pop</span>();</span><br><span class="line">			<span class="type">int</span> u = topNode.v;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; Adj[u].<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">				<span class="comment">//将next赋值为该节点连接的节点</span></span><br><span class="line">				Node next = Adj[u][i];</span><br><span class="line">				next.layer = topNode.layer + <span class="number">1</span>;<span class="comment">//赋值为上一层的层数+1</span></span><br><span class="line"></span><br><span class="line">				<span class="keyword">if</span> (inq[next.v] == <span class="literal">false</span>) &#123;</span><br><span class="line">					q.<span class="built_in">push</span>(next);</span><br><span class="line">					inq[next.v] = <span class="literal">true</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <h2 id="最短路径"><a href="#最短路径" class="headerlink" title="最短路径"></a>最短路径</h2><p>这类问题是求解图中从源点到图中任一节点的最短的距离（路径）。主要的算法有Dijkstra算法、Bellman-Ford算法、SPFA算法、Floyd算法。</p>
 <h3 id="Dijkstra算法"><a href="#Dijkstra算法" class="headerlink" title="Dijkstra算法"></a>Dijkstra算法</h3><p>算法图示（取自<a target="_blank" rel="noopener" href="https://en.wikipedia.iwiki.eu.org/wiki/Dijkstra%27s_algorithm">Wikipedia</a>）<br><img src="https://img-blog.csdnimg.cn/20210302185505437.gif" alt="在这里插入图片描述"><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Dijkstra算法</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXV = <span class="number">1000</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">1e9</span>;<span class="comment">//无穷大</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//寻找最短距离</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//邻接矩阵:先找到与源点最近的相邻节点，然后从该节点出发，遍历该节点的所有的未被访问的相邻的节点，并更新最小权值</span></span><br><span class="line"><span class="comment">//O(V*(V+V)) = O(V^2)</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SPD_AdjMatrix</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> n, G[MAXV][MAXV];<span class="comment">//分别为顶点数和以邻接矩阵形式存储的图</span></span><br><span class="line">	<span class="type">int</span> d[MAXV];<span class="comment">//该节点到源点的最短距离</span></span><br><span class="line">	<span class="type">bool</span> vis[MAXV] = &#123; <span class="literal">false</span> &#125;;<span class="comment">//访问数组，以图节点的编号作为索引</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">Dijkstra</span><span class="params">(<span class="type">int</span> s)</span></span>&#123;</span><br><span class="line">		<span class="built_in">fill</span>(d, d + MAXV, INF);<span class="comment">//将所有的节点初始化为极大值</span></span><br><span class="line">		d[s] = <span class="number">0</span>;<span class="comment">//源点到源点的距离为0</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//找到与起点相邻的路径最短的节点</span></span><br><span class="line">		<span class="type">int</span> u = <span class="number">-1</span>, MIN = INF;<span class="comment">//最短距离的节点编号和距离</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">			<span class="comment">//遍历所有相邻节点</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; ++j) &#123;</span><br><span class="line">				<span class="comment">//未被访问，并且距离权值小于之前记录的最小值</span></span><br><span class="line">				<span class="keyword">if</span> (vis[j] == <span class="literal">false</span> &amp;&amp; d[j] &lt; MIN) &#123;</span><br><span class="line">					u = j;</span><br><span class="line">					MIN = d[j];</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//说明剩下的顶点与起点s不相连通</span></span><br><span class="line">		<span class="keyword">if</span> (u == <span class="number">-1</span>)<span class="keyword">return</span>;</span><br><span class="line">		vis[u] = <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> v = <span class="number">0</span>; v &lt; n; ++v) &#123;</span><br><span class="line">			<span class="comment">//与该节点相连且未被访问且以该节点为中介的权值比原先的权值更小</span></span><br><span class="line">			<span class="keyword">if</span> (vis[v] == <span class="literal">false</span> &amp;&amp; G[u][v] != INF &amp;&amp; d[u] + G[u][v] &lt; d[v]) &#123;</span><br><span class="line">				d[v] = d[u] + G[u][v];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//要记录最短路径的具体情况，可以记录每个节点最短路径的前驱，将该节点作为数组下标，数组中的值作为前驱节点的编号</span></span><br><span class="line">	<span class="type">int</span> pre[MAXV];</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">DijkstraPath</span><span class="params">(<span class="type">int</span> s)</span> </span>&#123;</span><br><span class="line">		<span class="built_in">fill</span>(d, d + MAXV, INF);</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)pre[i] = i;<span class="comment">//(添加)初始化，将每个节点的前驱初试化为其本身</span></span><br><span class="line">		d[s] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//找到与起点相邻的路径最短的节点</span></span><br><span class="line">		<span class="type">int</span> u = <span class="number">-1</span>, MIN = INF;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; ++j) &#123;</span><br><span class="line">				<span class="keyword">if</span> (vis[j] == <span class="literal">false</span> &amp;&amp; d[j] &lt; MIN) &#123;</span><br><span class="line">					u = j;</span><br><span class="line">					MIN = d[j];</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (u == <span class="number">-1</span>)<span class="keyword">return</span>;</span><br><span class="line">		vis[u] = <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> v = <span class="number">0</span>; v &lt; n; ++v) &#123;</span><br><span class="line">			<span class="keyword">if</span> (vis[v] == <span class="literal">false</span> &amp;&amp; G[u][v] != INF &amp;&amp; d[u] + G[u][v] &lt; d[v]) &#123;</span><br><span class="line">				d[v] = d[u] + G[u][v];</span><br><span class="line">				pre[v] = u;<span class="comment">//(添加)将节点前驱初始化</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//输出路径</span></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">DFS</span><span class="params">(<span class="type">int</span> s, <span class="type">int</span> v)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (v == s) &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, s);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">DFS</span>(s, pre[v]);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, v);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//邻接表：O(V^2 + E)</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SPD_AdjList</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">Node</span>&#123;</span><br><span class="line">		<span class="type">int</span> v, dis;</span><br><span class="line">	&#125;;</span><br><span class="line">	vector&lt;Node&gt;Adj[MAXV];</span><br><span class="line">	<span class="type">int</span> n;</span><br><span class="line">	<span class="type">int</span> d[MAXV];</span><br><span class="line">	<span class="type">bool</span> vis[MAXV] = &#123; <span class="literal">false</span> &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">Dijkstra</span><span class="params">(<span class="type">int</span> s)</span> </span>&#123;</span><br><span class="line">		<span class="built_in">fill</span>(d, d + MAXV, INF);</span><br><span class="line">		d[s] = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">			<span class="type">int</span> u = <span class="number">-1</span>, MIN = INF;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; ++j) &#123;</span><br><span class="line">				<span class="keyword">if</span> (vis[j] == <span class="literal">false</span> &amp;&amp; d[j] &lt; MIN) &#123;</span><br><span class="line">					u = j;</span><br><span class="line">					MIN = d[j];</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (u == <span class="number">-1</span>)<span class="keyword">return</span>;</span><br><span class="line">			vis[u] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">			<span class="comment">//利用向量的特性，直接获取相邻的节点</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; Adj[u].<span class="built_in">size</span>(); ++j) &#123;</span><br><span class="line">				<span class="type">int</span> v = Adj[u][j].v;</span><br><span class="line">				<span class="comment">//检查是否满足条件</span></span><br><span class="line">				<span class="keyword">if</span> (vis[v] == <span class="literal">false</span> &amp;&amp; d[u] + Adj[u][j].dis &lt; d[v]) &#123;</span><br><span class="line">					d[v] = d[u] + Adj[u][j].dis;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure><br>To Be Continue…</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
 
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://example.com/2021/03/07/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E5%9B%BE%EF%BC%89/" data-title="《算法笔记》数据结构（图） | Hexo" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2021/03/10/算法➡数学问题/" title="算法➡数学问题">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  算法➡数学问题</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2021/02/27/《算法笔记》第四章：算法初步（算法思想）/"  title="《算法笔记》第四章：算法初步（算法思想）">
+ <strong>NEXT:</strong><br/> 
+ <span>《算法笔记》第四章：算法初步（算法思想）
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8"><span class="toc-number">1.</span> <span class="toc-text">图的存储</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5"><span class="toc-number">1.1.</span> <span class="toc-text">邻接矩阵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%82%BB%E6%8E%A5%E8%A1%A8"><span class="toc-number">1.2.</span> <span class="toc-text">邻接表</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86"><span class="toc-number">2.</span> <span class="toc-text">图的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88"><span class="toc-number">2.1.</span> <span class="toc-text">深度优先</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88"><span class="toc-number">2.2.</span> <span class="toc-text">广度优先</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="toc-number">2.3.</span> <span class="toc-text">最短路径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dijkstra%E7%AE%97%E6%B3%95"><span class="toc-number">2.3.1.</span> <span class="toc-text">Dijkstra算法</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C-primer/" title="C++ primer">C++ primer<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DB/" title="DB">DB<sup>1</sup></a></li>
+		
+			<li><a href="/tags/OS/" title="OS">OS<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Projects/" title="Projects">Projects<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bugs/" title="bugs">bugs<sup>1</sup></a></li>
+		
+			<li><a href="/tags/computer-network/" title="computer network">computer network<sup>2</sup></a></li>
+		
+			<li><a href="/tags/侯捷C/" title="侯捷C++">侯捷C++<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
     </div>
-
-    
-    
-    
-
-      <footer class="post-footer">
-
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2023 
+		
+		<a href="http://example.com" target="_blank" title="John Doe">John Doe</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2021/02/27/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A%E7%AE%97%E6%B3%95%E5%88%9D%E6%AD%A5%EF%BC%88%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3%EF%BC%89/" rel="prev" title="《算法笔记》第四章：算法初步（算法思想）">
-      <i class="fa fa-chevron-left"></i> 《算法笔记》第四章：算法初步（算法思想）
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/03/10/%E7%AE%97%E6%B3%95%E2%9E%A1%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/" rel="next" title="算法➡数学问题">
-      算法➡数学问题 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
     }
   });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
 </script>
 
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8"><span class="nav-number">1.</span> <span class="nav-text">图的存储</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5"><span class="nav-number">1.1.</span> <span class="nav-text">邻接矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E8%A1%A8"><span class="nav-number">1.2.</span> <span class="nav-text">邻接表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86"><span class="nav-number">2.</span> <span class="nav-text">图的遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88"><span class="nav-number">2.1.</span> <span class="nav-text">深度优先</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88"><span class="nav-number">2.2.</span> <span class="nav-text">广度优先</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="nav-number">2.3.</span> <span class="nav-text">最短路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dijkstra%E7%AE%97%E6%B3%95"><span class="nav-number">2.3.1.</span> <span class="nav-text">Dijkstra算法</span></a></li></ol></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">John Doe</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">39</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">8</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
 
 
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
-  </div>
-
-        
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
 
 
 
 
 
 
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

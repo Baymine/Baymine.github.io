@@ -1,86 +1,32 @@
-<!DOCTYPE html>
+
+ <!DOCTYPE HTML>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="TODO：总结各种初始化方法 temp p407：内置类型或组合类型的对象的值将是未定义的，而类对象将用默认构造函数进行初始化1234567891011string *ps &#x3D; new string;  &#x2F;&#x2F; empty stringint *pi &#x3D; new int;  &#x2F;&#x2F; uninitialized int&#x2F;&#x2F; 值初始化int *pi2 &#x3D; new int(); &#x2F;&#x2F; initialized">
-<meta property="og:type" content="article">
-<meta property="og:title" content="C++ primer">
-<meta property="og:url" content="http://example.com/2022/10/12/C-primer/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="TODO：总结各种初始化方法 temp p407：内置类型或组合类型的对象的值将是未定义的，而类对象将用默认构造函数进行初始化1234567891011string *ps &#x3D; new string;  &#x2F;&#x2F; empty stringint *pi &#x3D; new int;  &#x2F;&#x2F; uninitialized int&#x2F;&#x2F; 值初始化int *pi2 &#x3D; new int(); &#x2F;&#x2F; initialized">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/.com//10/12/C-primer/20211209210853.png">
-<meta property="og:image" content="http://example.com/.com//10/12/C-primer/Scope.png">
-<meta property="article:published_time" content="2022-10-12T12:07:04.000Z">
-<meta property="article:modified_time" content="2022-10-22T00:41:39.360Z">
-<meta property="article:author" content="John Doe">
-<meta property="article:tag" content="C++ primer">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/.com//10/12/C-primer/20211209210853.png">
-
-<link rel="canonical" href="http://example.com/2022/10/12/C-primer/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
-
-  <title>C++ primer | Hexo</title>
   
+    <title>C++ primer | Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="TODO：总结各种初始化方法
+temp
+p407：内置类型或组合类型的对象的值将是未定义的，而类对象将用默认构造函数进行初始化1234567891011string *ps = new string;  // empty stringint *pi = new int;  // uninitiali">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
 
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<style>mjx-container[jax="SVG"] {
+<meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -195,123 +141,68 @@ mjx-container[display="true"] + br {
 </style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Hexo" title="Hexo"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Hexo">Hexo</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:example.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
 </div>
 
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
     </header>
-
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
+      <a href="/2022/10/12/C-primer/" title="C++ primer" itemprop="url">C++ primer</a>
+  </h1>
+  <p class="article-author">By
     
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/12/C-primer/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          C++ primer
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-10-12 20:07:04" itemprop="dateCreated datePublished" datetime="2022-10-12T20:07:04+08:00">2022-10-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-10-22 08:41:39" itemprop="dateModified" datetime="2022-10-22T08:41:39+08:00">2022-10-22</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
+      <a href="http://example.com" title="John Doe">John Doe</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2022-10-12T12:07:04.000Z" itemprop="datePublished">2022-10-12</time>
+    Updated:<time datetime="2022-10-22T00:41:39.360Z" itemprop="dateModified">2022-10-22</time>
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <h2 id="TODO："><a href="#TODO：" class="headerlink" title="TODO："></a>TODO：</h2><p>总结各种初始化方法</p>
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TODO%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">TODO：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#temp"><span class="toc-number"></span> <span class="toc-text">temp</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number"></span> <span class="toc-text">知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-Oriented-Programming"><span class="toc-number">1.</span> <span class="toc-text">Object-Oriented Programming</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E5%88%97%E8%A1%A8"><span class="toc-number">1.1.</span> <span class="toc-text">对象列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#this-%E6%8C%87%E9%92%88"><span class="toc-number">1.2.</span> <span class="toc-text">this 指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-Scope-Constants"><span class="toc-number">1.3.</span> <span class="toc-text">Class Scope Constants</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%A5%E6%9C%89%E7%B1%BB%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B%EF%BC%88C-11%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">拥有类作用域的枚举类型（C++11）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%96%B9%E9%9D%A2%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="toc-number">2.</span> <span class="toc-text">输入输出方面的命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Separate-Compilation"><span class="toc-number">3.</span> <span class="toc-text">Separate Compilation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Storage-Duration-Scope-and-Linkage"><span class="toc-number">4.</span> <span class="toc-text">Storage Duration, Scope, and Linkage</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%88Scope%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">变量的作用域（Scope）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#volatile%E5%85%B3%E9%94%AE%E8%AF%8D"><span class="toc-number">4.1.1.</span> <span class="toc-text">volatile关键词</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mutable"><span class="toc-number">4.1.2.</span> <span class="toc-text">mutable</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#extern"><span class="toc-number">4.1.3.</span> <span class="toc-text">extern</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Functions-and-Linkage"><span class="toc-number">4.2.</span> <span class="toc-text">Functions and Linkage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Language-Linking"><span class="toc-number">4.3.</span> <span class="toc-text">Language Linking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Storage-Schemes-and-Dynamic-Allocation"><span class="toc-number">4.4.</span> <span class="toc-text">Storage Schemes and Dynamic Allocation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8D%E5%AD%97%E5%9F%9F"><span class="toc-number">4.5.</span> <span class="toc-text">名字域</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF"><span class="toc-number">5.</span> <span class="toc-text">函数模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88"><span class="toc-number">6.</span> <span class="toc-text">函数指针</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">6.1.</span> <span class="toc-text">函数指针可能遇到的问题</span></a></li></ol></li></ol>
+		</div>
+		
+		<h2 id="TODO："><a href="#TODO：" class="headerlink" title="TODO："></a>TODO：</h2><p>总结各种初始化方法</p>
 <h1 id="temp"><a href="#temp" class="headerlink" title="temp"></a>temp</h1><ul>
 <li>p407：内置类型或组合类型的对象的值将是未定义的，而类对象将用默认构造函数进行初始化<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">string *ps = <span class="keyword">new</span> string;  <span class="comment">// empty string</span></span><br><span class="line"><span class="type">int</span> *pi = <span class="keyword">new</span> <span class="type">int</span>;  <span class="comment">// uninitialized int</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 值初始化</span></span><br><span class="line"><span class="type">int</span> *pi2 = <span class="keyword">new</span> <span class="built_in">int</span>(); <span class="comment">// initialized as 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 拷贝构造也可以这样</span></span><br><span class="line"><span class="keyword">auto</span> p1 = <span class="keyword">new</span> <span class="built_in">auto</span>(p2);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 动态分配const 对象</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *pci = <span class="keyword">new</span> <span class="type">const</span> <span class="built_in">int</span>(<span class="number">1024</span>);</span><br></pre></td></tr></table></figure></li>
 </ul>
@@ -505,196 +396,246 @@ mjx-container[display="true"] + br {
 <blockquote>
 <p>数组名<code>a</code>表示的是数组的第一个元素的地址，<code>&amp;a</code>表示的所有数组所有元素的地址，<code>&amp;a+1</code>就表示下一个数组（是不是一个保存数组每一个元素的地址的数组？）</p>
 </blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">	<span class="type">int</span> a[<span class="number">3</span>]&#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span> &#125;;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;a:&quot;</span> &lt;&lt; a &lt;&lt; <span class="string">&quot;\t&amp;a:&quot;</span> &lt;&lt; &amp;a &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;size of a:&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(a) &lt;&lt; <span class="string">&quot;\tsize of &amp;a:&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(&amp;a) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;a + 1:&quot;</span> &lt;&lt; a + <span class="number">1</span> &lt;&lt; <span class="string">&quot;\t&amp;a+1&quot;</span> &lt;&lt; &amp;a + <span class="number">1</span> &lt;&lt; endl;</span><br><span class="line">	</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">a:00AFFCA4      &amp;a:00AFFCA4</span></span><br><span class="line"><span class="comment">size of a:12    size of &amp;a:4</span></span><br><span class="line"><span class="comment">a + 1:00AFFCA8  &amp;a+1:00AFFCB0  这里增加了C，也就是12</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">// 可见</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">	<span class="type">int</span> a[<span class="number">3</span>]&#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span> &#125;;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;a:&quot;</span> &lt;&lt; a &lt;&lt; <span class="string">&quot;\t&amp;a:&quot;</span> &lt;&lt; &amp;a &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;size of a:&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(a) &lt;&lt; <span class="string">&quot;\tsize of &amp;a:&quot;</span> &lt;&lt; <span class="built_in">sizeof</span>(&amp;a) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;a + 1:&quot;</span> &lt;&lt; a + <span class="number">1</span> &lt;&lt; <span class="string">&quot;\t&amp;a+1&quot;</span> &lt;&lt; &amp;a + <span class="number">1</span> &lt;&lt; endl;</span><br><span class="line">	</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">a:00AFFCA4      &amp;a:00AFFCA4</span></span><br><span class="line"><span class="comment">size of a:12    size of &amp;a:4</span></span><br><span class="line"><span class="comment">a + 1:00AFFCA8  &amp;a+1:00AFFCB0  这里增加了C，也就是12</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">// 可见</span></span><br></pre></td></tr></table></figure>  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/C-primer/">C++ primer</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://example.com/2022/10/12/C-primer/" data-title="C++ primer | Hexo" data-tsina="" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2022/10/21/6_S081lab1/" title="6.S081lab1">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  6.S081lab1</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2022/10/12/STL和泛型编程/"  title="STL和泛型编程">
+ <strong>NEXT:</strong><br/> 
+ <span>STL和泛型编程
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TODO%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">TODO：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#temp"><span class="toc-number"></span> <span class="toc-text">temp</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number"></span> <span class="toc-text">知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-Oriented-Programming"><span class="toc-number">1.</span> <span class="toc-text">Object-Oriented Programming</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E5%88%97%E8%A1%A8"><span class="toc-number">1.1.</span> <span class="toc-text">对象列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#this-%E6%8C%87%E9%92%88"><span class="toc-number">1.2.</span> <span class="toc-text">this 指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-Scope-Constants"><span class="toc-number">1.3.</span> <span class="toc-text">Class Scope Constants</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%A5%E6%9C%89%E7%B1%BB%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B%EF%BC%88C-11%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">拥有类作用域的枚举类型（C++11）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%96%B9%E9%9D%A2%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="toc-number">2.</span> <span class="toc-text">输入输出方面的命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Separate-Compilation"><span class="toc-number">3.</span> <span class="toc-text">Separate Compilation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Storage-Duration-Scope-and-Linkage"><span class="toc-number">4.</span> <span class="toc-text">Storage Duration, Scope, and Linkage</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%88Scope%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">变量的作用域（Scope）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#volatile%E5%85%B3%E9%94%AE%E8%AF%8D"><span class="toc-number">4.1.1.</span> <span class="toc-text">volatile关键词</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mutable"><span class="toc-number">4.1.2.</span> <span class="toc-text">mutable</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#extern"><span class="toc-number">4.1.3.</span> <span class="toc-text">extern</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Functions-and-Linkage"><span class="toc-number">4.2.</span> <span class="toc-text">Functions and Linkage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Language-Linking"><span class="toc-number">4.3.</span> <span class="toc-text">Language Linking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Storage-Schemes-and-Dynamic-Allocation"><span class="toc-number">4.4.</span> <span class="toc-text">Storage Schemes and Dynamic Allocation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8D%E5%AD%97%E5%9F%9F"><span class="toc-number">4.5.</span> <span class="toc-text">名字域</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF"><span class="toc-number">5.</span> <span class="toc-text">函数模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88"><span class="toc-number">6.</span> <span class="toc-text">函数指针</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">6.1.</span> <span class="toc-text">函数指针可能遇到的问题</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/C/" title="C++">C++<sup>1</sup></a></li>
+		
+			<li><a href="/tags/C-primer/" title="C++ primer">C++ primer<sup>1</sup></a></li>
+		
+			<li><a href="/tags/DB/" title="DB">DB<sup>1</sup></a></li>
+		
+			<li><a href="/tags/OS/" title="OS">OS<sup>2</sup></a></li>
+		
+			<li><a href="/tags/Projects/" title="Projects">Projects<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bugs/" title="bugs">bugs<sup>1</sup></a></li>
+		
+			<li><a href="/tags/computer-network/" title="computer network">computer network<sup>2</sup></a></li>
+		
+			<li><a href="/tags/侯捷C/" title="侯捷C++">侯捷C++<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
     </div>
-
-    
-    
-    
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/C-primer/" rel="tag"># C++ primer</a>
-          </div>
-
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2023 
+		
+		<a href="http://example.com" target="_blank" title="John Doe">John Doe</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2022/10/12/STL%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/" rel="prev" title="STL和泛型编程">
-      <i class="fa fa-chevron-left"></i> STL和泛型编程
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/10/21/6_S081lab1/" rel="next" title="6.S081lab1">
-      6.S081lab1 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
     }
   });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
 </script>
 
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TODO%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">TODO：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#temp"><span class="nav-number"></span> <span class="nav-text">temp</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number"></span> <span class="nav-text">知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-Oriented-Programming"><span class="nav-number">1.</span> <span class="nav-text">Object-Oriented Programming</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%88%97%E8%A1%A8"><span class="nav-number">1.1.</span> <span class="nav-text">对象列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this-%E6%8C%87%E9%92%88"><span class="nav-number">1.2.</span> <span class="nav-text">this 指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-Scope-Constants"><span class="nav-number">1.3.</span> <span class="nav-text">Class Scope Constants</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%A5%E6%9C%89%E7%B1%BB%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B%EF%BC%88C-11%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">拥有类作用域的枚举类型（C++11）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%96%B9%E9%9D%A2%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">输入输出方面的命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Separate-Compilation"><span class="nav-number">3.</span> <span class="nav-text">Separate Compilation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Storage-Duration-Scope-and-Linkage"><span class="nav-number">4.</span> <span class="nav-text">Storage Duration, Scope, and Linkage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%88Scope%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">变量的作用域（Scope）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#volatile%E5%85%B3%E9%94%AE%E8%AF%8D"><span class="nav-number">4.1.1.</span> <span class="nav-text">volatile关键词</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mutable"><span class="nav-number">4.1.2.</span> <span class="nav-text">mutable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#extern"><span class="nav-number">4.1.3.</span> <span class="nav-text">extern</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Functions-and-Linkage"><span class="nav-number">4.2.</span> <span class="nav-text">Functions and Linkage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Language-Linking"><span class="nav-number">4.3.</span> <span class="nav-text">Language Linking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Storage-Schemes-and-Dynamic-Allocation"><span class="nav-number">4.4.</span> <span class="nav-text">Storage Schemes and Dynamic Allocation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8D%E5%AD%97%E5%9F%9F"><span class="nav-number">4.5.</span> <span class="nav-text">名字域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF"><span class="nav-number">5.</span> <span class="nav-text">函数模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88"><span class="nav-number">6.</span> <span class="nav-text">函数指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">6.1.</span> <span class="nav-text">函数指针可能遇到的问题</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">John Doe</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">39</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">8</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
 
 
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
-  </div>
-
-        
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
 
 
 
 
 
 
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>
