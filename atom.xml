@@ -3,11 +3,11 @@
   <title>Hexo</title>
   
   
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="https://baymine.github.io/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
+  <link href="https://baymine.github.io/"/>
   <updated>2023-01-16T11:35:05.596Z</updated>
-  <id>http://example.com/</id>
+  <id>https://baymine.github.io/</id>
   
   <author>
     <name>John Doe</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>GeePRC notes</title>
-    <link href="http://example.com/2023/01/05/GeePRC-notes/"/>
-    <id>http://example.com/2023/01/05/GeePRC-notes/</id>
+    <link href="https://baymine.github.io/2023/01/05/GeePRC-notes/"/>
+    <id>https://baymine.github.io/2023/01/05/GeePRC-notes/</id>
     <published>2023-01-05T08:48:47.000Z</published>
     <updated>2023-01-16T11:35:05.596Z</updated>
     
@@ -38,14 +38,14 @@
     
     
     
-    <category term="Projects" scheme="http://example.com/tags/Projects/"/>
+    <category term="Projects" scheme="https://baymine.github.io/tags/Projects/"/>
     
   </entry>
   
   <entry>
     <title>C++ Memory Management</title>
-    <link href="http://example.com/2022/12/18/C-Memory-Management/"/>
-    <id>http://example.com/2022/12/18/C-Memory-Management/</id>
+    <link href="https://baymine.github.io/2022/12/18/C-Memory-Management/"/>
+    <id>https://baymine.github.io/2022/12/18/C-Memory-Management/</id>
     <published>2022-12-18T07:04:19.000Z</published>
     <updated>2022-12-21T09:08:01.289Z</updated>
     
@@ -60,14 +60,14 @@
     
     
     
-    <category term="侯捷C++" scheme="http://example.com/tags/%E4%BE%AF%E6%8D%B7C/"/>
+    <category term="侯捷C++" scheme="https://baymine.github.io/tags/%E4%BE%AF%E6%8D%B7C/"/>
     
   </entry>
   
   <entry>
     <title>MIT6.S081</title>
-    <link href="http://example.com/2022/12/16/MIT6-S081/"/>
-    <id>http://example.com/2022/12/16/MIT6-S081/</id>
+    <link href="https://baymine.github.io/2022/12/16/MIT6-S081/"/>
+    <id>https://baymine.github.io/2022/12/16/MIT6-S081/</id>
     <published>2022-12-16T03:53:01.000Z</published>
     <updated>2022-12-30T01:54:18.556Z</updated>
     
@@ -82,14 +82,14 @@
     
     
     
-    <category term="OS" scheme="http://example.com/tags/OS/"/>
+    <category term="OS" scheme="https://baymine.github.io/tags/OS/"/>
     
   </entry>
   
   <entry>
     <title>Basic Knoledge</title>
-    <link href="http://example.com/2022/11/29/Basic-Knoledge/"/>
-    <id>http://example.com/2022/11/29/Basic-Knoledge/</id>
+    <link href="https://baymine.github.io/2022/11/29/Basic-Knoledge/"/>
+    <id>https://baymine.github.io/2022/11/29/Basic-Knoledge/</id>
     <published>2022-11-29T12:44:45.000Z</published>
     <updated>2023-05-13T09:03:53.953Z</updated>
     
@@ -110,8 +110,8 @@
   
   <entry>
     <title>Q&amp;A</title>
-    <link href="http://example.com/2022/11/23/Q-A/"/>
-    <id>http://example.com/2022/11/23/Q-A/</id>
+    <link href="https://baymine.github.io/2022/11/23/Q-A/"/>
+    <id>https://baymine.github.io/2022/11/23/Q-A/</id>
     <published>2022-11-23T08:06:49.000Z</published>
     <updated>2023-01-14T00:01:01.097Z</updated>
     
@@ -130,8 +130,8 @@
   
   <entry>
     <title>命令笔记</title>
-    <link href="http://example.com/2022/11/08/%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/"/>
-    <id>http://example.com/2022/11/08/%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/</id>
+    <link href="https://baymine.github.io/2022/11/08/%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/"/>
+    <id>https://baymine.github.io/2022/11/08/%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/</id>
     <published>2022-11-08T08:39:05.000Z</published>
     <updated>2023-03-13T07:23:00.149Z</updated>
     
@@ -150,8 +150,8 @@
   
   <entry>
     <title>Database</title>
-    <link href="http://example.com/2022/10/21/Database/"/>
-    <id>http://example.com/2022/10/21/Database/</id>
+    <link href="https://baymine.github.io/2022/10/21/Database/"/>
+    <id>https://baymine.github.io/2022/10/21/Database/</id>
     <published>2022-10-21T04:37:04.000Z</published>
     <updated>2022-12-21T00:42:56.080Z</updated>
     
@@ -167,14 +167,14 @@
     
     
     
-    <category term="DB" scheme="http://example.com/tags/DB/"/>
+    <category term="DB" scheme="https://baymine.github.io/tags/DB/"/>
     
   </entry>
   
   <entry>
     <title>6.S081lab1</title>
-    <link href="http://example.com/2022/10/21/6_S081lab1/"/>
-    <id>http://example.com/2022/10/21/6_S081lab1/</id>
+    <link href="https://baymine.github.io/2022/10/21/6_S081lab1/"/>
+    <id>https://baymine.github.io/2022/10/21/6_S081lab1/</id>
     <published>2022-10-21T03:30:25.000Z</published>
     <updated>2022-12-22T06:31:12.115Z</updated>
     
@@ -189,14 +189,14 @@
     
     
     
-    <category term="OS" scheme="http://example.com/tags/OS/"/>
+    <category term="OS" scheme="https://baymine.github.io/tags/OS/"/>
     
   </entry>
   
   <entry>
     <title>C++ primer</title>
-    <link href="http://example.com/2022/10/12/C-primer/"/>
-    <id>http://example.com/2022/10/12/C-primer/</id>
+    <link href="https://baymine.github.io/2022/10/12/C-primer/"/>
+    <id>https://baymine.github.io/2022/10/12/C-primer/</id>
     <published>2022-10-12T12:07:04.000Z</published>
     <updated>2022-10-22T00:41:39.360Z</updated>
     
@@ -212,14 +212,14 @@
     
     
     
-    <category term="C++ primer" scheme="http://example.com/tags/C-primer/"/>
+    <category term="C++ primer" scheme="https://baymine.github.io/tags/C-primer/"/>
     
   </entry>
   
   <entry>
     <title>STL和泛型编程</title>
-    <link href="http://example.com/2022/10/12/STL%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/"/>
-    <id>http://example.com/2022/10/12/STL%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/</id>
+    <link href="https://baymine.github.io/2022/10/12/STL%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/"/>
+    <id>https://baymine.github.io/2022/10/12/STL%E5%92%8C%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/</id>
     <published>2022-10-12T11:46:55.000Z</published>
     <updated>2022-10-12T12:00:22.565Z</updated>
     
@@ -234,14 +234,14 @@
     
     
     
-    <category term="侯捷C++" scheme="http://example.com/tags/%E4%BE%AF%E6%8D%B7C/"/>
+    <category term="侯捷C++" scheme="https://baymine.github.io/tags/%E4%BE%AF%E6%8D%B7C/"/>
     
   </entry>
   
   <entry>
     <title>C++标准11-14</title>
-    <link href="http://example.com/2022/10/12/C-%E6%A0%87%E5%87%8611-14/"/>
-    <id>http://example.com/2022/10/12/C-%E6%A0%87%E5%87%8611-14/</id>
+    <link href="https://baymine.github.io/2022/10/12/C-%E6%A0%87%E5%87%8611-14/"/>
+    <id>https://baymine.github.io/2022/10/12/C-%E6%A0%87%E5%87%8611-14/</id>
     <published>2022-10-12T11:46:26.000Z</published>
     <updated>2022-10-14T08:19:20.608Z</updated>
     
@@ -257,14 +257,14 @@
     
     
     
-    <category term="侯捷C++" scheme="http://example.com/tags/%E4%BE%AF%E6%8D%B7C/"/>
+    <category term="侯捷C++" scheme="https://baymine.github.io/tags/%E4%BE%AF%E6%8D%B7C/"/>
     
   </entry>
   
   <entry>
     <title>面对对象的续集</title>
-    <link href="http://example.com/2022/10/12/%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%BB%AD%E9%9B%86/"/>
-    <id>http://example.com/2022/10/12/%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%BB%AD%E9%9B%86/</id>
+    <link href="https://baymine.github.io/2022/10/12/%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%BB%AD%E9%9B%86/"/>
+    <id>https://baymine.github.io/2022/10/12/%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%BB%AD%E9%9B%86/</id>
     <published>2022-10-12T11:45:30.000Z</published>
     <updated>2022-12-13T09:20:58.910Z</updated>
     
@@ -282,14 +282,14 @@
     
     
     
-    <category term="侯捷C++" scheme="http://example.com/tags/%E4%BE%AF%E6%8D%B7C/"/>
+    <category term="侯捷C++" scheme="https://baymine.github.io/tags/%E4%BE%AF%E6%8D%B7C/"/>
     
   </entry>
   
   <entry>
     <title>面对对象编程</title>
-    <link href="http://example.com/2022/10/12/%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/"/>
-    <id>http://example.com/2022/10/12/%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/</id>
+    <link href="https://baymine.github.io/2022/10/12/%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/"/>
+    <id>https://baymine.github.io/2022/10/12/%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/</id>
     <published>2022-10-12T06:35:56.000Z</published>
     <updated>2022-10-12T12:02:44.134Z</updated>
     
@@ -305,14 +305,14 @@
     
     
     
-    <category term="侯捷C++" scheme="http://example.com/tags/%E4%BE%AF%E6%8D%B7C/"/>
+    <category term="侯捷C++" scheme="https://baymine.github.io/tags/%E4%BE%AF%E6%8D%B7C/"/>
     
   </entry>
   
   <entry>
     <title>机器学习中的数学：信息论(Information Theory)</title>
-    <link href="http://example.com/2022/10/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%E4%BF%A1%E6%81%AF%E8%AE%BA-Information-Theory/"/>
-    <id>http://example.com/2022/10/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%E4%BF%A1%E6%81%AF%E8%AE%BA-Information-Theory/</id>
+    <link href="https://baymine.github.io/2022/10/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%E4%BF%A1%E6%81%AF%E8%AE%BA-Information-Theory/"/>
+    <id>https://baymine.github.io/2022/10/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%E4%BF%A1%E6%81%AF%E8%AE%BA-Information-Theory/</id>
     <published>2022-10-11T14:19:24.000Z</published>
     <updated>2022-10-11T14:19:36.548Z</updated>
     
@@ -333,8 +333,8 @@
   
   <entry>
     <title>test</title>
-    <link href="http://example.com/2022/10/11/test/"/>
-    <id>http://example.com/2022/10/11/test/</id>
+    <link href="https://baymine.github.io/2022/10/11/test/"/>
+    <id>https://baymine.github.io/2022/10/11/test/</id>
     <published>2022-10-11T13:57:22.000Z</published>
     <updated>2022-10-11T14:08:23.417Z</updated>
     
@@ -357,8 +357,8 @@
   
   <entry>
     <title>机器学习中的数学 ch12：支持向量机分类（Classification with Support Vector Machines）</title>
-    <link href="http://example.com/2021/07/25/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6-ch12%EF%BC%9A%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA%E5%88%86%E7%B1%BB%EF%BC%88Classification-with-Support-Vector-Machines%EF%BC%89/"/>
-    <id>http://example.com/2021/07/25/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6-ch12%EF%BC%9A%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA%E5%88%86%E7%B1%BB%EF%BC%88Classification-with-Support-Vector-Machines%EF%BC%89/</id>
+    <link href="https://baymine.github.io/2021/07/25/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6-ch12%EF%BC%9A%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA%E5%88%86%E7%B1%BB%EF%BC%88Classification-with-Support-Vector-Machines%EF%BC%89/"/>
+    <id>https://baymine.github.io/2021/07/25/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6-ch12%EF%BC%9A%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA%E5%88%86%E7%B1%BB%EF%BC%88Classification-with-Support-Vector-Machines%EF%BC%89/</id>
     <published>2021-07-25T00:25:24.000Z</published>
     <updated>2023-03-09T10:50:55.512Z</updated>
     
@@ -378,8 +378,8 @@
   
   <entry>
     <title>机器学习中的数学ch11：基于高斯混合模型的密度估计（Density Estimation with Gaussian Mixture Models）</title>
-    <link href="http://example.com/2021/07/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6ch11%EF%BC%9A%E5%9F%BA%E4%BA%8E%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AF%86%E5%BA%A6%E4%BC%B0%E8%AE%A1%EF%BC%88Density-Estimation-with-Gaussian-Mixture-Models%EF%BC%89/"/>
-    <id>http://example.com/2021/07/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6ch11%EF%BC%9A%E5%9F%BA%E4%BA%8E%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AF%86%E5%BA%A6%E4%BC%B0%E8%AE%A1%EF%BC%88Density-Estimation-with-Gaussian-Mixture-Models%EF%BC%89/</id>
+    <link href="https://baymine.github.io/2021/07/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6ch11%EF%BC%9A%E5%9F%BA%E4%BA%8E%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AF%86%E5%BA%A6%E4%BC%B0%E8%AE%A1%EF%BC%88Density-Estimation-with-Gaussian-Mixture-Models%EF%BC%89/"/>
+    <id>https://baymine.github.io/2021/07/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6ch11%EF%BC%9A%E5%9F%BA%E4%BA%8E%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AF%86%E5%BA%A6%E4%BC%B0%E8%AE%A1%EF%BC%88Density-Estimation-with-Gaussian-Mixture-Models%EF%BC%89/</id>
     <published>2021-07-05T02:09:14.000Z</published>
     <updated>2023-03-09T10:49:43.071Z</updated>
     
@@ -398,8 +398,8 @@
   
   <entry>
     <title>MML ch 10 主成分分析降维（Dimensionality Reduction with Principal Component Analysis）</title>
-    <link href="http://example.com/2021/07/02/MML-ch-10-%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90%E9%99%8D%E7%BB%B4%EF%BC%88Dimensionality-Reduction-with-Principal-Component-Analysis%EF%BC%89/"/>
-    <id>http://example.com/2021/07/02/MML-ch-10-%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90%E9%99%8D%E7%BB%B4%EF%BC%88Dimensionality-Reduction-with-Principal-Component-Analysis%EF%BC%89/</id>
+    <link href="https://baymine.github.io/2021/07/02/MML-ch-10-%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90%E9%99%8D%E7%BB%B4%EF%BC%88Dimensionality-Reduction-with-Principal-Component-Analysis%EF%BC%89/"/>
+    <id>https://baymine.github.io/2021/07/02/MML-ch-10-%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90%E9%99%8D%E7%BB%B4%EF%BC%88Dimensionality-Reduction-with-Principal-Component-Analysis%EF%BC%89/</id>
     <published>2021-07-02T04:38:46.000Z</published>
     <updated>2023-03-09T10:49:04.460Z</updated>
     
@@ -418,8 +418,8 @@
   
   <entry>
     <title>机器学习中的数学：线性回归Linear Regression</title>
-    <link href="http://example.com/2021/06/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92Linear-Regression/"/>
-    <id>http://example.com/2021/06/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92Linear-Regression/</id>
+    <link href="https://baymine.github.io/2021/06/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92Linear-Regression/"/>
+    <id>https://baymine.github.io/2021/06/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92Linear-Regression/</id>
     <published>2021-06-15T01:12:40.000Z</published>
     <updated>2023-03-09T10:48:22.852Z</updated>
     
@@ -438,8 +438,8 @@
   
   <entry>
     <title>机器学习中的数学: When Models Meet Data</title>
-    <link href="http://example.com/2021/05/26/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6-When-Models-Meet-Data/"/>
-    <id>http://example.com/2021/05/26/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6-When-Models-Meet-Data/</id>
+    <link href="https://baymine.github.io/2021/05/26/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6-When-Models-Meet-Data/"/>
+    <id>https://baymine.github.io/2021/05/26/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6-When-Models-Meet-Data/</id>
     <published>2021-05-26T02:51:34.000Z</published>
     <updated>2023-03-09T10:48:23.791Z</updated>
     
