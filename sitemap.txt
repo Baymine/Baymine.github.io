@@ -1,4 +1,4 @@
-https://baymine.github.io/2022/11/29/Basic-Knoledge/
+https://baymine.github.io/2022/11/29/Basic_must_known/
 https://baymine.github.io/2022/11/08/%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/
 https://baymine.github.io/2021/07/25/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6-ch12%EF%BC%9A%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA%E5%88%86%E7%B1%BB%EF%BC%88Classification-with-Support-Vector-Machines%EF%BC%89/
 https://baymine.github.io/2021/07/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6ch11%EF%BC%9A%E5%9F%BA%E4%BA%8E%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AF%86%E5%BA%A6%E4%BC%B0%E8%AE%A1%EF%BC%88Density-Estimation-with-Gaussian-Mixture-Models%EF%BC%89/

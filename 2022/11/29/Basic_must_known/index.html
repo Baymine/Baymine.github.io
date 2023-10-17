@@ -184,7 +184,7 @@ mjx-container[display="true"] + br {
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2022/11/29/Basic-Knoledge/" title="Basic Knoledge" itemprop="url">Basic Knoledge</a>
+      <a href="/2022/11/29/Basic_must_known/" title="Basic Knoledge" itemprop="url">Basic Knoledge</a>
   </h1>
   <p class="article-author">By
     
@@ -238,7 +238,7 @@ mjx-container[display="true"] + br {
 <li>对于析构函数的调用，需要是 public 的访问权限，否则会导致编译错误。</li>
 </ul>
 <h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><script type="math/tex; mode=display">
-\text{工作区}\stackrel{add}{\rightarrow}\text{暂存区}\stackrel{commit}{\rightarrow}\text{本地仓库}\stackrel{push}{\rightarrow}\text{远程仓库}\stackrel{pull}{\rightarrow}\text{本地}</script><p><img src="/.com//Basic-Knoledge/1672140678237.png" alt="1672140678237"></p>
+\text{工作区}\stackrel{add}{\rightarrow}\text{暂存区}\stackrel{commit}{\rightarrow}\text{本地仓库}\stackrel{push}{\rightarrow}\text{远程仓库}\stackrel{pull}{\rightarrow}\text{本地}</script><p><img src="/.io//Basic-Knoledge/1672140678237.png" alt="1672140678237"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># In the work directory</span></span><br><span class="line">git config --global user.name <span class="string">"yourName"</span></span><br><span class="line">git config --global user.email yourEmail</span><br><span class="line"></span><br><span class="line">git init <span class="comment"># initialize the repository</span></span><br><span class="line">git status <span class="comment"># repository information</span></span><br><span class="line">git add fileName</span><br><span class="line">git commit -m <span class="string">"commit msg"</span>EADADWE</span><br><span class="line">git <span class="built_in">log</span>  <span class="comment"># 查看以前的版本</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">touch</span> .gitignore  <span class="comment"># 不追踪的文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建新分支</span></span><br><span class="line">git branch branchName</span><br><span class="line"></span><br><span class="line"><span class="comment"># 两种切换分支的命令</span></span><br><span class="line">git checkout branchName</span><br><span class="line">	- git checkout -d branchName  <span class="comment"># 删除分支</span></span><br><span class="line">	- git checkout -b temp  <span class="comment"># 创建并切换到新建的分支</span></span><br><span class="line">git switch branchName</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并分支</span></span><br><span class="line">git merge temp</span><br><span class="line"></span><br><span class="line"><span class="comment"># add 和 commit合在一起写</span></span><br><span class="line">git commit -a -m <span class="string">"msg"</span>  <span class="comment"># 或者-am</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载远程内容</span></span><br><span class="line"><span class="comment">#### 直接下载zip是不会下载版本信息的，所以需要使用以下命令</span></span><br><span class="line">git <span class="built_in">clone</span></span><br><span class="line"></span><br><span class="line"> ESDAW</span><br></pre></td></tr></table></figure>
 <h1 id="C-C"><a href="#C-C" class="headerlink" title="C/C++"></a>C/C++</h1><h3 id="条件变量的虚假唤醒"><a href="#条件变量的虚假唤醒" class="headerlink" title="条件变量的虚假唤醒"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tqyysm/articles/9765667.html">条件变量的虚假唤醒</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// wait 端</span></span><br><span class="line"><span class="built_in">lock</span>(mutex);</span><br><span class="line"><span class="keyword">while</span>(queue.<span class="built_in">empty</span>()){  <span class="comment">// 如果使用if可能会导致虚假唤醒</span></span><br><span class="line">	cond.<span class="built_in">wait</span>();</span><br><span class="line">}</span><br><span class="line">x = queue.<span class="built_in">pop</span>();</span><br><span class="line"><span class="built_in">unlock</span>(mutex);</span><br><span class="line"></span><br><span class="line"><span class="comment">// signal/broadcast端</span></span><br><span class="line"><span class="built_in">lock</span>(mutex);</span><br><span class="line">queue.<span class="built_in">push_back</span>(x);</span><br><span class="line"><span class="built_in">unlock</span>(mutex);</span><br><span class="line">cond.<span class="built_in">notify</span>();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>当条件变量满足的时候，挂起的线程会被唤醒，当他准备获取锁之前，有其他线程将变量改变了，这时候条件变量不满足了，所以这次唤醒是虚假的。</p>
@@ -265,7 +265,7 @@ mjx-container[display="true"] + br {
 <li><p>传统IO</p>
 <ul>
 <li>整个过程发生了<strong>4次用户态和内核态的上下文切换</strong>和<strong>4次拷贝(1.用户发起read，2.读缓存拷贝到用户缓存，3.用户发起write，4.拷贝到网卡)</strong></li>
-<li><img src="/.com//readio.webp" alt="img"></li>
+<li><img src="/.io//readio.webp" alt="img"></li>
 <li><p>DMA拷贝</p>
 <ul>
 <li>IO操作，都是通过CPU发出对应的指令来完成，但是相比CPU来说，IO的速度太慢了，CPU有大量的时间处于等待IO的状态。因此就产生了<strong>DMA（Direct Memory Access</strong>)直接内存访问技术，本质上来说他就是一块 <code>主板上独立的芯片</code>，通过它来进行内存和IO设备的数据传输，从而减少CPU的等待时间。</li>
@@ -283,21 +283,21 @@ mjx-container[display="true"] + br {
 <li>使用 <code>mmap</code>替换了read+write中的read操作，减少了一次CPU的拷贝。</li>
 <li><code>mmap</code>主要实现方式是将读缓冲区的地址和用户缓冲区的地址进行映射</li>
 <li><strong>4次用户态和内核态的上下文切换</strong>和<strong>3次拷贝</strong>（1.mmap调用，2.mmap返回，3.用户调用write，4.拷贝到网卡）</li>
-<li><img src="/.com//mmap+write.webp" alt="img"></li>
+<li><img src="/.io//mmap+write.webp" alt="img"></li>
 <li><code>mmap</code>的方式节省了一次CPU拷贝，同时由于用户进程中的内存是虚拟的，只是映射到内核的读缓冲区，所以可以节省一半的内存空间，比较适合大文件的传输。</li>
 </ul>
 </li>
 <li>sendfile<ul>
 <li>Linux2.1内核版本后引入的一个系统调用函数，通过使用 <code>sendfile</code>数据可以直接在内核空间进行传输，因此避免了用户空间和内核空间的拷贝</li>
 <li><strong>2次用户态和内核态的上下文切换</strong>和<strong>3次拷贝</strong></li>
-<li><img src="/.com//sendfile.webp" alt="img"></li>
+<li><img src="/.io//sendfile.webp" alt="img"></li>
 <li>sendfile方法IO数据对用户空间完全不可见，所以只能适用于完全不需要用户空间处理的情况，比如静态文件服务器。</li>
 </ul>
 </li>
 <li>sendfile + DMA Scatter/Gather<ul>
 <li>对 <code>sendfile</code>做了进一步优化，通过引入新的硬件支持，这个方式叫做DMA Scatter/Gather 分散/收集功能。</li>
 <li><strong>2次用户态和内核态的上下文切换</strong>和 <strong>2次拷贝</strong> ，其中更重要的是完全没有CPU拷贝</li>
-<li><img src="/.com//DMS.webp" alt></li>
+<li><img src="/.io//DMS.webp" alt></li>
 </ul>
 </li>
 </ul>
@@ -351,7 +351,7 @@ mjx-container[display="true"] + br {
 </ul>
 </li>
 </ul>
-<h2 id="CPU调度算法"><a href="#CPU调度算法" class="headerlink" title="CPU调度算法"></a><a href>CPU调度算法</a></h2><h2 id="QUIC"><a href="#QUIC" class="headerlink" title="QUIC"></a><a href>QUIC</a></h2><p><img src="/.com//QUIC封装过程.png" alt></p>
+<h2 id="CPU调度算法"><a href="#CPU调度算法" class="headerlink" title="CPU调度算法"></a><a href>CPU调度算法</a></h2><h2 id="QUIC"><a href="#QUIC" class="headerlink" title="QUIC"></a><a href>QUIC</a></h2><p><img src="/.io//QUIC封装过程.png" alt></p>
 <ul>
 <li>0-RTT</li>
 </ul>
@@ -365,7 +365,7 @@ mjx-container[display="true"] + br {
 
 <div class="article-share" id="share">
 
-  <div data-url="https://baymine.github.io/2022/11/29/Basic-Knoledge/" data-title="Basic Knoledge | Hexo" data-tsina="" class="share clearfix">
+  <div data-url="https://baymine.github.io/2022/11/29/Basic_must_known/" data-title="Basic Knoledge | Hexo" data-tsina="" class="share clearfix">
   </div>
 
 </div>
@@ -576,5 +576,21 @@ $(document).ready(function(){
 
 
 
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
 </html>
