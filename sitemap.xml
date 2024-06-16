@@ -2,6 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://baymine.github.io/2022/11/29/Basic_must_known/</loc>
+    
+    <lastmod>2024-06-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://baymine.github.io/2022/12/16/MIT6-S081/</loc>
+    
+    <lastmod>2024-06-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://baymine.github.io/2022/12/18/C-Memory-Management/</loc>
+    
+    <lastmod>2024-06-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://baymine.github.io/2022/10/11/test/</loc>
     
     <lastmod>2024-06-16</lastmod>
@@ -32,15 +59,6 @@
     <loc>https://baymine.github.io/2022/10/12/%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/</loc>
     
     <lastmod>2024-06-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://baymine.github.io/2022/11/29/Basic_must_known/</loc>
-    
-    <lastmod>2023-05-13</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -290,27 +308,9 @@
   </url>
   
   <url>
-    <loc>https://baymine.github.io/2022/12/16/MIT6-S081/</loc>
-    
-    <lastmod>2022-12-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://baymine.github.io/2022/10/21/6_S081lab1/</loc>
     
     <lastmod>2022-12-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://baymine.github.io/2022/12/18/C-Memory-Management/</loc>
-    
-    <lastmod>2022-12-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -394,6 +394,13 @@
   </url>
   
   <url>
+    <loc>https://baymine.github.io/tags/C-primer/</loc>
+    <lastmod>2024-06-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://baymine.github.io/tags/%E4%BE%AF%E6%8D%B7C/</loc>
     <lastmod>2024-06-16</lastmod>
     <changefreq>weekly</changefreq>
@@ -402,13 +409,6 @@
   
   <url>
     <loc>https://baymine.github.io/tags/DB/</loc>
-    <lastmod>2024-06-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://baymine.github.io/tags/C-primer/</loc>
     <lastmod>2024-06-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
