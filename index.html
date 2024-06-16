@@ -258,71 +258,6 @@ mjx-container[display="true"] + br {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2024/06/18/test-post/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/06/18/test-post/" class="post-title-link" itemprop="url">test post</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2024-06-18 15:46:34" itemprop="dateCreated datePublished" datetime="2024-06-18T15:46:34+08:00">2024-06-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-06-16 16:10:34" itemprop="dateModified" datetime="2024-06-16T16:10:34+08:00">2024-06-16</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://Baymine.github.io/images/test.jpg" alt="test.jpg"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2024/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%95%99%E8%82%B2%E7%BC%BA%E5%A4%B1%E7%9A%84%E4%B8%80%E8%AF%BE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2372,6 +2307,89 @@ order by salary desc limit 1, 1
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2022/10/21/6_S081lab1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/21/6_S081lab1/" class="post-title-link" itemprop="url">6.S081lab1</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-10-21 11:30:25" itemprop="dateCreated datePublished" datetime="2022-10-21T11:30:25+08:00">2022-10-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-12-22 14:31:12" itemprop="dateModified" datetime="2022-12-22T14:31:12+08:00">2022-12-22</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h2><h3 id="使用Tmux在一个终端中创建多个窗口"><a href="#使用Tmux在一个终端中创建多个窗口" class="headerlink" title="使用Tmux在一个终端中创建多个窗口"></a>使用Tmux在一个终端中创建多个窗口</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tmux # 进入新建的会话中</span><br><span class="line">Ctrl + B , % # 垂直分割（左右）</span><br><span class="line">Ctrl + B , “ # 水平分割（上下）</span><br><span class="line">Ctrl + B , 方向键 # 在不同的终端中切换</span><br><span class="line">exit  # 退出会话</span><br></pre></td></tr></table></figure>
+<h3 id="启动qemu的gdb模式"><a href="#启动qemu的gdb模式" class="headerlink" title="启动qemu的gdb模式"></a>启动qemu的gdb模式</h3><p>在第一个窗口运行 <code>make CPUS=1 qemu-gdb</code>, 第二个窗口运行 <code>gdb-multiarch</code>，开启gdb模式。</p>
+<p>如果lient端没有连接到server，那么需要在 <code>/root</code> 创建 <code>.gdbinit</code> 文件, 加上：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add-auto-load-safe-path /root/xv6-labs-2022/.gdbinit  # xv6 directory</span><br></pre></td></tr></table></figure>
+<h4 id="gdb的使用方法"><a href="#gdb的使用方法" class="headerlink" title="gdb的使用方法"></a>gdb的使用方法</h4><p>首先是链接文件</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file fileName</span><br></pre></td></tr></table></figure>
+<p>常见的命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">r = run</span><br><span class="line">c = continue # 让暂停的程序继续运行</span><br><span class="line">n = next  # 运行到下一行</span><br><span class="line">s = step # 单步执行，遇到函数会进入</span><br><span class="line">p = print  # 打印变量或寄存器</span><br></pre></td></tr></table></figure>
+<h2 id="实验一"><a href="#实验一" class="headerlink" title="实验一"></a>实验一</h2><p>预备知识：</p>
+<ul>
+<li><code>pid_t wait(int *wstatus)</code>：等待（阻塞状态）子进程状态发生变化（子进程终结、子进程被信号停止或恢复）。如果子进程是被终结，那么wait能够允许系统释放子进程的资源。如果wait没有得到执行，那么终结的子进程就会变成“僵尸”状态。<code>exit(0)</code>表示等待所有的子进程退出。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"kernel/types.h"</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"user/user.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RD 0 <span class="comment">//pipe的read端</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> WR 1 <span class="comment">//pipe的write端</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span> </span>{</span><br><span class="line">    <span class="type">char</span> buf = <span class="string">'P'</span>; <span class="comment">//用于传送的字节</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> fd_c2p[<span class="number">2</span>]; <span class="comment">//子进程-&gt;父进程</span></span><br><span class="line">    <span class="type">int</span> fd_p2c[<span class="number">2</span>]; <span class="comment">//父进程-&gt;子进程</span></span><br><span class="line">    <span class="built_in">pipe</span>(fd_c2p);</span><br><span class="line">    <span class="built_in">pipe</span>(fd_p2c);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> pid = fork();</span><br><span class="line">    <span class="type">int</span> exit_status = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (pid &lt; <span class="number">0</span>) {</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="number">2</span>, <span class="string">"fork() error!\n"</span>);</span><br><span class="line">        <span class="built_in">close</span>(fd_c2p[RD]);</span><br><span class="line">        <span class="built_in">close</span>(fd_c2p[WR]);</span><br><span class="line">        <span class="built_in">close</span>(fd_p2c[RD]);</span><br><span class="line">        <span class="built_in">close</span>(fd_p2c[WR]);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    } <span class="keyword">else</span> <span class="keyword">if</span> (pid == <span class="number">0</span>) { <span class="comment">//子进程</span></span><br><span class="line">        <span class="built_in">close</span>(fd_p2c[WR]);</span><br><span class="line">        <span class="built_in">close</span>(fd_c2p[RD]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">read</span>(fd_p2c[RD], &amp;buf, <span class="built_in">sizeof</span>(<span class="type">char</span>)) != <span class="built_in">sizeof</span>(<span class="type">char</span>)) {</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="number">2</span>, <span class="string">"child read() error!\n"</span>);</span><br><span class="line">            exit_status = <span class="number">1</span>; <span class="comment">//标记出错</span></span><br><span class="line">        } <span class="keyword">else</span> {</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="number">1</span>, <span class="string">"%d: received ping\n"</span>, <span class="built_in">getpid</span>());</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">write</span>(fd_c2p[WR], &amp;buf, <span class="built_in">sizeof</span>(<span class="type">char</span>)) != <span class="built_in">sizeof</span>(<span class="type">char</span>)) {</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="number">2</span>, <span class="string">"child write() error!\n"</span>);</span><br><span class="line">            exit_status = <span class="number">1</span>;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="built_in">close</span>(fd_p2c[RD]);</span><br><span class="line">        <span class="built_in">close</span>(fd_c2p[WR]);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">exit</span>(exit_status);</span><br><span class="line">    } <span class="keyword">else</span> { <span class="comment">//父进程</span></span><br><span class="line">        <span class="built_in">close</span>(fd_p2c[RD]);</span><br><span class="line">        <span class="built_in">close</span>(fd_c2p[WR]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">write</span>(fd_p2c[WR], &amp;buf, <span class="built_in">sizeof</span>(<span class="type">char</span>)) != <span class="built_in">sizeof</span>(<span class="type">char</span>)) {</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="number">2</span>, <span class="string">"parent write() error!\n"</span>);</span><br><span class="line">            exit_status = <span class="number">1</span>;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">read</span>(fd_c2p[RD], &amp;buf, <span class="built_in">sizeof</span>(<span class="type">char</span>)) != <span class="built_in">sizeof</span>(<span class="type">char</span>)) {</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="number">2</span>, <span class="string">"parent read() error!\n"</span>);</span><br><span class="line">            exit_status = <span class="number">1</span>; <span class="comment">//标记出错</span></span><br><span class="line">        } <span class="keyword">else</span> {</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="number">1</span>, <span class="string">"%d: received pong\n"</span>, <span class="built_in">getpid</span>());</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="built_in">close</span>(fd_p2c[WR]);</span><br><span class="line">        <span class="built_in">close</span>(fd_c2p[RD]);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">exit</span>(exit_status);</span><br><span class="line">    }</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="find"><a href="#find" class="headerlink" title="find"></a>find</h4><ul>
+<li>0、1、2是文件描述符（分别对应stdin、stdout、stderr）</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fprintf</span><span class="params">(FILE *stream, <span class="type">const</span> <span class="type">char</span> *format, ...)</span><span class="comment">// C 库函数发送格式化输出到流 stream 中。</span></span></span><br><span class="line"><span class="function"><span class="comment">// -----------------------------------------------------------</span></span></span><br><span class="line"><span class="function"><span class="keyword">struct</span> dirent</span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">　　<span class="type">long</span> d_ino; <span class="comment">/* inode number 索引节点号 */</span></span><br><span class="line">    <span class="type">off_t</span> d_off; <span class="comment">/* offset to this dirent 在目录文件中的偏移 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">short</span> d_reclen; <span class="comment">/* length of this d_name 文件名长 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> d_type; <span class="comment">/* the type of d_name 文件类型 */</span></span><br><span class="line">    <span class="type">char</span> d_name [NAME_MAX+<span class="number">1</span>]; <span class="comment">/* file name (null-terminated) 文件名，最长255字符 */</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// -----------------------------------------------------------</span></span><br><span class="line"><span class="comment">// 从 str2 复制 n 个字符到 str1，但是在重叠内存块这方面，memmove() 是比 memcpy() 更安全的方法</span></span><br><span class="line"><span class="function"><span class="type">void</span> *<span class="title">memmove</span><span class="params">(<span class="type">void</span> *str1, <span class="type">const</span> <span class="type">void</span> *str2, <span class="type">size_t</span> n)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="实验二"><a href="#实验二" class="headerlink" title="实验二"></a>实验二</h2><h3 id="trace"><a href="#trace" class="headerlink" title="trace"></a>trace</h3><p>TODO: 理清楚整个调用的过程</p>
+<p>xv6系统调用的过程，这里以fork为例:<br><img src="/.io//10/21/6_S081lab1/fork.png" class></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -2441,7 +2459,7 @@ order by salary desc limit 1, 1
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
