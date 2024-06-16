@@ -1,84 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>机器学习中的数学：信息论(Information Theory) - Hexo</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hexo"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hexo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="@[toc]  参考：Dive into Deep Learning A. zhang ect Chapter 18 Appendix: Mathematics for Deep Learning 利用信息论我们可以测量或者比较在不同的信号（signals）中信息。在这部分，我们主要讨论机器学习对信息论的一些概念和应用。首先我们先简要描述介绍一下机器学习和信息论之间的关系。机器学习的主要的任务就是"><meta property="og:type" content="article"><meta property="og:title" content="机器学习中的数学：信息论(Information Theory)"><meta property="og:url" content="https://baymine.github.io/2022/10/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%E4%BF%A1%E6%81%AF%E8%AE%BA-Information-Theory/"><meta property="og:site_name" content="Hexo"><meta property="og:description" content="@[toc]  参考：Dive into Deep Learning A. zhang ect Chapter 18 Appendix: Mathematics for Deep Learning 利用信息论我们可以测量或者比较在不同的信号（signals）中信息。在这部分，我们主要讨论机器学习对信息论的一些概念和应用。首先我们先简要描述介绍一下机器学习和信息论之间的关系。机器学习的主要的任务就是"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://img-blog.csdnimg.cn/013c87570cd9401fb52ba8c3dd7d9da8.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_Q1NETiBATGVhcm5pbmdEZWVwbHk=,size_29,color_FFFFFF,t_70,g_se,x_16"><meta property="article:published_time" content="2022-10-11T14:19:24.000Z"><meta property="article:modified_time" content="2022-10-11T14:19:36.548Z"><meta property="article:author" content="John Doe"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://img-blog.csdnimg.cn/013c87570cd9401fb52ba8c3dd7d9da8.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_Q1NETiBATGVhcm5pbmdEZWVwbHk=,size_29,color_FFFFFF,t_70,g_se,x_16"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://baymine.github.io/2022/10/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%E4%BF%A1%E6%81%AF%E8%AE%BA-Information-Theory/"},"headline":"机器学习中的数学：信息论(Information Theory)","image":[],"datePublished":"2022-10-11T14:19:24.000Z","dateModified":"2022-10-11T14:19:36.548Z","author":{"@type":"Person","name":"John Doe"},"publisher":{"@type":"Organization","name":"Hexo","logo":{"@type":"ImageObject"}},"description":"@[toc]  参考：Dive into Deep Learning A. zhang ect Chapter 18 Appendix: Mathematics for Deep Learning 利用信息论我们可以测量或者比较在不同的信号（signals）中信息。在这部分，我们主要讨论机器学习对信息论的一些概念和应用。首先我们先简要描述介绍一下机器学习和信息论之间的关系。机器学习的主要的任务就是"}</script><link rel="canonical" href="https://baymine.github.io/2022/10/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%E4%BF%A1%E6%81%AF%E8%AE%BA-Information-Theory/"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
 
-<link rel="stylesheet" href="/css/main.css">
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
 
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"baymine.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="@[toc]  参考：Dive into Deep Learning A. zhang ect Chapter 18 Appendix: Mathematics for Deep Learning 利用信息论我们可以测量或者比较在不同的信号（signals）中信息。在这部分，我们主要讨论机器学习对信息论的一些概念和应用。首先我们先简要描述介绍一下机器学习和信息论之间的关系。机器学习的主要的任务就是">
-<meta property="og:type" content="article">
-<meta property="og:title" content="机器学习中的数学：信息论(Information Theory)">
-<meta property="og:url" content="https://baymine.github.io/2022/10/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%E4%BF%A1%E6%81%AF%E8%AE%BA-Information-Theory/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="@[toc]  参考：Dive into Deep Learning A. zhang ect Chapter 18 Appendix: Mathematics for Deep Learning 利用信息论我们可以测量或者比较在不同的信号（signals）中信息。在这部分，我们主要讨论机器学习对信息论的一些概念和应用。首先我们先简要描述介绍一下机器学习和信息论之间的关系。机器学习的主要的任务就是">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/013c87570cd9401fb52ba8c3dd7d9da8.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_Q1NETiBATGVhcm5pbmdEZWVwbHk=,size_29,color_FFFFFF,t_70,g_se,x_16">
-<meta property="article:published_time" content="2022-10-11T14:19:24.000Z">
-<meta property="article:modified_time" content="2022-10-11T14:19:36.548Z">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/013c87570cd9401fb52ba8c3dd7d9da8.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_Q1NETiBATGVhcm5pbmdEZWVwbHk=,size_29,color_FFFFFF,t_70,g_se,x_16">
-
-<link rel="canonical" href="https://baymine.github.io/2022/10/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%E4%BF%A1%E6%81%AF%E8%AE%BA-Information-Theory/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
-
-  <title>机器学习中的数学：信息论(Information Theory) | Hexo</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<style>mjx-container[jax="SVG"] {
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -191,119 +142,7 @@ mjx-container[display="true"] + br {
   display: none;
 }
 </style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2022/10/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%EF%BC%9A%E4%BF%A1%E6%81%AF%E8%AE%BA-Information-Theory/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          机器学习中的数学：信息论(Information Theory)
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-10-11 22:19:24 / Modified: 22:19:36" itemprop="dateCreated datePublished" datetime="2022-10-11T22:19:24+08:00">2022-10-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <p>@[toc]</p>
+</head><body class="is-1-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Hexo</a></div><div class="navbar-menu"><div class="navbar-end"></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-12"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-10-11T14:19:24.000Z" title="10/11/2022, 10:19:24 PM">2022-10-11</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-10-11T14:19:36.548Z" title="10/11/2022, 10:19:36 PM">2022-10-11</time></span></div></div><h1 class="title is-3 is-size-4-mobile">机器学习中的数学：信息论(Information Theory)</h1><div class="content"><p>@[toc]</p>
 <blockquote>
 <p>参考：<em>Dive into Deep Learning A. zhang ect</em> Chapter 18 <strong>Appendix: Mathematics for Deep Learning</strong></p>
 <p>利用信息论我们可以测量或者比较在不同的信号（signals）中信息。在这部分，我们主要讨论机器学习对信息论的一些概念和应用。<br>首先我们先简要描述介绍一下机器学习和信息论之间的关系。机器学习的主要的任务就是从数据中提取出有价值的信息，然后利用这些信息去做一些预测。而信息论主要研究信息的编码、解码、转换和操作（sencoding, decoding, transmitting, and manipulating information）。所以，我们可以利用信息论来讨论机器学习在训练中对信息的处理过程。</p>
@@ -398,193 +237,11 @@ l(\theta)&=\log L(\theta)\\
 <script type="math/tex; mode=display">p(z)=p(z_1,\cdots,z_k)=Multi(p_1,\cdots,p_k),\ where\ \sum^k_{i=1}p_i=1</script><p>z的联合概率质量函数为:</p>
 <script type="math/tex; mode=display">p^z=\prod^k_{j=1}p^{z_j}_j</script><p>所以对应的log似然方程为：</p>
 <script type="math/tex; mode=display">l(\theta)=\log L(\theta)=\log\prod^n_{i=1}p^{y_i}=\log\prod^n_{i=1}\prod_{j=1}^{k}p^{y_{ij}}=\sum^n_{i=1}\sum^k_{j=1}y_{ij}\log p_j</script><p>所以对于多分类问题最大化log似然函数等价于最小化交叉熵损失<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="8.431ex" height="2.398ex" role="img" focusable="false" viewbox="0 -810 3726.7 1060"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D436" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q484 659 454 652T382 628T299 572T226 479Q194 422 175 346T156 222Q156 108 232 58Q280 24 350 24Q441 24 512 92T606 240Q610 253 612 255T628 257Q648 257 648 248Q648 243 647 239Q618 132 523 55T319 -22Q206 -22 128 53T50 252Z"/></g><g data-mml-node="mi" transform="translate(760,0)"><path data-c="1D438" d="M492 213Q472 213 472 226Q472 230 477 250T482 285Q482 316 461 323T364 330H312Q311 328 277 192T243 52Q243 48 254 48T334 46Q428 46 458 48T518 61Q567 77 599 117T670 248Q680 270 683 272Q690 274 698 274Q718 274 718 261Q613 7 608 2Q605 0 322 0H133Q31 0 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H757Q764 676 764 669Q764 664 751 557T737 447Q735 440 717 440H705Q698 445 698 453L701 476Q704 500 704 528Q704 558 697 578T678 609T643 625T596 632T532 634H485Q397 633 392 631Q388 629 386 622Q385 619 355 499T324 377Q347 376 372 376H398Q464 376 489 391T534 472Q538 488 540 490T557 493Q562 493 565 493T570 492T572 491T574 487T577 483L544 351Q511 218 508 216Q505 213 492 213Z"/></g><g data-mml-node="mo" transform="translate(1524,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mi" transform="translate(1913,0)"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(2403,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"/></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(2847.7,0)"><g data-mml-node="mover"><g data-mml-node="mi"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(300.6,16) translate(-250 0)"><path data-c="5E" d="M112 560L249 694L257 686Q387 562 387 560L361 531Q359 532 303 581L250 627L195 580Q182 569 169 557T148 538L140 532Q138 530 125 546L112 560Z"/></g></g></g><g data-mml-node="mo" transform="translate(3337.7,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container></p>
-
-    </div>
-
-    
-    
-    
-
-      <footer class="post-footer">
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2022/10/11/test/" rel="prev" title="test">
-      <i class="fa fa-chevron-left"></i> test
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/10/12/%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" rel="next" title="面对对象编程">
-      面对对象编程 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%EF%BC%88Information%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">信息（Information）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E4%BF%A1%E6%81%AF%EF%BC%88Self-information%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">自信息（Self-information）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%86%B5%EF%BC%88Entropy%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">熵（Entropy）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%87%BA%E7%86%B5%E7%9A%84%E5%8A%A8%E6%9C%BA%EF%BC%88Motivating-Entropy%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">提出熵的动机（Motivating Entropy）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%EF%BC%88Definition%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">定义（Definition）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%87%8A%EF%BC%88Interpretation%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">解释（Interpretation）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%86%B5%E7%9A%84%E6%80%A7%E8%B4%A8%EF%BC%88Properties-of-Entropy%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">熵的性质（Properties of Entropy）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%92%E4%BF%A1%E6%81%AF%EF%BC%88Mutual-Information%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">互信息（Mutual Information）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%94%E5%90%88%E7%86%B5-Joint-Entropy"><span class="nav-number">4.1.</span> <span class="nav-text">联合熵(Joint Entropy)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E7%86%B5%EF%BC%88Conditional-Entropy%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">条件熵（Conditional Entropy）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%92%E4%BF%A1%E6%81%AF%EF%BC%88Mutual-Information%EF%BC%89-1"><span class="nav-number">4.3.</span> <span class="nav-text">互信息（Mutual Information）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%92%E4%BF%A1%E6%81%AF%E7%9A%84%E6%80%A7%E8%B4%A8-Properties-of-Mutual-Information"><span class="nav-number">4.4.</span> <span class="nav-text">互信息的性质(Properties of Mutual Information)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%B9%E9%97%B4%E4%BA%92%E4%BF%A1%E6%81%AF%EF%BC%88Pointwise-Mutual-Information%EF%BC%89"><span class="nav-number">4.5.</span> <span class="nav-text">点间互信息（Pointwise Mutual Information）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%92%E4%BF%A1%E6%81%AF%E7%9A%84%E5%BA%94%E7%94%A8%EF%BC%88Applications-of-Mutual-Information%EF%BC%89"><span class="nav-number">4.6.</span> <span class="nav-text">互信息的应用（Applications of Mutual Information）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kullback%E2%80%93Leibler-%E6%95%A3%E5%BA%A6%EF%BC%88Kullback%E2%80%93Leibler-Divergence%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">Kullback–Leibler 散度（Kullback–Leibler Divergence）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%EF%BC%88Definition%EF%BC%89-1"><span class="nav-number">5.1.</span> <span class="nav-text">定义（Definition）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%B4%A8%EF%BC%88Properties%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">性质（Properties）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%A4%E5%8F%89%E7%86%B5%EF%BC%88Cross-Entropy%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">交叉熵（Cross-Entropy）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%BC%8F%E5%AE%9A%E4%B9%89%EF%BC%88Formal-Definition%EF%BC%89"><span class="nav-number">6.1.</span> <span class="nav-text">正式定义（Formal Definition）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%B4%A8%EF%BC%88Properties%EF%BC%89-1"><span class="nav-number">6.2.</span> <span class="nav-text">性质（Properties）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E5%8F%89%E7%86%B5%E4%BD%9C%E4%B8%BA%E5%A4%9A%E5%85%83%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%E7%9A%84%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%EF%BC%88Cross-Entropy-as-An-Objective-Function-of-Multi-class-Classification%EF%BC%89"><span class="nav-number">6.3.</span> <span class="nav-text">交叉熵作为多元分类问题的目标函数（Cross-Entropy as An Objective Function of Multi-class Classification）</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">John Doe</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">41</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">8</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-</body>
-</html>
+</div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2022/10/12/%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">面对对象编程</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2022/10/11/test/"><span class="level-item">test</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><!--!--><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Hexo</a><p class="is-size-7"><span>&copy; 2024 John Doe</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><!--!--><script data-pjax src="/js/main.js" defer></script><!--!--></body></html>

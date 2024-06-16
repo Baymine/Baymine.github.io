@@ -1,78 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="robots" content="noindex"><title>Tag: OS - Hexo</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hexo"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hexo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="website"><meta property="og:title" content="Hexo"><meta property="og:url" content="https://baymine.github.io/"><meta property="og:site_name" content="Hexo"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://baymine.github.io/img/og_image.png"><meta property="article:author" content="John Doe"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://baymine.github.io/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://Baymine.github.io"},"headline":"Hexo","image":["https://baymine.github.io/img/og_image.png"],"author":{"@type":"Person","name":"John Doe"},"publisher":{"@type":"Organization","name":"Hexo","logo":{"@type":"ImageObject"}},"description":""}</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
 
-<link rel="stylesheet" href="/css/main.css">
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
 
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"baymine.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://baymine.github.io/tags/OS/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="https://baymine.github.io/tags/OS/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : false,
-    lang   : 'en'
-  };
-</script>
-
-  <title>Tag: OS | Hexo</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<style>mjx-container[jax="SVG"] {
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -185,296 +142,895 @@ mjx-container[display="true"] + br {
   display: none;
 }
 </style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
+</head><body class="is-1-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Hexo</a></div><div class="navbar-menu"><div class="navbar-end"></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-12"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/tags">Tags</a></li><li class="is-active"><a href="#" aria-current="page">OS</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-12-16T03:53:01.000Z" title="12/16/2022, 11:53:01 AM">2022-12-16</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-12-30T01:54:18.556Z" title="12/30/2022, 9:54:18 AM">2022-12-30</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/12/16/MIT6-S081/">MIT6.S081</a></p><div class="content"><h1 id="Reading"><a href="#Reading" class="headerlink" title="Reading"></a>Reading</h1><h3 id="Chapter-1-Operating-system-interfaces"><a href="#Chapter-1-Operating-system-interfaces" class="headerlink" title="Chapter 1: Operating system interfaces"></a>Chapter 1: Operating system interfaces</h3><ul>
+<li>the shell is a user program, and not part of the kernel</li>
+<li>Although the child has the same memory contents as the parent initially, the parent and child are executing with different memory and different registers: changing a variable in one does not affect the other.</li>
+<li><p><code>exec</code> replaces the calling process’s memory but preserves its file table</p>
+<ul>
+<li><code>exec</code> replaces the memory and registers of the current process with a new program</li>
+</ul>
+</li>
+<li><p>I/O and File descriptors</p>
+<ul>
+<li>The shell ensures that it always has three file descriptors open<ul>
+<li>std input, std output, std error</li>
+<li>先close(0); 然后open, 让文件描述符与读相连接</li>
+</ul>
+</li>
+<li>read(fd, buf, n)</li>
+<li>write(fd, buf, n)</li>
+<li><code>dup</code> system call duplicates an existing file descriptor, returning a new one that refers to the same underlying I/O object.</li>
+<li>File descriptors are a powerful abstraction, because they hide the details of what they are connected to</li>
+</ul>
+</li>
+<li><p>1.3 Pipes</p>
+<ul>
+<li>A pipe is a small kernel buffer exposed to processes as a pair of file descriptors, one for reading and one for writing.</li>
+<li>命令行pipe实例： grep fork sh.c | wc -l 程序会分别为两个程序创建一个子进程，并递归地运行命令（可能会出现多管道的现象， a | b | c）</li>
+<li>与重定向的优势<ul>
+<li>会自动清理（重定向需要小心清理临时文件）</li>
+<li>能传入任意长的数据流（重定向需要足够的disk空间存储所有的数据）</li>
+<li>能够并行执行（重定向只能串行）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>1.4 File system</p>
+<ul>
+<li><code>chdir</code>: change current directory</li>
+<li><code>mkdir</code> creates a new directory, <code>open</code> with the <code>O_CREATE</code> flag creates a new data file, and <code>mknod</code> creates a new device file</li>
+<li>The <code>link</code> system call creates another file system name referring to the same inode as an existing file.</li>
+<li>The <code>fstat</code> system call retrieves information from the inode that a file descriptor refers to. It fills in a <code>struct stat</code>, defined in <code>stat.h</code><ul>
+<li>Each inode is identified by a unique <code>inode number</code>.</li>
+<li>The file’s inode and the disk space holding its content are only freed when the file’s link count is zero and no file descriptors refer to it(using <code>unlink</code>)</li>
+</ul>
+</li>
+<li>sum-up： 文件目录变换，文件的结构和信息，文件的创建和关闭，Unix中运行文件相关命令的方法</li>
+</ul>
+</li>
+</ul>
+<h3 id="Chapter-2-Operating-system-organization"><a href="#Chapter-2-Operating-system-organization" class="headerlink" title="Chapter 2: Operating system organization"></a>Chapter 2: Operating system organization</h3><ul>
+<li>Thus an operating system must fulfill three requirements: multiplexing, isolation, and interaction.</li>
+<li><p>2.1 Abstracting physical resources</p>
+<ul>
+<li>通过函数结构访问disk的优势（让OS管理内存）</li>
+</ul>
+</li>
+<li><p>2.2 User mode, supervisor mode, and system calls</p>
+<ul>
+<li>Machine mode<ul>
+<li>have full privilege; a CPU starts in machine mode. Machine mode is mostly intended for configuring a computer.</li>
+</ul>
+</li>
+<li>Supervisor mode(Kernel space)<ul>
+<li>the CPU is allowed to execute privileged instructions<ul>
+<li>If running privileged instructions in user mode, CPU wouldn’t execute it, but switch to the supervisor mode to terminate it</li>
+</ul>
+</li>
+<li>the kernel control the entry point for transitions to supervisor mode</li>
+</ul>
+</li>
+<li>User mode(User space)</li>
+<li>实现程序之间隔离的方法</li>
+</ul>
+</li>
+<li><p>2.3 Kernel organization</p>
+<ul>
+<li><p>monolithic kernel</p>
+<ul>
+<li>The <strong>entire operating system resides in the kernel</strong>, so that the implementations of all system calls run in supervisor mode</li>
+<li><code>Pros</code>: Easy to cooperate, doesn’t have to decide which part of the operating system doesn’t need full hardware privileg</li>
+<li><code>Cons</code>: 1. the interfaces between different parts of the operating system are often complex 2. a mistake is fatal, because an error in supervisor mode will often cause the kernel to fail</li>
+</ul>
+</li>
+<li><p>microkernel</p>
+<ul>
+<li>minimize the amount of operating system code that runs in supervisor mode</li>
+<li><img src="/.io//microkernel.png" alt="img"></li>
+<li>the kernel provides an <code>inter-process communication mechanism</code> to send messages from one user-mode process to another</li>
+<li>OS services running as processes are called servers.<ul>
+<li>it sends a message to the file server and waits for a response.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>sum-up： 两种不同的内核设计方式</li>
+</ul>
+</li>
+<li><p>2.5 Process overview</p>
+<ul>
+<li>The unit of isolation is a process.</li>
+<li>The mechanisms used by the kernel to implement processes include the user/supervisor mode flag, address spaces, and time-slicing of threads</li>
+<li><p>Xv6 maintains a separate page table for each process that defines that process’s address space</p>
+<ul>
+<li><p><img src="/.io//virtual%20address%20space.png" alt="img"></p>
+<ul>
+<li>the trampoline page contains the code to transition in and out of the kernel</li>
+<li>mapping the trapframe is necessary to save/restore the state of the user process</li>
+</ul>
+</li>
+<li><p>The xv6 kernel maintains many pieces of state for each process, which it gathers into a <code>struct proc</code></p>
+<ul>
+<li>most important pieces of kernel state are its page table, its kernel stack, and its run state.</li>
+</ul>
+</li>
+<li><p>Context switch between user space and kernel space</p>
+<ul>
+<li>To switch transparently between processes, the kernel suspends the currently running thread and resumes another process’s thread.</li>
+<li>Each process has two stacks: a user stack and a kernel stack (<code>p-&gt;kstack</code>)<ul>
+<li>the kernel can execute even if a process has wrecked its user stack.</li>
+</ul>
+</li>
+<li><code>ecall</code>: change to kernel space; <code>sret</code>: to user space</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Sum-up<ul>
+<li>an address space to give a process the illusion of its own memory, and, a thread, to give the process the illusion of its own CPU</li>
+<li>如何利用进程实现隔离性的以及进程的工作方式</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>2.7 Security Model</p>
+<ul>
+<li>Safeguards<ul>
+<li>Assertions, type checking, stack guard pages, etc.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Chapter-3-Page-tables"><a href="#Chapter-3-Page-tables" class="headerlink" title="Chapter 3: Page tables"></a>Chapter 3: Page tables</h3><ul>
+<li>provides each process with its own private address space and memory</li>
+<li>Xv6 performs a few tricks: mapping the same memory (a trampoline page) in several address spaces, and guarding kernel and user stacks with an unmapped page.</li>
+<li><p>3.1 Paging hardware</p>
+<ul>
+<li><p>The structure of page table</p>
+<ul>
+<li><img src="/.io//pageTable.png" alt="img"></li>
+</ul>
+</li>
+<li><p>Address translation</p>
+<ul>
+<li>A page table is stored in physical memory as a three-level tree. (first nine bits is used for indexing PPN of each <code>page directory</code>. and etc.)</li>
+<li>If page is not found, raise <code>page-fault exception</code></li>
+<li>In the common case in which large ranges of virtual addresses have no mappings, the three-level structure can omit entire page directories.(Allocate pages when they are needed)</li>
+<li>flag bits that tell the paging hardware how the associated virtual address is allowed to be used<ul>
+<li><strong>每个PTE都包含标志位，说明虚拟地址的使用权限。</strong><ul>
+<li><code>PTE_V</code>表示 PTE 是否存在于页表中：如果未设置，那么一个对该页的引用会引发错误(也就是：不允许被使用（ <strong>validity</strong> ）)。</li>
+<li><code>PTE_W</code>控制着能否对页执行写操作；</li>
+<li><code>PTE_R</code> 控制是否允许使用指令读取页。</li>
+<li><code>PTE_X</code>控制CPU是否可以将页面内容解释为指令并执行它们。</li>
+<li><code>PTE_U</code>控制着用户程序能否使用该页；如果不能，则只有内核能够使用该页。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>satp</code>: the physical address of the root pagetable page<ul>
+<li>each CPU has its own <code>satp</code>(different CPUs can run different processes)</li>
+</ul>
+</li>
+<li></li>
+<li><img src="/.io//address%20translation.png" alt="img"></li>
+</ul>
+</li>
+<li><p>Translation Look-aside Buffer (TLB)</p>
+<ul>
+<li>Motivation: To avoid the cost of loading PTEs from physical memory<ul>
+<li>a potential downside of three levels is that the CPU must load three PTEs from memory to perform the translation of the virtual address in the load/store instruction to a physical address.</li>
+</ul>
+</li>
+<li>when xv6 changes a page table, it must tell the CPU to invalidate corresponding cached TLB entries.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>3.2 Kernel address space</p>
+<ul>
+<li>Xv6 maintains one page table per process, describing each process’s user address space, plus a single page table that describes the kernel’s address space</li>
+<li>The kernel gets at RAM and memory-mapped device registers using “direct mapping;<ul>
+<li>Direct mapping simplifies kernel code that reads or writes physical memory.</li>
+</ul>
+</li>
+<li>The guard page’s PTE is invalid (i.e.,PTE_V is not set), so that if the kernel overflows a kernel stack, it will likely cause an exception</li>
+<li><img src="/.io//kernel%20address%20space.png" alt="img"></li>
+</ul>
+</li>
+<li><p>3.4 Physical memory allocation</p>
+<ul>
+<li>The kernel must allocate and free physical memory at run-time for page tables, user memory, kernel stacks, and pipe buffers.</li>
+<li>Allocation consists of removing a page from the linked list; freeing consists of adding the freed page to the list.</li>
+</ul>
+</li>
+<li><p>3.6 Process address space</p>
+<ul>
+<li><img src="/.io//user%20addr%20space.png" alt="img"></li>
+<li>A process’s user memory starts at virtual address zero and can grow up to <code>MAXVA</code>(The max bits the address can take)</li>
+<li>Xv6 maps the data, stack, and heap with the permissions <code>PTE_R</code>, <code>PTE_W</code>, and <code>PTE_U</code>.<ul>
+<li>Avoid the program modifies the unexpected regions.(the hardware will refuse to execute the store and raises a page fault)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="Lecture-Note"><a href="#Lecture-Note" class="headerlink" title="Lecture Note"></a>Lecture Note</h5><ul>
+<li>Address space<ul>
+<li>pagetable<ul>
+<li>implemented in hardware by the processor or by unit called MMU</li>
+<li>CPU—VA—&gt;MMU—-PA—-&gt;Memory<ul>
+<li><code>satp</code>: In CPU, this register is used to specify where the map is(VA-&gt;PA). Each one process has unique address for the map(This is writen by the kernel for isolation)</li>
+<li>MMU: 读取内存并转换，不保存映射</li>
+</ul>
+</li>
+<li>The max bits of the virtual address is determined by the number of the registers</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>paging hardware(RISC-V)</li>
+<li>xv6 virtual memory code and layout of the kernel address spaces and user address spaces</li>
+<li>多级页表中存储PPN是44位的，末尾加上12个0，得到56位物理地址，这就是下一级页表的物理地址<ul>
+<li>多次访问耗费时间，所以使用TLB（快表）[VA, PA] mapping</li>
+</ul>
+</li>
+<li>MMU —-hardware</li>
+</ul>
+<h3 id="Chapter-4-Traps-and-system-calls"><a href="#Chapter-4-Traps-and-system-calls" class="headerlink" title="Chapter 4 Traps and system calls"></a>Chapter 4 Traps and system calls</h3><ul>
+<li><p>CPU Interrupt</p>
+<ul>
+<li><p>Cases</p>
+<ul>
+<li>system call</li>
+<li>exception</li>
+<li>device interrupt<ul>
+<li>While commonality among the three trap types suggests that a kernel could handle all traps with a single code path, it turns out to be convenient to have separate code for three distinct cases: traps from user space, traps from kernel space, and timer interrupts.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>The usual sequence</p>
+<ul>
+<li>a trap forces a transfer of control into the kernel</li>
+<li>the kernel saves registers and other state</li>
+<li>the kernel restores the saved state and returns from the trap</li>
+<li>original code resumes where it left off</li>
+</ul>
+</li>
+<li><p>For what</p>
+<ul>
+<li>isolation demands that only the kernel be allowed to use devices</li>
+<li>the kernel is a convenient mechanism with which to share devices among multiple processes</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>4.1 RISC-V trap machinery</p>
+<ul>
+<li>Each RISC-V CPU has a set of control registers that the kernel writes to tell the CPU how to handle traps, and that the kernel can read to find out about a trap that has occurred.</li>
+<li>sum-up: CPU用专用的寄存器完成上下文转换。但为了trap的效率CPU并不会将所有任务都完成，剩余的工作需要由内核软件完成</li>
+</ul>
+</li>
+<li><p>4.2 Traps from user space</p>
+<ul>
+<li>Occur if the user program makes a system call (<code>ecall</code> instruction), or does something illegal, or if a device interrupts</li>
+<li>RISC-V hardware does not switch page tables when it forces a trap<ul>
+<li>Things need to do<ul>
+<li>trap handling code needs to switch to the kernel page table</li>
+<li>the kernel page table must also have a mapping for the handler pointed to by stvec</li>
+</ul>
+</li>
+<li>Trampoline page<ul>
+<li><blockquote>
+<p>Trampoline page <strong>stores code to switch between user and kernel space</strong>. The code is mapped at the same virtual address (TRAMPOLINE) in user and kernel space so that it continues to work when it switches page tables.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><code>TRAPFRAME</code><ul>
+<li>address of <code>TRAPFRAME</code> is stored in <code>sscratch</code> register. Saves all the user registers there, including the user’s a0, read back from sscratch.</li>
+<li><code>TRAPFRAME</code> also contain the kernel information and the address of <code>usertrap</code> function.<ul>
+<li><code>usertrap</code>: The job of <code>usertrap</code> is to determine the cause of the trap, process it, and return</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Pointer as argument on system call<ul>
+<li>Problems<ul>
+<li>Invalid pointer</li>
+<li>kernel page table mappings are not the same as the user page table mappings so the kernel cannot use ordinary instructions to load or store from user-supplied addresses.</li>
+</ul>
+</li>
+<li>Find PA by using user space page table and map it to the VA in the kernel space.</li>
+</ul>
+</li>
+<li>sum-up: 在用户空间中调用trap。</li>
+</ul>
+</li>
+<li>4.5 Traps from kernel space</li>
+<li><p>4.6 Page-fault exceptions</p>
+<ul>
+<li><p>Actions</p>
+<ul>
+<li>In user space: kill the faulting process</li>
+<li>In kernel space: kernel panics<ul>
+<li><blockquote>
+<p><strong>内核错误 (Kernel panic</strong> )是指操作系统在监测到内部的致命错误，并无法安全处理此错误时采取的动作。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>three kinds of page fault</p>
+<ul>
+<li>load page faults (when a load instruction cannot translate its virtual address)</li>
+<li>store page faults (when a store instruction cannot translate its virtual address)</li>
+<li>instruction page faults (when the address in the program counter doesn’t translate)</li>
+</ul>
+</li>
+<li><p>The applications of page-fault exception</p>
+<ul>
+<li><p>copy-on-write fork</p>
+<ul>
+<li>Procedure<ul>
+<li>the parent and child to initially share all physical pages, but for each to map them read-only</li>
+<li>Write to that memory will raise a page-fault exception</li>
+<li>The kernel’s trap handler responds by allocating a new page of physical memory and<br>copying into it the physical page that the faulted address maps to.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Lazy allocation</p>
+<ul>
+<li>Procedure<ul>
+<li>application asks for more memory by calling <code>sbrk</code></li>
+<li>The kernel notes the increase in size, but does not allocate memory or create PTEs</li>
+<li>When page-fault occurs in those address, the kernel allocates a page of physical memory and maps it into the page table</li>
+</ul>
+</li>
+<li>Since applications often ask for more memory than they need</li>
+<li>Problem<ul>
+<li>The extra overhead introduced by kernel/user transition<ul>
+<li>reduce this cost by allocating a batch of consecutive pages per page fault instead of one page</li>
+<li>specializing the kernel entry/exit code for such page-faults.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>demand paging(需求分页)</p>
+<ul>
+<li><p>Problem</p>
+<ul>
+<li>Since applications can be large and reading from disk is expensive, this startup cost may be noticeable to users</li>
+</ul>
+</li>
+<li><p>Solution</p>
+<ul>
+<li>a modern kernel creates the page table for the user address space, but marks the PTEs for the pages invalid</li>
+<li>On a page fault, the kernel reads the content of the page from disk and maps it into the user address space</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>paging to disk</p>
+<ul>
+<li><p>Problem</p>
+<ul>
+<li>The programs running on a computer may need more memory than the computer has RAM</li>
+</ul>
+</li>
+<li><p>Solution</p>
+<ul>
+<li>to store only a fraction of user pages in RAM, and to store the rest on disk in a paging area.</li>
+<li>The memory stored in the paging area is set as invalid.</li>
+<li>Access paging area will incur a page fault. The kernel trap handler will allocate a page of physical RAM, read the page from disk into the RAM, and modify the relevant PTE to point to the RAM</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Chapter5-Interrupts-and-device-drivers"><a href="#Chapter5-Interrupts-and-device-drivers" class="headerlink" title="Chapter5 Interrupts and device drivers"></a>Chapter5 Interrupts and device drivers</h3><ul>
+<li>A driver is the code in an operating system that<ul>
+<li>manages a particular device: it configures the device hardware tells the device to perform operations</li>
+<li>handles the resulting interrupts</li>
+<li>interacts withprocesses that may be waiting for I/O from the device.</li>
+</ul>
+</li>
+<li>device drivers execute code in two contexts<ul>
+<li>top half that runs in a process’s kernel thread<ul>
+<li>ask the hardware to start an operation</li>
+<li>wait for the operation complete</li>
+<li>raise an interrupt when the code is completed</li>
+</ul>
+</li>
+<li>a bottom half that executes at interrupt time.<ul>
+<li>what operation has completed, wakes up a waiting process if appropriate</li>
+<li>tells the hardware to start work on any waiting next operation</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>A general pattern to note is the decoupling of device activity from process activity via buffering<br>and interrupts. (This idea is sometimes called <code>I/O concurrency</code>.)<ul>
+<li>This decoupling can increase performance by allowing processes to execute concurrently with device I/O</li>
+</ul>
+</li>
+<li>驱动程序完全禁用中断，并定期检查设备是否需要注意。这种技术被称为轮询（polling）<ul>
+<li>如果设备执行操作非常快，轮询是有意义的，但是如果设备大部分空闲，轮询会浪费CPU时间。一些驱动程序根据当前设备负载在轮询和中断之间动态切换。</li>
+</ul>
+</li>
+<li>程序I/O很简单，但速度太慢，无法在高数据速率下使用。需要高速移动大量数据的设备通常使用直接内存访问（DMA）<ul>
+<li>DMA设备硬件直接将传入数据写入内存，并从内存中读取传出数据。</li>
+<li>一些操作系统能够直接在用户空间缓冲区和设备硬件之间移动数据，通常带有DMA。</li>
+</ul>
+</li>
+</ul>
+<h3 id="lock"><a href="#lock" class="headerlink" title="lock"></a>lock</h3><ul>
+<li>锁的缺点是它们会扼杀性能，因为它们会串行化并发操作</li>
+<li><p>竞态条件是指多个进程读写某些共享数据（至少有一个访问是写入）的情况</p>
+<ul>
+<li>在内存池中，两个进程并行地释放内存，那么可能会导致释放的内存被放到同一个地址中，从而变成了覆盖</li>
+<li><code>acquire</code>和 <code>release</code>之间的指令序列通常被称为临界区域（critical section）。（加锁的区域）</li>
+<li>代码在执行的时候，依托一些 <code>不变量</code>(相当于一些条件)，但是其他进程对这个变量的操作暂时改变了这种不变量，所以导致代码运行错误。（上面就是链表头部指针有一个时间段中不是指向链表头部的，这时候其他进程的操作就可能导致竞态）</li>
+<li>以将锁视为串行化（serializing）并发的临界区域，以便同时只有一个进程在运行这部分代码，从而维护不变量（假设临界区域设定了正确的隔离性）</li>
+</ul>
+</li>
+<li><p>冲突</p>
+<ul>
+<li>如果多个进程同时想要相同的锁或者锁经历了争用，则称之为发生冲突（conflict）</li>
+</ul>
+</li>
+<li><p>要使用多少锁，以及每个锁应该保护哪些数据和不变量</p>
+<ul>
+<li>任何时候可以被一个CPU写入，同时又可以被另一个CPU读写的变量，都应该使用锁来防止两个操作重叠</li>
+<li>锁保护不变量（invariants）：如果一个不变量涉及多个内存位置，通常所有这些位置都需要由一个锁来保护，以确保不变量不被改变。</li>
+<li>大内核锁（big kernel lock）<ul>
+<li>如果并行性不重要，那么可以安排只拥有一个线程，而不用担心锁。一个简单的内核可以在多处理器上做到这一点，方法是拥有一个锁，这个锁必须在进入内核时获得，并在退出内核时释放</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>死锁和锁排序</p>
+<ul>
+<li>如果在内核中执行的代码路径必须同时持有数个锁，那么所有代码路径以相同的顺序获取这些锁是很重要的（否则有死锁的风险）</li>
+<li>全局锁获取顺序的需求意味着锁实际上是每个函数规范的一部分：调用者必须以一种使锁按照约定顺序被获取的方式调用函数。</li>
+</ul>
+</li>
+<li><p>锁和中断处理函数</p>
+<ul>
+<li>一个进程中持有一个变量，在执行过程中出现了中断，而中断处理函数可能又会需要访问这个变量，这时候处理函数就会等待这个变量被释放，这时候就产生了死锁<ul>
+<li>如果一个自旋锁被中断处理程序所使用，那么CPU必须保证在启用中断的情况下永远不能持有该锁。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Re-entrant locks</p>
+<ul>
+<li>It might appear that some deadlocks and lock-ordering challenges could be avoided by using re-entrant locks, which are also called recursive locks.<ul>
+<li>if the lock is held by a process and if that process attempts to acquire the lock again, then the kernel could just allow this</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>指令和内存访问顺序</p>
+<ul>
+<li>规则确实允许重新排序后改变并发代码的结果，并且很容易导致多处理器上的不正确行为。CPU的排序规则称为内存模型（memory model）。</li>
+<li><code>__sync_synchronize()</code>是一个内存障碍：它告诉编译器和CPU不要跨障碍重新排序 <code>load</code>或 <code>store</code>指令。</li>
+</ul>
+</li>
+<li><p>睡眠锁</p>
+<ul>
+<li>因为等待会浪费CPU时间，所以自旋锁最适合短的临界区域；睡眠锁对于冗长的操作效果很好。</li>
+</ul>
+</li>
+</ul>
+<h3 id="调度"><a href="#调度" class="headerlink" title="调度"></a>调度</h3><ul>
+<li><p>任何操作系统都可能运行比CPU数量更多的进程，所以需要一个进程间分时共享CPU的方案</p>
+<ul>
+<li>通过将进程多路复用到硬件CPU上，使每个进程产生一种错觉，即它有自己的虚拟CPU</li>
+</ul>
+</li>
+<li><p>多路复用</p>
+<ul>
+<li>情景<ul>
+<li>进程等待设备或管道I/O完成，或等待子进程退出，或在 <code>sleep</code>系统调用中等待时，xv6使用睡眠（sleep）和唤醒（wakeup）机制切换</li>
+<li>xv6周期性地强制切换以处理长时间计算而不睡眠的进程。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>协程</p>
+<ul>
+<li>在两个线程之间进行这种样式化切换的过程有时被称为协程（coroutines）<ul>
+<li>协程运行在线程之上，当一个协程执行完成后，可以选择主动让出，让另一个协程运行在当前线程之上。 <strong>协程并没有增加线程数量，只是在线程的基础之上通过分时复用的方式运行多个协程</strong> ，而且协程的切换在用户态完成，切换的代价比线程从用户态到内核态的代价小很多。</li>
+<li><img src="https://pic3.zhimg.com/80/v2-f4fb2dea86d909ed60498b7021d0fe66_720w.webp" alt="img"></li>
+<li>每个线程中运行多个协程</li>
+<li><strong>协程只有和异步IO结合起来才能发挥出最大的威力。</strong><ul>
+<li>假设协程运行在线程之上，并且协程调用了一个阻塞IO操作，这时候会发生什么？实际上操作系统并不知道协程的存在，它只知道线程，<strong>因此在协程调用阻塞IO操作的时候，操作系统会让线程进入阻塞状态，当前的协程和其它绑定在该线程之上的协程都会陷入阻塞而得不到调度，这往往是不能接受的。</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>sleep 和 wakeup<ul>
+<li>Xv6使用了一种称为 <code>sleep</code>和 <code>wakeup</code>的方法，它允许一个进程在等待事件时休眠，而另一个进程在事件发生后将其唤醒。睡眠和唤醒通常被称为序列协调（sequence coordination）或条件同步机制（conditional synchronization mechanisms）。<ul>
+<li><code>Sleep(chan)</code>在任意值 <code>chan</code>上睡眠，称为等待通道（wait channel）。 释放CPU用于其他任务</li>
+<li><code>Wakeup(chan)</code>唤醒所有在 <code>chan</code>上睡眠的进程（如果有），使其 <code>sleep</code>调用返回。</li>
+<li>为了防止死锁，使用 <code>条件锁</code>，让进程在睡眠之后释放锁<ul>
+<li><code>条件锁</code>就是所谓的条件变量，某一个线程因为某个条件为满足时可以使用条件变量使该程序处于阻塞状态。一旦条件满足以“信号量”的方式唤醒一个因为该条件而被阻塞的线程。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3><ul>
+<li>文件系统的目的是组织和存储数据</li>
+<li>解决的问题<ul>
+<li>文件系统需要磁盘上的数据结构来表示目录和文件名称树，记录保存每个文件内容的块的标识，以及记录磁盘的哪些区域是空闲的。</li>
+<li>文件系统必须支持崩溃恢复（crash recovery）。</li>
+<li>文件系统代码必须协调以保持不变量（不同的进程可能在相同的文件系统上运行）</li>
+<li>文件系统必须保持常用块的内存缓存（访问磁盘慢）</li>
+</ul>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>文件描述符（File descriptor）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>路径名（Pathname）</td>
+</tr>
+<tr>
+<td>目录（Directory）</td>
+</tr>
+<tr>
+<td>索引结点（Inode）</td>
+</tr>
+<tr>
+<td>日志（Logging）</td>
+</tr>
+<tr>
+<td>缓冲区高速缓存（Buffer cache）</td>
+</tr>
+<tr>
+<td>磁盘（Disk)</td>
+</tr>
+</tbody>
+</table>
 </div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content tag">
-            
-
-  
-  
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">OS
-          <small>Tag</small>
-        </h2>
-      </div>
-
-      
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-12-16T11:53:01+08:00"
-              content="2022-12-16">
-          12-16
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/12/16/MIT6-S081/" itemprop="url">
-            <span itemprop="name">MIT6.S081</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-10-21T11:30:25+08:00"
-              content="2022-10-21">
-          10-21
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/10/21/6_S081lab1/" itemprop="url">
-            <span itemprop="name">6.S081lab1</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-    </div>
-  </div>
-  
-  
-  
-
-  
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">John Doe</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">41</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">8</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-</body>
-</html>
+<p><img src="/.io//Structure%20of%20file%20system.png" alt></p>
+<ul>
+<li>日志<ul>
+<li>日志驻留在超级块中指定的未知。</li>
+<li>事务中途奔溃将导致日志头块中的计数为0，提交后奔溃将导致非零计数</li>
+</ul>
+</li>
+</ul>
+<h1 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h1><h2 id="Lecture-3-OS-design"><a href="#Lecture-3-OS-design" class="headerlink" title="Lecture 3: OS design"></a>Lecture 3: OS design</h2><ul>
+<li><p>Lecture Topic:</p>
+<ul>
+<li>OS design<ul>
+<li>system calls</li>
+<li>micro/monolithic kernel</li>
+</ul>
+</li>
+<li>First system call in xv6</li>
+</ul>
+</li>
+<li><p>OS picture</p>
+<ul>
+<li>apps: sh, echo, …</li>
+<li>system call interface (open, close,…)<br>OS</li>
+</ul>
+</li>
+<li><p>Goal of OS</p>
+<ul>
+<li>run multiple applications</li>
+<li>isolate them</li>
+<li>multiplex them</li>
+<li>share</li>
+</ul>
+</li>
+<li><p>Strawman design: No OS</p>
+<ul>
+<li>Application directly interacts with hardware<ul>
+<li>CPU cores &amp; registers</li>
+<li>DRAM chips</li>
+<li>Disk blocks</li>
+<li>…</li>
+</ul>
+</li>
+<li>OS library perhaps abstracts some of it</li>
+</ul>
+</li>
+<li><p>Strawman design not conducive to multiplexing</p>
+<ul>
+<li>each app periodically must give up hardware</li>
+<li>BUT, weak isolation<ul>
+<li>app forgets to give up, no other app runs</li>
+<li>apps has end-less loop, no other app runs</li>
+<li>you cannot even kill the badly app from another app</li>
+</ul>
+</li>
+<li>but used by real-time OSes<ul>
+<li>“cooperative scheduling”</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Strawman design not conducive to memory isolation</p>
+<ul>
+<li>all apps share physical memory</li>
+<li>one app can overwrites another apps memory</li>
+<li>one app can overwrite OS library</li>
+</ul>
+</li>
+<li><p>Unix interface conducive to OS goals</p>
+<ul>
+<li>abstracts the hardware in way that achieves goals</li>
+<li>processes (instead of cores): fork<ul>
+<li>OS transparently allocates cores to processes<ul>
+<li>Saves and restore registers</li>
+</ul>
+</li>
+<li>Enforces that processes give them up<ul>
+<li>Periodically re-allocates cores</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>memory (instead of physical memory): exec<ul>
+<li>Each process has its “own” memory</li>
+<li>OS can decide where to place app in memory</li>
+<li>OS can enforce isolation between memory of different apps</li>
+<li>OS allows storing image in file system</li>
+</ul>
+</li>
+<li>files (instead of disk blocks)<ul>
+<li>OS can provide convenient names</li>
+<li>OS can allow sharing of files between processes/users</li>
+</ul>
+</li>
+<li>pipes (instead of shared physical mem)<ul>
+<li>OS can stop sender/receiver</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>OS must be defensive</p>
+<ul>
+<li>an application shouldn’t be able to crash OS</li>
+<li>an application shouldn’t be able to break out of its isolation</li>
+<li>=&gt; need strong isolation between apps and OS</li>
+<li>approach: hardware support</li>
+</ul>
+</li>
+<li>user/kernel mode</li>
+<li>virtual memory</li>
+<li><p>Processors provide user/kernel mode</p>
+<ul>
+<li>kernel mode: can execute “privileged” instructions<ul>
+<li>e.g., setting kernel/user bit</li>
+<li>e.g., reprogramming timer chip</li>
+</ul>
+</li>
+<li>user mode: cannot execute privileged instructions</li>
+<li>Run OS in kernel mode, applications in user mode</li>
+<li>[RISC-V has also an M mode, which we mostly ignore]</li>
+</ul>
+</li>
+<li><p>Processors provide virtual memory</p>
+<ul>
+<li>Hardware provides page tables that translate virtual address to physical</li>
+<li>Define what physical memory an application can access</li>
+<li>OS sets up page tables so that each application can access only its memory</li>
+</ul>
+</li>
+<li><p>Apps must be able to communicate with kernel</p>
+<ul>
+<li>Write to storage device, which is shared =&gt; must be protected =&gt; in kernel</li>
+<li>Exit app</li>
+<li>…</li>
+</ul>
+</li>
+<li><p>Solution: add instruction to change mode in controlled way</p>
+<ul>
+<li>ecall <code>&lt;n&gt;</code></li>
+<li>enters kernel mode at a pre-agreed entry point</li>
+</ul>
+</li>
+<li><p>Modify OS picture</p>
+<ul>
+<li>user / kernel (redline)</li>
+<li>app -&gt; printf() -&gt; write() -&gt; SYSTEM CALL -&gt; sys_write() -&gt; …<br>user-level libraries are app’s private business</li>
+<li>kernel internal functions are not callable by user</li>
+<li>other way of drawing picture:</li>
+<li>syscall 1  -&gt; system call stub -&gt; kernel entry -&gt; syscall -&gt; fs</li>
+<li>syscall 2                                                 -&gt; proc</li>
+<li>system call stub executes special instruction to enter kernel<br>hardware switches to kernel mode<br>but only at an entry point specified by the kernel</li>
+<li>syscall need some way to get at arguments of syscall</li>
+<li>[syscalls the topic of this week’s lab]</li>
+</ul>
+</li>
+<li><p>Kernel is the Trusted Computing Base (TCB)</p>
+<ul>
+<li>Kernel must be “correct”<ul>
+<li>Bugs in kernel could allow user apps to circumvent kernel/user<br>Happens often in practice, because kernels are complex<br>See CVEs</li>
+</ul>
+</li>
+<li>Kernel must treat user apps as suspect<br>User app may trick kernel to do the wrong thing<br>Kernel must check arguments carefully<br>Setup user/kernel correctly<br>Etc.</li>
+<li>Kernel in charge of separating applications too<br>One app may try to read/write another app’s memory<br>=&gt; Requires a security mindset<br>Any bug in kernel may be a security exploit</li>
+</ul>
+</li>
+<li><p>Aside: can one have process isolation WITHOUT h/w-supported<br>kernel/user mode and virtual memory?</p>
+<ul>
+<li>yes! use a strongly-typed programming language</li>
+</ul>
+</li>
+<li>For example, see Singularity O/S<br>the compiler is then the trust computing base (TCB)<br>but h/w user/kernel mode is the most popular plan</li>
+<li>Monolothic kernel<br>OS runs in kernel space<br>Xv6 does this.  Linux etc. too.<br>kernel interface == system call interface<br>one big program with file system, drivers, &amp;c</li>
+<li>good: easy for subsystems to cooperate<br>one cache shared by file system and virtual memory</li>
+<li>bad: interactions are complex<br>leads to bugs<br>no isolation within</li>
+<li><p>Microkernel design</p>
+<ul>
+<li>many OS services run as ordinary user programs<ul>
+<li>file system in a file server</li>
+</ul>
+</li>
+<li>kernel implements minimal mechanism to run services in user space<ul>
+<li>processes with memory</li>
+<li>inter-process communication (IPC)</li>
+</ul>
+</li>
+<li>kernel interface != system call interface</li>
+</ul>
+</li>
+<li>good: more isolation</li>
+<li>bad: may be hard to get good performance<br>both monolithic and microkernel designs widely used</li>
+<li><p>Xv6 case study</p>
+<ul>
+<li>Monolithic kernel<ul>
+<li>Unix system calls == kernel interface</li>
+</ul>
+</li>
+<li>Source code reflects OS organization (by convention)<ul>
+<li>user/    apps in user mode</li>
+<li>kernel/  code in kernel mode</li>
+</ul>
+</li>
+<li>Kernel has several parts<ul>
+<li>kernel/defs.h<ul>
+<li>proc</li>
+<li>fs<br>..</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Goal: read source code and understand it (without consulting book)</li>
+</ul>
+</li>
+<li><p>The RISC-V computer</p>
+<ul>
+<li>A very simple board (e.g., no display)</li>
+</ul>
+</li>
+<li>RISC-V processor with 4 cores</li>
+<li>RAM (128 MB)</li>
+<li>support for interrupts (PLIC, CLINT)</li>
+<li>support for UART<br>allows xv6 to talk to console<br>allows xv6 to read from keyboard</li>
+<li>support for e1000 network card (through PCIe)<br>Qemu emulates several RISC-V computers</li>
+<li>we use the “virt” one<br><a target="_blank" rel="noopener" href="https://github.com/riscv/riscv-qemu/wiki">https://github.com/riscv/riscv-qemu/wiki</a></li>
+<li>close to the SiFive board (<a target="_blank" rel="noopener" href="https://www.sifive.com/boards">https://www.sifive.com/boards</a>)<br>but with virtio for disk</li>
+<li><p>Boot xv6 (under gdb)</p>
+<ul>
+<li><span>$</span> make CPUS=1 qemu-gdb<ul>
+<li>runs xv6 under gdb (with 1 core)</li>
+</ul>
+</li>
+<li>Qemu starts xv6 in kernel/entry.S (see kernel/kernel.ld)<ul>
+<li>set breakpoint at _entry<ul>
+<li>look at instruction</li>
+<li>info reg</li>
+</ul>
+</li>
+<li>set breakpoint at main<ul>
+<li>Walk through main<br>single step into userinit<br>Walk through userinit<br>show kalloc<br>show proc.h<br>show allocproc()<br>show initcode.S/initcode.asm<br>break forkret()<br>walk to userret<br>break syscall<br>print num<br>syscalls[num]<br>exec “/init”<br>points to be made:<br>page table in userinit<br>ecall: U -&gt; K<br>a7: syscall #<br>exec: defensive</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>kernel</p>
+<script type="math/tex; mode=display">
+\text{proc.c} \stackrel{\text{gcc}}{\rightarrow} \text{proc.s} \stackrel{\text{assembler}}{\rightarrow} \text{proc.o} \rightarrow\text{link different .o file together}</script></li>
+</ul>
+<h2 id="6-S081-2020-Lecture-4-Virtual-Memory"><a href="#6-S081-2020-Lecture-4-Virtual-Memory" class="headerlink" title="6.S081 2020 Lecture 4: Virtual Memory"></a>6.S081 2020 Lecture 4: Virtual Memory</h2><p>========================================</p>
+<ul>
+<li>plan:<br>address spaces<br>paging hardware<br>xv6 VM code</li>
+</ul>
+<h3 id="Virtual-memory-overview"><a href="#Virtual-memory-overview" class="headerlink" title="Virtual memory overview"></a>Virtual memory overview</h3><ul>
+<li>today’s problem:<br>[user/kernel diagram]<br>[memory view: diagram with user processes and kernel in memory]<br>suppose the shell has a bug:<br>sometimes it writes to a random memory address<br>how can we keep it from wrecking the kernel?<br>and from wrecking other processes?</li>
+<li>we want isolated address spaces<br>each process has its own memory<br>it can read and write its own memory<br>it cannot read or write anything else<br>challenge:<br>how to multiplex several memories over one physical memory?<br>while maintaining isolation between memories</li>
+<li>xv6 uses RISC-V’s paging hardware to implement AS’s<br>ask questions! this material is important<br>topic of next lab (and shows up in several other labs)</li>
+<li><p>paging provides a level of indirection for addressing<br>CPU -&gt; MMU -&gt; RAM<br>VA     PA</p>
+<script type="math/tex; mode=display">
+\text{CPU}\stackrel{\text{VA}}{\rightarrow}MMU\stackrel{\text{PA}}{\rightarrow}\text{RAM}</script><p>s/w can only ld/st to virtual addresses, not physical<br>kernel tells MMU how to map each virtual address to a physical address<br>MMU essentially has a table, indexed by va, yielding pa<br>called a “page table”<br>one page table per address space<br>MMU can restrict what virtual addresses user code can use<br>By programming the MMU, the kernel has complete control over va-&gt;pa mapping<br>Allows for many interesting OS features/tricks</p>
+</li>
+<li>RISC-V maps 4-KB “pages”<br>and aligned — start on 4 KB boundaries<br>4 KB = 12 bits<br>the RISC-V used in xv6 has 64-bit for addresses<br>thus page table index is top 64-12 = 52 bits of VA<br>except that the top 25 of the top 52 are unused<br>no RISC-V has that much memory now<br>can grow in future<br>so, index is 27 bits.</li>
+<li>MMU translation<br>see Figure 3.1 of book<br>use index bits of VA to find a page table entry (PTE)<br>construct physical address using PPN from PTE + offset of VA</li>
+<li>what is in PTE?<br>each PTE is 64 bits, but only 54 are used<br>top 44 bits of PTE are top bits of physical address<br>“physical page number”<br>low 10 bits of PTE flags<br>Present, Writeable, &amp;c<br>note: size virtual addresses != size physical addresses</li>
+<li>where is the page table stored?<br>in RAM — MMU loads (and stores) PTEs<br>o/s can read/write PTEs<br>read/write memory location corresponding to PTEs</li>
+<li>would it be reasonable for page table to just be an array of PTEs? how big is it?<br>2^27 is roughly 134 million<br>64 bits per entry<br>134*8 MB for a full page table<br>wasting roughly 1GB per page table<br>one page table per address space<br>one address space per application<br>would waste lots of memory for small programs!<br>you only need mappings for a few hundred pages<br>so the rest of the million entries would be there but not needed</li>
+<li>RISC-V 64 uses a “three-level page table” to save space<br>see figure 3.2 from book<br>page directory page (PD)<br>PD has 512 PTEs<br>PTEs point to another PD or is a leaf<br>so 512<em>512</em>512 PTEs in total<br>PD entries can be invalid<br>those PTE pages need not exist<br>so a page table for a small address space can be small</li>
+<li>how does the mmu know where the page table is located in RAM?<br>satp holds phys address of top PD<br>pages can be anywhere in RAM — need not be contiguous<br>rewrite satp when switching to another address space/application</li>
+<li>how does RISC-V paging hardware translate a va?<br>need to find the right PTE<br>satp register points to PA of top/L2 PD<br>top 9 bits index L2 PD to get PA of L1 PD<br>next 9 bits index L1 PD to get PA of L0 PD<br>next 9 bits index L0 PD to get PA of PTE<br>PPN from PTE + low-12 from VA</li>
+<li>flags in PTE<br>V, R, W, X, U<br>xv6 uses all of them</li>
+<li>what if V bit not set? or store and W bit not set?<br>“page fault”<br>forces transfer to kernel<br>trap.c in xv6 source<br>kernel can just produce error, kill process<br>in xv6: “usertrap(): unexpected scause … pid=… sepc=… stval=…”<br>or kernel can install a PTE, resume the process<br>e.g. after loading the page of memory from disk</li>
+<li>indirection allows paging h/w to solve many problems<br>e.g. phys memory doesn’t have to be contiguous<br>avoids fragmentation<br>e.g. lazy allocation (a lab)<br>e.g. copy-on-write fork (another lab)<br>many more techniques<br>topic of next lecture</li>
+<li><p>Q: why use virtual memory in kernel?<br>it is clearly good to have page tables for user processes<br>but why have a page table for the kernel?<br>could the kernel run with using only physical addresses?<br>top-level answer: yes<br>most standard kernels do use virtual addresses<br>why do standard kernels do so?<br>some reasons are lame, some are better, none are fundamental</p>
+<ul>
+<li>the hardware makes it difficult to turn it off<br>e.g. on entering a system call, one would have to disable VM</li>
+<li>the kernel itself can benefit from virtual addresses<br>mark text pages X, but data not (helps tracking down bugs)<br>unmap a page below kernel stack (helps tracking down bugs)<br>map a page both in user and kernel (helps user/kernel transition)</li>
+</ul>
+</li>
+</ul>
+<h3 id="Virtual-memory-in-xv6"><a href="#Virtual-memory-in-xv6" class="headerlink" title="Virtual memory in xv6"></a>Virtual memory in xv6</h3><ul>
+<li>kernel page table<br>See figure 3.3 of book<br>simple maping mostly<br>map virtual to physical one-on-one<br>note double-mapping of trampoline<br>note permissions<br>why map devices?</li>
+<li>each process has its own address space<br>and its own page table<br>see figure 3.4 of book<br>note: trampoline and trapframe aren’t writable by user process<br>kernel switches page tables (i.e. sets satp) when switching processes</li>
+<li>Q: why this address space arrangement?<br>user virtual addresses start at zero<br>of course user va 0 maps to different pa for each process<br>16,777,216 GB for user heap to grow contiguously<br>but needn’t have contiguous phys mem — no fragmentation problem<br>both kernel and user map trampoline and trapframe page<br>eases transition user -&gt; kernel and back<br>kernel doesn’t map user applications<br>not easy for kernel to r/w user memory<br>need translate user virtual address to kernel virtual address<br>good for isolation (see spectre attacks)<br>easy for kernel to r/w physical memory<br>pa x mapped at va x</li>
+<li>Q: does the kernel have to map all of phys mem into its virtual address space?</li>
+</ul>
+<h3 id="Code-walk-through"><a href="#Code-walk-through" class="headerlink" title="Code walk through"></a>Code walk through</h3><ul>
+<li>setup of kernel address space<br>kvmmap()<br>Q: what is address 0x10000000 (256M)<br>Q: how much address space does 1 L2 entry cover? (1G)<br>Q: how much address space does 1 L1 entry cover? (2MB)<br>Q: how much address space does 1 L0 entry cover? (4096)<br>print kernel page table<br>Q: what is size of address space? (512G)<br>Q: how much memory is used to represent it after 1rst kvmmap()? (3 pages)<br>Q: how many entries is CLINT? (16 pages)<br>Q: how many entries is PLIC? (1024 pages, two level 1 PDs)<br>Q: how many pages is kernel text (8 pages)<br>Q: how many pages is kernel total (128M = 64 * 2MB)<br>Q: Is trampoline mapped twice? (yes, last entry and direct-mapped, entry [2, 3, 7])<br>kvminithart();<br>Q: after executing w_satp() why will the next instruction be sfence_vma()?</li>
+<li>mappages() in vm.c<br>arguments are top PD, va, size, pa, perm<br>adds mappings from a range of va’s to corresponding pa’s<br>rounds b/c some uses pass in non-page-aligned addresses<br>for each page-aligned address in the range<br>call walkpgdir to find address of PTE<br>need the PTE’s address (not just content) b/c we want to modify<br>put the desired pa into the PTE<br>mark PTE as valid w/ PTE_P</li>
+<li>walk() in vm.c<br>mimics how the paging h/w finds the PTE for an address<br>PX extracts the 9 bits at Level level<br>&amp;pagetable[PX(level, va)] is the address of the relevant PTE<br>if PTE_V<br>the relevant page-table page already exists<br>PTE2PA extracts the PPN from the PDE<br>if not PTE_V<br>alloc a page-table page<br>fill in pte with PPN (using PA2PTE)<br>now the PTE we want is in the page-table page</li>
+<li>procinit() in proc.c<br>alloc a page for each kernel stack with a guard page</li>
+<li>setup user address space<br>allocproc(): allocates empty top-level page table<br>fork(): uvmcopy()<br>exec(): replace proc’s page table with a new one<br>uvmalloc<br>loadseg<br>print user page table for sh<br>Q: what is entry 2?</li>
+<li>a process calls sbrk(n) to ask for n more bytes of heap memory<br>user/umalloc.c calls sbrk() to get memory for the allocator<br>each process has a size<br>kernel adds new memory at process’s end, increases size<br>sbrk() allocates physical memory (RAM)<br>maps it into the process’s page table<br>returns the starting address of the new memory</li>
+<li>growproc() in proc.c<br>proc-&gt;sz is the process’s current size<br>uvmalloc() does most of the work<br>when switching to user space satp will be loaded with updated page table</li>
+<li>uvmalloc() in vm.c<br>why PGROUNDUP?<br>arguments to mappages()…</li>
+</ul>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-10-21T03:30:25.000Z" title="10/21/2022, 11:30:25 AM">2022-10-21</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-12-22T06:31:12.115Z" title="12/22/2022, 2:31:12 PM">2022-12-22</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/10/21/6_S081lab1/">6.S081lab1</a></p><div class="content"><h2 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h2><h3 id="使用Tmux在一个终端中创建多个窗口"><a href="#使用Tmux在一个终端中创建多个窗口" class="headerlink" title="使用Tmux在一个终端中创建多个窗口"></a>使用Tmux在一个终端中创建多个窗口</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tmux # 进入新建的会话中</span><br><span class="line">Ctrl + B , % # 垂直分割（左右）</span><br><span class="line">Ctrl + B , “ # 水平分割（上下）</span><br><span class="line">Ctrl + B , 方向键 # 在不同的终端中切换</span><br><span class="line">exit  # 退出会话</span><br></pre></td></tr></table></figure>
+<h3 id="启动qemu的gdb模式"><a href="#启动qemu的gdb模式" class="headerlink" title="启动qemu的gdb模式"></a>启动qemu的gdb模式</h3><p>在第一个窗口运行 <code>make CPUS=1 qemu-gdb</code>, 第二个窗口运行 <code>gdb-multiarch</code>，开启gdb模式。</p>
+<p>如果lient端没有连接到server，那么需要在 <code>/root</code> 创建 <code>.gdbinit</code> 文件, 加上：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add-auto-load-safe-path /root/xv6-labs-2022/.gdbinit  # xv6 directory</span><br></pre></td></tr></table></figure>
+<h4 id="gdb的使用方法"><a href="#gdb的使用方法" class="headerlink" title="gdb的使用方法"></a>gdb的使用方法</h4><p>首先是链接文件</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file fileName</span><br></pre></td></tr></table></figure>
+<p>常见的命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">r = run</span><br><span class="line">c = continue # 让暂停的程序继续运行</span><br><span class="line">n = next  # 运行到下一行</span><br><span class="line">s = step # 单步执行，遇到函数会进入</span><br><span class="line">p = print  # 打印变量或寄存器</span><br></pre></td></tr></table></figure>
+<h2 id="实验一"><a href="#实验一" class="headerlink" title="实验一"></a>实验一</h2><p>预备知识：</p>
+<ul>
+<li><code>pid_t wait(int *wstatus)</code>：等待（阻塞状态）子进程状态发生变化（子进程终结、子进程被信号停止或恢复）。如果子进程是被终结，那么wait能够允许系统释放子进程的资源。如果wait没有得到执行，那么终结的子进程就会变成“僵尸”状态。<code>exit(0)</code>表示等待所有的子进程退出。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"kernel/types.h"</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"user/user.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RD 0 <span class="comment">//pipe的read端</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> WR 1 <span class="comment">//pipe的write端</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span> </span>{</span><br><span class="line">    <span class="type">char</span> buf = <span class="string">'P'</span>; <span class="comment">//用于传送的字节</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> fd_c2p[<span class="number">2</span>]; <span class="comment">//子进程-&gt;父进程</span></span><br><span class="line">    <span class="type">int</span> fd_p2c[<span class="number">2</span>]; <span class="comment">//父进程-&gt;子进程</span></span><br><span class="line">    <span class="built_in">pipe</span>(fd_c2p);</span><br><span class="line">    <span class="built_in">pipe</span>(fd_p2c);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> pid = fork();</span><br><span class="line">    <span class="type">int</span> exit_status = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (pid &lt; <span class="number">0</span>) {</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="number">2</span>, <span class="string">"fork() error!\n"</span>);</span><br><span class="line">        <span class="built_in">close</span>(fd_c2p[RD]);</span><br><span class="line">        <span class="built_in">close</span>(fd_c2p[WR]);</span><br><span class="line">        <span class="built_in">close</span>(fd_p2c[RD]);</span><br><span class="line">        <span class="built_in">close</span>(fd_p2c[WR]);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    } <span class="keyword">else</span> <span class="keyword">if</span> (pid == <span class="number">0</span>) { <span class="comment">//子进程</span></span><br><span class="line">        <span class="built_in">close</span>(fd_p2c[WR]);</span><br><span class="line">        <span class="built_in">close</span>(fd_c2p[RD]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">read</span>(fd_p2c[RD], &amp;buf, <span class="built_in">sizeof</span>(<span class="type">char</span>)) != <span class="built_in">sizeof</span>(<span class="type">char</span>)) {</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="number">2</span>, <span class="string">"child read() error!\n"</span>);</span><br><span class="line">            exit_status = <span class="number">1</span>; <span class="comment">//标记出错</span></span><br><span class="line">        } <span class="keyword">else</span> {</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="number">1</span>, <span class="string">"%d: received ping\n"</span>, <span class="built_in">getpid</span>());</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">write</span>(fd_c2p[WR], &amp;buf, <span class="built_in">sizeof</span>(<span class="type">char</span>)) != <span class="built_in">sizeof</span>(<span class="type">char</span>)) {</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="number">2</span>, <span class="string">"child write() error!\n"</span>);</span><br><span class="line">            exit_status = <span class="number">1</span>;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="built_in">close</span>(fd_p2c[RD]);</span><br><span class="line">        <span class="built_in">close</span>(fd_c2p[WR]);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">exit</span>(exit_status);</span><br><span class="line">    } <span class="keyword">else</span> { <span class="comment">//父进程</span></span><br><span class="line">        <span class="built_in">close</span>(fd_p2c[RD]);</span><br><span class="line">        <span class="built_in">close</span>(fd_c2p[WR]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">write</span>(fd_p2c[WR], &amp;buf, <span class="built_in">sizeof</span>(<span class="type">char</span>)) != <span class="built_in">sizeof</span>(<span class="type">char</span>)) {</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="number">2</span>, <span class="string">"parent write() error!\n"</span>);</span><br><span class="line">            exit_status = <span class="number">1</span>;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">read</span>(fd_c2p[RD], &amp;buf, <span class="built_in">sizeof</span>(<span class="type">char</span>)) != <span class="built_in">sizeof</span>(<span class="type">char</span>)) {</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="number">2</span>, <span class="string">"parent read() error!\n"</span>);</span><br><span class="line">            exit_status = <span class="number">1</span>; <span class="comment">//标记出错</span></span><br><span class="line">        } <span class="keyword">else</span> {</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="number">1</span>, <span class="string">"%d: received pong\n"</span>, <span class="built_in">getpid</span>());</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="built_in">close</span>(fd_p2c[WR]);</span><br><span class="line">        <span class="built_in">close</span>(fd_c2p[RD]);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">exit</span>(exit_status);</span><br><span class="line">    }</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="find"><a href="#find" class="headerlink" title="find"></a>find</h4><ul>
+<li>0、1、2是文件描述符（分别对应stdin、stdout、stderr）</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fprintf</span><span class="params">(FILE *stream, <span class="type">const</span> <span class="type">char</span> *format, ...)</span><span class="comment">// C 库函数发送格式化输出到流 stream 中。</span></span></span><br><span class="line"><span class="function"><span class="comment">// -----------------------------------------------------------</span></span></span><br><span class="line"><span class="function"><span class="keyword">struct</span> dirent</span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">　　<span class="type">long</span> d_ino; <span class="comment">/* inode number 索引节点号 */</span></span><br><span class="line">    <span class="type">off_t</span> d_off; <span class="comment">/* offset to this dirent 在目录文件中的偏移 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">short</span> d_reclen; <span class="comment">/* length of this d_name 文件名长 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> d_type; <span class="comment">/* the type of d_name 文件类型 */</span></span><br><span class="line">    <span class="type">char</span> d_name [NAME_MAX+<span class="number">1</span>]; <span class="comment">/* file name (null-terminated) 文件名，最长255字符 */</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// -----------------------------------------------------------</span></span><br><span class="line"><span class="comment">// 从 str2 复制 n 个字符到 str1，但是在重叠内存块这方面，memmove() 是比 memcpy() 更安全的方法</span></span><br><span class="line"><span class="function"><span class="type">void</span> *<span class="title">memmove</span><span class="params">(<span class="type">void</span> *str1, <span class="type">const</span> <span class="type">void</span> *str2, <span class="type">size_t</span> n)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="实验二"><a href="#实验二" class="headerlink" title="实验二"></a>实验二</h2><h3 id="trace"><a href="#trace" class="headerlink" title="trace"></a>trace</h3><p>TODO: 理清楚整个调用的过程</p>
+<p>xv6系统调用的过程，这里以fork为例:<br><img src="/.io//10/21/6_S081lab1/fork.png" class></p>
+</div></article></div></div><!--!--><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Hexo</a><p class="is-size-7"><span>&copy; 2024 John Doe</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><!--!--><script data-pjax src="/js/main.js" defer></script><!--!--></body></html>

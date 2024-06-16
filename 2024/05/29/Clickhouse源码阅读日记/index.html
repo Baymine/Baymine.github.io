@@ -1,82 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>Clickhouse源码阅读日记 - Hexo</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hexo"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hexo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="源码列（Columns）字段（Field） src\Core\Field.h  字段实现是一个联合类， std::aligned_union_t，而一行数据在此文件当中定义为using Row &amp;#x3D; std::vector&amp;lt;Field&amp;gt;;  Field 中并没有足够的关于一个表（table）的特定数据类型的信息。比如，UInt8、UInt16、UInt32 和 UInt64 在 Fiel"><meta property="og:type" content="article"><meta property="og:title" content="Clickhouse源码阅读日记"><meta property="og:url" content="https://baymine.github.io/2024/05/29/Clickhouse%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E6%97%A5%E8%AE%B0/"><meta property="og:site_name" content="Hexo"><meta property="og:description" content="源码列（Columns）字段（Field） src\Core\Field.h  字段实现是一个联合类， std::aligned_union_t，而一行数据在此文件当中定义为using Row &amp;#x3D; std::vector&amp;lt;Field&amp;gt;;  Field 中并没有足够的关于一个表（table）的特定数据类型的信息。比如，UInt8、UInt16、UInt32 和 UInt64 在 Fiel"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://baymine.github.io/img/og_image.png"><meta property="article:published_time" content="2024-05-29T13:26:01.000Z"><meta property="article:modified_time" content="2024-06-05T12:30:41.095Z"><meta property="article:author" content="John Doe"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://baymine.github.io/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://baymine.github.io/2024/05/29/Clickhouse%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E6%97%A5%E8%AE%B0/"},"headline":"Clickhouse源码阅读日记","image":["https://baymine.github.io/img/og_image.png"],"datePublished":"2024-05-29T13:26:01.000Z","dateModified":"2024-06-05T12:30:41.095Z","author":{"@type":"Person","name":"John Doe"},"publisher":{"@type":"Organization","name":"Hexo","logo":{"@type":"ImageObject"}},"description":"源码列（Columns）字段（Field） src\\Core\\Field.h  字段实现是一个联合类， std::aligned_union_t，而一行数据在此文件当中定义为using Row &#x3D; std::vector&lt;Field&gt;;  Field 中并没有足够的关于一个表（table）的特定数据类型的信息。比如，UInt8、UInt16、UInt32 和 UInt64 在 Fiel"}</script><link rel="canonical" href="https://baymine.github.io/2024/05/29/Clickhouse%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E6%97%A5%E8%AE%B0/"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
 
-<link rel="stylesheet" href="/css/main.css">
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
 
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"baymine.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="源码列（Columns）字段（Field） src\Core\Field.h  字段实现是一个联合类， std::aligned_union_t，而一行数据在此文件当中定义为using Row &#x3D; std::vector&lt;Field&gt;;  Field 中并没有足够的关于一个表（table）的特定数据类型的信息。比如，UInt8、UInt16、UInt32 和 UInt64 在 Fiel">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Clickhouse源码阅读日记">
-<meta property="og:url" content="https://baymine.github.io/2024/05/29/Clickhouse%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E6%97%A5%E8%AE%B0/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="源码列（Columns）字段（Field） src\Core\Field.h  字段实现是一个联合类， std::aligned_union_t，而一行数据在此文件当中定义为using Row &#x3D; std::vector&lt;Field&gt;;  Field 中并没有足够的关于一个表（table）的特定数据类型的信息。比如，UInt8、UInt16、UInt32 和 UInt64 在 Fiel">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-05-29T13:26:01.000Z">
-<meta property="article:modified_time" content="2024-06-05T12:30:41.095Z">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="https://baymine.github.io/2024/05/29/Clickhouse%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E6%97%A5%E8%AE%B0/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
-
-  <title>Clickhouse源码阅读日记 | Hexo</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<style>mjx-container[jax="SVG"] {
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -189,125 +142,7 @@ mjx-container[display="true"] + br {
   display: none;
 }
 </style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2024/05/29/Clickhouse%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E6%97%A5%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Clickhouse源码阅读日记
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2024-05-29 21:26:01" itemprop="dateCreated datePublished" datetime="2024-05-29T21:26:01+08:00">2024-05-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-06-05 20:30:41" itemprop="dateModified" datetime="2024-06-05T20:30:41+08:00">2024-06-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><h2 id="列（Columns）"><a href="#列（Columns）" class="headerlink" title="列（Columns）"></a>列（Columns）</h2><h2 id="字段（Field）"><a href="#字段（Field）" class="headerlink" title="字段（Field）"></a>字段（Field）</h2><blockquote>
+</head><body class="is-1-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Hexo</a></div><div class="navbar-menu"><div class="navbar-end"></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-12"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2024-05-29T13:26:01.000Z" title="5/29/2024, 9:26:01 PM">2024-05-29</time></span><span class="level-item">Updated&nbsp;<time dateTime="2024-06-05T12:30:41.095Z" title="6/5/2024, 8:30:41 PM">2024-06-05</time></span></div></div><h1 class="title is-3 is-size-4-mobile">Clickhouse源码阅读日记</h1><div class="content"><h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><h2 id="列（Columns）"><a href="#列（Columns）" class="headerlink" title="列（Columns）"></a>列（Columns）</h2><h2 id="字段（Field）"><a href="#字段（Field）" class="headerlink" title="字段（Field）"></a>字段（Field）</h2><blockquote>
 <p>src\Core\Field.h</p>
 </blockquote>
 <p>字段实现是一个联合类， <code>std::aligned_union_t</code>，而一行数据在此文件当中定义为<code>using Row = std::vector&lt;Field&gt;;</code></p>
@@ -339,193 +174,11 @@ mjx-container[display="true"] + br {
 <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><h2 id="loop-vectorization-循环向量化"><a href="#loop-vectorization-循环向量化" class="headerlink" title="loop vectorization(循环向量化)"></a>loop vectorization(循环向量化)</h2><p>循环向量化是一种编译器优化技术，用于将循环转换为向量化指令，以便在单个指令中处理多个数据元素。这种技术可以提高程序的性能，因为它可以利用现代处理器的SIMD指令集，同时减少循环的迭代次数。</p>
 <p><code>例如：for (int i = 0; i &lt; n; ++i) { c[i] = a[i] + b[i]; }</code></p>
 <h1 id="语言-语法"><a href="#语言-语法" class="headerlink" title="语言/语法"></a>语言/语法</h1><h2 id="C-11-using-引入构造函数"><a href="#C-11-using-引入构造函数" class="headerlink" title="C++11 using 引入构造函数"></a>C++11 using 引入构造函数</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> DEFINE_FIELD_VECTOR(X) \</span></span><br><span class="line"><span class="meta">struct X : public FieldVector \</span></span><br><span class="line"><span class="meta">{ \</span></span><br><span class="line"><span class="meta">    using FieldVector::FieldVector; \</span></span><br><span class="line"><span class="meta">}</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="keyword">using</span> FieldVector::FieldVector;：这是 C++<span class="number">11</span> 引入的 <span class="keyword">using</span> 声明，它引入了基类（FieldVector）的构造函数到派生类（X）的作用域中。</span><br><span class="line">(第一个FieldVector是类名，第二个是构造函数的函数名称，这引入了所有的构造函数)</span><br><span class="line"></span><br><span class="line">这意味着 X 类可以使用 FieldVector 的所有构造函数，而无需重复定义。</span><br><span class="line">这有助于避免构造函数的代码重复，并保持代码简洁。</span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
-
-    </div>
-
-    
-    
-    
-
-      <footer class="post-footer">
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2023/01/05/GeePRC-notes/" rel="prev" title="GeePRC notes">
-      <i class="fa fa-chevron-left"></i> GeePRC notes
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2024/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%95%99%E8%82%B2%E7%BC%BA%E5%A4%B1%E7%9A%84%E4%B8%80%E8%AF%BE/" rel="next" title="计算机教育缺失的一课">
-      计算机教育缺失的一课 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BA%90%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%97%EF%BC%88Columns%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">列（Columns）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%EF%BC%88Field%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">字段（Field）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%97%EF%BC%88Block%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">块（Block）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MaterializedView"><span class="nav-number">1.4.</span> <span class="nav-text">MaterializedView</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">编程范式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NOLINT"><span class="nav-number">2.1.</span> <span class="nav-text">&#x2F;&#x2F; NOLINT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%90%8D%E7%A7%B0%EF%BC%9A-Helper"><span class="nav-number">2.2.</span> <span class="nav-text">类名称：*Helper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%90%8D%E7%A7%B0%EF%BC%9A-Dummy"><span class="nav-number">2.3.</span> <span class="nav-text">类名称：*Dummy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E6%95%B0%E7%BB%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E5%89%8D%E9%A2%84%E7%95%99%E4%B8%80%E4%B8%AA%E7%A9%BA%E9%97%B4%EF%BC%88-1th%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">在数组第一个元素前预留一个空间（-1th）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#loop-vectorization-%E5%BE%AA%E7%8E%AF%E5%90%91%E9%87%8F%E5%8C%96"><span class="nav-number">3.1.</span> <span class="nav-text">loop vectorization(循环向量化)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80-%E8%AF%AD%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">语言&#x2F;语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-11-using-%E5%BC%95%E5%85%A5%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">4.1.</span> <span class="nav-text">C++11 using 引入构造函数</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">John Doe</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">41</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">8</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-</body>
-</html>
+</div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2024/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%95%99%E8%82%B2%E7%BC%BA%E5%A4%B1%E7%9A%84%E4%B8%80%E8%AF%BE/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">计算机教育缺失的一课</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2023/01/05/GeePRC-notes/"><span class="level-item">GeePRC notes</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><!--!--><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Hexo</a><p class="is-size-7"><span>&copy; 2024 John Doe</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><!--!--><script data-pjax src="/js/main.js" defer></script><!--!--></body></html>

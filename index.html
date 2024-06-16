@@ -1,78 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>Hexo</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hexo"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hexo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="website"><meta property="og:title" content="Hexo"><meta property="og:url" content="https://baymine.github.io/"><meta property="og:site_name" content="Hexo"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://baymine.github.io/img/og_image.png"><meta property="article:author" content="John Doe"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://baymine.github.io/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://Baymine.github.io"},"headline":"Hexo","image":["https://baymine.github.io/img/og_image.png"],"author":{"@type":"Person","name":"John Doe"},"publisher":{"@type":"Organization","name":"Hexo","logo":{"@type":"ImageObject"}},"description":""}</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
 
-<link rel="stylesheet" href="/css/main.css">
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
 
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"baymine.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://baymine.github.io/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="https://baymine.github.io/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : true,
-    isPost : false,
-    lang   : 'en'
-  };
-</script>
-
-  <title>Hexo</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<style>mjx-container[jax="SVG"] {
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -185,125 +142,7 @@ mjx-container[display="true"] + br {
   display: none;
 }
 </style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content index posts-expand">
-            
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2024/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%95%99%E8%82%B2%E7%BC%BA%E5%A4%B1%E7%9A%84%E4%B8%80%E8%AF%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%95%99%E8%82%B2%E7%BC%BA%E5%A4%B1%E7%9A%84%E4%B8%80%E8%AF%BE/" class="post-title-link" itemprop="url">计算机教育缺失的一课</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2024-06-03 10:56:51" itemprop="dateCreated datePublished" datetime="2024-06-03T10:56:51+08:00">2024-06-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-06-05 15:39:57" itemprop="dateModified" datetime="2024-06-05T15:39:57+08:00">2024-06-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Shell-工具和脚本"><a href="#Shell-工具和脚本" class="headerlink" title="Shell 工具和脚本"></a>Shell 工具和脚本</h1><ul>
+</head><body class="is-1-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Hexo</a></div><div class="navbar-menu"><div class="navbar-end"></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-12"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2024-06-03T02:56:51.000Z" title="6/3/2024, 10:56:51 AM">2024-06-03</time></span><span class="level-item">Updated&nbsp;<time dateTime="2024-06-05T07:39:57.313Z" title="6/5/2024, 3:39:57 PM">2024-06-05</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%95%99%E8%82%B2%E7%BC%BA%E5%A4%B1%E7%9A%84%E4%B8%80%E8%AF%BE/">计算机教育缺失的一课</a></p><div class="content"><h1 id="Shell-工具和脚本"><a href="#Shell-工具和脚本" class="headerlink" title="Shell 工具和脚本"></a>Shell 工具和脚本</h1><ul>
 <li>在bash中，单引号中不会替换变量，双引号会<ul>
 <li><code>echo '$HOME'</code> 输出 <code>$HOME</code></li>
 <li><code>echo "$HOME"</code> 输出 <code>/home/username</code></li>
@@ -345,71 +184,7 @@ mjx-container[display="true"] + br {
 </ul>
 </li>
 </ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2024/05/29/Clickhouse%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E6%97%A5%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/05/29/Clickhouse%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E6%97%A5%E8%AE%B0/" class="post-title-link" itemprop="url">Clickhouse源码阅读日记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2024-05-29 21:26:01" itemprop="dateCreated datePublished" datetime="2024-05-29T21:26:01+08:00">2024-05-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-06-05 20:30:41" itemprop="dateModified" datetime="2024-06-05T20:30:41+08:00">2024-06-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><h2 id="列（Columns）"><a href="#列（Columns）" class="headerlink" title="列（Columns）"></a>列（Columns）</h2><h2 id="字段（Field）"><a href="#字段（Field）" class="headerlink" title="字段（Field）"></a>字段（Field）</h2><blockquote>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2024-05-29T13:26:01.000Z" title="5/29/2024, 9:26:01 PM">2024-05-29</time></span><span class="level-item">Updated&nbsp;<time dateTime="2024-06-05T12:30:41.095Z" title="6/5/2024, 8:30:41 PM">2024-06-05</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/05/29/Clickhouse%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E6%97%A5%E8%AE%B0/">Clickhouse源码阅读日记</a></p><div class="content"><h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><h2 id="列（Columns）"><a href="#列（Columns）" class="headerlink" title="列（Columns）"></a>列（Columns）</h2><h2 id="字段（Field）"><a href="#字段（Field）" class="headerlink" title="字段（Field）"></a>字段（Field）</h2><blockquote>
 <p>src\Core\Field.h</p>
 </blockquote>
 <p>字段实现是一个联合类， <code>std::aligned_union_t</code>，而一行数据在此文件当中定义为<code>using Row = std::vector&lt;Field&gt;;</code></p>
@@ -441,71 +216,7 @@ mjx-container[display="true"] + br {
 <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><h2 id="loop-vectorization-循环向量化"><a href="#loop-vectorization-循环向量化" class="headerlink" title="loop vectorization(循环向量化)"></a>loop vectorization(循环向量化)</h2><p>循环向量化是一种编译器优化技术，用于将循环转换为向量化指令，以便在单个指令中处理多个数据元素。这种技术可以提高程序的性能，因为它可以利用现代处理器的SIMD指令集，同时减少循环的迭代次数。</p>
 <p><code>例如：for (int i = 0; i &lt; n; ++i) { c[i] = a[i] + b[i]; }</code></p>
 <h1 id="语言-语法"><a href="#语言-语法" class="headerlink" title="语言/语法"></a>语言/语法</h1><h2 id="C-11-using-引入构造函数"><a href="#C-11-using-引入构造函数" class="headerlink" title="C++11 using 引入构造函数"></a>C++11 using 引入构造函数</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> DEFINE_FIELD_VECTOR(X) \</span></span><br><span class="line"><span class="meta">struct X : public FieldVector \</span></span><br><span class="line"><span class="meta">{ \</span></span><br><span class="line"><span class="meta">    using FieldVector::FieldVector; \</span></span><br><span class="line"><span class="meta">}</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="keyword">using</span> FieldVector::FieldVector;：这是 C++<span class="number">11</span> 引入的 <span class="keyword">using</span> 声明，它引入了基类（FieldVector）的构造函数到派生类（X）的作用域中。</span><br><span class="line">(第一个FieldVector是类名，第二个是构造函数的函数名称，这引入了所有的构造函数)</span><br><span class="line"></span><br><span class="line">这意味着 X 类可以使用 FieldVector 的所有构造函数，而无需重复定义。</span><br><span class="line">这有助于避免构造函数的代码重复，并保持代码简洁。</span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2023/01/05/GeePRC-notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/01/05/GeePRC-notes/" class="post-title-link" itemprop="url">GeePRC notes</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-01-05 16:48:47" itemprop="dateCreated datePublished" datetime="2023-01-05T16:48:47+08:00">2023-01-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-01-16 19:35:05" itemprop="dateModified" datetime="2023-01-16T19:35:05+08:00">2023-01-16</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="项目大纲"><a href="#项目大纲" class="headerlink" title="项目大纲"></a>项目大纲</h2><ul>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2023-01-05T08:48:47.000Z" title="1/5/2023, 4:48:47 PM">2023-01-05</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-01-16T11:35:05.596Z" title="1/16/2023, 7:35:05 PM">2023-01-16</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2023/01/05/GeePRC-notes/">GeePRC notes</a></p><div class="content"><h2 id="项目大纲"><a href="#项目大纲" class="headerlink" title="项目大纲"></a>项目大纲</h2><ul>
 <li><p>codec.go</p>
 <ul>
 <li>报文Header</li>
@@ -588,71 +299,7 @@ err = dec.Decode(&amp;q)
 <li>一句话：context 用来解决 goroutine 之间 <code>退出通知</code>、<code>元数据传递</code>的功能。</li>
 <li><img src="https://pic3.zhimg.com/80/v2-6a27526f536505cea08a5813ccce05b2_720w.webp" alt></li>
 </ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2022/12/18/C-Memory-Management/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/12/18/C-Memory-Management/" class="post-title-link" itemprop="url">C++ Memory Management</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-12-18 15:04:19" itemprop="dateCreated datePublished" datetime="2022-12-18T15:04:19+08:00">2022-12-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-12-21 17:08:01" itemprop="dateModified" datetime="2022-12-21T17:08:01+08:00">2022-12-21</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="第一讲-primitives"><a href="#第一讲-primitives" class="headerlink" title="第一讲 primitives"></a>第一讲 primitives</h1><h3 id="1-overview"><a href="#1-overview" class="headerlink" title="1. overview"></a>1. overview</h3><ul>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-12-18T07:04:19.000Z" title="12/18/2022, 3:04:19 PM">2022-12-18</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-12-21T09:08:01.289Z" title="12/21/2022, 5:08:01 PM">2022-12-21</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/12/18/C-Memory-Management/">C++ Memory Management</a></p><div class="content"><h1 id="第一讲-primitives"><a href="#第一讲-primitives" class="headerlink" title="第一讲 primitives"></a>第一讲 primitives</h1><h3 id="1-overview"><a href="#1-overview" class="headerlink" title="1. overview"></a>1. overview</h3><ul>
 <li>资料： <a target="_blank" rel="noopener" href="http://gee.cs.oswego.edu/dl/">DL Malloc</a></li>
 <li>涉及的库</li>
 </ul>
@@ -705,71 +352,7 @@ err = dec.Decode(&amp;q)
 <ul>
 <li>default, delete 关键字</li>
 </ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2022/12/16/MIT6-S081/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/12/16/MIT6-S081/" class="post-title-link" itemprop="url">MIT6.S081</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-12-16 11:53:01" itemprop="dateCreated datePublished" datetime="2022-12-16T11:53:01+08:00">2022-12-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-12-30 09:54:18" itemprop="dateModified" datetime="2022-12-30T09:54:18+08:00">2022-12-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Reading"><a href="#Reading" class="headerlink" title="Reading"></a>Reading</h1><h3 id="Chapter-1-Operating-system-interfaces"><a href="#Chapter-1-Operating-system-interfaces" class="headerlink" title="Chapter 1: Operating system interfaces"></a>Chapter 1: Operating system interfaces</h3><ul>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-12-16T03:53:01.000Z" title="12/16/2022, 11:53:01 AM">2022-12-16</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-12-30T01:54:18.556Z" title="12/30/2022, 9:54:18 AM">2022-12-30</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/12/16/MIT6-S081/">MIT6.S081</a></p><div class="content"><h1 id="Reading"><a href="#Reading" class="headerlink" title="Reading"></a>Reading</h1><h3 id="Chapter-1-Operating-system-interfaces"><a href="#Chapter-1-Operating-system-interfaces" class="headerlink" title="Chapter 1: Operating system interfaces"></a>Chapter 1: Operating system interfaces</h3><ul>
 <li>the shell is a user program, and not part of the kernel</li>
 <li>Although the child has the same memory contents as the parent initially, the parent and child are executing with different memory and different registers: changing a variable in one does not affect the other.</li>
 <li><p><code>exec</code> replaces the calling process’s memory but preserves its file table</p>
@@ -1634,71 +1217,7 @@ err = dec.Decode(&amp;q)
 <li>growproc() in proc.c<br>proc-&gt;sz is the process’s current size<br>uvmalloc() does most of the work<br>when switching to user space satp will be loaded with updated page table</li>
 <li>uvmalloc() in vm.c<br>why PGROUNDUP?<br>arguments to mappages()…</li>
 </ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2022/11/29/Basic_must_known/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/29/Basic_must_known/" class="post-title-link" itemprop="url">Basic Knoledge</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-11-29 20:44:45" itemprop="dateCreated datePublished" datetime="2022-11-29T20:44:45+08:00">2022-11-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-13 17:03:53" itemprop="dateModified" datetime="2023-05-13T17:03:53+08:00">2023-05-13</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h1><ul>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-11-29T12:44:45.000Z" title="11/29/2022, 8:44:45 PM">2022-11-29</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-05-13T09:03:53.953Z" title="5/13/2023, 5:03:53 PM">2023-05-13</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/11/29/Basic_must_known/">Basic Knoledge</a></p><div class="content"><h1 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h1><ul>
 <li><p>Small tricks</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取中间的数：</span></span><br><span class="line"><span class="type">int</span> mid = (left + right) / <span class="number">2</span>; <span class="comment">// 有溢出的风险</span></span><br><span class="line"><span class="type">int</span> mid = left + ((right - left) &gt;&gt; <span class="number">1</span>); <span class="comment">// 这样更好</span></span><br></pre></td></tr></table></figure></li>
 <li>当异常发⽣时，C++通常会调⽤对象的析构函数来释放资源</li>
@@ -1850,71 +1369,7 @@ err = dec.Decode(&amp;q)
 <li>0-RTT</li>
 </ul>
 <p>不用看：env_monitor、moses  启动：tool_chain_config.py</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2022/11/23/Q-A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/23/Q-A/" class="post-title-link" itemprop="url">Q&A</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-11-23 16:06:49" itemprop="dateCreated datePublished" datetime="2022-11-23T16:06:49+08:00">2022-11-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-01-14 08:01:01" itemprop="dateModified" datetime="2023-01-14T08:01:01+08:00">2023-01-14</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="右值引用的用法"><a href="#右值引用的用法" class="headerlink" title="右值引用的用法"></a>右值引用的用法</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引用右值，避免生成新对象</span></span><br><span class="line">Foo&amp;&amp; foo2 = <span class="built_in">FooFactory</span>();</span><br></pre></td></tr></table></figure>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-11-23T08:06:49.000Z" title="11/23/2022, 4:06:49 PM">2022-11-23</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-01-14T00:01:01.097Z" title="1/14/2023, 8:01:01 AM">2023-01-14</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/11/23/Q-A/">Q&amp;A</a></p><div class="content"><h2 id="右值引用的用法"><a href="#右值引用的用法" class="headerlink" title="右值引用的用法"></a>右值引用的用法</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引用右值，避免生成新对象</span></span><br><span class="line">Foo&amp;&amp; foo2 = <span class="built_in">FooFactory</span>();</span><br></pre></td></tr></table></figure>
 <p><strong><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/335994370">关于std::move函数</a></strong></p>
 <blockquote>
 <p>std::move移动不了什么，唯一的功能是把左值强制转化为右值，让右值引用可以指向左值。其实现等同于一个类型转换：static_cast<t&&>(lvalue)。 所以，单纯的std::move(xxx)不会有性能提升. move返回值如果有名称就是左值（被赋值给一个变量），没有名称就是右值。</t&&></p>
@@ -1982,71 +1437,7 @@ err = dec.Decode(&amp;q)
 <li>解决一个算法问题的过程</li>
 <li>为什么说计算机领域最难的两个问题是变量命名和缓存不命中？</li>
 </ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2022/11/08/%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/08/%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">命令笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-11-08 16:39:05" itemprop="dateCreated datePublished" datetime="2022-11-08T16:39:05+08:00">2022-11-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-13 15:23:00" itemprop="dateModified" datetime="2023-03-13T15:23:00+08:00">2023-03-13</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="linux-命令"><a href="#linux-命令" class="headerlink" title="linux 命令"></a>linux 命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span> <span class="comment"># Present Working Directory</span></span><br><span class="line">tar &lt;options&gt; &lt;filename&gt; <span class="comment"># Tape ARchive</span></span><br><span class="line"><span class="built_in">rm</span> -rf <span class="comment"># 删除文件夹以及其中的内容</span></span><br><span class="line"><span class="built_in">cat</span> -n <span class="comment"># 查看文件中的内容，-n加上行序号</span></span><br><span class="line">less <span class="comment"># 可以滚动查看， 输入q退出</span></span><br><span class="line">grep &lt;pattern&gt; &lt;file&gt;  <span class="comment"># -v: 不包含模式的字串， -R递归地查找</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">chmod</span> 777 -R &lt;dir_name&gt; <span class="comment"># 将文件夹以及其目录中的所有文件的访问权限全开</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> - <span class="comment"># 上次目录</span></span><br><span class="line"><span class="built_in">head</span> <span class="comment"># 查看文件开头</span></span><br><span class="line">file <span class="comment"># 查看文件属性</span></span><br><span class="line"><span class="variable">${var#week}</span> <span class="comment"># 将var头部的week删掉，$会去除末尾的字符</span></span><br><span class="line">lsof -i:9008  <span class="comment"># 检查9008端口是否开放</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## ----- g++  -------</span></span><br><span class="line"><span class="comment"># - 这样做的好处是当某一个链接文件改动的时候，不需要重新编译所有的文件</span></span><br><span class="line">g++ filename.cpp -c <span class="comment"># 只编译不运行</span></span><br><span class="line">g++ *.o -o main <span class="comment"># 将编译的文件链接</span></span><br></pre></td></tr></table></figure>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-11-08T08:39:05.000Z" title="11/8/2022, 4:39:05 PM">2022-11-08</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-03-13T07:23:00.149Z" title="3/13/2023, 3:23:00 PM">2023-03-13</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/11/08/%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/">命令笔记</a></p><div class="content"><h2 id="linux-命令"><a href="#linux-命令" class="headerlink" title="linux 命令"></a>linux 命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span> <span class="comment"># Present Working Directory</span></span><br><span class="line">tar &lt;options&gt; &lt;filename&gt; <span class="comment"># Tape ARchive</span></span><br><span class="line"><span class="built_in">rm</span> -rf <span class="comment"># 删除文件夹以及其中的内容</span></span><br><span class="line"><span class="built_in">cat</span> -n <span class="comment"># 查看文件中的内容，-n加上行序号</span></span><br><span class="line">less <span class="comment"># 可以滚动查看， 输入q退出</span></span><br><span class="line">grep &lt;pattern&gt; &lt;file&gt;  <span class="comment"># -v: 不包含模式的字串， -R递归地查找</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">chmod</span> 777 -R &lt;dir_name&gt; <span class="comment"># 将文件夹以及其目录中的所有文件的访问权限全开</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> - <span class="comment"># 上次目录</span></span><br><span class="line"><span class="built_in">head</span> <span class="comment"># 查看文件开头</span></span><br><span class="line">file <span class="comment"># 查看文件属性</span></span><br><span class="line"><span class="variable">${var#week}</span> <span class="comment"># 将var头部的week删掉，$会去除末尾的字符</span></span><br><span class="line">lsof -i:9008  <span class="comment"># 检查9008端口是否开放</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## ----- g++  -------</span></span><br><span class="line"><span class="comment"># - 这样做的好处是当某一个链接文件改动的时候，不需要重新编译所有的文件</span></span><br><span class="line">g++ filename.cpp -c <span class="comment"># 只编译不运行</span></span><br><span class="line">g++ *.o -o main <span class="comment"># 将编译的文件链接</span></span><br></pre></td></tr></table></figure>
 <h2 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h2><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">make -f fileName <span class="comment"># fileName 你指定的makefile文件</span></span><br><span class="line"><span class="comment"># make通过修改文件的时间戳来判断文件是否被更新</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## ---------------一个编译实例----------</span></span><br><span class="line"><span class="comment"># 增量编译(只重新编译修改过的文件)</span></span><br><span class="line">CXX = g++</span><br><span class="line">TARGET = hello</span><br><span class="line">OBJ = main.o printhello.o factorial.o  <span class="comment"># 声明依赖</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置编译模式</span></span><br><span class="line"><span class="variable">$(TARGET)</span> : <span class="variable">$(OBJ)</span></span><br><span class="line">	<span class="variable">$(CXX)</span> -o <span class="variable">$(TARGET)</span> <span class="variable">$(OBJ)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 依赖项的来源，通过g++编译而来</span></span><br><span class="line"><span class="section">main.o: main.cpp</span></span><br><span class="line">	<span class="variable">$(CXX)</span> -c main.cpp</span><br><span class="line"></span><br><span class="line"><span class="comment">## ----------第三个版本-----</span></span><br><span class="line">CXXFLAGS = -c -Wall <span class="comment"># Wall： warning all</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$(TARGET)</span> : <span class="variable">$(OBJ)</span></span><br><span class="line">	<span class="variable">$(CXX)</span> -o <span class="variable">$@</span> <span class="variable">$^</span>  <span class="comment"># @: TARGET, ^:OBJ</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ----------统一的规则------------</span></span><br><span class="line"><span class="comment">## $&lt;: 表示依赖中的第一个， $^: 代表所有的依赖</span></span><br><span class="line"><span class="section">%.o: %.cpp</span></span><br><span class="line">	<span class="variable">$(CXX)</span> <span class="variable">$(CXXFLAGS)</span> <span class="variable">$&lt;</span> -o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line"><span class="meta"><span class="keyword">.PHONY</span>: clean # 防止出现文件叫clean。这里生成一个依赖于clean的项目，但是什么都不做</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	rm -f *.o <span class="variable">$(TARGET)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## -----------版本4----------</span></span><br><span class="line">SRC = <span class="variable">$(<span class="built_in">wildcard</span> *.cpp)</span>  <span class="comment"># 当前目录下的所有.cpp文件都放到变量SRC中</span></span><br><span class="line">OBJ = <span class="variable">$(<span class="built_in">patsubst</span> %.cpp, %.o, <span class="variable">$(SRC)</span>)</span> <span class="comment"># 把SRC中的.cpp文件替换成.o然后存储到OBJ中</span></span><br></pre></td></tr></table></figure>
 <h2 id="CMake"><a href="#CMake" class="headerlink" title="CMake"></a><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/500002865">CMake</a></h2><p>文件名：CMakeLists.txt<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 由于cmake会生成大量的临时文件，所以最好将cmake的过程放在build</span></span><br><span class="line"><span class="comment"># 文件下，这样清除的时候会比较方便</span></span><br><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.10</span>) <span class="comment"># 需要的cmake的最低版本</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(hello VERSION <span class="number">1.0</span>)  <span class="comment"># 项目名称以及对应的版本号</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置头文件将版本号传递给源代码</span></span><br><span class="line"><span class="keyword">configure_file</span>(TutorialConfig.h.in TutorialConfig.h)</span><br><span class="line"></span><br><span class="line"><span class="comment"># TutorialConfig.h 文件会被自动写入 build 目录，需要将目录加入到搜索头文件的路径列表中（以下添加到CMakeList.txt文件末尾）</span></span><br><span class="line"><span class="keyword">target_include_directories</span>(<span class="variable">${PROJECT_NAME}</span> PUBLIC</span><br><span class="line">							<span class="variable">${PROJECT_BINARY_DIR}</span></span><br><span class="line">)<span class="comment"># PROJECT_BINARY_DIR 表示当前工程的二进制路径，即编译产物会存放到该路径，此时PROJECT_BINARY_DIR 就是 build 所在路径。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -------------TutorialConfig.h.in ----------------</span></span><br><span class="line">// the configured options <span class="keyword">and</span> settings for Tutorial</span><br><span class="line"><span class="comment">#define Tutorial_VERSION_MAJOR @Tutorial_VERSION_MAJOR@</span></span><br><span class="line"><span class="comment">#define Tutorial_VERSION_MINOR @Tutorial_VERSION_MINOR@</span></span><br><span class="line"><span class="comment"># -------------TutorialConfig.h.in ----------------</span></span><br><span class="line"><span class="comment">#-----------------------------------------</span></span><br><span class="line"><span class="comment"># 以后可以通过这个头文件查看版本信息，MAJOR.MINOR</span></span><br><span class="line"><span class="comment"># cmake 构建之后，会在build中生成一个TutorialConfig.h文件</span></span><br><span class="line">// the configured options <span class="keyword">and</span> settings for Tutorial</span><br><span class="line"><span class="comment">#define Tutorial_VERSION_MAJOR 1</span></span><br><span class="line"><span class="comment">#define Tutorial_VERSION_MINOR 0</span></span><br><span class="line"><span class="comment"># ------------TutorialConfig.h---------------</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成hello程序，后面的是依赖的文件</span></span><br><span class="line"><span class="keyword">add_executable</span>(hello main.cpp factorial.cpp printhello.cpp)</span><br><span class="line"></span><br><span class="line"><span class="comment">## -------- 外部构建 --------</span></span><br><span class="line"><span class="comment"># --build 指定编译生成的文件存放目录，其中就包括可执行文件，. 表示存放到当前目录</span></span><br><span class="line">cmake --build .</span><br><span class="line">cmake .. <span class="comment"># .. 是CMakeLists.txt的存放路径</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## ------- 使用变量 --------</span></span><br><span class="line"><span class="keyword">set</span>(SRC_LIST a.cpp b.cpp c.cpp)  <span class="comment"># 将多个文件用一个变量保存</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">11</span>) <span class="comment"># 设置c++11标准</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD_REQUIRED <span class="keyword">True</span>)</span><br><span class="line"><span class="keyword">add_executable</span>(<span class="variable">${PROJECT_NAME}</span> <span class="variable">${SRC_LIST}</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## -------------添加库---------------</span></span><br><span class="line"><span class="comment"># MathFunctions/CMakeLists.txt</span></span><br><span class="line"><span class="keyword">add_library</span>(MathFunctions mysqrt.cpp) <span class="comment"># 添加一个叫 MathFunctions 的库文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 顶级CMakeLists.txt</span></span><br><span class="line">	<span class="comment"># add the MathFunctions library</span></span><br><span class="line">	<span class="keyword">add_subdirectory</span>(MathFunctions)</span><br><span class="line"></span><br><span class="line">	<span class="comment"># add the executable</span></span><br><span class="line">	<span class="keyword">add_executable</span>(<span class="variable">${PROJECT_NAME}</span> tutorial.cpp)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">target_link_libraries</span>(<span class="variable">${PROJECT_NAME}</span> PUBLIC MathFunctions)</span><br><span class="line"></span><br><span class="line">	<span class="comment"># add the binary tree to the search path for include files</span></span><br><span class="line">	<span class="comment"># so that we will find TutorialConfig.h</span></span><br><span class="line">	<span class="keyword">target_include_directories</span>(<span class="variable">${PROJECT_NAME}</span> PUBLIC</span><br><span class="line">							<span class="variable">${PROJECT_BINARY_DIR}</span></span><br><span class="line">							<span class="variable">${PROJECT_SOURCE_DIR}</span>/MathFunctions</span><br><span class="line">							)</span><br></pre></td></tr></table></figure></p>
 <h2 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a>gdb</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">info s  <span class="comment"># 查看栈信息</span></span><br><span class="line">info r  <span class="comment"># 查看寄存器信息</span></span><br><span class="line">info <span class="built_in">local</span> <span class="comment"># 查看局部变量</span></span><br><span class="line">bt  <span class="comment"># 查看调用栈</span></span><br><span class="line">disas <span class="comment"># 查看汇编代码， 可以指定函数</span></span><br><span class="line">x/[count][format] [address] <span class="comment"># 打印内存值</span></span><br><span class="line"> - x/s 0x402400 <span class="comment"># 打印在地址0x402400中的值，转换成string</span></span><br><span class="line">run res.txt <span class="comment"># 后面可以加上传入的参数</span></span><br><span class="line">stepi <span class="comment"># 二进制中的一步</span></span><br><span class="line">fs next <span class="comment"># 切换关注的窗口，gdb或者命令行窗口</span></span><br><span class="line"></span><br><span class="line">condition 1 item_to_remove==1  <span class="comment"># 为断点添加一个条件</span></span><br><span class="line">backtrace  <span class="comment"># 查看错误栈</span></span><br></pre></td></tr></table></figure>
@@ -2055,71 +1446,7 @@ err = dec.Decode(&amp;q)
 <h2 id="docker-命令"><a href="#docker-命令" class="headerlink" title="docker 命令"></a>docker 命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开启docker</span></span><br><span class="line">docker start user_name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入docker</span></span><br><span class="line">docker attach user_name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打开ssh服务(进入对应的docker之后)</span></span><br><span class="line">service ssh start</span><br></pre></td></tr></table></figure>
 <h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><script type="math/tex; mode=display">
 \text{工作区}\stackrel{add}{\rightarrow}\text{暂存区}\stackrel{commit}{\rightarrow}\text{本地仓库}\stackrel{push}{\rightarrow}\text{远程仓库}\stackrel{pull}{\rightarrow}\text{本地}</script><p><img src="/.io//Basic-Knoledge/1672140678237.png" alt="1672140678237"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># In the work directory</span></span><br><span class="line">git config --global user.name <span class="string">"yourName"</span></span><br><span class="line">git config --global user.email yourEmail</span><br><span class="line"></span><br><span class="line">git init <span class="comment"># initialize the repository</span></span><br><span class="line">git status <span class="comment"># repository information</span></span><br><span class="line">git add fileName</span><br><span class="line">git commit -m <span class="string">"commit msg"</span>EADADWE</span><br><span class="line">git <span class="built_in">log</span>  <span class="comment"># 查看以前的版本</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">touch</span> .gitignore  <span class="comment"># 不追踪的文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建新分支</span></span><br><span class="line">git branch branchName</span><br><span class="line"></span><br><span class="line"><span class="comment"># 两种切换分支的命令</span></span><br><span class="line">git checkout branchName</span><br><span class="line">	- git checkout -d branchName  <span class="comment"># 删除分支</span></span><br><span class="line">	- git checkout -b temp  <span class="comment"># 创建并切换到新建的分支</span></span><br><span class="line">git switch branchName</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并分支</span></span><br><span class="line">git merge temp</span><br><span class="line"></span><br><span class="line"><span class="comment"># add 和 commit合在一起写</span></span><br><span class="line">git commit -a -m <span class="string">"msg"</span>  <span class="comment"># 或者-am</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交</span></span><br><span class="line">git push -u &lt;remote_branch&gt; &lt;loacal_branch&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加远程分支（命名为origin）</span></span><br><span class="line">git remote add origin https:****.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载远程内容</span></span><br><span class="line"><span class="comment">#### 直接下载zip是不会下载版本信息的，所以需要使用以下命令</span></span><br><span class="line">git <span class="built_in">clone</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 总结</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"# learningGit"</span> &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">"first commit"</span></span><br><span class="line">git branch -M main</span><br><span class="line">git remote add origin https://github.com/Baymine/learningGit.git</span><br><span class="line">git push -u origin main</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解决冲突</span></span><br><span class="line"><span class="comment">##　建立分支</span></span><br><span class="line">git checkout -b my_feature</span><br><span class="line"><span class="comment">## 检查差异（与main branch之间的差异）</span></span><br><span class="line">git diff</span><br><span class="line"></span><br><span class="line">git merge &lt;branch&gt;  <span class="comment"># 合并分支，如果有冲突就选择放弃或者保留改动</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 不同分支中保存不同的内容，可以从远端pull最新的内容到本地</span></span><br><span class="line"> ESDAW</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2022/10/21/Database/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/21/Database/" class="post-title-link" itemprop="url">Database</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-10-21 12:37:04" itemprop="dateCreated datePublished" datetime="2022-10-21T12:37:04+08:00">2022-10-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-12-21 08:42:56" itemprop="dateModified" datetime="2022-12-21T08:42:56+08:00">2022-12-21</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h2><ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># In the work directory</span></span><br><span class="line">git config --global user.name <span class="string">"yourName"</span></span><br><span class="line">git config --global user.email yourEmail</span><br><span class="line"></span><br><span class="line">git init <span class="comment"># initialize the repository</span></span><br><span class="line">git status <span class="comment"># repository information</span></span><br><span class="line">git add fileName</span><br><span class="line">git commit -m <span class="string">"commit msg"</span>EADADWE</span><br><span class="line">git <span class="built_in">log</span>  <span class="comment"># 查看以前的版本</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">touch</span> .gitignore  <span class="comment"># 不追踪的文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建新分支</span></span><br><span class="line">git branch branchName</span><br><span class="line"></span><br><span class="line"><span class="comment"># 两种切换分支的命令</span></span><br><span class="line">git checkout branchName</span><br><span class="line">	- git checkout -d branchName  <span class="comment"># 删除分支</span></span><br><span class="line">	- git checkout -b temp  <span class="comment"># 创建并切换到新建的分支</span></span><br><span class="line">git switch branchName</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并分支</span></span><br><span class="line">git merge temp</span><br><span class="line"></span><br><span class="line"><span class="comment"># add 和 commit合在一起写</span></span><br><span class="line">git commit -a -m <span class="string">"msg"</span>  <span class="comment"># 或者-am</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交</span></span><br><span class="line">git push -u &lt;remote_branch&gt; &lt;loacal_branch&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加远程分支（命名为origin）</span></span><br><span class="line">git remote add origin https:****.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载远程内容</span></span><br><span class="line"><span class="comment">#### 直接下载zip是不会下载版本信息的，所以需要使用以下命令</span></span><br><span class="line">git <span class="built_in">clone</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 总结</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"# learningGit"</span> &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">"first commit"</span></span><br><span class="line">git branch -M main</span><br><span class="line">git remote add origin https://github.com/Baymine/learningGit.git</span><br><span class="line">git push -u origin main</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解决冲突</span></span><br><span class="line"><span class="comment">##　建立分支</span></span><br><span class="line">git checkout -b my_feature</span><br><span class="line"><span class="comment">## 检查差异（与main branch之间的差异）</span></span><br><span class="line">git diff</span><br><span class="line"></span><br><span class="line">git merge &lt;branch&gt;  <span class="comment"># 合并分支，如果有冲突就选择放弃或者保留改动</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 不同分支中保存不同的内容，可以从远端pull最新的内容到本地</span></span><br><span class="line"> ESDAW</span><br></pre></td></tr></table></figure></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-10-21T04:37:04.000Z" title="10/21/2022, 12:37:04 PM">2022-10-21</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-12-21T00:42:56.080Z" title="12/21/2022, 8:42:56 AM">2022-12-21</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/10/21/Database/">Database</a></p><div class="content"><h2 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h2><ul>
 <li>SQL therefore treats as unknown the result of any comparison involving a null value</li>
 <li>我们通过DBMS访问数据库</li>
 <li><p><code>NTILE</code> 函数</p>
@@ -2292,71 +1619,7 @@ order by salary desc limit 1, 1
 <p>并非所有视图都是可更新的。基本上可以说，如果MySQL不能正确地确定被更新的基数据，则不允许更新（包括插入和删除）</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> view_name <span class="keyword">as</span> <span class="keyword">select</span> .....;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2022/10/21/6_S081lab1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/21/6_S081lab1/" class="post-title-link" itemprop="url">6.S081lab1</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-10-21 11:30:25" itemprop="dateCreated datePublished" datetime="2022-10-21T11:30:25+08:00">2022-10-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-12-22 14:31:12" itemprop="dateModified" datetime="2022-12-22T14:31:12+08:00">2022-12-22</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h2><h3 id="使用Tmux在一个终端中创建多个窗口"><a href="#使用Tmux在一个终端中创建多个窗口" class="headerlink" title="使用Tmux在一个终端中创建多个窗口"></a>使用Tmux在一个终端中创建多个窗口</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tmux # 进入新建的会话中</span><br><span class="line">Ctrl + B , % # 垂直分割（左右）</span><br><span class="line">Ctrl + B , “ # 水平分割（上下）</span><br><span class="line">Ctrl + B , 方向键 # 在不同的终端中切换</span><br><span class="line">exit  # 退出会话</span><br></pre></td></tr></table></figure>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-10-21T03:30:25.000Z" title="10/21/2022, 11:30:25 AM">2022-10-21</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-12-22T06:31:12.115Z" title="12/22/2022, 2:31:12 PM">2022-12-22</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/10/21/6_S081lab1/">6.S081lab1</a></p><div class="content"><h2 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h2><h3 id="使用Tmux在一个终端中创建多个窗口"><a href="#使用Tmux在一个终端中创建多个窗口" class="headerlink" title="使用Tmux在一个终端中创建多个窗口"></a>使用Tmux在一个终端中创建多个窗口</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tmux # 进入新建的会话中</span><br><span class="line">Ctrl + B , % # 垂直分割（左右）</span><br><span class="line">Ctrl + B , “ # 水平分割（上下）</span><br><span class="line">Ctrl + B , 方向键 # 在不同的终端中切换</span><br><span class="line">exit  # 退出会话</span><br></pre></td></tr></table></figure>
 <h3 id="启动qemu的gdb模式"><a href="#启动qemu的gdb模式" class="headerlink" title="启动qemu的gdb模式"></a>启动qemu的gdb模式</h3><p>在第一个窗口运行 <code>make CPUS=1 qemu-gdb</code>, 第二个窗口运行 <code>gdb-multiarch</code>，开启gdb模式。</p>
 <p>如果lient端没有连接到server，那么需要在 <code>/root</code> 创建 <code>.gdbinit</code> 文件, 加上：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add-auto-load-safe-path /root/xv6-labs-2022/.gdbinit  # xv6 directory</span><br></pre></td></tr></table></figure>
@@ -2375,183 +1638,11 @@ order by salary desc limit 1, 1
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fprintf</span><span class="params">(FILE *stream, <span class="type">const</span> <span class="type">char</span> *format, ...)</span><span class="comment">// C 库函数发送格式化输出到流 stream 中。</span></span></span><br><span class="line"><span class="function"><span class="comment">// -----------------------------------------------------------</span></span></span><br><span class="line"><span class="function"><span class="keyword">struct</span> dirent</span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">　　<span class="type">long</span> d_ino; <span class="comment">/* inode number 索引节点号 */</span></span><br><span class="line">    <span class="type">off_t</span> d_off; <span class="comment">/* offset to this dirent 在目录文件中的偏移 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">short</span> d_reclen; <span class="comment">/* length of this d_name 文件名长 */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> d_type; <span class="comment">/* the type of d_name 文件类型 */</span></span><br><span class="line">    <span class="type">char</span> d_name [NAME_MAX+<span class="number">1</span>]; <span class="comment">/* file name (null-terminated) 文件名，最长255字符 */</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// -----------------------------------------------------------</span></span><br><span class="line"><span class="comment">// 从 str2 复制 n 个字符到 str1，但是在重叠内存块这方面，memmove() 是比 memcpy() 更安全的方法</span></span><br><span class="line"><span class="function"><span class="type">void</span> *<span class="title">memmove</span><span class="params">(<span class="type">void</span> *str1, <span class="type">const</span> <span class="type">void</span> *str2, <span class="type">size_t</span> n)</span></span>;</span><br></pre></td></tr></table></figure>
 <h2 id="实验二"><a href="#实验二" class="headerlink" title="实验二"></a>实验二</h2><h3 id="trace"><a href="#trace" class="headerlink" title="trace"></a>trace</h3><p>TODO: 理清楚整个调用的过程</p>
 <p>xv6系统调用的过程，这里以fork为例:<br><img src="/.io//10/21/6_S081lab1/fork.png" class></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">John Doe</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">41</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">8</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-</body>
-</html>
+</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous is-invisible is-hidden-mobile"><a href="/page/0/">Previous</a></div><div class="pagination-next"><a href="/page/2/">Next</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link is-current" href="/">1</a></li><li><a class="pagination-link" href="/page/2/">2</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/5/">5</a></li></ul></nav></div><!--!--><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Hexo</a><p class="is-size-7"><span>&copy; 2024 John Doe</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><!--!--><script data-pjax src="/js/main.js" defer></script><!--!--></body></html>

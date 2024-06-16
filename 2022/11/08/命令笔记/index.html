@@ -1,84 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>命令笔记 - Hexo</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hexo"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hexo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="linux 命令12345678910111213141516171819pwd # Present Working Directorytar &amp;lt;options&amp;gt; &amp;lt;filename&amp;gt; # Tape ARchiverm -rf # 删除文件夹以及其中的内容cat -n # 查看文件中的内容，-n加上行序号less # 可以滚动查看， 输入q退出grep &amp;lt;patter"><meta property="og:type" content="article"><meta property="og:title" content="命令笔记"><meta property="og:url" content="https://baymine.github.io/2022/11/08/%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/"><meta property="og:site_name" content="Hexo"><meta property="og:description" content="linux 命令12345678910111213141516171819pwd # Present Working Directorytar &amp;lt;options&amp;gt; &amp;lt;filename&amp;gt; # Tape ARchiverm -rf # 删除文件夹以及其中的内容cat -n # 查看文件中的内容，-n加上行序号less # 可以滚动查看， 输入q退出grep &amp;lt;patter"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://baymine.github.io/.io//Basic-Knoledge/1672140678237.png"><meta property="article:published_time" content="2022-11-08T08:39:05.000Z"><meta property="article:modified_time" content="2023-03-13T07:23:00.149Z"><meta property="article:author" content="John Doe"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://baymine.github.io/.io//Basic-Knoledge/1672140678237.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://baymine.github.io/2022/11/08/%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/"},"headline":"命令笔记","image":["https://baymine.github.io/.io//Basic-Knoledge/1672140678237.png"],"datePublished":"2022-11-08T08:39:05.000Z","dateModified":"2023-03-13T07:23:00.149Z","author":{"@type":"Person","name":"John Doe"},"publisher":{"@type":"Organization","name":"Hexo","logo":{"@type":"ImageObject"}},"description":"linux 命令12345678910111213141516171819pwd # Present Working Directorytar &lt;options&gt; &lt;filename&gt; # Tape ARchiverm -rf # 删除文件夹以及其中的内容cat -n # 查看文件中的内容，-n加上行序号less # 可以滚动查看， 输入q退出grep &lt;patter"}</script><link rel="canonical" href="https://baymine.github.io/2022/11/08/%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
 
-<link rel="stylesheet" href="/css/main.css">
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
 
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"baymine.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="linux 命令12345678910111213141516171819pwd # Present Working Directorytar &lt;options&gt; &lt;filename&gt; # Tape ARchiverm -rf # 删除文件夹以及其中的内容cat -n # 查看文件中的内容，-n加上行序号less # 可以滚动查看， 输入q退出grep &lt;patter">
-<meta property="og:type" content="article">
-<meta property="og:title" content="命令笔记">
-<meta property="og:url" content="https://baymine.github.io/2022/11/08/%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="linux 命令12345678910111213141516171819pwd # Present Working Directorytar &lt;options&gt; &lt;filename&gt; # Tape ARchiverm -rf # 删除文件夹以及其中的内容cat -n # 查看文件中的内容，-n加上行序号less # 可以滚动查看， 输入q退出grep &lt;patter">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://baymine.github.io/.io//Basic-Knoledge/1672140678237.png">
-<meta property="article:published_time" content="2022-11-08T08:39:05.000Z">
-<meta property="article:modified_time" content="2023-03-13T07:23:00.149Z">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://baymine.github.io/.io//Basic-Knoledge/1672140678237.png">
-
-<link rel="canonical" href="https://baymine.github.io/2022/11/08/%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
-
-  <title>命令笔记 | Hexo</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<style>mjx-container[jax="SVG"] {
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -191,125 +142,7 @@ mjx-container[display="true"] + br {
   display: none;
 }
 </style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2022/11/08/%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          命令笔记
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-11-08 16:39:05" itemprop="dateCreated datePublished" datetime="2022-11-08T16:39:05+08:00">2022-11-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-13 15:23:00" itemprop="dateModified" datetime="2023-03-13T15:23:00+08:00">2023-03-13</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <h2 id="linux-命令"><a href="#linux-命令" class="headerlink" title="linux 命令"></a>linux 命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span> <span class="comment"># Present Working Directory</span></span><br><span class="line">tar &lt;options&gt; &lt;filename&gt; <span class="comment"># Tape ARchive</span></span><br><span class="line"><span class="built_in">rm</span> -rf <span class="comment"># 删除文件夹以及其中的内容</span></span><br><span class="line"><span class="built_in">cat</span> -n <span class="comment"># 查看文件中的内容，-n加上行序号</span></span><br><span class="line">less <span class="comment"># 可以滚动查看， 输入q退出</span></span><br><span class="line">grep &lt;pattern&gt; &lt;file&gt;  <span class="comment"># -v: 不包含模式的字串， -R递归地查找</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">chmod</span> 777 -R &lt;dir_name&gt; <span class="comment"># 将文件夹以及其目录中的所有文件的访问权限全开</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> - <span class="comment"># 上次目录</span></span><br><span class="line"><span class="built_in">head</span> <span class="comment"># 查看文件开头</span></span><br><span class="line">file <span class="comment"># 查看文件属性</span></span><br><span class="line"><span class="variable">${var#week}</span> <span class="comment"># 将var头部的week删掉，$会去除末尾的字符</span></span><br><span class="line">lsof -i:9008  <span class="comment"># 检查9008端口是否开放</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## ----- g++  -------</span></span><br><span class="line"><span class="comment"># - 这样做的好处是当某一个链接文件改动的时候，不需要重新编译所有的文件</span></span><br><span class="line">g++ filename.cpp -c <span class="comment"># 只编译不运行</span></span><br><span class="line">g++ *.o -o main <span class="comment"># 将编译的文件链接</span></span><br></pre></td></tr></table></figure>
+</head><body class="is-1-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Hexo</a></div><div class="navbar-menu"><div class="navbar-end"></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-12"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-11-08T08:39:05.000Z" title="11/8/2022, 4:39:05 PM">2022-11-08</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-03-13T07:23:00.149Z" title="3/13/2023, 3:23:00 PM">2023-03-13</time></span></div></div><h1 class="title is-3 is-size-4-mobile">命令笔记</h1><div class="content"><h2 id="linux-命令"><a href="#linux-命令" class="headerlink" title="linux 命令"></a>linux 命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span> <span class="comment"># Present Working Directory</span></span><br><span class="line">tar &lt;options&gt; &lt;filename&gt; <span class="comment"># Tape ARchive</span></span><br><span class="line"><span class="built_in">rm</span> -rf <span class="comment"># 删除文件夹以及其中的内容</span></span><br><span class="line"><span class="built_in">cat</span> -n <span class="comment"># 查看文件中的内容，-n加上行序号</span></span><br><span class="line">less <span class="comment"># 可以滚动查看， 输入q退出</span></span><br><span class="line">grep &lt;pattern&gt; &lt;file&gt;  <span class="comment"># -v: 不包含模式的字串， -R递归地查找</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">chmod</span> 777 -R &lt;dir_name&gt; <span class="comment"># 将文件夹以及其目录中的所有文件的访问权限全开</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> - <span class="comment"># 上次目录</span></span><br><span class="line"><span class="built_in">head</span> <span class="comment"># 查看文件开头</span></span><br><span class="line">file <span class="comment"># 查看文件属性</span></span><br><span class="line"><span class="variable">${var#week}</span> <span class="comment"># 将var头部的week删掉，$会去除末尾的字符</span></span><br><span class="line">lsof -i:9008  <span class="comment"># 检查9008端口是否开放</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## ----- g++  -------</span></span><br><span class="line"><span class="comment"># - 这样做的好处是当某一个链接文件改动的时候，不需要重新编译所有的文件</span></span><br><span class="line">g++ filename.cpp -c <span class="comment"># 只编译不运行</span></span><br><span class="line">g++ *.o -o main <span class="comment"># 将编译的文件链接</span></span><br></pre></td></tr></table></figure>
 <h2 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h2><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">make -f fileName <span class="comment"># fileName 你指定的makefile文件</span></span><br><span class="line"><span class="comment"># make通过修改文件的时间戳来判断文件是否被更新</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## ---------------一个编译实例----------</span></span><br><span class="line"><span class="comment"># 增量编译(只重新编译修改过的文件)</span></span><br><span class="line">CXX = g++</span><br><span class="line">TARGET = hello</span><br><span class="line">OBJ = main.o printhello.o factorial.o  <span class="comment"># 声明依赖</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置编译模式</span></span><br><span class="line"><span class="variable">$(TARGET)</span> : <span class="variable">$(OBJ)</span></span><br><span class="line">	<span class="variable">$(CXX)</span> -o <span class="variable">$(TARGET)</span> <span class="variable">$(OBJ)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 依赖项的来源，通过g++编译而来</span></span><br><span class="line"><span class="section">main.o: main.cpp</span></span><br><span class="line">	<span class="variable">$(CXX)</span> -c main.cpp</span><br><span class="line"></span><br><span class="line"><span class="comment">## ----------第三个版本-----</span></span><br><span class="line">CXXFLAGS = -c -Wall <span class="comment"># Wall： warning all</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$(TARGET)</span> : <span class="variable">$(OBJ)</span></span><br><span class="line">	<span class="variable">$(CXX)</span> -o <span class="variable">$@</span> <span class="variable">$^</span>  <span class="comment"># @: TARGET, ^:OBJ</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ----------统一的规则------------</span></span><br><span class="line"><span class="comment">## $&lt;: 表示依赖中的第一个， $^: 代表所有的依赖</span></span><br><span class="line"><span class="section">%.o: %.cpp</span></span><br><span class="line">	<span class="variable">$(CXX)</span> <span class="variable">$(CXXFLAGS)</span> <span class="variable">$&lt;</span> -o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line"><span class="meta"><span class="keyword">.PHONY</span>: clean # 防止出现文件叫clean。这里生成一个依赖于clean的项目，但是什么都不做</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	rm -f *.o <span class="variable">$(TARGET)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## -----------版本4----------</span></span><br><span class="line">SRC = <span class="variable">$(<span class="built_in">wildcard</span> *.cpp)</span>  <span class="comment"># 当前目录下的所有.cpp文件都放到变量SRC中</span></span><br><span class="line">OBJ = <span class="variable">$(<span class="built_in">patsubst</span> %.cpp, %.o, <span class="variable">$(SRC)</span>)</span> <span class="comment"># 把SRC中的.cpp文件替换成.o然后存储到OBJ中</span></span><br></pre></td></tr></table></figure>
 <h2 id="CMake"><a href="#CMake" class="headerlink" title="CMake"></a><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/500002865">CMake</a></h2><p>文件名：CMakeLists.txt<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 由于cmake会生成大量的临时文件，所以最好将cmake的过程放在build</span></span><br><span class="line"><span class="comment"># 文件下，这样清除的时候会比较方便</span></span><br><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.10</span>) <span class="comment"># 需要的cmake的最低版本</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(hello VERSION <span class="number">1.0</span>)  <span class="comment"># 项目名称以及对应的版本号</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置头文件将版本号传递给源代码</span></span><br><span class="line"><span class="keyword">configure_file</span>(TutorialConfig.h.in TutorialConfig.h)</span><br><span class="line"></span><br><span class="line"><span class="comment"># TutorialConfig.h 文件会被自动写入 build 目录，需要将目录加入到搜索头文件的路径列表中（以下添加到CMakeList.txt文件末尾）</span></span><br><span class="line"><span class="keyword">target_include_directories</span>(<span class="variable">${PROJECT_NAME}</span> PUBLIC</span><br><span class="line">							<span class="variable">${PROJECT_BINARY_DIR}</span></span><br><span class="line">)<span class="comment"># PROJECT_BINARY_DIR 表示当前工程的二进制路径，即编译产物会存放到该路径，此时PROJECT_BINARY_DIR 就是 build 所在路径。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -------------TutorialConfig.h.in ----------------</span></span><br><span class="line">// the configured options <span class="keyword">and</span> settings for Tutorial</span><br><span class="line"><span class="comment">#define Tutorial_VERSION_MAJOR @Tutorial_VERSION_MAJOR@</span></span><br><span class="line"><span class="comment">#define Tutorial_VERSION_MINOR @Tutorial_VERSION_MINOR@</span></span><br><span class="line"><span class="comment"># -------------TutorialConfig.h.in ----------------</span></span><br><span class="line"><span class="comment">#-----------------------------------------</span></span><br><span class="line"><span class="comment"># 以后可以通过这个头文件查看版本信息，MAJOR.MINOR</span></span><br><span class="line"><span class="comment"># cmake 构建之后，会在build中生成一个TutorialConfig.h文件</span></span><br><span class="line">// the configured options <span class="keyword">and</span> settings for Tutorial</span><br><span class="line"><span class="comment">#define Tutorial_VERSION_MAJOR 1</span></span><br><span class="line"><span class="comment">#define Tutorial_VERSION_MINOR 0</span></span><br><span class="line"><span class="comment"># ------------TutorialConfig.h---------------</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成hello程序，后面的是依赖的文件</span></span><br><span class="line"><span class="keyword">add_executable</span>(hello main.cpp factorial.cpp printhello.cpp)</span><br><span class="line"></span><br><span class="line"><span class="comment">## -------- 外部构建 --------</span></span><br><span class="line"><span class="comment"># --build 指定编译生成的文件存放目录，其中就包括可执行文件，. 表示存放到当前目录</span></span><br><span class="line">cmake --build .</span><br><span class="line">cmake .. <span class="comment"># .. 是CMakeLists.txt的存放路径</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## ------- 使用变量 --------</span></span><br><span class="line"><span class="keyword">set</span>(SRC_LIST a.cpp b.cpp c.cpp)  <span class="comment"># 将多个文件用一个变量保存</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">11</span>) <span class="comment"># 设置c++11标准</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD_REQUIRED <span class="keyword">True</span>)</span><br><span class="line"><span class="keyword">add_executable</span>(<span class="variable">${PROJECT_NAME}</span> <span class="variable">${SRC_LIST}</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## -------------添加库---------------</span></span><br><span class="line"><span class="comment"># MathFunctions/CMakeLists.txt</span></span><br><span class="line"><span class="keyword">add_library</span>(MathFunctions mysqrt.cpp) <span class="comment"># 添加一个叫 MathFunctions 的库文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 顶级CMakeLists.txt</span></span><br><span class="line">	<span class="comment"># add the MathFunctions library</span></span><br><span class="line">	<span class="keyword">add_subdirectory</span>(MathFunctions)</span><br><span class="line"></span><br><span class="line">	<span class="comment"># add the executable</span></span><br><span class="line">	<span class="keyword">add_executable</span>(<span class="variable">${PROJECT_NAME}</span> tutorial.cpp)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">target_link_libraries</span>(<span class="variable">${PROJECT_NAME}</span> PUBLIC MathFunctions)</span><br><span class="line"></span><br><span class="line">	<span class="comment"># add the binary tree to the search path for include files</span></span><br><span class="line">	<span class="comment"># so that we will find TutorialConfig.h</span></span><br><span class="line">	<span class="keyword">target_include_directories</span>(<span class="variable">${PROJECT_NAME}</span> PUBLIC</span><br><span class="line">							<span class="variable">${PROJECT_BINARY_DIR}</span></span><br><span class="line">							<span class="variable">${PROJECT_SOURCE_DIR}</span>/MathFunctions</span><br><span class="line">							)</span><br></pre></td></tr></table></figure></p>
 <h2 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a>gdb</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">info s  <span class="comment"># 查看栈信息</span></span><br><span class="line">info r  <span class="comment"># 查看寄存器信息</span></span><br><span class="line">info <span class="built_in">local</span> <span class="comment"># 查看局部变量</span></span><br><span class="line">bt  <span class="comment"># 查看调用栈</span></span><br><span class="line">disas <span class="comment"># 查看汇编代码， 可以指定函数</span></span><br><span class="line">x/[count][format] [address] <span class="comment"># 打印内存值</span></span><br><span class="line"> - x/s 0x402400 <span class="comment"># 打印在地址0x402400中的值，转换成string</span></span><br><span class="line">run res.txt <span class="comment"># 后面可以加上传入的参数</span></span><br><span class="line">stepi <span class="comment"># 二进制中的一步</span></span><br><span class="line">fs next <span class="comment"># 切换关注的窗口，gdb或者命令行窗口</span></span><br><span class="line"></span><br><span class="line">condition 1 item_to_remove==1  <span class="comment"># 为断点添加一个条件</span></span><br><span class="line">backtrace  <span class="comment"># 查看错误栈</span></span><br></pre></td></tr></table></figure>
@@ -318,193 +151,11 @@ mjx-container[display="true"] + br {
 <h2 id="docker-命令"><a href="#docker-命令" class="headerlink" title="docker 命令"></a>docker 命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开启docker</span></span><br><span class="line">docker start user_name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入docker</span></span><br><span class="line">docker attach user_name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打开ssh服务(进入对应的docker之后)</span></span><br><span class="line">service ssh start</span><br></pre></td></tr></table></figure>
 <h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><script type="math/tex; mode=display">
 \text{工作区}\stackrel{add}{\rightarrow}\text{暂存区}\stackrel{commit}{\rightarrow}\text{本地仓库}\stackrel{push}{\rightarrow}\text{远程仓库}\stackrel{pull}{\rightarrow}\text{本地}</script><p><img src="/.io//Basic-Knoledge/1672140678237.png" alt="1672140678237"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># In the work directory</span></span><br><span class="line">git config --global user.name <span class="string">"yourName"</span></span><br><span class="line">git config --global user.email yourEmail</span><br><span class="line"></span><br><span class="line">git init <span class="comment"># initialize the repository</span></span><br><span class="line">git status <span class="comment"># repository information</span></span><br><span class="line">git add fileName</span><br><span class="line">git commit -m <span class="string">"commit msg"</span>EADADWE</span><br><span class="line">git <span class="built_in">log</span>  <span class="comment"># 查看以前的版本</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">touch</span> .gitignore  <span class="comment"># 不追踪的文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建新分支</span></span><br><span class="line">git branch branchName</span><br><span class="line"></span><br><span class="line"><span class="comment"># 两种切换分支的命令</span></span><br><span class="line">git checkout branchName</span><br><span class="line">	- git checkout -d branchName  <span class="comment"># 删除分支</span></span><br><span class="line">	- git checkout -b temp  <span class="comment"># 创建并切换到新建的分支</span></span><br><span class="line">git switch branchName</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并分支</span></span><br><span class="line">git merge temp</span><br><span class="line"></span><br><span class="line"><span class="comment"># add 和 commit合在一起写</span></span><br><span class="line">git commit -a -m <span class="string">"msg"</span>  <span class="comment"># 或者-am</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交</span></span><br><span class="line">git push -u &lt;remote_branch&gt; &lt;loacal_branch&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加远程分支（命名为origin）</span></span><br><span class="line">git remote add origin https:****.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载远程内容</span></span><br><span class="line"><span class="comment">#### 直接下载zip是不会下载版本信息的，所以需要使用以下命令</span></span><br><span class="line">git <span class="built_in">clone</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 总结</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"# learningGit"</span> &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">"first commit"</span></span><br><span class="line">git branch -M main</span><br><span class="line">git remote add origin https://github.com/Baymine/learningGit.git</span><br><span class="line">git push -u origin main</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解决冲突</span></span><br><span class="line"><span class="comment">##　建立分支</span></span><br><span class="line">git checkout -b my_feature</span><br><span class="line"><span class="comment">## 检查差异（与main branch之间的差异）</span></span><br><span class="line">git diff</span><br><span class="line"></span><br><span class="line">git merge &lt;branch&gt;  <span class="comment"># 合并分支，如果有冲突就选择放弃或者保留改动</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 不同分支中保存不同的内容，可以从远端pull最新的内容到本地</span></span><br><span class="line"> ESDAW</span><br></pre></td></tr></table></figure>
-    </div>
-
-    
-    
-    
-
-      <footer class="post-footer">
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2022/10/21/Database/" rel="prev" title="Database">
-      <i class="fa fa-chevron-left"></i> Database
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/11/23/Q-A/" rel="next" title="Q&A">
-      Q&A <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#linux-%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">linux 命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Makefile"><span class="nav-number">2.</span> <span class="nav-text">Makefile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CMake"><span class="nav-number">3.</span> <span class="nav-text">CMake</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gdb"><span class="nav-number">4.</span> <span class="nav-text">gdb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE%EF%BC%88Linux%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">快捷键（Linux）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-%E5%91%BD%E4%BB%A4"><span class="nav-number">6.</span> <span class="nav-text">docker 命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git"><span class="nav-number">7.</span> <span class="nav-text">Git</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">John Doe</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">41</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">8</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-</body>
-</html>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># In the work directory</span></span><br><span class="line">git config --global user.name <span class="string">"yourName"</span></span><br><span class="line">git config --global user.email yourEmail</span><br><span class="line"></span><br><span class="line">git init <span class="comment"># initialize the repository</span></span><br><span class="line">git status <span class="comment"># repository information</span></span><br><span class="line">git add fileName</span><br><span class="line">git commit -m <span class="string">"commit msg"</span>EADADWE</span><br><span class="line">git <span class="built_in">log</span>  <span class="comment"># 查看以前的版本</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">touch</span> .gitignore  <span class="comment"># 不追踪的文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建新分支</span></span><br><span class="line">git branch branchName</span><br><span class="line"></span><br><span class="line"><span class="comment"># 两种切换分支的命令</span></span><br><span class="line">git checkout branchName</span><br><span class="line">	- git checkout -d branchName  <span class="comment"># 删除分支</span></span><br><span class="line">	- git checkout -b temp  <span class="comment"># 创建并切换到新建的分支</span></span><br><span class="line">git switch branchName</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并分支</span></span><br><span class="line">git merge temp</span><br><span class="line"></span><br><span class="line"><span class="comment"># add 和 commit合在一起写</span></span><br><span class="line">git commit -a -m <span class="string">"msg"</span>  <span class="comment"># 或者-am</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交</span></span><br><span class="line">git push -u &lt;remote_branch&gt; &lt;loacal_branch&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加远程分支（命名为origin）</span></span><br><span class="line">git remote add origin https:****.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载远程内容</span></span><br><span class="line"><span class="comment">#### 直接下载zip是不会下载版本信息的，所以需要使用以下命令</span></span><br><span class="line">git <span class="built_in">clone</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 总结</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"# learningGit"</span> &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">"first commit"</span></span><br><span class="line">git branch -M main</span><br><span class="line">git remote add origin https://github.com/Baymine/learningGit.git</span><br><span class="line">git push -u origin main</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解决冲突</span></span><br><span class="line"><span class="comment">##　建立分支</span></span><br><span class="line">git checkout -b my_feature</span><br><span class="line"><span class="comment">## 检查差异（与main branch之间的差异）</span></span><br><span class="line">git diff</span><br><span class="line"></span><br><span class="line">git merge &lt;branch&gt;  <span class="comment"># 合并分支，如果有冲突就选择放弃或者保留改动</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 不同分支中保存不同的内容，可以从远端pull最新的内容到本地</span></span><br><span class="line"> ESDAW</span><br></pre></td></tr></table></figure></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2022/11/23/Q-A/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Q&amp;A</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2022/10/21/Database/"><span class="level-item">Database</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><!--!--><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Hexo</a><p class="is-size-7"><span>&copy; 2024 John Doe</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><!--!--><script data-pjax src="/js/main.js" defer></script><!--!--></body></html>

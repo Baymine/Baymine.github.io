@@ -1,78 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>Hexo</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hexo"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hexo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="website"><meta property="og:title" content="Hexo"><meta property="og:url" content="https://baymine.github.io/"><meta property="og:site_name" content="Hexo"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://baymine.github.io/img/og_image.png"><meta property="article:author" content="John Doe"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://baymine.github.io/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://Baymine.github.io"},"headline":"Hexo","image":["https://baymine.github.io/img/og_image.png"],"author":{"@type":"Person","name":"John Doe"},"publisher":{"@type":"Organization","name":"Hexo","logo":{"@type":"ImageObject"}},"description":""}</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
 
-<link rel="stylesheet" href="/css/main.css">
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
 
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"baymine.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://baymine.github.io/page/4/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="https://baymine.github.io/page/4/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : true,
-    isPost : false,
-    lang   : 'en'
-  };
-</script>
-
-  <title>Hexo</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<style>mjx-container[jax="SVG"] {
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
 
@@ -185,125 +142,7 @@ mjx-container[display="true"] + br {
   display: none;
 }
 </style><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content index posts-expand">
-            
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2021/03/25/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/25/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="post-title-link" itemprop="url">《算法笔记》第十一章(动态规划)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-03-25 15:29:44" itemprop="dateCreated datePublished" datetime="2021-03-25T15:29:44+08:00">2021-03-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-08 19:47:18" itemprop="dateModified" datetime="2023-03-08T19:47:18+08:00">2023-03-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>@[toc]</p>
+</head><body class="is-1-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Hexo</a></div><div class="navbar-menu"><div class="navbar-end"></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-12"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-03-25T07:29:44.000Z" title="3/25/2021, 3:29:44 PM">2021-03-25</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-03-08T11:47:18.992Z" title="3/8/2023, 7:47:18 PM">2023-03-08</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2021/03/25/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">《算法笔记》第十一章(动态规划)</a></p><div class="content"><p>@[toc]</p>
 <h1 id="动态规划介绍"><a href="#动态规划介绍" class="headerlink" title="动态规划介绍"></a>动态规划介绍</h1><p><strong>动态规划（Dynamic Programming</strong>)用于解决一类最优化问题。它将一个问题划分成几个相同的子问题，通过找到子问题的全局最优解，得到整个问题的最优解。<br><br><br><strong>DP与贪心算法的主要区别是</strong>：<u>贪心算法选用的是当前步骤的最优解，但是DP采用的是当前子问题的全局最优解。</u>DP因为每一步都是当前子问题的全局最优解，所以最后的一个子问题（原问题）也是全局最优解。而贪心算法由于是局部最优解，所以只能得到一个局部最优解。<br><img src="https://img-blog.csdnimg.cn/20210317203300613.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>在动态规划的一类问题中，子问题之间会出现重叠子问题，为了避免重复计算，可以用一个数组变量作为备忘录，记录当前的子问题的最优解。<br>下面是求解斐波那契数列的问题：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">F</span><span class="params">(<span class="type">int</span> n)</span> </span>{</span><br><span class="line">	<span class="keyword">if</span> (n == <span class="number">0</span> || n == <span class="number">1</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> <span class="built_in">F</span>(n - <span class="number">1</span>) + <span class="built_in">F</span>(n - <span class="number">2</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure><br>可以注意到在求解最终结果之前，这个算法花费了大量的时间去计算一些重复的问题，因为<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="31.91ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 14104.3 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D439" d="M48 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H742Q749 676 749 669Q749 664 736 557T722 447Q720 440 702 440H690Q683 445 683 453Q683 454 686 477T689 530Q689 560 682 579T663 610T626 626T575 633T503 634H480Q398 633 393 631Q388 629 386 623Q385 622 352 492L320 363H375Q378 363 398 363T426 364T448 367T472 374T489 386Q502 398 511 419T524 457T529 475Q532 480 548 480H560Q567 475 567 470Q567 467 536 339T502 207Q500 200 482 200H470Q463 206 463 212Q463 215 468 234T473 274Q473 303 453 310T364 317H309L277 190Q245 66 245 60Q245 46 334 46H359Q365 40 365 39T363 19Q359 6 353 0H336Q295 2 185 2Q120 2 86 2T48 1Z"/></g><g data-mml-node="mo" transform="translate(749,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mi" transform="translate(1138,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(1960.2,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"/></g><g data-mml-node="mn" transform="translate(2960.4,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/></g><g data-mml-node="mo" transform="translate(3460.4,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g><g data-mml-node="mo" transform="translate(4127.2,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/></g><g data-mml-node="mi" transform="translate(5183,0)"><path data-c="1D439" d="M48 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H742Q749 676 749 669Q749 664 736 557T722 447Q720 440 702 440H690Q683 445 683 453Q683 454 686 477T689 530Q689 560 682 579T663 610T626 626T575 633T503 634H480Q398 633 393 631Q388 629 386 623Q385 622 352 492L320 363H375Q378 363 398 363T426 364T448 367T472 374T489 386Q502 398 511 419T524 457T529 475Q532 480 548 480H560Q567 475 567 470Q567 467 536 339T502 207Q500 200 482 200H470Q463 206 463 212Q463 215 468 234T473 274Q473 303 453 310T364 317H309L277 190Q245 66 245 60Q245 46 334 46H359Q365 40 365 39T363 19Q359 6 353 0H336Q295 2 185 2Q120 2 86 2T48 1Z"/></g><g data-mml-node="mo" transform="translate(5932,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mi" transform="translate(6321,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(7143.2,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"/></g><g data-mml-node="mn" transform="translate(8143.4,0)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/></g><g data-mml-node="mo" transform="translate(8643.4,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g><g data-mml-node="mo" transform="translate(9254.7,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"/></g><g data-mml-node="mi" transform="translate(10254.9,0)"><path data-c="1D439" d="M48 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H742Q749 676 749 669Q749 664 736 557T722 447Q720 440 702 440H690Q683 445 683 453Q683 454 686 477T689 530Q689 560 682 579T663 610T626 626T575 633T503 634H480Q398 633 393 631Q388 629 386 623Q385 622 352 492L320 363H375Q378 363 398 363T426 364T448 367T472 374T489 386Q502 398 511 419T524 457T529 475Q532 480 548 480H560Q567 475 567 470Q567 467 536 339T502 207Q500 200 482 200H470Q463 206 463 212Q463 215 468 234T473 274Q473 303 453 310T364 317H309L277 190Q245 66 245 60Q245 46 334 46H359Q365 40 365 39T363 19Q359 6 353 0H336Q295 2 185 2Q120 2 86 2T48 1Z"/></g><g data-mml-node="mo" transform="translate(11003.9,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mi" transform="translate(11392.9,0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(12215.1,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"/></g><g data-mml-node="mn" transform="translate(13215.3,0)"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"/></g><g data-mml-node="mo" transform="translate(13715.3,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g></g></g></svg></mjx-container>，所以在完成第一个递归的时候，其实第二个递归式已经被计算过了，所以可以将这个结果利用起来。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAXN = 10</span></span><br><span class="line">	<span class="function"><span class="type">int</span> <span class="title">F</span><span class="params">(<span class="type">int</span> n)</span> </span>{</span><br><span class="line">		<span class="comment">//将数组初始化为-1.表示该结果未被计算</span></span><br><span class="line">		<span class="type">int</span>*dp = <span class="keyword">new</span> <span class="type">int</span>[n];</span><br><span class="line">		<span class="built_in">fill</span>(dp, dp + n, <span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (n == <span class="number">0</span> || n == <span class="number">1</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span> (dp[n] != <span class="number">-1</span>)<span class="keyword">return</span> dp[n];</span><br><span class="line">		<span class="keyword">else</span> {</span><br><span class="line">			dp[n] = <span class="built_in">F</span>(n - <span class="number">1</span>) + <span class="built_in">F</span>(n - <span class="number">2</span>);</span><br><span class="line">			<span class="keyword">return</span> dp[n];</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="comment">//当只需要第n个斐波那契数的时候，使用三个变量滚动更新即可</span></span><br><span class="line">	<span class="function"><span class="type">int</span> <span class="title">F</span><span class="params">(<span class="type">int</span> n)</span> </span>{</span><br><span class="line">		<span class="keyword">if</span> (n == <span class="number">1</span> || n == <span class="number">0</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//三个变量分别表示F(n-2)、F(n-1)、F(n)</span></span><br><span class="line">		<span class="type">int</span> a = <span class="number">1</span>, b = <span class="number">1</span>, c = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; ++n) {</span><br><span class="line">			c = a + b;</span><br><span class="line">			a = b;</span><br><span class="line">			b = c;</span><br><span class="line">		}</span><br><span class="line">	}</span><br></pre></td></tr></table></figure><br>通过记忆之前的计算结果，避免了重复子问题的求解，从而使求解的时间复杂度由原先的O(<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="2.279ex" height="1.528ex" role="img" focusable="false" viewbox="0 -675.5 1007.3 675.5"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/></g><g data-mml-node="TeXAtom" transform="translate(533,363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g></g></g></g></g></svg></mjx-container>)转变成O(<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="1.357ex" height="1.025ex" role="img" focusable="false" viewbox="0 -442 600 453"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/></g></g></g></svg></mjx-container>)。</p>
 <h2 id="递推写法"><a href="#递推写法" class="headerlink" title="递推写法"></a>递推写法</h2><p>现在看一个数塔问题，需要求解从顶层到最底层的所形成的最大的数字。如下图：<br><img src="https://img-blog.csdnimg.cn/20210317213841404.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>从最顶层开始，我们先假设下一层的各个元素到最低层所形成的最大数字都已经知道了，并且存放在一个二维数组中。在上图中，最顶层的元素到最层的所形成的最大数字可以表示为：</p>
 <script type="math/tex; mode=display">dp[1][1] = max(dp[2][1],dp[2][2]) + val[1][1]</script><p><font color="#999AAA"><em>其中，dp存放各节点到最底层形成的最大数字，val存放当前节点的所存储的值。</em></font></p>
@@ -345,71 +184,7 @@ dp[i+1][j-1],S[i] == S[j]\\
 \right.</script><p>边界：<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="47.497ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 20993.8 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"/></g><g data-mml-node="mi" transform="translate(520,0)"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"/></g><g data-mml-node="mo" transform="translate(1023,0)"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/></g><g data-mml-node="mi" transform="translate(1301,0)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(1646,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"/></g><g data-mml-node="mo" transform="translate(1924,0)"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/></g><g data-mml-node="mi" transform="translate(2202,0)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(2547,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"/></g><g data-mml-node="mo" transform="translate(3102.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/></g><g data-mml-node="mn" transform="translate(4158.6,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/></g><g data-mml-node="mo" transform="translate(4658.6,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"/></g><g data-mml-node="mi" transform="translate(5103.2,0)"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"/></g><g data-mml-node="mi" transform="translate(5623.2,0)"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"/></g><g data-mml-node="mo" transform="translate(6126.2,0)"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/></g><g data-mml-node="mi" transform="translate(6404.2,0)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(6749.2,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"/></g><g data-mml-node="mo" transform="translate(7027.2,0)"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/></g><g data-mml-node="mi" transform="translate(7305.2,0)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(7872.4,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"/></g><g data-mml-node="mn" transform="translate(8872.7,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/></g><g data-mml-node="mo" transform="translate(9372.7,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"/></g><g data-mml-node="mo" transform="translate(9928.4,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/></g><g data-mml-node="mo" transform="translate(10984.2,0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/></g><g data-mml-node="mi" transform="translate(11373.2,0)"><path data-c="1D446" d="M308 24Q367 24 416 76T466 197Q466 260 414 284Q308 311 278 321T236 341Q176 383 176 462Q176 523 208 573T273 648Q302 673 343 688T407 704H418H425Q521 704 564 640Q565 640 577 653T603 682T623 704Q624 704 627 704T632 705Q645 705 645 698T617 577T585 459T569 456Q549 456 549 465Q549 471 550 475Q550 478 551 494T553 520Q553 554 544 579T526 616T501 641Q465 662 419 662Q362 662 313 616T263 510Q263 480 278 458T319 427Q323 425 389 408T456 390Q490 379 522 342T554 242Q554 216 546 186Q541 164 528 137T492 78T426 18T332 -20Q320 -22 298 -22Q199 -22 144 33L134 44L106 13Q83 -14 78 -18T65 -22Q52 -22 52 -14Q52 -11 110 221Q112 227 130 227H143Q149 221 149 216Q149 214 148 207T144 186T142 153Q144 114 160 87T203 47T255 29T308 24Z"/></g><g data-mml-node="mo" transform="translate(12018.2,0)"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/></g><g data-mml-node="mi" transform="translate(12296.2,0)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(12641.2,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"/></g><g data-mml-node="mo" transform="translate(13197,0)"><g data-mml-node="text"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/></g><g data-mml-node="text" transform="translate(778,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/></g></g><g data-mml-node="mi" transform="translate(15030.8,0)"><path data-c="1D446" d="M308 24Q367 24 416 76T466 197Q466 260 414 284Q308 311 278 321T236 341Q176 383 176 462Q176 523 208 573T273 648Q302 673 343 688T407 704H418H425Q521 704 564 640Q565 640 577 653T603 682T623 704Q624 704 627 704T632 705Q645 705 645 698T617 577T585 459T569 456Q549 456 549 465Q549 471 550 475Q550 478 551 494T553 520Q553 554 544 579T526 616T501 641Q465 662 419 662Q362 662 313 616T263 510Q263 480 278 458T319 427Q323 425 389 408T456 390Q490 379 522 342T554 242Q554 216 546 186Q541 164 528 137T492 78T426 18T332 -20Q320 -22 298 -22Q199 -22 144 33L134 44L106 13Q83 -14 78 -18T65 -22Q52 -22 52 -14Q52 -11 110 221Q112 227 130 227H143Q149 221 149 216Q149 214 148 207T144 186T142 153Q144 114 160 87T203 47T255 29T308 24Z"/></g><g data-mml-node="mo" transform="translate(15675.8,0)"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/></g><g data-mml-node="mi" transform="translate(15953.8,0)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(16521,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"/></g><g data-mml-node="mn" transform="translate(17521.2,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/></g><g data-mml-node="mo" transform="translate(18021.2,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"/></g><g data-mml-node="mo" transform="translate(18299.2,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/></g><g data-mml-node="mo" transform="translate(18688.2,0)"><path data-c="3F" d="M226 668Q190 668 162 656T124 632L114 621Q116 621 119 620T130 616T145 607T157 591T162 567Q162 544 147 529T109 514T71 528T55 566Q55 625 100 661T199 704Q201 704 210 704T224 705H228Q281 705 320 692T378 656T407 612T416 567Q416 503 361 462Q267 395 247 303Q242 279 242 241V224Q242 205 239 202T222 198T205 201T202 218V249Q204 320 220 371T255 445T292 491T315 537Q317 546 317 574V587Q317 604 315 615T304 640T277 661T226 668ZM162 61Q162 89 180 105T224 121Q247 119 264 104T281 61Q281 31 264 16T222 1Q197 1 180 16T162 61Z"/></g><g data-mml-node="mn" transform="translate(19160.2,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/></g><g data-mml-node="mo" transform="translate(19938,0)"><path data-c="3A" d="M78 370Q78 394 95 412T138 430Q162 430 180 414T199 371Q199 346 182 328T139 310T96 327T78 370ZM78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z"/></g><g data-mml-node="mn" transform="translate(20493.8,0)"><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"/></g></g></g></svg></mjx-container><br>但是直接将<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="0.781ex" height="1.52ex" role="img" focusable="false" viewbox="0 -661 345 672"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/></g></g></g></svg></mjx-container>和<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.462ex;" xmlns="http://www.w3.org/2000/svg" width="0.932ex" height="1.957ex" role="img" focusable="false" viewbox="0 -661 412 865"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D457" d="M297 596Q297 627 318 644T361 661Q378 661 389 651T403 623Q403 595 384 576T340 557Q322 557 310 567T297 596ZM288 376Q288 405 262 405Q240 405 220 393T185 362T161 325T144 293L137 279Q135 278 121 278H107Q101 284 101 286T105 299Q126 348 164 391T252 441Q253 441 260 441T272 442Q296 441 316 432Q341 418 354 401T367 348V332L318 133Q267 -67 264 -75Q246 -125 194 -164T75 -204Q25 -204 7 -183T-12 -137Q-12 -110 7 -91T53 -71Q70 -71 82 -81T95 -112Q95 -148 63 -167Q69 -168 77 -168Q111 -168 139 -140T182 -74L193 -32Q204 11 219 72T251 197T278 308T289 365Q289 372 288 376Z"/></g></g></g></svg></mjx-container>从小到大枚举（ <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.462ex;" xmlns="http://www.w3.org/2000/svg" width="19.325ex" height="1.968ex" role="img" focusable="false" viewbox="0 -666 8541.4 870"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/></g><g data-mml-node="mo" transform="translate(622.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/></g><g data-mml-node="mn" transform="translate(1678.6,0)"><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"/></g><g data-mml-node="mo" transform="translate(2178.6,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"/></g><g data-mml-node="mi" transform="translate(2623.2,0)"><path data-c="1D457" d="M297 596Q297 627 318 644T361 661Q378 661 389 651T403 623Q403 595 384 576T340 557Q322 557 310 567T297 596ZM288 376Q288 405 262 405Q240 405 220 393T185 362T161 325T144 293L137 279Q135 278 121 278H107Q101 284 101 286T105 299Q126 348 164 391T252 441Q253 441 260 441T272 442Q296 441 316 432Q341 418 354 401T367 348V332L318 133Q267 -67 264 -75Q246 -125 194 -164T75 -204Q25 -204 7 -183T-12 -137Q-12 -110 7 -91T53 -71Q70 -71 82 -81T95 -112Q95 -148 63 -167Q69 -168 77 -168Q111 -168 139 -140T182 -74L193 -32Q204 11 219 72T251 197T278 308T289 365Q289 372 288 376Z"/></g><g data-mml-node="mo" transform="translate(3313,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/></g><g data-mml-node="mn" transform="translate(4368.8,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/></g><g data-mml-node="mo" transform="translate(4868.8,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"/></g><g data-mml-node="mn" transform="translate(5313.4,0)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/></g><g data-mml-node="mo" transform="translate(5813.4,0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"/></g><g data-mml-node="mn" transform="translate(6258.1,0)"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"/></g><g data-mml-node="mo" transform="translate(6924.8,0)"><path data-c="2026" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60ZM525 60Q525 84 542 102T585 120Q609 120 627 104T646 61Q646 36 629 18T586 0T543 17T525 60ZM972 60Q972 84 989 102T1032 120Q1056 120 1074 104T1093 61Q1093 36 1076 18T1033 0T990 17T972 60Z"/></g><g data-mml-node="mo" transform="translate(8263.4,0)"><path data-c="2E" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z"/></g></g></g></svg></mjx-container>）会导致一些问题。因为动态规划是自底向上的，所以只有将子问题解出来，才能解决更大的子问题。但是在这个问题中，例如需要计算<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="7.093ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 3135 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"/></g><g data-mml-node="mi" transform="translate(520,0)"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"/></g><g data-mml-node="mo" transform="translate(1023,0)"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/></g><g data-mml-node="mn" transform="translate(1301,0)"><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"/></g><g data-mml-node="mo" transform="translate(1801,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"/></g><g data-mml-node="mo" transform="translate(2079,0)"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/></g><g data-mml-node="mn" transform="translate(2357,0)"><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"/></g><g data-mml-node="mo" transform="translate(2857,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"/></g></g></g></svg></mjx-container>的时候，会需要<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex;" xmlns="http://www.w3.org/2000/svg" width="7.093ex" height="2.262ex" role="img" focusable="false" viewbox="0 -750 3135 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"/></g><g data-mml-node="mi" transform="translate(520,0)"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"/></g><g data-mml-node="mo" transform="translate(1023,0)"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/></g><g data-mml-node="mn" transform="translate(1301,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/></g><g data-mml-node="mo" transform="translate(1801,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"/></g><g data-mml-node="mo" transform="translate(2079,0)"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/></g><g data-mml-node="mn" transform="translate(2357,0)"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"/></g><g data-mml-node="mo" transform="translate(2857,0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"/></g></g></g></svg></mjx-container>的结果，但是这个问题的结果并没有求解出来。所以需要转换枚举方式。<br>注意到每次进行状态转移的时候，都是将子串的长度减少了一，所以可以考虑先将所有长度小的子串全部计算出来，然后再求长度更长的子串。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Palindrome</span><span class="params">()</span> </span>{</span><br><span class="line">	<span class="type">const</span> <span class="type">int</span> maxn = <span class="number">1010</span>;</span><br><span class="line">	<span class="type">char</span> S[maxn];</span><br><span class="line">	<span class="type">int</span> dp[maxn][maxn];</span><br><span class="line"></span><br><span class="line">	<span class="comment">//Input datas</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; maxn; ++i) {</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%c"</span>, &amp;S[i]);</span><br><span class="line">	}</span><br><span class="line">	<span class="type">int</span> len = <span class="built_in">strlen</span>(S), ans = <span class="number">1</span>;<span class="comment">//'ans'stores the length of longest subarray</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">//Initializing dp array</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; maxn; ++i) {</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; maxn; ++j) {</span><br><span class="line">			dp[i][j] = <span class="number">0</span>;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">//Set up Boundaries</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; ++i) {</span><br><span class="line">		dp[i][i] = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span> (i &lt; len - <span class="number">1</span>) {</span><br><span class="line">			<span class="keyword">if</span> (S[i] == S[i + <span class="number">1</span>]) {</span><br><span class="line">				dp[i][i + <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">				ans = <span class="number">2</span>;</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">//State Transition Equation</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> L = <span class="number">3</span>; L &lt;= len; L++) {</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i + L - <span class="number">1</span> &lt; len; ++i) {</span><br><span class="line">			<span class="type">int</span> j = i + L - <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span> (S[i] == S[j] &amp;&amp; dp[i + <span class="number">1</span>][j - <span class="number">1</span>] == <span class="number">1</span>) {</span><br><span class="line">				dp[i][j] = <span class="number">1</span>;</span><br><span class="line">				ans = L;<span class="comment">//Updating the length</span></span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
 <p><strong>To Be Continue…</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2021/03/10/%E7%AE%97%E6%B3%95%E2%9E%A1%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/10/%E7%AE%97%E6%B3%95%E2%9E%A1%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">算法➡数学问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-03-10 08:00:41" itemprop="dateCreated datePublished" datetime="2021-03-10T08:00:41+08:00">2021-03-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-08 19:48:51" itemprop="dateModified" datetime="2023-03-08T19:48:51+08:00">2023-03-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h1><p>8➡10:</p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-03-10T00:00:41.000Z" title="3/10/2021, 8:00:41 AM">2021-03-10</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-03-08T11:48:51.427Z" title="3/8/2023, 7:48:51 PM">2023-03-08</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2021/03/10/%E7%AE%97%E6%B3%95%E2%9E%A1%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/">算法➡数学问题</a></p><div class="content"><h1 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h1><p>8➡10:</p>
 <script type="math/tex; mode=display">123_{oct} = 3 \times8^0+2\times8^1+1\times8^2 = 83_{dec}</script><p>10➡8:</p>
 <script type="math/tex; mode=display">
 \left.\ \begin{aligned}
@@ -453,71 +228,7 @@ Subset_{\{1\}} = Subset_{\{\}} + \{Subset_{\{\}} append \{1\}\}</script><p>所�
 <h2 id="全排列"><a href="#全排列" class="headerlink" title="全排列"></a>全排列</h2><p>每次都选取一个元素，并做好标记（防止元素被重复选取），然后重新遍历一遍所有元素，与之匹配，直到数组中的数量满足要求，将结果输出。</p>
 <p><img src="https://img-blog.csdnimg.cn/20210324091018987.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//处理排列的idex号位</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">generateP</span><span class="params">(<span class="type">int</span> index)</span></span>{</span><br><span class="line"></span><br><span class="line">	<span class="comment">//这是递归边界，前面的元素全部排列完毕，现在是要将数组输出</span></span><br><span class="line">	<span class="keyword">if</span> (index == n + <span class="number">1</span>) {</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) {</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d"</span>, p[i]);</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">//遍历检查所有的元素，这里引用了外部的变量n，由主函数定义</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> x = <span class="number">1</span>; x &lt;= n; ++x) {</span><br><span class="line">		<span class="comment">//哈希表是来表示索引元素是否已经加入数组了</span></span><br><span class="line">		<span class="keyword">if</span> (hashTable[x] == <span class="literal">false</span>) {</span><br><span class="line">			p[index] = x;<span class="comment">//以x作为头部的时候</span></span><br><span class="line">			hashTable[x] = <span class="literal">true</span>;<span class="comment">//更新状态</span></span><br><span class="line"></span><br><span class="line">			<span class="comment">//这里是继续下一位，注意这里还没有将哈希表重置，所以原先作为首部的元素是不会再被赋值了</span></span><br><span class="line">			<span class="built_in">generateP</span>(index + <span class="number">1</span>);</span><br><span class="line">			hashTable[x] = <span class="literal">false</span>;<span class="comment">//完成递归项中的一个，重置状态</span></span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	count++;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-<p></p>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2021/03/07/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E5%9B%BE%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/07/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E5%9B%BE%EF%BC%89/" class="post-title-link" itemprop="url">《算法笔记》数据结构（图）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-03-07 16:48:19" itemprop="dateCreated datePublished" datetime="2021-03-07T16:48:19+08:00">2021-03-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-08 19:48:52" itemprop="dateModified" datetime="2023-03-08T19:48:52+08:00">2023-03-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="图的存储"><a href="#图的存储" class="headerlink" title="图的存储"></a>图的存储</h1><p>图有两种存储方式：邻接表和邻接矩阵。邻接矩阵需要的空间较大，一般适用于顶点数目不超过1000的情况</p>
+<p></p></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-03-07T08:48:19.000Z" title="3/7/2021, 4:48:19 PM">2021-03-07</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-03-08T11:48:52.198Z" title="3/8/2023, 7:48:52 PM">2023-03-08</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2021/03/07/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E5%9B%BE%EF%BC%89/">《算法笔记》数据结构（图）</a></p><div class="content"><h1 id="图的存储"><a href="#图的存储" class="headerlink" title="图的存储"></a>图的存储</h1><p>图有两种存储方式：邻接表和邻接矩阵。邻接矩阵需要的空间较大，一般适用于顶点数目不超过1000的情况</p>
 <h2 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h2><p>相当于一个离散的平面直角坐标系，每一个坐标代表一对节点的相互之间的关系，当两节点不直接相连的时候，这个坐标上的值可以设为0、-1或者是无穷大。否则可以在该点上赋值为这两点之间的权值。<img src="https://img-blog.csdnimg.cn/20210227084657192.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <h2 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h2><p>将这些节点之间的关系保存在几个链表中，每一个链表都是在描述一个节点的连接情况。可以将这些数据保存在向量中。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">10</span>;<span class="comment">//顶点个数</span></span><br><span class="line"></span><br><span class="line">vector&lt;<span class="type">int</span>&gt;Adj[N];</span><br><span class="line"><span class="comment">//之后直接将节点的信息连接到相应的向量之后</span></span><br><span class="line"><span class="type">int</span> x;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Create</span><span class="params">()</span> </span>{</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">10</span>; ++i) {</span><br><span class="line">		Adj[i].<span class="built_in">push_back</span>(x);</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//当需要存放更多节点信息的时候，可以用结构体+构造函数</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span></span><br><span class="line">{</span><br><span class="line">	<span class="type">int</span> v, w;</span><br><span class="line">	<span class="built_in">Node</span>(<span class="type">int</span> _v, <span class="type">int</span> _w) :<span class="built_in">v</span>(_v), <span class="built_in">w</span>(_w) {};</span><br><span class="line">};</span><br><span class="line"><span class="comment">//赋值：Adj[1].push_back(Node(3,4));</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
 <h1 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h1><p>遍历就是将图中所有的节点都访问一遍，要做到不重复访问，不遗漏。主要的方法有深度优先和广度优先。</p>
@@ -525,71 +236,7 @@ Subset_{\{1\}} = Subset_{\{\}} + \{Subset_{\{\}} append \{1\}\}</script><p>所�
 <h2 id="广度优先"><a href="#广度优先" class="headerlink" title="广度优先"></a>广度优先</h2><p>  在遍历过程中优先访问一个节点的所有的相邻的节点。这个时候需要借助队列，将该节点的所有相连节点加入到队列中，在队列中的节点顺序就是最终的广度优先遍历的顺序。同时，为了防止重复访问，需要建立一个数组，将节点的序号作为数组的下标，作为该节点是否被访问的标识。<br><br>   <strong>算法思想</strong>：先将起始节点加入到队列中，然后不断取出队列中的元素，访问并加入到队列中，并将该点相连的节点加入到队列中，直到队列中的元素为空。<br><br> 判断一个节点v1是否与另一个节点v2是否相连：<br> 邻接矩阵中，只需要确定[v1,v2]所对应的值是否为1，是则为相连，反之不相连。<br><br> 在邻接表中，只需要遍历这个节点所连接的那一条邻接表即可。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n, G[MAXV][MAXV];</span><br><span class="line"><span class="type">bool</span> inq[MAXV] = { <span class="literal">false</span> };</span><br><span class="line"></span><br><span class="line"><span class="comment">//广度优先邻接矩阵版：先将首个节点入队，</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BFS_AdjMatrix</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">BFS</span><span class="params">(<span class="type">int</span> u)</span> </span>{</span><br><span class="line">		queue&lt;<span class="type">int</span>&gt;q;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//将首节点放到队列中</span></span><br><span class="line">		q.<span class="built_in">push</span>(u);</span><br><span class="line">		inq[u] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//将相邻的节点加入到队列中</span></span><br><span class="line">		<span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) {</span><br><span class="line">			<span class="type">int</span> u = q.<span class="built_in">front</span>();</span><br><span class="line">			q.<span class="built_in">pop</span>();</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> v = <span class="number">0</span>; v &lt; n; ++v) {</span><br><span class="line">				<span class="keyword">if</span> (inq[v] == <span class="literal">false</span> &amp;&amp; G[u][v] != INF) {</span><br><span class="line">					q.<span class="built_in">push</span>(v);</span><br><span class="line">					inq[v] = <span class="literal">true</span>;<span class="comment">//访问之后加入队列，改变标识</span></span><br><span class="line">				}</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">BFSTrave</span><span class="params">()</span> </span>{</span><br><span class="line">		<span class="comment">//将未被访问过的节点全部访问一遍</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> u = <span class="number">0</span>; u &lt; n; ++u) {</span><br><span class="line">			<span class="keyword">if</span> (inq[u] == <span class="literal">false</span>)<span class="built_in">BFS</span>(u);</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">//邻接表：访问节点的方式为遍历该向量的所有节点</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BFS_AdjList</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	vector&lt;<span class="type">int</span>&gt;Adj[MAXV];<span class="comment">//这其实相当于一个二维向量</span></span><br><span class="line">	<span class="type">int</span> n;</span><br><span class="line">	<span class="type">bool</span> inq[MAXV] = { <span class="literal">false</span> };<span class="comment">//判断节点是否在队列中</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">BFS</span><span class="params">(<span class="type">int</span> u)</span> </span>{</span><br><span class="line">		queue&lt;<span class="type">int</span>&gt;q;</span><br><span class="line">		q.<span class="built_in">push</span>(u);</span><br><span class="line">		inq[u] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">while</span> (!q.<span class="built_in">empty</span>())</span><br><span class="line">		{</span><br><span class="line">			<span class="type">int</span> u = q.<span class="built_in">front</span>();</span><br><span class="line">			q.<span class="built_in">pop</span>();</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; Adj[u].<span class="built_in">size</span>(); ++i) {</span><br><span class="line">				<span class="type">int</span> v = Adj[u][i];</span><br><span class="line">				<span class="keyword">if</span> (inq[v] == <span class="literal">false</span>) {</span><br><span class="line">					q.<span class="built_in">push</span>(v);</span><br><span class="line">					inq[v] = <span class="literal">true</span>;</span><br><span class="line">				}</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">BFSTravel</span><span class="params">()</span> </span>{</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> u = <span class="number">0</span>; u &lt; n; ++u) {</span><br><span class="line">			<span class="keyword">if</span> (inq[u] == <span class="literal">false</span>)<span class="built_in">BFS</span>(u);</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="comment">//当想要得出所有节点的所在层的信息的时候：利用结构体，在其中加上层次这一变量</span></span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">Node</span></span><br><span class="line">	{</span><br><span class="line">		<span class="type">int</span> v;<span class="comment">//节点编号</span></span><br><span class="line">		<span class="type">int</span> layer;<span class="comment">//所在层次，头节点为第0层</span></span><br><span class="line">	};</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">BFS</span><span class="params">(<span class="type">int</span> s)</span> </span>{</span><br><span class="line">		vector&lt;Node&gt;Adj[MAXV];</span><br><span class="line">		<span class="type">int</span> n;</span><br><span class="line">		<span class="type">bool</span> inq[MAXV] = { <span class="literal">false</span> };</span><br><span class="line">		queue&lt;Node&gt;q;</span><br><span class="line">		Node start;<span class="comment">//第一个访问的节点</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//初始化首个节点</span></span><br><span class="line">		start.v = s;</span><br><span class="line">		start.layer = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		q.<span class="built_in">push</span>(start);</span><br><span class="line">		inq[start.v] = <span class="literal">true</span>;<span class="comment">//做好相应的标识</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">while</span> (!q.<span class="built_in">empty</span>())</span><br><span class="line">		{</span><br><span class="line">			Node topNode = q.<span class="built_in">front</span>();</span><br><span class="line">			q.<span class="built_in">pop</span>();</span><br><span class="line">			<span class="type">int</span> u = topNode.v;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; Adj[u].<span class="built_in">size</span>(); ++i) {</span><br><span class="line">				<span class="comment">//将next赋值为该节点连接的节点</span></span><br><span class="line">				Node next = Adj[u][i];</span><br><span class="line">				next.layer = topNode.layer + <span class="number">1</span>;<span class="comment">//赋值为上一层的层数+1</span></span><br><span class="line"></span><br><span class="line">				<span class="keyword">if</span> (inq[next.v] == <span class="literal">false</span>) {</span><br><span class="line">					q.<span class="built_in">push</span>(next);</span><br><span class="line">					inq[next.v] = <span class="literal">true</span>;</span><br><span class="line">				}</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">};</span><br></pre></td></tr></table></figure></p>
 <h2 id="最短路径"><a href="#最短路径" class="headerlink" title="最短路径"></a>最短路径</h2><p>这类问题是求解图中从源点到图中任一节点的最短的距离（路径）。主要的算法有Dijkstra算法、Bellman-Ford算法、SPFA算法、Floyd算法。</p>
 <h3 id="Dijkstra算法"><a href="#Dijkstra算法" class="headerlink" title="Dijkstra算法"></a>Dijkstra算法</h3><p>算法图示（取自<a target="_blank" rel="noopener" href="https://en.wikipedia.iwiki.eu.org/wiki/Dijkstra%27s_algorithm">Wikipedia</a>）<br><img src="https://img-blog.csdnimg.cn/20210302185505437.gif" alt="在这里插入图片描述"><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Dijkstra算法</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXV = <span class="number">1000</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">1e9</span>;<span class="comment">//无穷大</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//寻找最短距离</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//邻接矩阵:先找到与源点最近的相邻节点，然后从该节点出发，遍历该节点的所有的未被访问的相邻的节点，并更新最小权值</span></span><br><span class="line"><span class="comment">//O(V*(V+V)) = O(V^2)</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SPD_AdjMatrix</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> n, G[MAXV][MAXV];<span class="comment">//分别为顶点数和以邻接矩阵形式存储的图</span></span><br><span class="line">	<span class="type">int</span> d[MAXV];<span class="comment">//该节点到源点的最短距离</span></span><br><span class="line">	<span class="type">bool</span> vis[MAXV] = { <span class="literal">false</span> };<span class="comment">//访问数组，以图节点的编号作为索引</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">Dijkstra</span><span class="params">(<span class="type">int</span> s)</span></span>{</span><br><span class="line">		<span class="built_in">fill</span>(d, d + MAXV, INF);<span class="comment">//将所有的节点初始化为极大值</span></span><br><span class="line">		d[s] = <span class="number">0</span>;<span class="comment">//源点到源点的距离为0</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//找到与起点相邻的路径最短的节点</span></span><br><span class="line">		<span class="type">int</span> u = <span class="number">-1</span>, MIN = INF;<span class="comment">//最短距离的节点编号和距离</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) {</span><br><span class="line">			<span class="comment">//遍历所有相邻节点</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; ++j) {</span><br><span class="line">				<span class="comment">//未被访问，并且距离权值小于之前记录的最小值</span></span><br><span class="line">				<span class="keyword">if</span> (vis[j] == <span class="literal">false</span> &amp;&amp; d[j] &lt; MIN) {</span><br><span class="line">					u = j;</span><br><span class="line">					MIN = d[j];</span><br><span class="line">				}</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		<span class="comment">//说明剩下的顶点与起点s不相连通</span></span><br><span class="line">		<span class="keyword">if</span> (u == <span class="number">-1</span>)<span class="keyword">return</span>;</span><br><span class="line">		vis[u] = <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> v = <span class="number">0</span>; v &lt; n; ++v) {</span><br><span class="line">			<span class="comment">//与该节点相连且未被访问且以该节点为中介的权值比原先的权值更小</span></span><br><span class="line">			<span class="keyword">if</span> (vis[v] == <span class="literal">false</span> &amp;&amp; G[u][v] != INF &amp;&amp; d[u] + G[u][v] &lt; d[v]) {</span><br><span class="line">				d[v] = d[u] + G[u][v];</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">//要记录最短路径的具体情况，可以记录每个节点最短路径的前驱，将该节点作为数组下标，数组中的值作为前驱节点的编号</span></span><br><span class="line">	<span class="type">int</span> pre[MAXV];</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">DijkstraPath</span><span class="params">(<span class="type">int</span> s)</span> </span>{</span><br><span class="line">		<span class="built_in">fill</span>(d, d + MAXV, INF);</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)pre[i] = i;<span class="comment">//(添加)初始化，将每个节点的前驱初试化为其本身</span></span><br><span class="line">		d[s] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//找到与起点相邻的路径最短的节点</span></span><br><span class="line">		<span class="type">int</span> u = <span class="number">-1</span>, MIN = INF;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) {</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; ++j) {</span><br><span class="line">				<span class="keyword">if</span> (vis[j] == <span class="literal">false</span> &amp;&amp; d[j] &lt; MIN) {</span><br><span class="line">					u = j;</span><br><span class="line">					MIN = d[j];</span><br><span class="line">				}</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">if</span> (u == <span class="number">-1</span>)<span class="keyword">return</span>;</span><br><span class="line">		vis[u] = <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> v = <span class="number">0</span>; v &lt; n; ++v) {</span><br><span class="line">			<span class="keyword">if</span> (vis[v] == <span class="literal">false</span> &amp;&amp; G[u][v] != INF &amp;&amp; d[u] + G[u][v] &lt; d[v]) {</span><br><span class="line">				d[v] = d[u] + G[u][v];</span><br><span class="line">				pre[v] = u;<span class="comment">//(添加)将节点前驱初始化</span></span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="comment">//输出路径</span></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">DFS</span><span class="params">(<span class="type">int</span> s, <span class="type">int</span> v)</span> </span>{</span><br><span class="line">		<span class="keyword">if</span> (v == s) {</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, s);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		}</span><br><span class="line">		<span class="built_in">DFS</span>(s, pre[v]);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, v);</span><br><span class="line">	}</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">//邻接表：O(V^2 + E)</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SPD_AdjList</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">Node</span>{</span><br><span class="line">		<span class="type">int</span> v, dis;</span><br><span class="line">	};</span><br><span class="line">	vector&lt;Node&gt;Adj[MAXV];</span><br><span class="line">	<span class="type">int</span> n;</span><br><span class="line">	<span class="type">int</span> d[MAXV];</span><br><span class="line">	<span class="type">bool</span> vis[MAXV] = { <span class="literal">false</span> };</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">Dijkstra</span><span class="params">(<span class="type">int</span> s)</span> </span>{</span><br><span class="line">		<span class="built_in">fill</span>(d, d + MAXV, INF);</span><br><span class="line">		d[s] = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) {</span><br><span class="line">			<span class="type">int</span> u = <span class="number">-1</span>, MIN = INF;</span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; ++j) {</span><br><span class="line">				<span class="keyword">if</span> (vis[j] == <span class="literal">false</span> &amp;&amp; d[j] &lt; MIN) {</span><br><span class="line">					u = j;</span><br><span class="line">					MIN = d[j];</span><br><span class="line">				}</span><br><span class="line">			}</span><br><span class="line">			<span class="keyword">if</span> (u == <span class="number">-1</span>)<span class="keyword">return</span>;</span><br><span class="line">			vis[u] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">			<span class="comment">//利用向量的特性，直接获取相邻的节点</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; Adj[u].<span class="built_in">size</span>(); ++j) {</span><br><span class="line">				<span class="type">int</span> v = Adj[u][j].v;</span><br><span class="line">				<span class="comment">//检查是否满足条件</span></span><br><span class="line">				<span class="keyword">if</span> (vis[v] == <span class="literal">false</span> &amp;&amp; d[u] + Adj[u][j].dis &lt; d[v]) {</span><br><span class="line">					d[v] = d[u] + Adj[u][j].dis;</span><br><span class="line">				}</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">};</span><br><span class="line"></span><br></pre></td></tr></table></figure><br>To Be Continue…</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2021/02/27/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A%E7%AE%97%E6%B3%95%E5%88%9D%E6%AD%A5%EF%BC%88%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/27/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A%E7%AE%97%E6%B3%95%E5%88%9D%E6%AD%A5%EF%BC%88%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3%EF%BC%89/" class="post-title-link" itemprop="url">《算法笔记》第四章：算法初步（算法思想）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-27 08:14:48" itemprop="dateCreated datePublished" datetime="2021-02-27T08:14:48+08:00">2021-02-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-08 19:44:49" itemprop="dateModified" datetime="2023-03-08T19:44:49+08:00">2023-03-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><font color="#999AAA"><br><strong>Learn to learn</strong><br>1.Whenever I tackle a new subject, one of my first thoughts is what kind of structure am I trying to build. What would be the input situations that should cause me to remember this knowledge? How do I need to manipulate it, discriminate between similar-seeming situations, calculate or reason with it?<br>2.When my end goal is to solve a practical problem, <strong><em>I should begin thinking about applications.</em></strong></font></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-02-27T00:14:48.000Z" title="2/27/2021, 8:14:48 AM">2021-02-27</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-03-08T11:44:49.723Z" title="3/8/2023, 7:44:49 PM">2023-03-08</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2021/02/27/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A%E7%AE%97%E6%B3%95%E5%88%9D%E6%AD%A5%EF%BC%88%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3%EF%BC%89/">《算法笔记》第四章：算法初步（算法思想）</a></p><div class="content"><p><font color="#999AAA"><br><strong>Learn to learn</strong><br>1.Whenever I tackle a new subject, one of my first thoughts is what kind of structure am I trying to build. What would be the input situations that should cause me to remember this knowledge? How do I need to manipulate it, discriminate between similar-seeming situations, calculate or reason with it?<br>2.When my end goal is to solve a practical problem, <strong><em>I should begin thinking about applications.</em></strong></font></p>
 <hr>
 <h1 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h1><p>选择排序：从无序表中选择最值元素，放到有序表的末端<br>插入排序：将无序表中的以一个元素插入到有序表中的相应的位置</p>
 <h2 id="sort-函数"><a href="#sort-函数" class="headerlink" title="sort 函数"></a>sort 函数</h2><p><font color="#999AAA"><br>C语言：qsort函数</font></p>
@@ -663,71 +310,7 @@ Subset_{\{1\}} = Subset_{\{\}} + \{Subset_{\{\}} append \{1\}\}</script><p>所�
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#找出数组中两两不相邻的数字的最大值</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">de_opt</span>(<span class="params">arr</span>):</span><br><span class="line">	opt = np.zeros(<span class="built_in">len</span>(arr))</span><br><span class="line">	opt[<span class="number">0</span>] = arr[<span class="number">0</span>]</span><br><span class="line">	opt[<span class="number">1</span>] = <span class="built_in">max</span>(arr[<span class="number">0</span>], arr[<span class="number">1</span>])</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="built_in">len</span>(arr)):</span><br><span class="line">		A = opt[i-<span class="number">2</span>] + arr[i]</span><br><span class="line">		B = opt[i-<span class="number">1</span>]</span><br><span class="line">		opt[i] = <span class="built_in">max</span>(A,B)</span><br><span class="line">	<span class="keyword">return</span> opt[<span class="built_in">len</span>(arr) - <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#递归写法</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rec_opt</span>(<span class="params">arr, i</span>)</span><br><span class="line">	<span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">		<span class="keyword">return</span> arr[<span class="number">0</span>]</span><br><span class="line">	<span class="keyword">elif</span> i == <span class="number">1</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">max</span>(arr[<span class="number">0</span>], arr[<span class="number">1</span>])</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		A = rec_opt(arr, i - <span class="number">2</span>) + arr[i]</span><br><span class="line">		B = rec_opt(arr, i - <span class="number">1</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">max</span>(A, B)</span><br></pre></td></tr></table></figure>
 <p>回溯（sù）：将选择一种情况作为一个结果，然后将不选择该情况作为另一个结果，找出两种情况的最优解，得到局部的最优解。<br><img src="https://img-blog.csdnimg.cn/20210317104724690.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2021/02/25/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%83%A8%E5%88%86-STL-%E9%93%BE%E8%A1%A8-%E6%A0%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/25/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%83%A8%E5%88%86-STL-%E9%93%BE%E8%A1%A8-%E6%A0%91/" class="post-title-link" itemprop="url">《算法笔记》数据结构部分(STL&链表&树)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-25 10:46:43" itemprop="dateCreated datePublished" datetime="2021-02-25T10:46:43+08:00">2021-02-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-08 19:44:22" itemprop="dateModified" datetime="2023-03-08T19:44:22+08:00">2023-03-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="C-STL"><a href="#C-STL" class="headerlink" title="C++ STL"></a>C++ STL</h1><h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义一个栈</span></span><br><span class="line">stack &lt;<span class="keyword">typename</span>&gt; name;</span><br><span class="line"></span><br><span class="line"><span class="comment">//stack函数实例</span></span><br><span class="line">stack.<span class="built_in">push</span>(x);<span class="comment">//将元素x加入到栈中</span></span><br><span class="line">stack.<span class="built_in">top</span>();<span class="comment">//获取栈顶元素</span></span><br><span class="line">stack.<span class="built_in">pop</span>();<span class="comment">//将栈顶元素弹出</span></span><br><span class="line">stack.<span class="built_in">empty</span>();<span class="comment">//判断栈是否为空，返回值类型为空</span></span><br><span class="line">stack.<span class="built_in">size</span>();<span class="comment">//返回栈内元素</span></span><br></pre></td></tr></table></figure>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-02-25T02:46:43.000Z" title="2/25/2021, 10:46:43 AM">2021-02-25</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-03-08T11:44:22.495Z" title="3/8/2023, 7:44:22 PM">2023-03-08</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2021/02/25/%E3%80%8A%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0%E3%80%8B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%83%A8%E5%88%86-STL-%E9%93%BE%E8%A1%A8-%E6%A0%91/">《算法笔记》数据结构部分(STL&amp;链表&amp;树)</a></p><div class="content"><h1 id="C-STL"><a href="#C-STL" class="headerlink" title="C++ STL"></a>C++ STL</h1><h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义一个栈</span></span><br><span class="line">stack &lt;<span class="keyword">typename</span>&gt; name;</span><br><span class="line"></span><br><span class="line"><span class="comment">//stack函数实例</span></span><br><span class="line">stack.<span class="built_in">push</span>(x);<span class="comment">//将元素x加入到栈中</span></span><br><span class="line">stack.<span class="built_in">top</span>();<span class="comment">//获取栈顶元素</span></span><br><span class="line">stack.<span class="built_in">pop</span>();<span class="comment">//将栈顶元素弹出</span></span><br><span class="line">stack.<span class="built_in">empty</span>();<span class="comment">//判断栈是否为空，返回值类型为空</span></span><br><span class="line">stack.<span class="built_in">size</span>();<span class="comment">//返回栈内元素</span></span><br></pre></td></tr></table></figure>
 <h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">//队列的定义</span></span><br><span class="line">queue&lt; <span class="keyword">typename</span> &gt; name;</span><br><span class="line"></span><br><span class="line">queue&lt;<span class="type">int</span>&gt; Q;</span><br><span class="line"><span class="comment">//queue函数实例</span></span><br><span class="line">Q.<span class="built_in">push</span>(x);<span class="comment">//将元素x入队</span></span><br><span class="line">Q.<span class="built_in">front</span>();<span class="comment">//获取队首元素</span></span><br><span class="line">Q.<span class="built_in">back</span>();<span class="comment">//获取队尾元素</span></span><br><span class="line">Q.<span class="built_in">pop</span>();<span class="comment">//将队首元素出队</span></span><br><span class="line">Q.<span class="built_in">empty</span>();<span class="comment">//判断队列是否为空</span></span><br><span class="line">Q.<span class="built_in">size</span>();<span class="comment">//队列中元素的个数</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h3 id="优先队列（Priority-queue）"><a href="#优先队列（Priority-queue）" class="headerlink" title="优先队列（Priority_queue）"></a>优先队列（Priority_queue）</h3><p>优先队列就是按照元素的优先级来确定对首部的元素的队列，它是由堆实现的，这种优先级的规则可以自定义。优先队列可以用于计算哈夫曼树最短路径权值，可以对Dijkstra算法进行优化，还可以解决一些贪心问题。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>{</span><br><span class="line">	priority_queue&lt;<span class="type">int</span>&gt;q;</span><br><span class="line">	q.<span class="built_in">push</span>(<span class="number">3</span>);<span class="comment">//将3入队</span></span><br><span class="line">	q.<span class="built_in">empty</span>();<span class="comment">//检查队列是否为空</span></span><br><span class="line">	q.<span class="built_in">pop</span>();<span class="comment">//将优先级最高的元素出队</span></span><br><span class="line">	q.<span class="built_in">size</span>();<span class="comment">//队列的大小</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//第一个参数是元素类型，第二个是承载底层数据结构堆的容器，第三个是参数的比较类，less&lt;int&gt;表示数字越大优先级越高</span></span><br><span class="line">	priority_queue&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;, greater&lt;<span class="type">int</span>&gt;&gt;q_1;</span><br><span class="line"></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//当想以结构体中的数据作为优先级的时候，应该堆操作符进行重载</span></span><br><span class="line"><span class="comment">//使用时直接将相应的结构体定义的变量直接入队即可</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">fruit</span> {</span><br><span class="line">	string name;</span><br><span class="line">	<span class="type">int</span> price;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//价格高的优先级高</span></span><br><span class="line">	<span class="comment">//由于队列默认将优先级高的放在队首，如果将小于号重载为大于号，最后会将规则反向</span></span><br><span class="line">	<span class="keyword">friend</span> <span class="type">bool</span> <span class="keyword">operator</span> &lt; (fruit f1, fruit f2) {</span><br><span class="line">		<span class="keyword">return</span> f1.price &lt; f2.price;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">//也可以将比较函数写在结构体外面</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">cmp</span>{	</span><br><span class="line">	<span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(fruit f1, fruit f2)</span> </span>{</span><br><span class="line">		<span class="keyword">return</span> f1.price &gt; f2.price;</span><br><span class="line">	}</span><br><span class="line">};</span><br><span class="line">priority_queue&lt;fruit, vector&lt;<span class="type">int</span>&gt;, cmp&gt;p_2;</span><br><span class="line"></span><br><span class="line"><span class="comment">//当结构体数据较大应该使用引用来提高效率</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">friend bool operator &lt; (const fruit&amp; f1, const fruit&amp; f2) {</span></span><br><span class="line"><span class="comment">	....</span></span><br><span class="line"><span class="comment">}</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="pair采用方法"><a href="#pair采用方法" class="headerlink" title="pair采用方法"></a>pair采用方法</h2><p>pair可以用于快速定义一个相当于拥有两个变量的结构体。使用pair需要添加函数头utility.当然map函数头中包含前者。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义一个pair变量，并初始化</span></span><br><span class="line">pair&lt;typename1, typename2&gt;<span class="built_in">name</span>(initial1, initial2);</span><br><span class="line"><span class="comment">//定义一个临时pair变量</span></span><br><span class="line">name = <span class="built_in">make_pair</span>(initial1, initial2);</span><br></pre></td></tr></table></figure></p>
@@ -768,71 +351,7 @@ Subset_{\{1\}} = Subset_{\{\}} + \{Subset_{\{\}} append \{1\}\}</script><p>所�
 <p>以下是并查集得一些基本操作。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> father[N];</span><br><span class="line"><span class="comment">//初始化</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">initialSet</span><span class="params">(<span class="type">int</span> father[], <span class="type">int</span> N)</span> </span>{</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= N; ++i) {</span><br><span class="line">		father[i] = i;</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//查找:根节点的父节点就是其本身</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">findFather</span><span class="params">(<span class="type">int</span> x)</span> </span>{</span><br><span class="line">	<span class="keyword">while</span> (x != father[x]) {</span><br><span class="line">		x = father[x];</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> x;</span><br><span class="line">}</span><br><span class="line"><span class="comment">//递归版本</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">findFatherRe</span><span class="params">(<span class="type">int</span> x)</span> </span>{</span><br><span class="line">	<span class="comment">//递归出口</span></span><br><span class="line">	<span class="keyword">if</span> (x == father[x])<span class="keyword">return</span> x;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> <span class="built_in">findFather</span>(father[x]);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//并查集合并：先判断两节点是否再同一并查集中（判断根节点是否相同），然后再将其中一个根节点的父节点指向另一个根节点</span></span><br><span class="line"><span class="comment">//这样能能够保证并查集是个树型结构，不会出现环</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Union</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>{</span><br><span class="line">	<span class="type">int</span> faA = <span class="built_in">findFather</span>(a);</span><br><span class="line">	<span class="type">int</span> faB = <span class="built_in">findFather</span>(b);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//当二者不是统一并查集时合并</span></span><br><span class="line">	<span class="keyword">if</span> (faA != faB){</span><br><span class="line">		father[faA] = father[faB];</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//路径压缩：将搜索的时间复杂度由O(n)变为O(1)，其实就是将所有节点的父节点全部指向根节点</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">findFatherPatheShorten</span><span class="params">(<span class="type">int</span> x)</span></span>{</span><br><span class="line">	<span class="type">int</span> a = x;<span class="comment">//找到根节点，同时保存初始节点</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//找到根节点</span></span><br><span class="line">	<span class="keyword">while</span> (x != father[x]) {</span><br><span class="line">		x = father[x];</span><br><span class="line">	}</span><br><span class="line">	<span class="comment">//将该节点的父节点指向根节点，并保存该节点原先的父节点的信息</span></span><br><span class="line">	<span class="keyword">while</span> (a != father[a]) {</span><br><span class="line">		<span class="type">int</span> z = a;</span><br><span class="line">		a = father[a];</span><br><span class="line">		father[z] = x;</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> x;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//递归版本</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">findFatherRSRec</span><span class="params">(<span class="type">int</span> v)</span> </span>{</span><br><span class="line">	<span class="keyword">if</span> (v == father[v])<span class="keyword">return</span> v;</span><br><span class="line">	<span class="keyword">else</span>{</span><br><span class="line">		<span class="type">int</span> F = <span class="built_in">findFather</span>(father[v]);</span><br><span class="line">		father[v] = F;</span><br><span class="line">		<span class="keyword">return</span> F;</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
 <h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><p>堆本质上就是满足父节点大于（或小于）孩子节点的二叉树。所有节点存储在一个数组当中，这样i节点的孩子节点分别为$2<em>i<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.452ex;" xmlns="http://www.w3.org/2000/svg" width="2.262ex" height="2.149ex" role="img" focusable="false" viewbox="0 -750 1000 950"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">和</text></g></g></g></svg></mjx-container>2</em>i+1$。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> heap[maxn], n = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap</span><span class="params">(<span class="type">int</span> &amp;a, <span class="type">int</span> &amp;b)</span> </span>{</span><br><span class="line">	<span class="type">int</span> temp = a;</span><br><span class="line">	a = b;</span><br><span class="line">	b = temp;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//向下调整O(logn)：从low到high。找出该节点得该子节点中最大得节点，然后于该节点进行比较，若孩子节点较大，则与孩子节点进行交换</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">downAdjust</span><span class="params">(<span class="type">int</span> low, <span class="type">int</span> high)</span> </span>{</span><br><span class="line">	<span class="type">int</span> i = low, j = i * <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">while</span> (j &lt;= high) {</span><br><span class="line">		<span class="comment">//找出孩子节点中较大的</span></span><br><span class="line">		<span class="keyword">if</span> (j + <span class="number">1</span> &lt;= high &amp;&amp; heap[j + <span class="number">1</span>] &gt; heap[j]) ++j;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//与父节点进行比较</span></span><br><span class="line">		<span class="keyword">if</span> (heap[j] &gt; heap[i]) {</span><br><span class="line">			<span class="built_in">swap</span>(heap[j], heap[i]);</span><br><span class="line">			i = j;</span><br><span class="line">			j = i * <span class="number">2</span>;<span class="comment">//这里只去检查被调整的元素是否满足堆的条件，因为为改动的节点应该是满足堆的要求的</span></span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">else</span>{</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//建堆O(n):从最后一个非叶节点往后进行循环，这是对原先数组进行了排序，以满足堆的要求</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">createHeap</span><span class="params">()</span> </span>{</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = n / <span class="number">2</span>; i &gt;= <span class="number">1</span>; --i)<span class="built_in">downAdjust</span>(i, n);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除堆顶元素O(logn)</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">deleteTop</span><span class="params">()</span> </span>{</span><br><span class="line">	<span class="comment">//将最后一个元素代替堆顶元素，然后减少节点数量</span></span><br><span class="line">	heap[<span class="number">1</span>] = heap[n--];</span><br><span class="line">	<span class="built_in">downAdjust</span>(<span class="number">1</span>, n);<span class="comment">//改动了这个节点就从这个节点进行调整</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//向上调整：当插入一个节点的时候，这个节点被放到最后，逐个与其父节点比较，直到该节点小于父节点</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">upAdjust</span><span class="params">(<span class="type">int</span> low, <span class="type">int</span> high)</span></span>{</span><br><span class="line">	<span class="type">int</span> i = high, j = i / <span class="number">2</span>;<span class="comment">//high就是最后一个节点，即插入的节点</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//父节点在范围之内</span></span><br><span class="line">	<span class="keyword">while</span> (j &gt;= low) {</span><br><span class="line">		<span class="keyword">if</span> (heap[j] &lt; heap[i]) {</span><br><span class="line">			<span class="built_in">swap</span>(heap[j], heap[i]);</span><br><span class="line">			i = j;</span><br><span class="line">			j = i / <span class="number">2</span>;</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加元素，借用上面的函数:加入节点，然后进行相应的调整</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">int</span> x)</span> </span>{</span><br><span class="line">	heap[++n] = x;</span><br><span class="line">	<span class="built_in">upAdjust</span>(<span class="number">1</span>, n);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//堆排序:将头节点与最后一个节点进行交换，然后对堆进行调整</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">heapSort</span><span class="params">()</span> </span>{</span><br><span class="line">	<span class="built_in">createHeap</span>();</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = n; i &gt; <span class="number">1</span>; i--){</span><br><span class="line">		<span class="built_in">swap</span>(heap[i], heap[<span class="number">1</span>]);</span><br><span class="line">		<span class="built_in">downAdjust</span>(<span class="number">1</span>, i - <span class="number">1</span>);</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
 <h3 id="哈夫曼树"><a href="#哈夫曼树" class="headerlink" title="哈夫曼树"></a>哈夫曼树</h3><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.iwiki.eu.org/wiki/File:Huffman_algorithm.gif">哈夫曼树构建过程</a><br>用语言描述就是，先将队列中权值最小的两个节点合并成新的节点，加入到队列中，然后一直按照这个规律执行，直到队列中只剩下一个节点。这个时候头节点的权值就是最短路径权值<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以下是求一个实例的最短路径的权值的算法</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">priority_queue&lt;<span class="type">long</span> <span class="type">long</span>, vector&lt;<span class="type">long</span> <span class="type">long</span>&gt;, greater&lt;<span class="type">long</span> <span class="type">long</span>&gt;&gt; q;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>{</span><br><span class="line">	<span class="type">int</span> n;</span><br><span class="line">	<span class="type">long</span> <span class="type">long</span> temp, x, y, ans = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"&amp;d"</span>, &amp;n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) {</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;temp);</span><br><span class="line">		q.<span class="built_in">push</span>(temp);</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (q.<span class="built_in">size</span>()&gt;<span class="number">1</span>)</span><br><span class="line">	{</span><br><span class="line">		<span class="comment">//获取前两个最大节点</span></span><br><span class="line">		x = q.<span class="built_in">top</span>();</span><br><span class="line">		q.<span class="built_in">pop</span>();</span><br><span class="line">		y = q.<span class="built_in">top</span>();</span><br><span class="line">		q.<span class="built_in">pop</span>();</span><br><span class="line"></span><br><span class="line">		<span class="comment">//将节点合并之后再入队</span></span><br><span class="line">		q.<span class="built_in">push</span>(x + y);</span><br><span class="line">		<span class="comment">//统计最短路径权值</span></span><br><span class="line">		ans += x + y;</span><br><span class="line"></span><br><span class="line">	}</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld"</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure><br>哈夫曼编码是一种用于无损数据压缩的熵编码（权编码）算法，它可以根据数据的一些特点（如出现频率）来制定相应长度的编码从而达到数据压缩的目的。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2021/01/09/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/09/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Java学习笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-09 21:32:23" itemprop="dateCreated datePublished" datetime="2021-01-09T21:32:23+08:00">2021-01-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-08 19:43:03" itemprop="dateModified" datetime="2023-03-08T19:43:03+08:00">2023-03-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Java学习"><a href="#Java学习" class="headerlink" title="Java学习"></a>Java学习</h1><font color="#999AAA">学习[廖雪峰博客](https://www.liaoxuefeng.com/wiki/1252599548343744)笔记
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-01-09T13:32:23.000Z" title="1/9/2021, 9:32:23 PM">2021-01-09</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-03-08T11:43:03.329Z" title="3/8/2023, 7:43:03 PM">2023-03-08</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2021/01/09/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Java学习笔记</a></p><div class="content"><h1 id="Java学习"><a href="#Java学习" class="headerlink" title="Java学习"></a>Java学习</h1><font color="#999AAA">学习[廖雪峰博客](https://www.liaoxuefeng.com/wiki/1252599548343744)笔记
 </font>
 
 
@@ -951,71 +470,7 @@ Subset_{\{1\}} = Subset_{\{\}} + \{Subset_{\{\}} append \{1\}\}</script><p>所�
 <p>②：Anonymous Class（匿名类）在其他类的内部实例化<br>创建方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Runnable</span> <span class="variable">r</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Runnable</span>(){<span class="comment">//这里是定义了一个接口</span></span><br><span class="line">	<span class="comment">//方法</span></span><br><span class="line">}</span><br><span class="line"><span class="comment">//继承自普通类</span></span><br><span class="line">HashMap&lt;String, String&gt;map2 = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;(){};</span><br></pre></td></tr></table></figure><br>编译后：main$1.class(main是public修饰的)<br>③：Static Nested Class（静态内部类）用static修饰，无法应用Outer.this，可以访问private修饰的变量</p>
 <h5 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h5><p>模块申明了依赖关系，只有声明依赖关系之后才能将需要的类导入<br>(While need it, learn it)</p>
 <h4 id="Java核心类"><a href="#Java核心类" class="headerlink" title="Java核心类"></a>Java核心类</h4><h1 id="补充内容"><a href="#补充内容" class="headerlink" title="补充内容"></a>补充内容</h1><h2 id="在命令行中运行Java程序"><a href="#在命令行中运行Java程序" class="headerlink" title="在命令行中运行Java程序"></a>在命令行中运行Java程序</h2><p>可以在执行语句后面加上参数列表，在程序中将会被保存至args参数列表中，用下标索引的方式可以直接访问传入的参数。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2021/01/09/%E3%80%8AComputer-Systems-A-Programmer-Perspective-3rd-ed%E3%80%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/09/%E3%80%8AComputer-Systems-A-Programmer-Perspective-3rd-ed%E3%80%8B/" class="post-title-link" itemprop="url">《Computer Systems: A Programmer Perspective 3rd ed》</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-09 20:45:14" itemprop="dateCreated datePublished" datetime="2021-01-09T20:45:14+08:00">2021-01-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-08 19:43:43" itemprop="dateModified" datetime="2023-03-08T19:43:43+08:00">2023-03-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="第一章-A-Tour-of-Computer-Systems"><a href="#第一章-A-Tour-of-Computer-Systems" class="headerlink" title="第一章 A Tour of Computer Systems"></a>第一章 A Tour of Computer Systems</h1><p><font color="#999AAA"><br>&amp;#8195这本书的前言部分主要介绍了本书主要包含的内容（the hardware architecture, the operating system, the compiler, the network）还有一些学习的预备知识（C语言、Lunux系统）。</font></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-01-09T12:45:14.000Z" title="1/9/2021, 8:45:14 PM">2021-01-09</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-03-08T11:43:43.952Z" title="3/8/2023, 7:43:43 PM">2023-03-08</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2021/01/09/%E3%80%8AComputer-Systems-A-Programmer-Perspective-3rd-ed%E3%80%8B/">《Computer Systems: A Programmer Perspective 3rd ed》</a></p><div class="content"><h1 id="第一章-A-Tour-of-Computer-Systems"><a href="#第一章-A-Tour-of-Computer-Systems" class="headerlink" title="第一章 A Tour of Computer Systems"></a>第一章 A Tour of Computer Systems</h1><p><font color="#999AAA"><br>&amp;#8195这本书的前言部分主要介绍了本书主要包含的内容（the hardware architecture, the operating system, the compiler, the network）还有一些学习的预备知识（C语言、Lunux系统）。</font></p>
 <p><font color="#999AAA"><br>&amp;#8195全文展开的逻辑是介绍Hello.c文件从编写到输出主要经历了什么</font></p>
 <h2 id="1-1-Information-Is-Bits-Context"><a href="#1-1-Information-Is-Bits-Context" class="headerlink" title="1.1 Information Is Bits + Context"></a>1.1 Information Is Bits + Context</h2><p><font color="#999AAA"></font>这一部分主要讲程序文件在计算机中的存贮方式<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>{</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Hello,world!\n"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure><br>这段代码在计算机中使用ASCII码存贮的，如下图：<br><img src="https://img-blog.csdnimg.cn/20210102154622739.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <blockquote>
@@ -1059,71 +514,7 @@ Subset_{\{1\}} = Subset_{\{\}} + \{Subset_{\{\}} append \{1\}\}</script><p>所�
 <blockquote>
 <p>在计算机中，系统调用（英语：system call），又称为系统调用，指运行在用户空间的进程向操作系统内核请求需要更高权限运行的服务。系统调用提供用户进程与操作系统之间的接口。大多数系统交互式操作需求在内核态执行。如设备IO操作或者进程间通信。</p>
 </blockquote>
-</font>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2021/01/04/Bug-%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/04/Bug-%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">Bug 记录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-04 11:49:57" itemprop="dateCreated datePublished" datetime="2021-01-04T11:49:57+08:00">2021-01-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-08 19:43:38" itemprop="dateModified" datetime="2023-03-08T19:43:38+08:00">2023-03-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Bug-笔记"><a href="#Bug-笔记" class="headerlink" title="Bug 笔记"></a>Bug 笔记</h1><h2 id="VS-2019"><a href="#VS-2019" class="headerlink" title="VS 2019"></a>VS 2019</h2><p>1.<strong>警告    C6031    返回值被忽略: “scanf”。</strong><br>主要是没有检查输入是否成功。</p>
+</font></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-01-04T03:49:57.000Z" title="1/4/2021, 11:49:57 AM">2021-01-04</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-03-08T11:43:38.661Z" title="3/8/2023, 7:43:38 PM">2023-03-08</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2021/01/04/Bug-%E8%AE%B0%E5%BD%95/">Bug 记录</a></p><div class="content"><h1 id="Bug-笔记"><a href="#Bug-笔记" class="headerlink" title="Bug 笔记"></a>Bug 笔记</h1><h2 id="VS-2019"><a href="#VS-2019" class="headerlink" title="VS 2019"></a>VS 2019</h2><p>1.<strong>警告    C6031    返回值被忽略: “scanf”。</strong><br>主要是没有检查输入是否成功。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//修改：加上一个条件判断语句</span></span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a) == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br></pre></td></tr></table></figure>
 <p>2.<strong>变量不明确</strong>：这多半是因为变量名或者是函数名与现有库中的变量有冲突。</p>
 <p>3.<strong>E0520    应使用“{…}”初始化聚合对象</strong></p>
@@ -1132,71 +523,7 @@ Subset_{\{1\}} = Subset_{\{\}} + \{Subset_{\{\}} append \{1\}\}</script><p>所�
 <p>6.<strong>c++ 非静态成员引用必须与特定对象相对</strong><br>这是在调用类成员函数的时候出现的问题<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">className::<span class="built_in">funcName</span>(para) <span class="comment">// Error</span></span><br><span class="line"></span><br><span class="line">className CN;</span><br><span class="line">CN.<span class="built_in">funcName</span>(para);<span class="comment">//Pass</span></span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20210416082241282.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <h2 id="PAT"><a href="#PAT" class="headerlink" title="PAT"></a>PAT</h2><p>1.（当输出结果为很大的数字时出现）比较赋值的变量一定要进行初始化，因为PAT编译器不会默认初始化为0.（基本上就是一个很大的随机数）</p>
 <h1 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h1><p>sudo apt-get install g++-multilib<br>遇到一种情况，就是出现缺少一些库</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2021/01/03/Wireshark-Lab-HTTP/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/03/Wireshark-Lab-HTTP/" class="post-title-link" itemprop="url">Wireshark Lab: HTTP</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-03 08:16:33" itemprop="dateCreated datePublished" datetime="2021-01-03T08:16:33+08:00">2021-01-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-08 19:40:01" itemprop="dateModified" datetime="2023-03-08T19:40:01+08:00">2023-03-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Wireshark-Lab-HTTP"><a href="#Wireshark-Lab-HTTP" class="headerlink" title="Wireshark Lab: HTTP"></a>Wireshark Lab: HTTP</h1><h1 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h1><font color="#999AAA">
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-01-03T00:16:33.000Z" title="1/3/2021, 8:16:33 AM">2021-01-03</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-03-08T11:40:01.165Z" title="3/8/2023, 7:40:01 PM">2023-03-08</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2021/01/03/Wireshark-Lab-HTTP/">Wireshark Lab: HTTP</a></p><div class="content"><h1 id="Wireshark-Lab-HTTP"><a href="#Wireshark-Lab-HTTP" class="headerlink" title="Wireshark Lab: HTTP"></a>Wireshark Lab: HTTP</h1><h1 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h1><font color="#999AAA">
 
 坚持型连接&amp;非坚持型连接：是否在同一个TCP连接上完成所有的请求/应答报文的传输？Y：坚持型，N:非坚持型。
 
@@ -1260,71 +587,7 @@ Subset_{\{1\}} = Subset_{\{\}} + \{Subset_{\{\}} append \{1\}\}</script><p>所�
 <font color="#999AAA">
 
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><font color="#999AAA"><br>问题：<br>1.HTTP/2？（unsolved）</font></p>
-</font>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://baymine.github.io/2021/01/02/Wireshark-Lab-Getting-Started/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/02/Wireshark-Lab-Getting-Started/" class="post-title-link" itemprop="url">Wireshark Lab:Getting Started</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-02 16:46:57" itemprop="dateCreated datePublished" datetime="2021-01-02T16:46:57+08:00">2021-01-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-08 19:39:26" itemprop="dateModified" datetime="2023-03-08T19:39:26+08:00">2023-03-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Wireshark-Lab-Getting-Started"><a href="#Wireshark-Lab-Getting-Started" class="headerlink" title="Wireshark Lab:Getting Started"></a>Wireshark Lab:Getting Started</h1><p><font color="#999AAA">《计算机网络自顶向下方法7e》实验</font></p>
+</font></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-01-02T08:46:57.000Z" title="1/2/2021, 4:46:57 PM">2021-01-02</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-03-08T11:39:26.231Z" title="3/8/2023, 7:39:26 PM">2023-03-08</time></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2021/01/02/Wireshark-Lab-Getting-Started/">Wireshark Lab:Getting Started</a></p><div class="content"><h1 id="Wireshark-Lab-Getting-Started"><a href="#Wireshark-Lab-Getting-Started" class="headerlink" title="Wireshark Lab:Getting Started"></a>Wireshark Lab:Getting Started</h1><p><font color="#999AAA">《计算机网络自顶向下方法7e》实验</font></p>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><font color="#999AAA">第一次实验主要就是介绍Wireshark应该怎么用，还有大致讲了Wireshark的工作原理。</font></p>
 <h1 id="一、How-Wireshark-Works"><a href="#一、How-Wireshark-Works" class="headerlink" title="一、How Wireshark Works?"></a>一、How Wireshark Works?</h1><p><img src="https://img-blog.csdnimg.cn/20201231213649334.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_12,color_FFFFFF,t_70" alt><br>包嗅探器（Packet Sniffer）<br>其本身不主动运行，只是观察应用发送和接收的数据包，并保存这些数据包的一个备份。</p>
 <blockquote>
@@ -1339,183 +602,11 @@ Subset_{\{1\}} = Subset_{\{\}} + \{Subset_{\{\}} append \{1\}\}</script><p>所�
 <h1 id="三、实验过程"><a href="#三、实验过程" class="headerlink" title="三、实验过程"></a>三、实验过程</h1><p>i）运行Wireshark，然后在浏览器中访问<a target="_blank" rel="noopener" href="http://gaia.cs.umass.edu/wireshark-labs/INTRO-wireshark-file1.html">http://gaia.cs.umass.edu/wireshark-labs/INTRO-wireshark-file1.html</a><br>ii）停止Wireshak，在过滤器中输入http。<br><img src="https://img-blog.csdnimg.cn/20210102163534330.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 <p>在对应层可以看到对应协议的一些信息，例如在IP层可以看到数据包的发送者和接收者的IP地址。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><font color="#999AAA">How long did it take from when the HTTP GET message was sent until the HTTP<br>OK reply was received?（Unsolved）</font></p>
-</font>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">John Doe</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">41</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">8</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-</body>
-</html>
+</font></div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/3/">Previous</a></div><div class="pagination-next"><a href="/page/5/">Next</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><a class="pagination-link" href="/page/2/">2</a></li><li><a class="pagination-link" href="/page/3/">3</a></li><li><a class="pagination-link is-current" href="/page/4/">4</a></li><li><a class="pagination-link" href="/page/5/">5</a></li></ul></nav></div><!--!--><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Hexo</a><p class="is-size-7"><span>&copy; 2024 John Doe</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><!--!--><script data-pjax src="/js/main.js" defer></script><!--!--></body></html>
