@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://baymine.github.io/.io//10/12/%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/20220831211854.png">
 <meta property="og:image" content="https://baymine.github.io/.io//10/12/%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/20220907193955.png">
 <meta property="article:published_time" content="2022-10-12T06:35:56.000Z">
-<meta property="article:modified_time" content="2022-10-12T12:02:44.134Z">
+<meta property="article:modified_time" content="2024-06-02T08:42:50.226Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="侯捷C++">
 <meta name="twitter:card" content="summary">
@@ -289,10 +289,16 @@ mjx-container[display="true"] + br {
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-10-12 14:35:56 / Modified: 20:02:44" itemprop="dateCreated datePublished" datetime="2022-10-12T14:35:56+08:00">2022-10-12</time>
+              <time title="Created: 2022-10-12 14:35:56" itemprop="dateCreated datePublished" datetime="2022-10-12T14:35:56+08:00">2022-10-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-06-02 16:42:50" itemprop="dateModified" datetime="2024-06-02T16:42:50+08:00">2024-06-02</time>
+              </span>
 
           
 
@@ -370,6 +376,77 @@ mjx-container[display="true"] + br {
 <font color="red">为什么父类指针能够指向子类，但是子类指针指向父类可能导致不安全？</font>
 
 <p><strong>委托+继承</strong><br>将新建的类与框架搭配到一起，需要创建好的类加入到框架的容器中去。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原型</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">imageType</span></span><br><span class="line">{</span><br><span class="line">	LAST, SPOT</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Image</span></span><br><span class="line">{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">draw</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="type">static</span> Image *<span class="title">findAndColone</span><span class="params">(imageType)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> imageType <span class="title">returnType</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> Image *<span class="title">clone</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">addPrototype</span><span class="params">(Image *image)</span></span></span><br><span class="line"><span class="function">	</span>{</span><br><span class="line">		_prototypes[_nextSlot++] = image;</span><br><span class="line">	}</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="comment">// 存放类原型</span></span><br><span class="line">	<span class="type">static</span> Image *_prototypes[<span class="number">10</span>];</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> _nextSlot;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 静态变量需要在类外进行初始化</span></span><br><span class="line">Image *Image::_prototypes[];</span><br><span class="line"><span class="type">int</span> Imgage::_nextSlot;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过变量类型找出需要调用的原型</span></span><br><span class="line"><span class="function">Image *<span class="title">Image::findAndClone</span><span class="params">(imageType type)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; _nextSlot; i++)</span><br><span class="line">		<span class="keyword">if</span>(_prototypes[i]-&gt;<span class="built_in">returnType</span>() == type)</span><br><span class="line">			<span class="keyword">return</span> _prototypes[i]-&gt;<span class="built_in">clone</span>();  <span class="comment">// 得到目标类的一个备份</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 子类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">LandSatImage</span>:<span class="keyword">public</span> Image{</span><br><span class="line">	<span class="comment">// 创建一个静态的自己，然后放到父类的那个容器中</span></span><br><span class="line">	<span class="comment">// 这里需要两个不同的构造函数，一个用于给父类原型时创建类用的，一个时父类在调用这个原型clone时用的，为了将这两种构造函数进行区分，他们的参数之间存在差异</span></span><br><span class="line">	....</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><h3 id="模版模式"><a href="#模版模式" class="headerlink" title="模版模式"></a>模版模式</h3><ul>
+<li>写代码过程中有种只见树木不见森林的感觉，因为一些主流程被封装起来了。（框架）</li>
+<li>晚绑定</li>
+<li>找到系统当中的稳定因素，对不稳定因素进行封装。<ul>
+<li>练习：类图当中区分稳定因素和不稳定因素</li>
+</ul>
+</li>
+</ul>
+<h3 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h3><p>考虑未来的代码的可能的变化。</p>
+<ul>
+<li>复用是二进制层面上额复用，不是代码复制粘贴。</li>
+<li>多继承：主继承+接口继承，这是一种比较好的编程实践。Java当中是支持接口多继承的</li>
+</ul>
+<h3 id="装饰器模式"><a href="#装饰器模式" class="headerlink" title="装饰器模式"></a>装饰器模式</h3><p>优化理由：使用继承得到的类汪汪是随着需求进行变化，这样子类急剧膨胀，同时充斥着重复代码。</p>
+<ul>
+<li>由于继承带来的代码量的提升（在继承过程中的分化，继承类之间存在一定重复的代码，但是他们之间又存在差异）<ul>
+<li>基类指针作为成员变量，这样在运行时确定具体的类，从而实现不同的功能</li>
+</ul>
+</li>
+<li>组合优于继承</li>
+<li>相同的字段往上提，重新写一个类作为接口（马丁福勒思想）</li>
+</ul>
+<h3 id="桥模式"><a href="#桥模式" class="headerlink" title="桥模式"></a>桥模式</h3><ul>
+<li>主要为了避免一个类在多个维度上拓展功能而出现的类爆炸<ul>
+<li>这个时候会对类进行拆分，这样使得这两个维度的拓展不会相互影响（其中一个继承其他的功能通过组合的方式加入到类当中）</li>
+</ul>
+</li>
+</ul>
+<h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><ul>
+<li>面向接口编程，将变量声明为一个抽象类</li>
+<li>优化场景：在面向接口编程的时候，成员变量是抽象类，但是在创建的时候又需要依赖具体的类</li>
+<li>通过面对对象的手段，将所要创建的具体对象工作延迟到子类，从而实现一种拓展（而非更改）的<ul>
+<li>绕开new</li>
+</ul>
+</li>
+<li>抽象工厂<ul>
+<li>将一系列相关的类创建过程放到一个类当中 </li>
+<li>其中方式一系列的工厂方法</li>
+</ul>
+</li>
+</ul>
+<h3 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h3><p>在成员变量当中加入一个原型变量，在使用的时候，通过这个原型变量进行拷贝，从而实现一个新的对象。</p>
+<p>当一个对象的创建过程比较复杂的时候，可以使用原型模式，将这个对象的创建过程放到一个类当中，然后通过这个类进行拷贝，从而实现一个新的对象。</p>
+<h3 id="构造器"><a href="#构造器" class="headerlink" title="构造器"></a>构造器</h3><ul>
+<li>有时候将一个初始化的过程放到一个Init函数当中是为了避免在构造函数当中调用虚函数<ul>
+<li>由于在构造函数数当中调用虚函数可能导致在子类中调用的是父类的虚函数（因为构造顺序是：先构造父类然后构造子类，这个时候子类的虚函数还不存在，但是父类在构造函数当中已经对其进行调用了。）</li>
+</ul>
+</li>
+<li>分步骤构建一个复杂的对象，其中分步骤是一个稳定的算法，而复杂的各个对象则经常发生变化</li>
+</ul>
+<h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h3><ul>
+<li>双检查锁<ul>
+<li>在加锁之前先检查实例是否为空，之后加锁之后再次检查实例是否为空<ul>
+<li>避免读的状态不加锁</li>
+<li>存在的问题：由于内存读写reorder导致的不安全<ul>
+<li>在申请空间的时候可能会因为指令重拍，先将地址赋值给单例对象，然后再调用构造函数初始化，这个时候可能会导致其他线程访问到一个未初始化的对象（只有内存地址但是没有构造）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h3><ul>
+<li>用共享技术支持大量细粒度的对象</li>
+<li>对象池</li>
+</ul>
+<h3 id="门面模式"><a href="#门面模式" class="headerlink" title="门面模式"></a>门面模式</h3><ul>
+<li>在子系统内部和外部的解耦，用一个稳定的接口隔离变化体</li>
+<li>更加注重架构的层次看整个系统</li>
+</ul>
 
     </div>
 
@@ -453,7 +530,7 @@ mjx-container[display="true"] + br {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-C-%E7%BC%96%E7%A8%8B%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">1.C++编程简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%A4%B4%E6%96%87%E4%BB%B6%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%A3%B0%E6%98%8E"><span class="nav-number">2.</span> <span class="nav-text">2. 头文件与类的声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">3. 构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E4%B8%8E%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">4.</span> <span class="nav-text">4.参数传递与返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD%E4%B8%8E%E4%B8%B4%E6%97%B6%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.</span> <span class="nav-text">4. 操作符重载与临时对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E4%B8%89%E5%A4%A7%E5%87%BD%E6%95%B0%EF%BC%9A%E6%8B%B7%E8%B4%9D%E5%87%BD%E6%95%B0%EF%BC%8C%E6%8B%B7%E8%B4%9D%E5%A4%8D%E5%88%B6%EF%BC%8C%E6%9E%90%E6%9E%84"><span class="nav-number">6.</span> <span class="nav-text">7.三大函数：拷贝函数，拷贝复制，析构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E5%A0%86%EF%BC%8C%E6%A0%88%E4%B8%8E%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">7.</span> <span class="nav-text">8.堆，栈与内存管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%E8%A1%A5%E5%85%85%EF%BC%9A%E7%B1%BB%E6%A8%A1%E6%9D%BF%E3%80%81%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E5%8F%8A%E5%85%B6%E4%BB%96"><span class="nav-number">8.</span> <span class="nav-text">拓展补充：类模板、函数模板及其他</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-%E7%BB%84%E5%90%88%E4%B8%8E%E7%BB%A7%E6%89%BF"><span class="nav-number">9.</span> <span class="nav-text">11.组合与继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-%E8%99%9A%E5%87%BD%E6%95%B0%E4%B8%8E%E5%A4%9A%E6%80%81"><span class="nav-number">10.</span> <span class="nav-text">12.虚函数与多态</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-C-%E7%BC%96%E7%A8%8B%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">1.C++编程简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%A4%B4%E6%96%87%E4%BB%B6%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%A3%B0%E6%98%8E"><span class="nav-number">2.</span> <span class="nav-text">2. 头文件与类的声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">3. 构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E4%B8%8E%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">4.</span> <span class="nav-text">4.参数传递与返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD%E4%B8%8E%E4%B8%B4%E6%97%B6%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.</span> <span class="nav-text">4. 操作符重载与临时对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E4%B8%89%E5%A4%A7%E5%87%BD%E6%95%B0%EF%BC%9A%E6%8B%B7%E8%B4%9D%E5%87%BD%E6%95%B0%EF%BC%8C%E6%8B%B7%E8%B4%9D%E5%A4%8D%E5%88%B6%EF%BC%8C%E6%9E%90%E6%9E%84"><span class="nav-number">6.</span> <span class="nav-text">7.三大函数：拷贝函数，拷贝复制，析构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E5%A0%86%EF%BC%8C%E6%A0%88%E4%B8%8E%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">7.</span> <span class="nav-text">8.堆，栈与内存管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%E8%A1%A5%E5%85%85%EF%BC%9A%E7%B1%BB%E6%A8%A1%E6%9D%BF%E3%80%81%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E5%8F%8A%E5%85%B6%E4%BB%96"><span class="nav-number">8.</span> <span class="nav-text">拓展补充：类模板、函数模板及其他</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-%E7%BB%84%E5%90%88%E4%B8%8E%E7%BB%A7%E6%89%BF"><span class="nav-number">9.</span> <span class="nav-text">11.组合与继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-%E8%99%9A%E5%87%BD%E6%95%B0%E4%B8%8E%E5%A4%9A%E6%80%81"><span class="nav-number">10.</span> <span class="nav-text">12.虚函数与多态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number"></span> <span class="nav-text">设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E7%89%88%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">模版模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">策略模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">装饰器模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A1%A5%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">桥模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">工厂模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.</span> <span class="nav-text">原型模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%99%A8"><span class="nav-number">7.</span> <span class="nav-text">构造器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="nav-number">8.</span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F"><span class="nav-number">9.</span> <span class="nav-text">享元模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%A8%E9%9D%A2%E6%A8%A1%E5%BC%8F"><span class="nav-number">10.</span> <span class="nav-text">门面模式</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -467,7 +544,7 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

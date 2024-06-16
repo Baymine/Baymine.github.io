@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"baymine.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="编程范式&#x2F;&#x2F; NOLINT在代码中添加 NOLINT 注释是一种指示，通常用于告诉静态代码分析工具或代码审查工具不要对特定行或块发出警告或错误报告。 例如在使用reinterpret_cast的时候 类名称：*Helper通常是一个模板类的特化，可以是一个中间表示，其中实现了*（类名）的一些功能，作为统一的处理方式 例如：template &lt;typename T&gt; class Colu">
+  <meta name="description" content="源码列（Columns）字段（Field） src\Core\Field.h  字段实现是一个联合类， std::aligned_union_t，而一行数据在此文件当中定义为using Row &#x3D; std::vector&lt;Field&gt;;  Field 中并没有足够的关于一个表（table）的特定数据类型的信息。比如，UInt8、UInt16、UInt32 和 UInt64 在 Fiel">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Clickhouse源码阅读日记">
 <meta property="og:url" content="https://baymine.github.io/2024/05/29/Clickhouse%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E6%97%A5%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="编程范式&#x2F;&#x2F; NOLINT在代码中添加 NOLINT 注释是一种指示，通常用于告诉静态代码分析工具或代码审查工具不要对特定行或块发出警告或错误报告。 例如在使用reinterpret_cast的时候 类名称：*Helper通常是一个模板类的特化，可以是一个中间表示，其中实现了*（类名）的一些功能，作为统一的处理方式 例如：template &lt;typename T&gt; class Colu">
+<meta property="og:description" content="源码列（Columns）字段（Field） src\Core\Field.h  字段实现是一个联合类， std::aligned_union_t，而一行数据在此文件当中定义为using Row &#x3D; std::vector&lt;Field&gt;;  Field 中并没有足够的关于一个表（table）的特定数据类型的信息。比如，UInt8、UInt16、UInt32 和 UInt64 在 Fiel">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-05-29T13:26:01.000Z">
-<meta property="article:modified_time" content="2024-05-29T13:34:02.840Z">
+<meta property="article:modified_time" content="2024-06-05T12:30:41.095Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -285,10 +285,16 @@ mjx-container[display="true"] + br {
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2024-05-29 21:26:01 / Modified: 21:34:02" itemprop="dateCreated datePublished" datetime="2024-05-29T21:26:01+08:00">2024-05-29</time>
+              <time title="Created: 2024-05-29 21:26:01" itemprop="dateCreated datePublished" datetime="2024-05-29T21:26:01+08:00">2024-05-29</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-06-05 20:30:41" itemprop="dateModified" datetime="2024-06-05T20:30:41+08:00">2024-06-05</time>
+              </span>
 
           
 
@@ -301,7 +307,21 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="编程范式"><a href="#编程范式" class="headerlink" title="编程范式"></a>编程范式</h1><h2 id="NOLINT"><a href="#NOLINT" class="headerlink" title="// NOLINT"></a>// NOLINT</h2><p>在代码中添加 NOLINT 注释是一种指示，通常用于告诉静态代码分析工具或代码审查工具不要对特定行或块发出警告或错误报告。</p>
+        <h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><h2 id="列（Columns）"><a href="#列（Columns）" class="headerlink" title="列（Columns）"></a>列（Columns）</h2><h2 id="字段（Field）"><a href="#字段（Field）" class="headerlink" title="字段（Field）"></a>字段（Field）</h2><blockquote>
+<p>src\Core\Field.h</p>
+</blockquote>
+<p>字段实现是一个联合类， <code>std::aligned_union_t</code>，而一行数据在此文件当中定义为<code>using Row = std::vector&lt;Field&gt;;</code></p>
+<blockquote>
+<p>Field 中并没有足够的关于一个表（table）的特定数据类型的信息。比如，UInt8、UInt16、UInt32 和 UInt64 在 Field 中均表示为 UInt64。</p>
+</blockquote>
+<p>在代码当中，<code>createConcrete</code> 是一个模板函数，用于在给定的存储空间中创建一个具体的对象。小类型可能会被存储为更宽的类型，例如 char 可能会被存储为 UInt64。</p>
+<h2 id="块（Block）"><a href="#块（Block）" class="headerlink" title="块（Block）"></a>块（Block）</h2><blockquote>
+<p>If we have a <code>Block</code>, we have data (in the <code>IColumn</code> object), we have information about its type (in <code>IDataType</code>) that tells us how to deal with that column, and we have the column name. </p>
+</blockquote>
+<p>这个类的成员变量当中有一个由<code>IColumn</code>指针组成的向量，还有一个由map组成的索引，用于存储列名到列索引的映射。同时还包含一个块信息的结构体。</p>
+<h2 id="MaterializedView"><a href="#MaterializedView" class="headerlink" title="MaterializedView"></a>MaterializedView</h2><p><code>MaterializedView</code>是一种特殊的表，它根据预定义的SELECT查询语句存储数据。当插入新数据到源表时，这些数据也会被插入到<code>MaterializedView</code>中。</p>
+<p><code>MaterializedView</code>的主要用途是预计算复杂的查询。例如，你可能有一个包含大量数据的表，你需要对这个表进行一些复杂的聚合查询。如果每次需要结果时都运行这些查询，可能会非常慢。相反，你可以创建一个<code>MaterializedView</code>，它根据你的查询预先计算结果。然后，你可以直接查询<code>MaterializedView</code>，这通常会比直接查询原始表快得多。</p>
+<h1 id="编程范式"><a href="#编程范式" class="headerlink" title="编程范式"></a>编程范式</h1><h2 id="NOLINT"><a href="#NOLINT" class="headerlink" title="// NOLINT"></a>// NOLINT</h2><p>在代码中添加 NOLINT 注释是一种指示，通常用于告诉静态代码分析工具或代码审查工具不要对特定行或块发出警告或错误报告。</p>
 <p><code>例如在使用reinterpret_cast的时候</code></p>
 <h2 id="类名称：-Helper"><a href="#类名称：-Helper" class="headerlink" title="类名称：*Helper"></a>类名称：<em>*</em>Helper</h2><p>通常是一个模板类的特化，可以是一个中间表示，其中实现了<em>*</em>（类名）的一些功能，作为统一的处理方式</p>
 <p><code>例如：template &lt;typename T&gt; class ColumnVectorHelper;</code></p>
@@ -310,8 +330,15 @@ mjx-container[display="true"] + br {
 <h2 id="在数组第一个元素前预留一个空间（-1th）"><a href="#在数组第一个元素前预留一个空间（-1th）" class="headerlink" title="在数组第一个元素前预留一个空间（-1th）"></a>在数组第一个元素前预留一个空间（-1th）</h2><p>这个设计在将偏移量数组转换为大小数组时提供了性能优势。在处理这种转换时，通常需要计算当前元素的大小，即下一个元素的偏移量减去当前元素的偏移量。有了额外的 0 值的 -1th 元素，计算第一个元素的大小时，可以直接用 0 减去第一个元素的偏移量，而不需要特殊处理。这样简化了代码，减少了条件分支，并可能提高计算速度。</p>
 <p><code>在链表插入的过程中使用dummy_header也是类似的设计</code></p>
 <blockquote>
-<p>在高性能计算或大数据处理中，避免条件分支可以显著提高循环的效率，因为现代处理器对分支预测有困难，尤其是在分支密集的情况下。</p>
+<p>1.在高性能计算或大数据处理中，避免条件分支可以显著提高循环的效率，因为现代处理器对分支预测有困难，尤其是在分支密集的情况下。<br>2.在处理向量数据或使用单指令多数据（SIMD）指令时，if 语句可能导致向量操作的分裂<br>3.分支惩罚</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://clickhouse.com/docs/zh/development/architecture#lie-columns">对于 String 列和 Array 列，则由两个向量组成：其中一个向量连续存储所有的 String 或数组元素，另一个存储每一个 String 或 Array 的起始元素在第一个向量中的偏移。</a></p>
 </blockquote>
+<p>在这种场景下，偏移数组可能需要转换成大小数组，这个时候可以利用到这种优化</p>
+</blockquote>
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><h2 id="loop-vectorization-循环向量化"><a href="#loop-vectorization-循环向量化" class="headerlink" title="loop vectorization(循环向量化)"></a>loop vectorization(循环向量化)</h2><p>循环向量化是一种编译器优化技术，用于将循环转换为向量化指令，以便在单个指令中处理多个数据元素。这种技术可以提高程序的性能，因为它可以利用现代处理器的SIMD指令集，同时减少循环的迭代次数。</p>
+<p><code>例如：for (int i = 0; i &lt; n; ++i) { c[i] = a[i] + b[i]; }</code></p>
+<h1 id="语言-语法"><a href="#语言-语法" class="headerlink" title="语言/语法"></a>语言/语法</h1><h2 id="C-11-using-引入构造函数"><a href="#C-11-using-引入构造函数" class="headerlink" title="C++11 using 引入构造函数"></a>C++11 using 引入构造函数</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> DEFINE_FIELD_VECTOR(X) \</span></span><br><span class="line"><span class="meta">struct X : public FieldVector \</span></span><br><span class="line"><span class="meta">{ \</span></span><br><span class="line"><span class="meta">    using FieldVector::FieldVector; \</span></span><br><span class="line"><span class="meta">}</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="keyword">using</span> FieldVector::FieldVector;：这是 C++<span class="number">11</span> 引入的 <span class="keyword">using</span> 声明，它引入了基类（FieldVector）的构造函数到派生类（X）的作用域中。</span><br><span class="line">(第一个FieldVector是类名，第二个是构造函数的函数名称，这引入了所有的构造函数)</span><br><span class="line"></span><br><span class="line">这意味着 X 类可以使用 FieldVector 的所有构造函数，而无需重复定义。</span><br><span class="line">这有助于避免构造函数的代码重复，并保持代码简洁。</span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -330,7 +357,10 @@ mjx-container[display="true"] + br {
     <a href="/2023/01/05/GeePRC-notes/" rel="prev" title="GeePRC notes">
       <i class="fa fa-chevron-left"></i> GeePRC notes
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2024/06/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%95%99%E8%82%B2%E7%BC%BA%E5%A4%B1%E7%9A%84%E4%B8%80%E8%AF%BE/" rel="next" title="计算机教育缺失的一课">
+      计算机教育缺失的一课 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -389,7 +419,7 @@ mjx-container[display="true"] + br {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">编程范式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NOLINT"><span class="nav-number">1.1.</span> <span class="nav-text">&#x2F;&#x2F; NOLINT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%90%8D%E7%A7%B0%EF%BC%9A-Helper"><span class="nav-number">1.2.</span> <span class="nav-text">类名称：*Helper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%90%8D%E7%A7%B0%EF%BC%9A-Dummy"><span class="nav-number">1.3.</span> <span class="nav-text">类名称：*Dummy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E6%95%B0%E7%BB%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E5%89%8D%E9%A2%84%E7%95%99%E4%B8%80%E4%B8%AA%E7%A9%BA%E9%97%B4%EF%BC%88-1th%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">在数组第一个元素前预留一个空间（-1th）</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BA%90%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%97%EF%BC%88Columns%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">列（Columns）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%EF%BC%88Field%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">字段（Field）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%97%EF%BC%88Block%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">块（Block）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MaterializedView"><span class="nav-number">1.4.</span> <span class="nav-text">MaterializedView</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">编程范式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NOLINT"><span class="nav-number">2.1.</span> <span class="nav-text">&#x2F;&#x2F; NOLINT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%90%8D%E7%A7%B0%EF%BC%9A-Helper"><span class="nav-number">2.2.</span> <span class="nav-text">类名称：*Helper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%90%8D%E7%A7%B0%EF%BC%9A-Dummy"><span class="nav-number">2.3.</span> <span class="nav-text">类名称：*Dummy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E6%95%B0%E7%BB%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E5%89%8D%E9%A2%84%E7%95%99%E4%B8%80%E4%B8%AA%E7%A9%BA%E9%97%B4%EF%BC%88-1th%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">在数组第一个元素前预留一个空间（-1th）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#loop-vectorization-%E5%BE%AA%E7%8E%AF%E5%90%91%E9%87%8F%E5%8C%96"><span class="nav-number">3.1.</span> <span class="nav-text">loop vectorization(循环向量化)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80-%E8%AF%AD%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">语言&#x2F;语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-11-using-%E5%BC%95%E5%85%A5%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">4.1.</span> <span class="nav-text">C++11 using 引入构造函数</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -403,7 +433,7 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
