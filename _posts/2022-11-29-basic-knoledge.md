@@ -12,10 +12,6 @@ tags: []
 
 Small tricks
 
-1
-2
-3
-
 // 取中间的数：
 int mid = (left + right) / 2; // 有溢出的风险
 int mid = left + ((right - left) &gt;&gt; 1); // 这样更好
@@ -33,8 +29,6 @@ int mid = left + ((right - left) &gt;&gt; 1); // 这样更好
 - 在菱形继承的场景下，会产生两份基类数据，浪费空间，同时访问基类还需要通过域运算符
 - 利用虚继承，在间接继承共同基类时是保留一份基类成员。创建派生类实例的时候，只需要调用一次基类的构造函数
 
-1
-2
 
 class A{}
 class B : virtual public A{}
@@ -59,38 +53,6 @@ Linux 是一个类似 Unix 的操作系统，Unix 要早于 Linux，Linux 的初
 
 ![1672140678237](https://Baymine.github.io/images/Basic_must_known/1672140678237.png)
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
 
 # In the work directory
 git config --global user.name "yourName"
@@ -128,20 +90,6 @@ git clone
 # [](#C-C)C/C++
 ### [](#%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F%E7%9A%84%E8%99%9A%E5%81%87%E5%94%A4%E9%86%92)[条件变量的虚假唤醒](https://www.cnblogs.com/tqyysm/articles/9765667.html)
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
 
 // wait 端
 lock(mutex);
@@ -163,37 +111,7 @@ cond.notify();
 
 ### [](#Function-pointer)[Function pointer](https://stackoverflow.com/questions/840501/how-do-function-pointers-in-c-work)
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
+
 
 int addInt(int n, int m) {
     return n+m;
@@ -227,14 +145,6 @@ myFuncDef functionFactory(int n) {
     return functionPtr;
 }
 
-1
-2
-3
-4
-5
-6
-7
-8
 
 int addInt(int n, int m) {
     return n+m;
@@ -255,15 +165,6 @@ C++调用非静态的成员函数时，采用的是一种 __thiscall 的函数�
 
 ## [](#Upcasting)[Upcasting](http://c.biancheng.net/view/2284.html)
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
 
 class A { void func1(); }
 class B : A{ void func1(); }
