@@ -1,0 +1,391 @@
+/* Hacker-style homepage CSS */
+
+/* Import a monospace font */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&display=swap');
+
+/* Global hacker theme variables */
+:root {
+  --primary-green: #00ff41;
+  --secondary-green: #00cc33;
+  --dark-green: #008f11;
+  --bg-black: #0a0a0a;
+  --bg-dark: #1a1a1a;
+  --bg-darker: #111111;
+  --text-green: #00ff41;
+  --text-dim: #00cc33;
+  --text-darker: #008f11;
+  --border-green: #00ff41;
+  --glow-green: rgba(0, 255, 65, 0.5);
+}
+
+/* Reset and base styles for hacker homepage */
+.hacker-homepage {
+  font-family: 'Fira Code', 'Courier New', monospace;
+  background: var(--bg-black);
+  color: var(--text-green);
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+
+/* Terminal window styling */
+.terminal-header {
+  background: var(--bg-darker);
+  border: 1px solid var(--border-green);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 20px var(--glow-green);
+}
+
+.terminal-controls {
+  display: flex;
+  gap: 8px;
+  margin-right: 15px;
+}
+
+.control {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--text-darker);
+}
+
+.control.close { background: #ff5f56; }
+.control.minimize { background: #ffbd2e; }
+.control.maximize { background: #27ca3f; }
+
+.terminal-title {
+  color: var(--text-dim);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Terminal content */
+.terminal-content {
+  background: var(--bg-black);
+  border: 1px solid var(--border-green);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  padding: 20px;
+  box-shadow: 0 0 20px var(--glow-green);
+  min-height: 70vh;
+}
+
+/* Terminal lines */
+.terminal-line {
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.prompt {
+  color: var(--primary-green);
+  font-weight: 700;
+  margin-right: 10px;
+  text-shadow: 0 0 10px var(--glow-green);
+}
+
+.command {
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+/* ASCII Art */
+.ascii-art {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.ascii-art pre {
+  color: var(--primary-green);
+  font-size: 12px;
+  line-height: 1.2;
+  text-shadow: 0 0 10px var(--glow-green);
+  margin: 0;
+  overflow-x: auto;
+}
+
+/* Info grid */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid var(--text-darker);
+  border-radius: 4px;
+  background: rgba(0, 255, 65, 0.05);
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label {
+  color: var(--text-darker);
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.value {
+  color: var(--text-green);
+  font-weight: 500;
+}
+
+/* Skills section */
+.skills-section {
+  margin: 20px 0;
+  padding: 15px;
+  border-left: 3px solid var(--primary-green);
+  background: rgba(0, 255, 65, 0.05);
+}
+
+.skill-category {
+  margin-bottom: 20px;
+}
+
+.skill-category h3 {
+  color: var(--text-dim);
+  font-size: 14px;
+  margin: 0 0 10px 0;
+  font-weight: 700;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-tag {
+  background: rgba(0, 255, 65, 0.1);
+  border: 1px solid var(--text-darker);
+  color: var(--text-green);
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+  background: rgba(0, 255, 65, 0.2);
+  border-color: var(--primary-green);
+  box-shadow: 0 0 10px var(--glow-green);
+  transform: translateY(-1px);
+}
+
+/* Posts section */
+.posts-section {
+  margin: 20px 0;
+  font-family: 'Fira Code', monospace;
+}
+
+.post-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.1);
+  transition: all 0.3s ease;
+}
+
+.post-item:hover {
+  background: rgba(0, 255, 65, 0.05);
+  padding-left: 10px;
+}
+
+.file-permissions {
+  color: var(--text-darker);
+  font-size: 12px;
+  width: 100px;
+  flex-shrink: 0;
+}
+
+.file-date {
+  color: var(--text-dim);
+  font-size: 12px;
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.file-name {
+  color: var(--text-green);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.file-name:hover {
+  color: var(--primary-green);
+  text-shadow: 0 0 10px var(--glow-green);
+  text-decoration: underline;
+}
+
+/* Navigation section */
+.navigation-section {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid var(--text-darker);
+  border-radius: 4px;
+  background: rgba(0, 255, 65, 0.05);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  padding: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+  background: rgba(0, 255, 65, 0.1);
+  border-radius: 3px;
+}
+
+.nav-link {
+  color: var(--primary-green);
+  text-decoration: none;
+  font-weight: 700;
+  margin-right: 15px;
+  min-width: 100px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  text-shadow: 0 0 10px var(--glow-green);
+  color: #ffffff;
+}
+
+.nav-desc {
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+/* Animations */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.blink {
+  animation: blink 1s infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.typing-animation {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 2s steps(6, end);
+}
+
+.cursor {
+  color: var(--primary-green);
+  font-weight: 700;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .hacker-homepage {
+    padding: 10px;
+  }
+  
+  .ascii-art pre {
+    font-size: 8px;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .post-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .file-permissions,
+  .file-date {
+    width: auto;
+    margin-right: 10px;
+  }
+  
+  .nav-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .nav-link {
+    margin-bottom: 5px;
+  }
+}
+
+/* Matrix rain effect (optional background) */
+.matrix-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.1;
+}
+
+/* Glitch effect for special elements */
+.glitch {
+  position: relative;
+  color: var(--primary-green);
+  font-weight: 700;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  animation: glitch-1 0.5s infinite;
+  color: #ff0040;
+  z-index: -1;
+}
+
+.glitch::after {
+  animation: glitch-2 0.5s infinite;
+  color: #00ffff;
+  z-index: -2;
+}
+
+@keyframes glitch-1 {
+  0%, 14%, 15%, 49%, 50%, 99%, 100% {
+    transform: translate(0);
+  }
+  15%, 49% {
+    transform: translate(-2px, 1px);
+  }
+}
+
+@keyframes glitch-2 {
+  0%, 20%, 21%, 62%, 63%, 99%, 100% {
+    transform: translate(0);
+  }
+  21%, 62% {
+    transform: translate(2px, -1px);
+  }
+}

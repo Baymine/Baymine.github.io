@@ -10,7 +10,8 @@ Your blog is now built with **Jekyll**, which is natively supported by GitHub Pa
 
 Your blog now uses:
 - **Jekyll** static site generator
-- **Minima theme** (clean and responsive)
+- **Custom hacker-style homepage** with terminal aesthetics
+- **Minima theme** for blog posts (clean and responsive)
 - **GitHub Pages** native support (no build process needed)
 - **Markdown** for writing posts
 - **Automatic deployment** when you push changes
@@ -40,14 +41,17 @@ git push origin main
 ```
 ├── _posts/             # Blog posts (Markdown files)
 ├── _pages/             # Static pages
-├── _layouts/           # Custom layouts (optional)
-├── _includes/          # Reusable components (optional)
-├── _sass/              # Custom styles (optional)
+├── _layouts/           # Custom layouts
+├── _includes/          # Reusable components
 ├── assets/             # Images, CSS, JS files
+│   ├── css/            # Custom stylesheets
+│   └── js/             # JavaScript files
 ├── _config.yml         # Jekyll configuration
 ├── Gemfile             # Ruby dependencies
-├── index.md            # Homepage
+├── index.md            # Hacker-style homepage
+├── 404.html            # Custom 404 page
 ├── migrate.rb          # Migration script
+├── customize-theme.sh  # Theme customization tool
 └── README.md           # This file
 ```
 
@@ -122,6 +126,37 @@ Jekyll deployment is automatic with GitHub Pages! No complex setup needed:
    - GitHub Pages detects Jekyll and builds your site automatically
    - No GitHub Actions or complex workflows needed
    - Your site will be live at `https://baymine.github.io` within minutes
+
+## 🎨 Hacker-Style Homepage
+
+Your blog features a custom cyberpunk-inspired homepage with:
+
+### ✨ Visual Features
+- **Terminal-style interface** with realistic command prompts
+- **Matrix rain background** effect (animated falling characters)
+- **ASCII art banner** with your name
+- **Glowing green text** with cyberpunk aesthetics
+- **Animated typing effects** for commands
+- **Interactive elements** with hover effects
+
+### 🎮 Interactive Elements
+- **Skill tags** that respond to clicks
+- **Navigation links** with terminal-style formatting
+- **Konami code easter egg** (try: ↑↑↓↓←→←→BA)
+- **Random glitch effects** on hover
+- **Blinking cursor** animation
+
+### 🛠️ Customization
+```bash
+# Customize colors, effects, and more
+./customize-theme.sh
+```
+
+### 🎯 Theme Features
+- **Responsive design** - works on all devices
+- **Performance optimized** - lightweight animations
+- **Accessibility friendly** - readable and navigable
+- **SEO optimized** - proper meta tags and structure
 
 ## Migrating Existing Posts
 

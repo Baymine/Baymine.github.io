@@ -1,0 +1,26 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%- seo -%}
+  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
+  {%- if page.title == "Home" -%}
+    <link rel="stylesheet" href="{{ "/assets/css/hacker-style.css" | relative_url }}">
+    <style>
+      /* Override default styles for hacker homepage */
+      body {
+        margin: 0;
+        padding: 0;
+        background: #0a0a0a;
+        overflow-x: hidden;
+      }
+      .site-header, .site-footer {
+        display: none;
+      }
+    </style>
+  {%- endif -%}
+  {%- feed_meta -%}
+  {%- if jekyll.environment == 'production' and site.google_analytics -%}
+    {%- include google-analytics.html -%}
+  {%- endif -%}
+</head>

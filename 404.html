@@ -1,0 +1,80 @@
+---
+layout: default
+permalink: /404.html
+---
+
+<style>
+  .error-page {
+    font-family: 'Fira Code', 'Courier New', monospace;
+    background: #0a0a0a;
+    color: #00ff41;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .error-content {
+    border: 1px solid #00ff41;
+    padding: 40px;
+    border-radius: 8px;
+    background: rgba(0, 255, 65, 0.05);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+  }
+  
+  .error-code {
+    font-size: 72px;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 0 20px #00ff41;
+    animation: blink 2s infinite;
+  }
+  
+  .error-message {
+    font-size: 24px;
+    margin: 20px 0;
+    color: #00cc33;
+  }
+  
+  .error-description {
+    font-size: 16px;
+    margin: 20px 0;
+    color: #008f11;
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 10px 20px;
+    border: 1px solid #00ff41;
+    color: #00ff41;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+  
+  .back-link:hover {
+    background: rgba(0, 255, 65, 0.1);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+    color: #ffffff;
+  }
+  
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.3; }
+  }
+</style>
+
+<div class="error-page">
+  <div class="error-content">
+    <h1 class="error-code">404</h1>
+    <p class="error-message">ACCESS DENIED</p>
+    <p class="error-description">
+      The requested resource could not be found on this server.<br>
+      Perhaps you're looking for something that doesn't exist in this dimension?
+    </p>
+    <a href="{{ "/" | relative_url }}" class="back-link">[RETURN TO BASE]</a>
+  </div>
+</div>
