@@ -72,28 +72,18 @@ exit status 1
 在goroutine中，完成一步之后往管道内传入`struct {}{}`这样，在goroutine外部就可以接收到这些信息，这样外部就知道goroutine内部某个函数完成了，
 
 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
 12
 
 callChannel := make(chan struct{})
 go func(){
   err := call(args)
-  callChannel &lt;- struct{}{}
+  callChannel <- struct{}{}
 }()
 
 select {
-  case &lt;-time.After(timeout):  // 处理超时
+  case <-time.After(timeout):  // 处理超时
     timeout handling
-  case &lt;-callChannel:
+  case <-callChannel:
     function finished
 }
 
@@ -103,27 +93,13 @@ select {
 利用管道传入一个结束信息（这里是true），然后返回函数即可
 
 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
 16
 
 quit := make(chan bool)
 go func() {
     for {
         select {
-        case &lt;- quit:
+        case <- quit:
             return
         default:
             // Do other stuff
@@ -134,20 +110,20 @@ go func() {
 // Do stuff
 
 // Quit goroutine
-quit &lt;- true
+quit <- true
 
 ### [](#encoding-gob)encoding/gob
 
 - Package gob 管理 gobs 流 - 在编码器（发送器）和解码器（接收器）之间交换的二进制值
 - 
 ```
-enc := gob.NewEncoder(&amp;network) // 将写入网络。
-dec := gob.NewDecoder(&amp;network) // 将从网络上读取。
+enc := gob.NewEncoder(&network) // 将写入网络。
+dec := gob.NewDecoder(&network) // 将从网络上读取。
 // Encoding（发送）一些值。
 err := enc.Encode(P{3, 4, 5, "Pythagoras"})
 // 接收
 var q Q
-err = dec.Decode(&amp;q)
+err = dec.Decode(&q)
 ```
 
 ### [](#%E5%8F%8D%E5%B0%84)反射

@@ -17,7 +17,7 @@ First, we need to make information as number, so as to we can use it as training
 ## [](#Models-as-Functions)Models as Functions
 
 There are two main school relative to the machine learning, function and probabilistic model. The former one gives a specific value, the later one would give the distribution of the result.
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210517101400415.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70)
+<!-- Image removed: CSDN link no longer accessible -->
 And in order to value a model, we use cost function or loss function to discribe it.
 
 # [](#%E7%BB%8F%E9%AA%8C%E9%A3%8E%E9%99%A9%E6%9C%80%E5%B0%8F%E5%8C%96%EF%BC%88Empirical-Risk-Minimization%EF%BC%89)经验风险最小化（Empirical Risk Minimization）
@@ -28,7 +28,7 @@ And in order to value a model, we use cost function or loss function to discribe
 
 我们训练的目的是找到一个参数列表,使得函数的输出结果能够更接近真实值，即：
 
-f(x_n,\theta^*)\approx y_n\quad for \ all\ \ a = 1,\cdots,N
+$$f(x_n,\theta^*)\approx y_n\quad for \ all\ \ a = 1,\cdots,N$$
 
 在本节中使用代表模型的预测值。
 
@@ -38,11 +38,11 @@ f(x_n,\theta^*)\approx y_n\quad for \ all\ \ a = 1,\cdots,N
 
 对于一个给定的训练集,实例矩阵（example matrix）：,标签矩阵,对应的平均损失为：
 
-R_{emp}(f,\boldsymbol X, y)=\frac{1}{N}\sum\limits^N_{n-1} l(y_n,\hat y_n)
+$$R_{emp}(f,\boldsymbol X, y)=\frac{1}{N}\sum\limits^N_{n-1} l(y_n,\hat y_n)$$
 
 我们希望模型不仅仅能够很好地拟合训练数据，还希望模型能够很好地预测数据，所以能够找到一个**期望风险**（Expected Risk）
 
-\bold R_{true}(f)=\boldsymbol{\mathbb E_{x,y}}[l(y,f(\boldsymbol x))]## [](#%E6%AD%A3%E5%88%99%E5%8C%96%E5%87%8F%E5%B0%8F%E8%BF%87%E6%8B%9F%E5%90%88-Regularization-to-Reduce-Overfitting)正则化减小过拟合(Regularization to Reduce Overfitting)
+$$\bold R_{true}(f)=\boldsymbol{\mathbb E_{x,y}}[l(y,f(\boldsymbol x))]## [](#%E6%AD%A3%E5%88%99%E5%8C%96%E5%87%8F%E5%B0%8F%E8%BF%87%E6%8B%9F%E5%90%88-Regularization-to-Reduce-Overfitting)正则化减小过拟合(Regularization to Reduce Overfitting)$$
 
 如果有足够的参数，给定地模型一般能够很好地拟合测试数据，但是预测数据却与实际数据有较大的偏差，这时候就是模型发生了**过拟合**。
 一般情况下，已知的数据分为测试数据和训练数据，分别用于测试和训练模型。
@@ -52,16 +52,16 @@ R_{emp}(f,\boldsymbol X, y)=\frac{1}{N}\sum\limits^N_{n-1} l(y_n,\hat y_n)
 Regularization is a way to compromise between accurate solution of empirical risk minimization and the size or complexity of the solution.
 对于一个最小二乘问题：,加上正则项则是：
 
-\min\limits_\theta\frac{1}{N}\|y-X\theta\|^2+\lambda \|\theta\|
+$$\min\limits_\theta\frac{1}{N}\|y-X\theta\|^2+\lambda \|\theta\|$$
 
 ## [](#%E7%94%A8%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%E8%AF%84%E4%BC%B0%E6%B3%9B%E5%8C%96%E6%80%A7%E8%83%BD-Cross-Validation-to-Assess-the-Generalization-Performance)用交叉验证评估泛化性能(Cross-Validation to Assess the Generalization Performance)
 
 我们将已知数据进行拆分，一部分用于模型训练，一部分用于模型性能测试，这个称为**验证集**（validation set）。但是如果训练数据太少，可能导致得不到好的模型，如果训练数据太少可能导致噪声估计。所以应该对已有的数据进行合理的划分，这就有**K-折交叉验证**（K-fold cross-validation）
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210518102941859.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70)
+<!-- Image removed: CSDN link no longer accessible -->
 
 这样得到的**期望泛化误差**（expected generalization error）为：
 
-\mathbb E_\mathcal V[R(f,\mathcal V)]\approx\frac{1}{K}\sum^K_{k=1}R(f^{(k)},\mathcal V^{(k)})
+$$\mathbb E_\mathcal V[R(f,\mathcal V)]\approx\frac{1}{K}\sum^K_{k=1}R(f^{(k)},\mathcal V^{(k)})$$
 
 其中，为预测值与真实值之间的误差。
 但是这个方法有几个缺点，首先是不合理的数据划分可能会导致的几个不好的结果，与之前的训练集和测试集之间的大小关系导致不同后果一致。同时需要对模型进行K次训练，可能需要大量的计算资源。
@@ -75,16 +75,16 @@ Evaluating the quality of the model, depending on these hyperparameters, may res
 
 定义一个关于参数的函数，去评估模型对数据的拟合的好坏。一般使用**负对数似然**（negative log-likelihood）：
 
-\mathcal L_x(\boldsymbol\theta)=-\log p(\boldsymbol x|\boldsymbol\theta)
+$$\mathcal L_x(\boldsymbol\theta)=-\log p(\boldsymbol x|\boldsymbol\theta)$$
 
 在上式中，样品值是固定的，变化的是参数,这个函数彰显的是给定参数的情况下，取得样品值的概率。
 假设两个相互独立且均匀分布的数据集，,,他们的似然方程可以呗分解为：
 
-p(\mathcal Y|\mathcal X,\theta)=\prod^N_{n=1}p(y_n|\boldsymbol x_n,\boldsymbol\theta)
+$$p(\mathcal Y|\mathcal X,\theta)=\prod^N_{n=1}p(y_n|\boldsymbol x_n,\boldsymbol\theta)$$
 
 但是从优化的角度来看，和比乘积更容易处理：
 
-\mathcal L(\theta)=-\log p(\mathcal Y|\mathcal X, \theta)=-\sum^N_{n=1}\log p(y_n|x_n,\theta)> 
+$$\mathcal L(\theta)=-\log p(\mathcal Y|\mathcal X, \theta)=-\sum^N_{n=1}\log p(y_n|x_n,\theta)>$$
 
 hence should be interpreted as observed and fixed, this interpretation is incorrect.
 
@@ -101,12 +101,12 @@ hence should be interpreted as observed and fixed, this interpretation is incorr
 拟合的意思就是优化模型的参数，以最小化代价函数。
 **参数化**（arametrization）：一种描述模型的方式。
 
-y = ax+b\rightarrow \theta:=\{a,b\}
+$$y = ax+b\rightarrow \theta:=\{a,b\}$$
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210521104544345.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70)
+<!-- Image removed: CSDN link no longer accessible -->
 书中使用表示参数化的模型，$M^*$为真实值，上图中的红线可以认为是代价函数。
 *拟合的三种结果*：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210521104758825.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70)
+<!-- Image removed: CSDN link no longer accessible -->
 
 > 
 
@@ -126,11 +126,11 @@ The link function provides the relationship between the linear predictor and the
 
 对于一个数据集、一个参数先验和一个似然方程的后验分布为：
 
-p(\theta|\mathcal X)=\frac{p(\mathcal X|\theta)p(\theta)}{p(\mathcal X)},\quad p(\mathcal X)=\int p(\mathcal X|\theta)p(\theta)d\theta
+$$p(\theta|\mathcal X)=\frac{p(\mathcal X|\theta)p(\theta)}{p(\mathcal X)},\quad p(\mathcal X)=\int p(\mathcal X|\theta)p(\theta)d\theta$$
 
 利用参数的后验分布，我们可以将对参数的不确定性转移到数据上,也就是我们的预测值不再依赖于参数了：
 
-p(\boldsymbol x)=\int p(\boldsymbol x|\boldsymbol\theta)p(\boldsymbol\theta)d\boldsymbol\theta=\mathbb E_\boldsymbol\theta[p(\boldsymbol x|\boldsymbol\theta)]
+$$p(\boldsymbol x)=\int p(\boldsymbol x|\boldsymbol\theta)p(\boldsymbol\theta)d\boldsymbol\theta=\mathbb E_\boldsymbol\theta[p(\boldsymbol x|\boldsymbol\theta)]$$
 
 上式说明，预测值是所有参数下的预测值的均值。
 
@@ -150,22 +150,22 @@ p(\boldsymbol x|\boldsymbol z,\boldsymbol\theta)
 
 想要得到给定模型参数下的预测数据，我们需要消去潜变量：
 
-p(x|\theta)=\int p(x|z,\theta)p(z)dz
+$$p(x|\theta)=\int p(x|z,\theta)p(z)dz$$
 
 注意到似然方程与潜变量无关，有了上面这个式子，我们可以直接使用极大似然估计来进行参数估计。
 用上式带入到贝叶斯公式中：
 
-p(\theta|\mathcal X)=\frac{p(\mathcal X|\theta)p(\theta)}{p(\mathcal X)}
+$$p(\theta|\mathcal X)=\frac{p(\mathcal X|\theta)p(\theta)}{p(\mathcal X)}$$
 
 其中，为给定的数据集。这样得到了后验概率分布，可以用于贝叶斯推断。
 与上式类似，我们可以得到潜变量的后验分布：
 
-p(z|\mathcal X)=\frac{p(\mathcal X|z)p(z)}{p(\mathcal X)},\quad p(\mathcal X|z)=\int p(\mathcal X|z,\theta)p(\theta)d\theta
+$$p(z|\mathcal X)=\frac{p(\mathcal X|z)p(z)}{p(\mathcal X)},\quad p(\mathcal X|z)=\int p(\mathcal X|z,\theta)p(\theta)d\theta$$
 
 但是还是遇到了积分。而且同时将参数和潜变量消掉也非常困难。
 下面这个式子相对好计算：
 
-p(z|\mathcal X,\theta)=\frac{p(\mathcal X|z,\theta)p(z)}{p(\mathcal X|\theta)}> 
+$$p(z|\mathcal X,\theta)=\frac{p(\mathcal X|z,\theta)p(z)}{p(\mathcal X|\theta)}>$$
 
 补充一下这部分？含义？
 
@@ -176,14 +176,14 @@ p(z|\mathcal X,\theta)=\frac{p(\mathcal X|z,\theta)p(z)}{p(\mathcal X|\theta)}>
 ## [](#%E5%9B%BE%E7%9A%84%E8%AF%AD%E4%B9%89%EF%BC%88Graph-Semantics%EF%BC%89)图的语义（Graph Semantics）
 
 下图表示的是a、b、c三个随机变量，边代表条件概率分布，例如a、b节点，代表
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210524173813873.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70)
+<!-- Image removed: CSDN link no longer accessible -->
 所以，一个联合概率分布可以表示为：
 
-p(\boldsymbol x)=\prod^K_{k=1}p(x_k|Pa_k)
+$$p(\boldsymbol x)=\prod^K_{k=1}p(x_k|Pa_k)$$
 
 其中，表示节点的父节点。
 对于一个重复N次的伯努利实验的联合概率分布为：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210524174426163.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70)
+<!-- Image removed: CSDN link no longer accessible -->
 图(b)是一种更加紧凑的表示方法，图 (c)中的、是潜变量的**超参数**（Hyperparameter）也是的一个超前驱（hyperprior）
 
 ## [](#%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E5%92%8Cd-%E5%88%86%E7%A6%BB%EF%BC%88%E6%9C%89%E5%90%91%E5%88%86%E7%A6%BB%EF%BC%89%EF%BC%88Conditional-Independence-and-d-Separation%EF%BC%89)条件概率分布和d-分离（有向分离）（Conditional Independence and d-Separation）
@@ -194,14 +194,14 @@ p(\boldsymbol x)=\prod^K_{k=1}p(x_k|Pa_k)
 
 `有向分离`(d-separation)的基本思想：通过贝叶斯网中看两个事件的关系（两个事件是否条件独立），从而简化概率计算。（利用两时间的相互独立的性质）
 当三个节点满足下面地条件之一的时候，则表示是d-分离的。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2021052515431295.png)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210525154505655.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70)
+<!-- Image removed: CSDN link no longer accessible -->
+<!-- Image removed: CSDN link no longer accessible -->
 
 > 
 
 下面的参考博客中有对应结论的推导
 
-[参考](https://blog.csdn.net/ybdesire/article/details/78998398?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162190960216780264053425%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=162190960216780264053425&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-78998398.first_rank_v2_pc_rank_v29&amp;utm_term=d%E5%88%86%E7%A6%BB&amp;spm=1018.2226.3001.4187)
+$$[参考](https://blog.csdn.net/ybdesire/article/details/78998398?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162190960216780264053425%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=162190960216780264053425&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-78998398.first_rank_v2_pc_rank_v29&utm_term=d%E5%88%86%E7%A6%BB&spm=1018.2226.3001.4187)$$
 这里两种情况：
 
 2
@@ -213,10 +213,10 @@ p(\boldsymbol x)=\prod^K_{k=1}p(x_k|Pa_k)
 
 ## [](#%E5%B5%8C%E5%A5%97%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81%EF%BC%88Nested-Cross-Validation%EF%BC%89)嵌套交叉验证（Nested Cross-Validation）
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210526093453995.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70)
+<!-- Image removed: CSDN link no longer accessible -->
 将数据分为三个部分，第一部分用于训练模型，第二部分用于计算误差：
 
-\mathbb E_\mathcal V[\boldsymbol R(\mathcal V| M)]\approx = \frac{1}{K}\sum^K_{k=1}\boldsymbol R(\mathcal V^{(k)}|M)
+$$\mathbb E_\mathcal V[\boldsymbol R(\mathcal V| M)]\approx = \frac{1}{K}\sum^K_{k=1}\boldsymbol R(\mathcal V^{(k)}|M)$$
 
 其中代表的是**经验风险**(empirical risk)
 计算所有模型的经验风险，然后选取经验风险最小的模型作为最终模型，然后利用测试数据计算模型的泛化误差。
@@ -227,27 +227,27 @@ p(\boldsymbol x)=\prod^K_{k=1}p(x_k|Pa_k)
 
 > 
 
-![贝叶斯推断中的奥卡姆剃刀](https://img-blog.csdnimg.cn/20210526095407220.png?x-oss-process=image,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70)
+<!-- Image removed: CSDN link no longer accessible -->
 上图中，横坐标表示所有的可能的数据集，纵坐标表示模型对对应数据的拟合程度。我们会选用拟合程度更好的模拟作为最终的模型。
 
 下图是数据生成过程：
-![](https://img-blog.csdnimg.cn/20210526101506995.png)
+<!-- Image removed: CSDN link no longer accessible -->
 第一个表示模型的先验概率，表示模型被选取的概率，第二个表示模型对应的参数的分布，最后一个是模型的生成数据。
 
 用贝叶斯网可以表示为：
-![](https://img-blog.csdnimg.cn/20210526101352294.png)
+<!-- Image removed: CSDN link no longer accessible -->
 我们可以利用贝叶斯公式计算后验分布：
 
 p(M_k|\mathcal D)\propto p(M_k)p(\mathcal D|M_k)，\quad(*)
 
 其中的后验分布不依赖于参数,因为：
 
-p(\mathcal D|M_k)=\int p(\mathcal D|\boldsymbol \theta_k)p(\boldsymbol \theta_k|M_k)d\boldsymbol \theta_k
+$$p(\mathcal D|M_k)=\int p(\mathcal D|\boldsymbol \theta_k)p(\boldsymbol \theta_k|M_k)d\boldsymbol \theta_k$$
 
 这个式子被称为**边际似然**（marginal likelihood）
 利用(*)式，可以得到极大后验估计：
 
-M^*=\operatorname {arg}\max_{M_k}p(M_k|\mathcal D)> 
+$$M^*=\operatorname {arg}\max_{M_k}p(M_k|\mathcal D)>$$
 
 似然与边际似然有些不同点，前者更容易出现过拟合的现象，后者因为参数被边际化掉了，出现过拟合的现象更小。而且边际似然中嵌套着模型复杂度和数据拟合之间的一个折中。
 
@@ -255,10 +255,10 @@ M^*=\operatorname {arg}\max_{M_k}p(M_k|\mathcal D)>
 
 在给定数据集和两个模型,想要计算后验分布
 
-\underbrace{\frac{p\left(M_{1} \mid \mathcal{D}\right)}{p\left(M_{2} \mid \mathcal{D}\right)}}_{\text {posterior odds(后验相对风险) }}=\frac{\frac{p\left(\mathcal{D} \mid M_{1}\right) p\left(M_{1}\right)}{p(\mathcal{D})}}{\frac{p\left(\mathcal{D} \mid M_{2}\right) p\left(M_{2}\right)}{p(\mathcal{D})}}=\underbrace{\frac{p\left(M_{1}\right)}{p\left(M_{2}\right)}}_{\text {prior odds }} \underbrace{\frac{p\left(\mathcal{D} \mid M_{1}\right)}{p\left(\mathcal{D} \mid M_{2}\right)}}_{\text {Bayes factor }}> 
+$$\underbrace{\frac{p\left(M_{1} \mid \mathcal{D}\right)}{p\left(M_{2} \mid \mathcal{D}\right)}}_{\text {posterior odds(后验相对风险) }}=\frac{\frac{p\left(\mathcal{D} \mid M_{1}\right) p\left(M_{1}\right)}{p(\mathcal{D})}}{\frac{p\left(\mathcal{D} \mid M_{2}\right) p\left(M_{2}\right)}{p(\mathcal{D})}}=\underbrace{\frac{p\left(M_{1}\right)}{p\left(M_{2}\right)}}_{\text {prior odds }} \underbrace{\frac{p\left(\mathcal{D} \mid M_{1}\right)}{p\left(\mathcal{D} \mid M_{2}\right)}}_{\text {Bayes factor }}>$$
 
 ???
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210526104142218.png)
+<!-- Image removed: CSDN link no longer accessible -->
 
 如果选择每一个模型的概率相等，即,则可以根据贝叶斯因子与1的关系，选择模型。
 
@@ -269,7 +269,7 @@ M^*=\operatorname {arg}\max_{M_k}p(M_k|\mathcal D)>
 其中，M表示参数的个数
 **Bayesian information criterion (BIC)**
 
-\log p(x)=\log\int p(x|\boldsymbol\theta)p(\boldsymbol\theta)d\boldsymbol\theta\approx\log p(x|\boldsymbol\theta)-\frac{1}{2}M\log N
+$$\log p(x)=\log\int p(x|\boldsymbol\theta)p(\boldsymbol\theta)d\boldsymbol\theta\approx\log p(x|\boldsymbol\theta)-\frac{1}{2}M\log N$$
 
 这里N表示数据集，M表示参数个数
 **这部分遇到的时候在详细学习**

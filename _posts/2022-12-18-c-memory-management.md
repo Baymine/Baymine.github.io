@@ -28,17 +28,6 @@ tags: []
 **基本用法**
 
 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
 13
 
 void* p3 = ::operator new (512);   // 512 bytes
@@ -46,8 +35,8 @@ void* p3 = ::operator new (512);   // 512 bytes
 
 #ifdef __BORLANDC__  // 不同库不同
 	// 申请5个int。 一般容器中使用
-	int* p4 = allocator&lt;int&gt;().allocate(5);
-	allocator&lt;int&gt;().deallocate(p4, 5);
+	int* p4 = allocator<int>().allocate(5);
+	allocator<int>().deallocate(p4, 5);
 #endif
 
 #ifdef __GNUC__   // 较早版本中
@@ -59,22 +48,15 @@ void* p3 = ::operator new (512);   // 512 bytes
 new 中实际上就是在调用malloc
 
 1
-2
-3
-4
-5
-6
-7
-8
 9
 
-class_name* pc = new class_name(1, 2);
+$$class_name* pc = new class_name(1, 2);$$
 
 // 编译器转换为
 // 加上try catch
-void* mem = operator new(sizeof(class_name));
-pc = static_cast&lt;class_name*&gt;(mem);
-pc-&gt;class_name::class_name(1, 2); // 只有编译其才能这样调用构造函数
+$$void* mem = operator new(sizeof(class_name));$$
+$$pc = static_cast<class_name*>(mem);$$
+pc->class_name::class_name(1, 2); // 只有编译其才能这样调用构造函数
 // 但是可以直接调用析构函数
 
 ### [](#7%E3%80%81Array-new)7、Array new
@@ -98,7 +80,7 @@ Complex* pca = new Complex[3];
 - 因为数组个数被写入，所以内存的整体布局会发生变化，所以不能直接用 `delete`来回收
 - 
 `61h`的大小计算
-类大小*类个数=((3*4) * 3) = 36\ 上下debugger header = 32 + 4\ 两个61h=4*2=8
+$$类大小*类个数=((3*4) * 3) = 36\ 上下debugger header = 32 + 4\ 两个61h=4*2=8$$
 - 最后向16的倍数内存对齐最后的 `pad`
 
 ### [](#8-palcement-new)8.palcement new

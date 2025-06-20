@@ -13,7 +13,7 @@ tags: []
 
 src\Core\Field.h
 
-字段实现是一个联合类， `std::aligned_union_t`，而一行数据在此文件当中定义为`using Row = std::vector&lt;Field&gt;;`
+$$字段实现是一个联合类， `std::aligned_union_t`，而一行数据在此文件当中定义为`using Row = std::vector<Field>;`$$
 
 > 
 
@@ -45,7 +45,7 @@ If we have a `Block`, we have data (in the `IColumn` object), we have informatio
 
 通常是一个模板类的特化，可以是一个中间表示，其中实现了***（类名）的一些功能，作为统一的处理方式
 
-`例如：template &lt;typename T&gt; class ColumnVectorHelper;`
+`例如：template <typename T> class ColumnVectorHelper;`
 
 ## [](#%E7%B1%BB%E5%90%8D%E7%A7%B0%EF%BC%9A-Dummy)类名称：***Dummy
 
@@ -74,22 +74,12 @@ If we have a `Block`, we have data (in the `IColumn` object), we have informatio
 
 循环向量化是一种编译器优化技术，用于将循环转换为向量化指令，以便在单个指令中处理多个数据元素。这种技术可以提高程序的性能，因为它可以利用现代处理器的SIMD指令集，同时减少循环的迭代次数。
 
-`例如：for (int i = 0; i &lt; n; ++i) { c[i] = a[i] + b[i]; }`
+$$`例如：for (int i = 0; i < n; ++i) { c[i] = a[i] + b[i]; }`$$
 
 # [](#%E8%AF%AD%E8%A8%80-%E8%AF%AD%E6%B3%95)语言/语法
 ## [](#C-11-using-%E5%BC%95%E5%85%A5%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0)C++11 using 引入构造函数
 
 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
 12
 
 #define DEFINE_FIELD_VECTOR(X) \

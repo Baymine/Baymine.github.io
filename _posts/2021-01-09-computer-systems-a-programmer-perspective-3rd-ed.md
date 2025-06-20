@@ -8,22 +8,18 @@ tags: []
 
 # [](#%E7%AC%AC%E4%B8%80%E7%AB%A0-A-Tour-of-Computer-Systems)第一章 A Tour of Computer Systems
 
-&amp;#8195这本书的前言部分主要介绍了本书主要包含的内容（the hardware architecture, the operating system, the compiler, the network）还有一些学习的预备知识（C语言、Lunux系统）。
+&#8195这本书的前言部分主要介绍了本书主要包含的内容（the hardware architecture, the operating system, the compiler, the network）还有一些学习的预备知识（C语言、Lunux系统）。
 
-&amp;#8195全文展开的逻辑是介绍Hello.c文件从编写到输出主要经历了什么
+&#8195全文展开的逻辑是介绍Hello.c文件从编写到输出主要经历了什么
 
 ## [](#1-1-Information-Is-Bits-Context)1.1 Information Is Bits + Context
 
 这一部分主要讲程序文件在计算机中的存贮方式
 
 1
-2
-3
-4
-5
 6
 
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int main(){
 	printf("Hello,world!\n");
@@ -31,7 +27,7 @@ int main(){
 }
 
 这段代码在计算机中使用ASCII码存贮的，如下图：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210102154622739.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70#pic_center)
+<!-- Image removed: CSDN link no longer accessible -->
 
 > 
 
@@ -47,11 +43,11 @@ The hello.c program is stored in a file as a sequence of bytes
 
 C pointers are a common source of confusion and programming errors.
 
-&lt;hr style=” border:solid; width:100px; height:1px;” color=#000000 size=1”&gt;
+<hr style=” border:solid; width:100px; height:1px;” color=#000000 size=1”>
 
 ## [](#1-2-Programs-Are-Translated-by-Other-Programs-into-Different-Forms)1.2 Programs Are Translated by Other Programs into Different Forms
 
-![一个程序文件的执行周期](https://img-blog.csdnimg.cn/20210116102447818.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70)
+<!-- Image removed: CSDN link no longer accessible -->
 文件运行的时候会有四个阶段：
 在预处理阶段，预处理器会处理带有#的语句，并将它直接插入到程序文本中。
 编译阶段将文本文件转义成汇编语言文件，汇编语言相当于一种通用语言，能够使得不同的高级语言在同一个机器上运行。
@@ -60,9 +56,9 @@ C pointers are a common source of confusion and programming errors.
 
 ## [](#1-4-Processors-Read-and-Interpret-Instructions-Stored-in-Memory)1.4 Processors Read and Interpret Instructions Stored in Memory
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210119145938442.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70)
+<!-- Image removed: CSDN link no longer accessible -->
 What’s happening when we entering a sequence of command.
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210119152000654.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70)
+<!-- Image removed: CSDN link no longer accessible -->
 
 ## [](#1-5-Cache-Matter)1.5 Cache Matter
 
@@ -72,19 +68,19 @@ Note that we spend a lot of time to move data form disk to main memory by bus. W
 
 Because of physical laws, larger storage devices are slower than smaller storage devices.
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210119152749480.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70)
+<!-- Image removed: CSDN link no longer accessible -->
 
 ## [](#1-6-Storage-Devices-Form-a-Hierarchy)1.6 Storage Devices Form a Hierarchy
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210120143008803.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70)
+<!-- Image removed: CSDN link no longer accessible -->
 
 ## [](#1-7-The-Operating-System-Manages-the-Hardware)1.7 The Operating System Manages the Hardware
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210120151124190.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70#pic_center)
+<!-- Image removed: CSDN link no longer accessible -->
 
 ### [](#1-7-1-Processes)1.7.1 Processes
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2021012015135845.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70#pic_center)
+<!-- Image removed: CSDN link no longer accessible -->
 
 To be continue
 
@@ -98,7 +94,7 @@ interpreted language ：
 直译语言（英语：Interpreted language），又称直译式语言，是一种编程语言。这种类型的编程语言，会将代码一句一句直接运行，不需要像编译语言（Compiled language）一样，经过编译器先行编译为机器码，之后再运行。这种编程语言需要利用解释器，在运行期，动态将代码逐句直译（interpret）为机器码，或是已经预先编译为机器码的的子程序，之后再运行。
 理论上，任何编程语言都可以是编译式，或直译式的。它们之间的区别，仅与程序的应用有关。许多编程语言同时采用编译器与解释器来实作，其中包括Lisp，Pascal，C，BASIC 与 Python。JAVA及C#采用混合方式，先将代码编译为bytecode，在运行时再进行直译。
 
-magnetic-disk &amp; solid state drives：磁盘和固态硬盘
+magnetic-disk & solid state drives：磁盘和固态硬盘
 lingking：链接器
 
 > 

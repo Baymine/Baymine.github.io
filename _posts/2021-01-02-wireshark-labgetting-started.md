@@ -16,7 +16,7 @@ tags: []
 
 # [](#%E4%B8%80%E3%80%81How-Wireshark-Works)一、How Wireshark Works?
 
-![](https://img-blog.csdnimg.cn/20201231213649334.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_12,color_FFFFFF,t_70)
+<!-- Image removed: CSDN link no longer accessible -->
 包嗅探器（Packet Sniffer）
 其本身不主动运行，只是观察应用发送和接收的数据包，并保存这些数据包的一个备份。
 
@@ -29,13 +29,13 @@ tags: []
 
 # [](#%E4%BA%8C%E3%80%81Wireshark%E7%9A%84%E7%95%8C%E9%9D%A2%E4%BB%8B%E7%BB%8D)二、Wireshark的界面介绍
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210102162028414.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70#pic_center)
+<!-- Image removed: CSDN link no longer accessible -->
 
 # [](#%E4%B8%89%E3%80%81%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B)三、实验过程
 
 i）运行Wireshark，然后在浏览器中访问[http://gaia.cs.umass.edu/wireshark-labs/INTRO-wireshark-file1.html](http://gaia.cs.umass.edu/wireshark-labs/INTRO-wireshark-file1.html)
 ii）停止Wireshak，在过滤器中输入http。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210102163534330.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTMxNTY1Ng==,size_16,color_FFFFFF,t_70#pic_center)
+<!-- Image removed: CSDN link no longer accessible -->
 
 在对应层可以看到对应协议的一些信息，例如在IP层可以看到数据包的发送者和接收者的IP地址。
 

@@ -6,7 +6,7 @@ categories: [blog]
 tags: []
 ---
 
-@[toc]
+
 
 > 
 
@@ -24,11 +24,11 @@ tags: []
 香农（Shannon）将**比特**（bit）作为信息的单位，这将时间发生的概率转换成比特数。这样，对于一个长度为的二进制序列所包含的信息为比特。
 假设二进制序列每一个位置为1或者0的概率相等（都为）,所以对于一个事件,这个事件为：一个长度为二进制序列，每种序列出现的概率为,香农定义了**自信息**，将事件的概率转换成了比特数：
 
-I(x) = -\log_2(p)
+$$I(x) = -\log_2(p)$$
 
 举例来说，对于一个序列“0010”的自信息为：
 
-I("0010") = -\log_2(p("0010"))=-\log_2(\frac{1}{2^4})=4\ bits
+$$I("0010") = -\log_2(p("0010"))=-\log_2(\frac{1}{2^4})=4\ bits$$
 
 * `在本章节中，我们省略log的下标，如无特殊说明都表示` 
 
@@ -41,7 +41,6 @@ I("0010") = -\log_2(p("0010"))=-\log_2(\frac{1}{2^4})=4\ bits
 熵的形式受限于**香农熵定理**：
 
 2
-3
 4
 
 我们可以将抛掷一个完全均匀的硬币所得到的信息为1比特作为基准，以消除使用不同的基本单位而导致的对同一事件的信息量上的差异。
@@ -50,14 +49,14 @@ I("0010") = -\log_2(p("0010"))=-\log_2(\frac{1}{2^4})=4\ bits
 
 对于一个随机变量, 遵循概率分布,概率密度函数或概率质量函数为,我们利用熵来描述信息的期望值：
 
-H(x)=-E_{x\sim P}[\log p(x)]
+$$H(x)=-E_{x\sim P}[\log p(x)]$$
 
 具体来说：
 
-H(X)=\left\{\begin{aligned}
-& -\sum_i p_i\log p_i, \quad p_i = P(X_i)\quad X 是离散型随机变量 \\
+$$H(X)=\left\{\begin{aligned}$$
+$$& -\sum_i p_i\log p_i, \quad p_i = P(X_i)\quad X 是离散型随机变量 \\$$
 & -\int_x p(x)\log p(x) dx\quad X是连续型随机变量
-\end{aligned}
+$$\end{aligned}$$
 \right.
 
 连续性随机变量的熵也被称为**微分熵**（Differential Entropy） 
@@ -78,16 +77,16 @@ H(X)=\left\{\begin{aligned}
 - 对所有离散型随机变量
 
 :(连续性随机变量的熵可能会是负数)
-- 假设一个随机事件，我们想用一个新的概率分布来估计则有：H(X)=-E_{x\sim P}[\log p(x)]\le -E_{x\sim P}[\log q(x)]   当的时候，取得等号。
-对于一个随机变量, 将会传递最多的信息，如果他能将这些信息均匀地分布在所有可能的结果上。具体来说，对于一个概率分布的k种相互独立的输出:H(X)\le \log(k), with\ equality\ if \ and \ only \ if \ p_i=\frac{1}{k},\forall_i但是如果是一个连续性随机变量，那么处理过程就会很麻烦了。我们假设P在一个有限的区间内，那么，如果这个随机变量在这个区间上满足均匀分布，那么这个随机变量的熵的值将会是最大的。# [](#%E4%BA%92%E4%BF%A1%E6%81%AF%EF%BC%88Mutual-Information%EF%BC%89)互信息（Mutual Information）在这部分，我们联合变量的熵。在本节中，我们使用的联合变量遵循联合概率分布,概率密度函数为,其中## [](#%E8%81%94%E5%90%88%E7%86%B5-Joint-Entropy)联合熵(Joint Entropy)联合熵与先前定义的熵的形式一致：H(X,Y)=-E_{(x,y)\sim P}[\log p_{X,Y}(x,y)]\tag {*}具体形式为：H(X,Y)=\left\{\begin{aligned}
-&-\sum_x\sum_yp_{X,Y}(x,y)\log p_{X,Y}(x,y),\quad 离散型\\
-&-\int_{x,y}p_{X,Y}(x,y)\log p_{X,Y}(x,y)dxdy,\quad 连续型
+$$- 假设一个随机事件，我们想用一个新的概率分布来估计则有：H(X)=-E_{x\sim P}[\log p(x)]\le -E_{x\sim P}[\log q(x)]   当的时候，取得等号。$$
+$$对于一个随机变量, 将会传递最多的信息，如果他能将这些信息均匀地分布在所有可能的结果上。具体来说，对于一个概率分布的k种相互独立的输出:H(X)\le \log(k), with\ equality\ if \ and \ only \ if \ p_i=\frac{1}{k},\forall_i但是如果是一个连续性随机变量，那么处理过程就会很麻烦了。我们假设P在一个有限的区间内，那么，如果这个随机变量在这个区间上满足均匀分布，那么这个随机变量的熵的值将会是最大的。# [](#%E4%BA%92%E4%BF%A1%E6%81%AF%EF%BC%88Mutual-Information%EF%BC%89)互信息（Mutual Information）在这部分，我们联合变量的熵。在本节中，我们使用的联合变量遵循联合概率分布,概率密度函数为,其中## [](#%E8%81%94%E5%90%88%E7%86%B5-Joint-Entropy)联合熵(Joint Entropy)联合熵与先前定义的熵的形式一致：H(X,Y)=-E_{(x,y)\sim P}[\log p_{X,Y}(x,y)]\tag {*}具体形式为：H(X,Y)=\left\{\begin{aligned}$$
+$$&-\sum_x\sum_yp_{X,Y}(x,y)\log p_{X,Y}(x,y),\quad 离散型\\$$
+$$&-\int_{x,y}p_{X,Y}(x,y)\log p_{X,Y}(x,y)dxdy,\quad 连续型$$
 \end{aligned}\right.表示一对随机变量的全部的不确定性。当的时候，,当X与Y相互独立的时候,所以有：H(X),H(Y)\le H(X,Y)\le H(X)+H(Y)
 
 ## [](#%E6%9D%A1%E4%BB%B6%E7%86%B5%EF%BC%88Conditional-Entropy%EF%BC%89)条件熵（Conditional Entropy）
 在机器学习中，我们更多的时候，我们更关注条件上而不是联合熵。例如我们要根据图片判断图片的标签，这就可以理解为在图片像素信息条件下的对标签的信息。条件熵的定义与之前的几种熵的定义相似：
 
-H(Y|X)=-E_{(x,y)\sim P}[\log p(y|x)]
+$$H(Y|X)=-E_{(x,y)\sim P}[\log p(y|x)]$$
 
 其中：.条件熵与熵和联合熵的关系为：
 
@@ -104,11 +103,11 @@ I(X,Y) = H(X,Y)-H(Y|X)-H(X|Y)
 将原先的定义式带入，整理可得：
 
 I(X,Y)=E_xE_y\left\{
-p_{X,Y}(x,y)\log \frac{p_{X,Y}(x,y)}{p_X(x)p_Y(y)}
+$$p_{X,Y}(x,y)\log \frac{p_{X,Y}(x,y)}{p_X(x)p_Y(y)}$$
 \right\}
 
 在本节中提到的定义之间的关系如下图：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/013c87570cd9401fb52ba8c3dd7d9da8.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_Q1NETiBATGVhcm5pbmdEZWVwbHk=,size_29,color_FFFFFF,t_70,g_se,x_16)
+<!-- Image removed: CSDN link no longer accessible -->
 
 ## [](#%E4%BA%92%E4%BF%A1%E6%81%AF%E7%9A%84%E6%80%A7%E8%B4%A8-Properties-of-Mutual-Information)互信息的性质(Properties of Mutual Information)
 
@@ -123,7 +122,7 @@ p_{X,Y}(x,y)\log \frac{p_{X,Y}(x,y)}{p_X(x)p_Y(y)}
 ## [](#%E7%82%B9%E9%97%B4%E4%BA%92%E4%BF%A1%E6%81%AF%EF%BC%88Pointwise-Mutual-Information%EF%BC%89)点间互信息（Pointwise Mutual Information）
 点间互信息:就是互信息定义中的对数部分：
 
-pmi(x,y) = \log\frac{p_{X,Y}(x,y)}{p_X(x)p_Y(y)}
+$$pmi(x,y) = \log\frac{p_{X,Y}(x,y)}{p_X(x)p_Y(y)}$$
 
 他描述的是两个联合事件发生的概率比分别发生的概率的具体的数值关系。
 
@@ -139,7 +138,7 @@ pmi(x,y) = \log\frac{p_{X,Y}(x,y)}{p_X(x)p_Y(y)}
 
 对于一个随机变量遵循概率分布,概率密度分布为.我们利用另一个概率分布(),那么和之间的KL散度（相对熵，Relative Entropy）定义为：
 
-D_{KL}(P\|Q)=E_{x\sim P}[\log\frac{p(x)}{q(x)}]
+$$D_{KL}(P\|Q)=E_{x\sim P}[\log\frac{p(x)}{q(x)}]$$
 
 可见DL散度就是在描述两个随机变量之间不确定性程度的相对关系。
 
@@ -150,7 +149,7 @@ D_{KL}(P\|Q)=E_{x\sim P}[\log\frac{p(x)}{q(x)}]
 - 非负性：,当时取得等号。
 - 如果则
 
-- 以下三种表达式等价：D_{KL}(P(X,Y)\| P(X)P(Y))E_Y\{D_{KL}(P(X|Y))\|P(X))\}E_X\{D_{KL}(P(Y|X)\|P(Y))\}> 
+$$- 以下三种表达式等价：D_{KL}(P(X,Y)\| P(X)P(Y))E_Y\{D_{KL}(P(X|Y))\|P(X))\}E_X\{D_{KL}(P(Y|X)\|P(Y))\}>$$
 For the first term, we interpret mutual information as the KL divergence between P(X, Y ) and the product of P(X) and P(Y ), and thus is a measure of how different the joint distribution is from the distribution if they were independent. For the second term, mutual information tells us the average reduction in uncertainty about Y that results from learning the value of the ʼs distribution. Similarly to the third term.
 
 # [](#%E4%BA%A4%E5%8F%89%E7%86%B5%EF%BC%88Cross-Entropy%EF%BC%89)交叉熵（Cross-Entropy）
@@ -158,10 +157,10 @@ For the first term, we interpret mutual information as the KL divergence between
 对于一个二分类问题，预测值为.预测结果为1的概率为：所以log似然方程为：
 
 \begin{aligned}
-l(\theta)&=\log L(\theta)\\
-&=\log \prod^n_{i=1}\pi_i^{y_i}(1-\pi_i)^{1-y_i}\\
-&=\sum^n_{i=1}y_i \log(\pi_i)+(1-y_i)\log(1-\pi_i)
-\end{aligned}
+$$l(\theta)&=\log L(\theta)\\$$
+$$&=\log \prod^n_{i=1}\pi_i^{y_i}(1-\pi_i)^{1-y_i}\\$$
+$$&=\sum^n_{i=1}y_i \log(\pi_i)+(1-y_i)\log(1-\pi_i)$$
+$$\end{aligned}$$
 
 我们的目标就是最大化这个似然函数，这种方法就是极大似然估计。看到式中的自然对数，我们可以联想到之前提到一些信息论的概念。这暗示我们这个函数可以从信息论的角度理解。
 
@@ -169,11 +168,11 @@ l(\theta)&=\log L(\theta)\\
 
 我们假设有两个随机变量:(前者是真实值的分布，后者是预测值的分布).，我们可以通过交叉熵来描述两种分布之间的散度：
 
-CE(P,Q)=-E_{x\sim P}[\log (q(x))]
+$$CE(P,Q)=-E_{x\sim P}[\log (q(x))]$$
 
 通过之前提到的关系式，可以将上式转化为：
 
-CE(P,Q) = H(P)+D_{KL}(P\|Q)## [](#%E6%80%A7%E8%B4%A8%EF%BC%88Properties%EF%BC%89-1)性质（Properties）
+$$CE(P,Q) = H(P)+D_{KL}(P\|Q)## [](#%E6%80%A7%E8%B4%A8%EF%BC%88Properties%EF%BC%89-1)性质（Properties）$$
 
 交叉熵可以用于优化问题的损失函数，以下几种说法是等价的：
 
@@ -190,22 +189,22 @@ CE(P,Q) = H(P)+D_{KL}(P\|Q)## [](#%E6%80%A7%E8%B4%A8%EF%BC%88Properties%EF%BC%89
 
 现在考虑一个k分类问题，这个分类问题的标签用独热编码（One-hot encoding）表示,预测标签值为：
 
-\hat y_i=p_\theta(y_i|x_i)=\sum^k_{j=1}y_{ij}p_\theta(y_{ij}|x_i)
+$$\hat y_i=p_\theta(y_i|x_i)=\sum^k_{j=1}y_{ij}p_\theta(y_{ij}|x_i)$$
 
 所以交叉熵可以表示为：
 
-CE(y,\hat y)=-\sum^n_{i=1}y_i\log\hat y_i=-\sum^n_{i=1}\sum^k_{j=1}y_{ij}\log(y_{ij}|x_i)
+$$CE(y,\hat y)=-\sum^n_{i=1}y_i\log\hat y_i=-\sum^n_{i=1}\sum^k_{j=1}y_{ij}\log(y_{ij}|x_i)$$
 
 另一方面，我们可以利用极大似然估计来解决这个问题。假设一个随机变量满足k分类多元伯努利分布，对应的概率为,也就是：
 
-p(z)=p(z_1,\cdots,z_k)=Multi(p_1,\cdots,p_k),\ where\ \sum^k_{i=1}p_i=1
+$$p(z)=p(z_1,\cdots,z_k)=Multi(p_1,\cdots,p_k),\ where\ \sum^k_{i=1}p_i=1$$
 
 z的联合概率质量函数为:
 
-p^z=\prod^k_{j=1}p^{z_j}_j
+$$p^z=\prod^k_{j=1}p^{z_j}_j$$
 
 所以对应的log似然方程为：
 
-l(\theta)=\log L(\theta)=\log\prod^n_{i=1}p^{y_i}=\log\prod^n_{i=1}\prod_{j=1}^{k}p^{y_{ij}}=\sum^n_{i=1}\sum^k_{j=1}y_{ij}\log p_j
+$$l(\theta)=\log L(\theta)=\log\prod^n_{i=1}p^{y_i}=\log\prod^n_{i=1}\prod_{j=1}^{k}p^{y_{ij}}=\sum^n_{i=1}\sum^k_{j=1}y_{ij}\log p_j$$
 
 所以对于多分类问题最大化log似然函数等价于最小化交叉熵损失

@@ -14,7 +14,7 @@ Small tricks
 
 // 取中间的数：
 int mid = (left + right) / 2; // 有溢出的风险
-int mid = left + ((right - left) &gt;&gt; 1); // 这样更好
+int mid = left + ((right - left) >> 1); // 这样更好
 
 - 当异常发⽣时，C++通常会调⽤对象的析构函数来释放资源
 - 指向虚函数表的指针 `vptr`需要在构造函数中进⾏初始化
@@ -49,7 +49,7 @@ Linux 是一个类似 Unix 的操作系统，Unix 要早于 Linux，Linux 的初
 
 # [](#Git)Git
 
-\text{工作区}\stackrel{add}{\rightarrow}\text{暂存区}\stackrel{commit}{\rightarrow}\text{本地仓库}\stackrel{push}{\rightarrow}\text{远程仓库}\stackrel{pull}{\rightarrow}\text{本地}
+$$\text{工作区}\stackrel{add}{\rightarrow}\text{暂存区}\stackrel{commit}{\rightarrow}\text{本地仓库}\stackrel{push}{\rightarrow}\text{远程仓库}\stackrel{pull}{\rightarrow}\text{本地}$$
 
 ![1672140678237](https://Baymine.github.io/images/Basic_must_known/1672140678237.png)
 
@@ -118,7 +118,7 @@ int addInt(int n, int m) {
 }
 
 int (*functionPtr)(int,int); // Declare
-functionPtr = &amp;addInt;  // Assigment
+functionPtr = &addInt;  // Assigment
 int sum = (*functionPtr)(2, 3); // usage: sum == 5
 
 // As a parameter
@@ -131,7 +131,7 @@ int add2to3(int (*functionPtr)(int, int)) {
 // and it returns another int
 int (*functionFactory(int n))(int, int) {
     printf("Got parameter %d", n);
-    int (*functionPtr)(int,int) = &amp;addInt;
+    int (*functionPtr)(int,int) = &addInt;
     return functionPtr;
 }
 
@@ -141,7 +141,7 @@ typedef int (*myFuncDef)(int, int);
 
 myFuncDef functionFactory(int n) {
     printf("Got parameter %d", n);
-    myFuncDef functionPtr = &amp;addInt;
+    myFuncDef functionPtr = &addInt;
     return functionPtr;
 }
 
@@ -151,17 +151,17 @@ int addInt(int n, int m) {
 }
 
 int (*functionPtr)(int,int); // Declare
-functionPtr = &amp;addInt;  // Assigment
+functionPtr = &addInt;  // Assigment
 
-cout &lt;&lt; addInt &lt;&lt; endl; // Return 1
+cout << addInt << endl; // Return 1
 
 > 
 cout 打印函数返回1的[原因](https://blog.csdn.net/Q_1849805767/article/details/107391572)：
-C++调用非静态的成员函数时，采用的是一种 __thiscall 的函数调用方式。采用这种调用方式，编译器在编译的时候，会在调用的函数形参表中增加一个指向调用该成员函数的指针，也就是我们经常说的this指针。调用的形式类似于Base::f1(Base* this, otherparam…)，在函数体中，涉及到对象的成员变量或者其他成员函数，都会通过这个this指针来调用，从而达到在成员函数中处理调用对象所对应的数据，而不会错误处理其他对象的数据。可见，虽然我们必须通过对象来调用动态函数，但是其实我们访问的都是同一个成员函数。所以我们采用&amp;Base::f1来获取成员函数地址是没错的，动态函数同样是跟类绑定而不是跟对象绑定的。
+C++调用非静态的成员函数时，采用的是一种 __thiscall 的函数调用方式。采用这种调用方式，编译器在编译的时候，会在调用的函数形参表中增加一个指向调用该成员函数的指针，也就是我们经常说的this指针。调用的形式类似于Base::f1(Base* this, otherparam…)，在函数体中，涉及到对象的成员变量或者其他成员函数，都会通过这个this指针来调用，从而达到在成员函数中处理调用对象所对应的数据，而不会错误处理其他对象的数据。可见，虽然我们必须通过对象来调用动态函数，但是其实我们访问的都是同一个成员函数。所以我们采用&Base::f1来获取成员函数地址是没错的，动态函数同样是跟类绑定而不是跟对象绑定的。
 
-出错的原因是，`输出操作符&lt;&lt;没有对void(__thiscall A:: *)()类型重载，编译器将这种类型转换为bool类型，所以输出了1；`
+出错的原因是，`输出操作符<<没有对void(__thiscall A:: *)()类型重载，编译器将这种类型转换为bool类型，所以输出了1；`
 
-对于静态函数，其调用方式并非**thiscall，&lt;&lt;有对它的重载，因此类的静态函数可以直接用cout输出函数地址。我们可以用printf输出，因为他可以接收任意类型的参数，包括**thiscall类型
+对于静态函数，其调用方式并非**thiscall，<<有对它的重载，因此类的静态函数可以直接用cout输出函数地址。我们可以用printf输出，因为他可以接收任意类型的参数，包括**thiscall类型
 
 ## [](#Upcasting)[Upcasting](http://c.biancheng.net/view/2284.html)
 

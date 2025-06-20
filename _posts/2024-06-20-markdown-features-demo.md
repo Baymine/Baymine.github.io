@@ -30,7 +30,7 @@ def fibonacci(n):
     return sequence
 
 # Example usage
-fib_numbers = fibonacci(10)
+$$fib_numbers = fibonacci(10)$$
 print(f"First 10 Fibonacci numbers: {fib_numbers}")
 ```
 
@@ -115,8 +115,8 @@ function check_system_health() {
     echo "Disk Usage:"
     df -h | grep -E '^/dev/' | awk '{print $5 " " $1}' | while read output;
     do
-        usage=$(echo $output | awk '{print $1}' | sed 's/%//g')
-        partition=$(echo $output | awk '{print $2}')
+$$usage=$(echo $output | awk '{print $1}' | sed 's/%//g')$$
+$$partition=$(echo $output | awk '{print $2}')$$
         
         if [ $usage -ge 90 ]; then
             echo "WARNING: $partition is ${usage}% full"
@@ -140,17 +140,17 @@ check_system_health
 ## Mathematics Support
 
 ### Inline Math
-Here's an inline equation: $E = mc^2$ and another one: $\sum_{i=1}^{n} x_i = x_1 + x_2 + \cdots + x_n$.
+$$Here's an inline equation: $E = mc^2$ and another one: $\sum_{i=1}^{n} x_i = x_1 + x_2 + \cdots + x_n$.$$
 
 ### Display Math
 Complex mathematical expressions are fully supported:
 
 $$
-\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
+$$\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}$$
 $$
 
 $$
-\frac{\partial}{\partial t} \Psi(\mathbf{r}, t) = \frac{i\hbar}{2m} \nabla^2 \Psi(\mathbf{r}, t) + V(\mathbf{r}) \Psi(\mathbf{r}, t)
+$$\frac{\partial}{\partial t} \Psi(\mathbf{r}, t) = \frac{i\hbar}{2m} \nabla^2 \Psi(\mathbf{r}, t) + V(\mathbf{r}) \Psi(\mathbf{r}, t)$$
 $$
 
 ### Matrix Equations
@@ -158,23 +158,23 @@ $$
 \begin{pmatrix}
 a & b \\
 c & d
-\end{pmatrix}
+$$\end{pmatrix}$$
 \begin{pmatrix}
 x \\
 y
-\end{pmatrix}
+$$\end{pmatrix}$$
 =
 \begin{pmatrix}
 ax + by \\
 cx + dy
-\end{pmatrix}
+$$\end{pmatrix}$$
 $$
 
 ### Statistical Formulas
 The probability density function of a normal distribution:
 
 $$
-f(x|\mu,\sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+$$f(x|\mu,\sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$
 $$
 
 ## Advanced Markdown Features
@@ -223,7 +223,7 @@ The syntax highlighting includes line numbers for better readability:
 class APIClient {
     constructor(baseURL) {
         this.baseURL = baseURL;
-        this.headers = {
+$$this.headers = {$$
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${this.getToken()}`
         };
@@ -231,7 +231,7 @@ class APIClient {
     
     async get(endpoint) {
         try {
-            const response = await fetch(`${this.baseURL}${endpoint}`, {
+$$const response = await fetch(`${this.baseURL}${endpoint}`, {$$
                 method: 'GET',
                 headers: this.headers
             });
