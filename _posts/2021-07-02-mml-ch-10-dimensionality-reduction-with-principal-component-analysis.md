@@ -110,14 +110,20 @@ $$\begin{aligned}\hat Sb_i &= \frac 1N \hat X \hat X^\top b_i=\frac1N(X-B_{m-1}X
 
 由于都是这个子空间下的规范正交基（ONB），所以：
 
-$$\boldsymbol B_{m-1}\boldsymbol b_i=\left\{$$
+$$
+\boldsymbol B_{m-1}\boldsymbol b_i=\left\{
 \begin{aligned}
-\boldsymbol b_i, \quad i
+\boldsymbol b_i, \quad &i \leq m-1 \\
+\boldsymbol 0, \quad &i > m-1
+\end{aligned}
+\right.
+$$
 
 当时，说明是子空间下的一个正交基，由于是规范正交基，所以与其他基向量的乘积为0，与自身相乘仍为自身。当时，说明不是子空间下的正交基，这时候，这与其他的所有的正交基相互垂直，所以与他们的乘积也就为0.
 由上面的关系可以得到：
 
-$$\hat S b_i=(S-B_{m-1}S)b_i=Sb_i=\lambda_ib_i\\\hat Sb_m = Sb_m=\lambda_mb_m$$
+$$\hat S b_i=(S-B_{m-1}S)b_i=Sb_i=\lambda_ib_i\\\hat Sb_m = Sb_m=\lambda_mb_m
+$$
 
 这可以知道正交投影之后的向量的特征向量的是一致的。
 当时，的关系式带入到（*）中：
@@ -166,7 +172,8 @@ $$\tilde x_n:=\sum^M_{m=1}z_{mn}b_m=Bz_n\in \mathbb R^D,\quad z_n := [z_{1n},\cd
 为投影矩阵的坐标。
 描述PCA之后的损失的量度为**重构误差**（Reconstruction Error）:
 
-$$J_m:=\frac 1N \sum^N_{n=1}\| x_n-\tilde x_n\|^2## [](#%E6%89%BE%E5%88%B0%E6%9C%80%E4%BC%98%E5%8C%96%E5%9D%90%E6%A0%87%EF%BC%88Finding-Optimal-Coordinates%EF%BC%89)找到最优化坐标（Finding Optimal Coordinates）$$
+$$J_m:=\frac 1N \sum^N_{n=1}\| x_n-\tilde x_n\|^2 $$
+## [](#%E6%89%BE%E5%88%B0%E6%9C%80%E4%BC%98%E5%8C%96%E5%9D%90%E6%A0%87%EF%BC%88Finding-Optimal-Coordinates%EF%BC%89)找到最优化坐标（Finding Optimal Coordinates）
 
 想要找到最优化的坐标，需要找到原向量在基向量空间中的正交映射.如下图所示，我的目标也可以理解为找到最小的,由图中可以知道最小的时候是向量正交投影到基向量上的时候。
 <!-- Image removed: CSDN link no longer accessible -->
@@ -216,10 +223,12 @@ $$\tilde x _n=(\sum^M_{m=1}b_mb_m^\top)x_n>$$
 
 原先提到原始数据可以用基向量线性组合表示，所以(这里可以理解为将原向量分解为投影向量和位移向量)
 
+$$
 \begin{aligned}
-$$\boldsymbol{x}_{n} &=\sum_{d=1}^{D} z_{d n} \boldsymbol{b}_{d} \stackrel{(10.32)}{=} \sum_{d=1}^{D}\left(\boldsymbol{x}_{n}^{\top} \boldsymbol{b}_{d}\right) \boldsymbol{b}_{d}=\left(\sum_{d=1}^{D} b_{d} \boldsymbol{b}_{d}^{\top}\right) \boldsymbol{x}_{n} \\$$
-$$&=\left(\sum_{m=1}^{M} \boldsymbol{b}_{m} \boldsymbol{b}_{m}^{\top}\right) \boldsymbol{x}_{n}+\left(\sum_{j=M+1}^{D} \boldsymbol{b}_{j} \boldsymbol{b}_{j}^{\top}\right) \boldsymbol{x}_{n}$$
-$$\end{aligned}$$
+\boldsymbol{x}_{n} &=\sum_{d=1}^{D} z_{d n} \boldsymbol{b}_{d} \stackrel{(10.32)}{=} \sum_{d=1}^{D}\left(\boldsymbol{x}_{n}^{\top} \boldsymbol{b}_{d}\right) \boldsymbol{b}_{d}=\left(\sum_{d=1}^{D} \boldsymbol{b}_{d} \boldsymbol{b}_{d}^{\top}\right) \boldsymbol{x}_{n} \\
+&=\left(\sum_{m=1}^{M} \boldsymbol{b}_{m} \boldsymbol{b}_{m}^{\top}\right) \boldsymbol{x}_{n}+\left(\sum_{j=M+1}^{D} \boldsymbol{b}_{j} \boldsymbol{b}_{j}^{\top}\right) \boldsymbol{x}_{n}
+\end{aligned}
+$$
 
 所以位移向量（displacement vector）为：
 
@@ -255,10 +264,12 @@ $$J_M=\frac 1N \sum^N_{n=1}\sum^D_{j=M+1}(b_j^\top x_n)^2=\frac {1}{N}\sum^N_{n=
 
 由于点乘的对称性，我们可以知道,带入上式：
 
+$$
 \begin{aligned}
-$$J_{M} &=\sum_{j=M+1}^{D} \boldsymbol{b}_{j}^{\top} \underbrace{\left(\frac{1}{N} \sum_{n=1}^{N} \boldsymbol{x}_{n} \boldsymbol{x}_{n}^{\top}\right)}_{=: \boldsymbol{S}} \boldsymbol{b}_{j}=\sum_{j=M+1}^{D} \boldsymbol{b}_{j}^{\top} \boldsymbol{S} \boldsymbol{b}_{j} \\$$
-$$&=\sum_{j=M+1}^{D} \operatorname{tr}\left(\boldsymbol{b}_{j}^{\top} \boldsymbol{S} \boldsymbol{b}_{j}\right)=\sum_{j=M+1}^{D} \operatorname{tr}\left(\boldsymbol{S} \boldsymbol{b}_{j} \boldsymbol{b}_{j}^{\top}\right)=\operatorname{tr}(\underbrace{\left(\sum_{j=M+1}^{D} \boldsymbol{b}_{j} \boldsymbol{b}_{j}^{\top}\right)}_{\text {projection matrix }} \boldsymbol{S})$$
-$$\end{aligned}$$
+J_{M} &=\sum_{j=M+1}^{D} \boldsymbol{b}_{j}^{\top} \underbrace{\left(\frac{1}{N} \sum_{n=1}^{N} \boldsymbol{x}_{n} \boldsymbol{x}_{n}^{\top}\right)}_{=: \boldsymbol{S}} \boldsymbol{b}_{j}=\sum_{j=M+1}^{D} \boldsymbol{b}_{j}^{\top} \boldsymbol{S} \boldsymbol{b}_{j} \\
+&=\sum_{j=M+1}^{D} \operatorname{tr}\left(\boldsymbol{b}_{j}^{\top} \boldsymbol{S} \boldsymbol{b}_{j}\right)=\sum_{j=M+1}^{D} \operatorname{tr}\left(\boldsymbol{S} \boldsymbol{b}_{j} \boldsymbol{b}_{j}^{\top}\right)=\operatorname{tr}(\underbrace{\left(\sum_{j=M+1}^{D} \boldsymbol{b}_{j} \boldsymbol{b}_{j}^{\top}\right)}_{\text {projection matrix }} \boldsymbol{S})
+\end{aligned}
+$$
 
 由上可知，损失函数可以被理解为源数据在主子空间的正交补上的方差。这也对应这主成分分析是在最小化我们忽略的维度上的误差。等价的来说也就是我们需要保留方差最大的那几个维度。所以当我们投影到M维主子空间的时候，所对应的重构误差为：
 
@@ -370,9 +381,6 @@ $$\underbrace{\frac 1NXX^\top}_SXc_m=\lambda_mXc_m$$
 
 # [](#PCA%E5%9C%A8%E5%AE%9E%E8%B7%B5%E4%B8%AD%E7%9A%84%E5%85%B3%E9%94%AE%E6%AD%A5%E9%AA%A4-Key-Steps-of-PCA-in-Practice)PCA在实践中的关键步骤(Key Steps of PCA in Practice)
 
-2
-10
-
 # [](#%E7%94%A8%E6%BD%9C%E5%8F%98%E9%87%8F%E7%9C%8B%E5%BE%85PCA-Latent-Variable-Perspective)用潜变量看待PCA(Latent Variable Perspective)
 
 原先讨论PCA的时候没有使用概率方面的理论，这样能够帮助我们避开一些由概率论引起的数学上的困难，但是用概率论的能够帮助我们更好地理解PCA，而且在处理带有噪音的数据的时候，概率论中的似然函数提供了分析方式。
@@ -395,9 +403,9 @@ $$x=Bz+\mu+\epsilon\in \mathbb R^D$$
 $$p(x|z,B,\mu,\sigma^2)=\mathcal N(x|Bz+\mu, \sigma^2I)$$
 
 整体来说，PPCA的生成过程为：
-
+$$
 \begin{aligned} z&\sim \mathcal N(z|0,I)\\ x_n|z_n&\sim\mathcal N(x|Bz_n+\mu,\sigma^2I)\end{aligned}
-
+$$
 想要得到获得这些参数，需要一些典型数据，想要得到这样的数据可以使用**祖先抽样**（Ancestral sampling）
 
 > 
@@ -434,20 +442,24 @@ $$\begin{aligned}\mathbb E_x[x]&=\mathbb E_z[Bz+\mu]+\mathbb E_\epsilon[\epsilon
 
 因为潜变量的线性/仿射变换是联合高斯分布，现在已知一些边际概率分布:.所以对应**交叉协方差**（cross-covariance）为：
 
-$$\operatorname{Cov}[x,z]=\operatorname{Cov}_z[Bz+\mu]=B\operatorname{Cov}_z[z,z]=B$$
+$$
+\operatorname{Cov}[\boldsymbol{x},\boldsymbol{z}]=\operatorname{Cov}_{\boldsymbol{z}}[\boldsymbol{B}\boldsymbol{z}+\boldsymbol{\mu}]=\boldsymbol{B}\operatorname{Cov}_{\boldsymbol{z}}[\boldsymbol{z},\boldsymbol{z}]=\boldsymbol{B}
+$$
 
 所以潜变量以及观测到的随机变量之间的联合分布为：
 
-$$p\left(\boldsymbol{x}, \boldsymbol{z} \mid \boldsymbol{B}, \boldsymbol{\mu}, \sigma^{2}\right)=\mathcal{N}\left(\left[\begin{array}{l}$$
-$$\boldsymbol{x} \\$$
+$$
+p\left(\boldsymbol{x}, \boldsymbol{z} \mid \boldsymbol{B}, \boldsymbol{\mu}, \sigma^{2}\right)=\mathcal{N}\left(\begin{bmatrix}
+\boldsymbol{x} \\
 \boldsymbol{z}
-$$\end{array}\right] \mid\left[\begin{array}{l}$$
-$$\boldsymbol{\mu} \\$$
-$$\mathbf{0}$$
-$$\end{array}\right],\left[\begin{array}{cc}$$
-$$\boldsymbol{B} \boldsymbol{B}^{\top}+\sigma^{2} \boldsymbol{I} & \boldsymbol{B} \\$$
-$$\boldsymbol{B}^{\top} & \boldsymbol{I}$$
-\end{array}\right]\right)
+\end{bmatrix} \mid \begin{bmatrix}
+\boldsymbol{\mu} \\
+\mathbf{0}
+\end{bmatrix}, \begin{bmatrix}
+\boldsymbol{B} \boldsymbol{B}^{\top}+\sigma^{2} \boldsymbol{I} & \boldsymbol{B} \\
+\boldsymbol{B}^{\top} & \boldsymbol{I}
+\end{bmatrix}\right)
+$$
 
 其中均值向量的长度为,协方差矩阵的大小为
 
@@ -455,11 +467,13 @@ $$\boldsymbol{B}^{\top} & \boldsymbol{I}$$
 
 由前面提到的联合概率分布可以求得后验分布(参数求解方式在概率论那一章有提及)
 
+$$
 \begin{aligned}
-$$p(\boldsymbol{z} \mid \boldsymbol{x}) &=\mathcal{N}(\boldsymbol{z} \mid \boldsymbol{m}, \boldsymbol{C}) \\$$
-$$\boldsymbol{m} &=\boldsymbol{B}^{\top}\left(\boldsymbol{B} \boldsymbol{B}^{\top}+\sigma^{2} \boldsymbol{I}\right)^{-1}(\boldsymbol{x}-\boldsymbol{\mu}) \\$$
-$$\boldsymbol{C} &=\boldsymbol{I}-\boldsymbol{B}^{\top}\left(\boldsymbol{B} \boldsymbol{B}^{\top}+\sigma^{2} \boldsymbol{I}\right)^{-1} \boldsymbol{B}$$
-$$\end{aligned}$$
+p(\boldsymbol{z} \mid \boldsymbol{x}) &=\mathcal{N}(\boldsymbol{z} \mid \boldsymbol{m}, \boldsymbol{C}) \\
+\boldsymbol{m} &=\boldsymbol{B}^{\top}\left(\boldsymbol{B} \boldsymbol{B}^{\top}+\sigma^{2} \boldsymbol{I}\right)^{-1}(\boldsymbol{x}-\boldsymbol{\mu}) \\
+\boldsymbol{C} &=\boldsymbol{I}-\boldsymbol{B}^{\top}\left(\boldsymbol{B} \boldsymbol{B}^{\top}+\sigma^{2} \boldsymbol{I}\right)^{-1} \boldsymbol{B}
+\end{aligned}
+$$
 
 注意后验协方差与数据无关，协方差矩阵C告诉我们（？）嵌入的可信度（？p343）
 我们可以利用这个后验分布得到数据对应的潜变量，然后再利用潜变量得到重构向量$\tilde x_*\sim p(x|z_*,B,\mu,\sigma^2)$.将这个过程重复多次，我们能够得到潜变量的后验分布以及其暗含的观测数据
