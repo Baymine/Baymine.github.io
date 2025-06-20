@@ -1,0 +1,25 @@
+title: "Baymine's Blog"
+description: "Data Engineer sharing thoughts on technology, programming, and life"
+url: "https://baymine.github.io"
+baseurl: ""
+
+author:
+  name: "York Cao"
+  bio: "Data Engineer based in Beijing"
+  location: "Beijing, China"
+  github: "Baymine"
+
+markdown: kramdown
+highlighter: rouge
+permalink: /:year/:month/:day/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-paginate
+
+paginate: 10
+paginate_path: "/page/:num/"
+
+theme: minima
