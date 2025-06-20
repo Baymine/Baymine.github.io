@@ -94,6 +94,12 @@ title: Home
         <a href="{{ post.url }}" class="file-name">{{ post.title | default: "Untitled" }}</a>
       </div>
       {% endfor %}
+
+      <div class="post-item view-all">
+        <span class="file-permissions">drwxr-xr-x</span>
+        <span class="file-date">{{ site.time | date: "%b %d" }}</span>
+        <a href="/archives/" class="file-name">📁 View All {{ site.posts.size }} Posts →</a>
+      </div>
     </div>
 
     <div class="terminal-line">
@@ -102,6 +108,22 @@ title: Home
     </div>
 
     <div class="navigation-section">
+      <div class="nav-item">
+        <a href="/archives/" class="nav-link">[ARCHIVES]</a>
+        <span class="nav-desc">Browse all {{ site.posts.size }} blog posts</span>
+      </div>
+      <div class="nav-item">
+        <a href="/search/" class="nav-link">[SEARCH]</a>
+        <span class="nav-desc">Find specific content</span>
+      </div>
+      <div class="nav-item">
+        <a href="/categories/" class="nav-link">[CATEGORIES]</a>
+        <span class="nav-desc">Posts organized by topic</span>
+      </div>
+      <div class="nav-item">
+        <a href="/tags/" class="nav-link">[TAGS]</a>
+        <span class="nav-desc">Explore by technology tags</span>
+      </div>
       <div class="nav-item">
         <a href="/about/" class="nav-link">[ABOUT]</a>
         <span class="nav-desc">Learn more about me</span>

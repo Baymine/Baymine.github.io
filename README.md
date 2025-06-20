@@ -209,6 +209,35 @@ Example: $E = mc^2$ and $$\sum_{i=1}^{n} i = \frac{n(n+1)}{2}$$
 ./fix-liquid-syntax.sh
 ```
 
+## 📚 Blog Navigation & Archives
+
+Your blog now has comprehensive navigation to access all historical content:
+
+### 🗂️ **Archive Pages**
+- **[Archives](/archives/)** - Complete chronological list of all posts
+- **[Categories](/categories/)** - Posts organized by topic categories
+- **[Tags](/tags/)** - Posts grouped by technology tags with tag cloud
+- **[Search](/search/)** - Real-time search across all content
+
+### 🧭 **Navigation Features**
+- **Homepage links** to all archive pages
+- **Post navigation** with previous/next post links
+- **Quick access** to archives from any blog post
+- **Post count display** showing total number of articles
+- **"View All Posts"** link prominently displayed on homepage
+
+### 🔍 **Search Functionality**
+- **Real-time search** as you type
+- **Searches across** titles, content, categories, and tags
+- **Responsive results** with post excerpts
+- **Terminal-style interface** matching the hacker theme
+
+### 📊 **Archive Organization**
+- **By Year**: Posts grouped chronologically
+- **By Category**: Content organized by broad topics
+- **By Tag**: Specific technology and keyword groupings
+- **Complete List**: All posts in reverse chronological order
+
 ## Migrating Existing Posts
 
 If you have existing posts in HTML format (like in this repository), you can migrate them to Jekyll:

@@ -229,6 +229,29 @@
   text-decoration: underline;
 }
 
+/* Special styling for "View All" link */
+.post-item.view-all {
+  border-top: 1px solid var(--text-darker);
+  margin-top: 10px;
+  padding-top: 15px;
+}
+
+.post-item.view-all .file-name {
+  color: var(--primary-green);
+  font-weight: 700;
+  animation: pulse 2s infinite;
+}
+
+.post-item.view-all:hover .file-name {
+  color: #ffffff;
+  text-shadow: 0 0 15px var(--glow-green);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
 /* Navigation section */
 .navigation-section {
   margin: 20px 0;
