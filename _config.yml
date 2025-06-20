@@ -19,8 +19,7 @@ kramdown:
   syntax_highlighter: rouge
   syntax_highlighter_opts:
     block:
-      line_numbers: true
-      start_line: 1
+      line_numbers: false
     span:
       line_numbers: false
   math_engine: katex
@@ -35,8 +34,7 @@ rouge:
   span:
     line_numbers: false
   block:
-    line_numbers: true
-    start_line: 1
+    line_numbers: false
 
 plugins:
   - jekyll-feed
