@@ -1,29 +1,50 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
 
-  {%- include head.html -%}
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%- seo -%}
 
-  <body>
+  {%- if page.title == "Home" -%}
+    <!-- Homepage styles -->
+    <link rel="stylesheet" href="{{ "/assets/css/hacker-style.css" | relative_url }}">
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: #0a0a0a;
+        overflow-x: hidden;
+      }
+    </style>
+  {%- elsif page.layout == "post" -%}
+    <!-- Post styles -->
+    <link rel="stylesheet" href="{{ "/assets/css/hacker-post.css" | relative_url }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  {%- elsif page.layout == "page" -%}
+    <!-- Page styles -->
+    <link rel="stylesheet" href="{{ "/assets/css/hacker-post.css" | relative_url }}">
+  {%- else -%}
+    <!-- Default minima styles for any other content -->
+    <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
+    <style>
+      body {
+        font-family: 'Fira Code', 'Courier New', monospace;
+        background: #0a0a0a;
+        color: #00ff41;
+        margin: 0;
+        padding: 20px;
+      }
+    </style>
+  {%- endif -%}
 
-    {%- if page.title == "Home" -%}
-      <!-- Custom hacker-style homepage -->
-      <link rel="stylesheet" href="{{ "/assets/css/hacker-style.css" | relative_url }}">
-      <div class="hacker-container">
-        {{ content }}
-      </div>
-    {%- else -%}
-      <!-- Standard layout for other pages -->
-      {%- include header.html -%}
+  {%- feed_meta -%}
+</head>
 
-      <main class="page-content" aria-label="Content">
-        <div class="wrapper">
-          {{ content }}
-        </div>
-      </main>
-
-      {%- include footer.html -%}
-    {%- endif -%}
-
-  </body>
+<body>
+  {{ content }}
+</body>
 
 </html>
