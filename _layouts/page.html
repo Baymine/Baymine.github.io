@@ -1,0 +1,79 @@
+---
+layout: default
+---
+
+<link rel="stylesheet" href="{{ "/assets/css/hacker-post.css" | relative_url }}">
+
+<div class="hacker-post">
+  <!-- Terminal Header -->
+  <div class="terminal-header">
+    <div class="terminal-controls">
+      <span class="control close"></span>
+      <span class="control minimize"></span>
+      <span class="control maximize"></span>
+    </div>
+    <div class="terminal-title">{{ page.title | default: "Page" }}</div>
+  </div>
+
+  <!-- Page Content -->
+  <div class="terminal-content">
+    <!-- Navigation breadcrumb -->
+    <div class="terminal-line">
+      <span class="prompt">root@baymine:~#</span>
+      <span class="command">cat /pages/{{ page.title | slugify }}.md</span>
+    </div>
+    
+    <!-- Main page content -->
+    <article class="post-content">
+      {{ content }}
+    </article>
+
+    <!-- Navigation back to home -->
+    <div class="post-navigation">
+      <div class="terminal-line">
+        <span class="prompt">root@baymine:~#</span>
+        <span class="command">cd /</span>
+      </div>
+      
+      <div class="nav-links">
+        <div class="nav-item">
+          <span class="file-permissions">drwxr-xr-x</span>
+          <span class="file-date">{{ site.time | date: "%b %d" }}</span>
+          <a href="{{ "/" | relative_url }}" class="file-name">↑ Back to Terminal</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="terminal-line">
+      <span class="prompt">root@baymine:~#</span>
+      <span class="cursor blink">█</span>
+    </div>
+  </div>
+</div>
+
+<script>
+// Add typing effect to command
+document.addEventListener('DOMContentLoaded', function() {
+    const commands = document.querySelectorAll('.command');
+    commands.forEach((cmd, index) => {
+        if (index === 0) return; // Skip first command
+        const text = cmd.textContent;
+        cmd.textContent = '';
+        setTimeout(() => {
+            typeText(cmd, text, 50);
+        }, 1000);
+    });
+    
+    function typeText(element, text, speed) {
+        let i = 0;
+        const timer = setInterval(() => {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+            } else {
+                clearInterval(timer);
+            }
+        }, speed);
+    }
+});
+</script>

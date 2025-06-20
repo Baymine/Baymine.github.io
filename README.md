@@ -158,6 +158,57 @@ Your blog features a custom cyberpunk-inspired homepage with:
 - **Accessibility friendly** - readable and navigable
 - **SEO optimized** - proper meta tags and structure
 
+## 📝 Enhanced Markdown Support
+
+Your blog now has professional-grade markdown support with:
+
+### ✨ Syntax Highlighting
+- **100+ programming languages** supported
+- **Line numbers** for better readability
+- **Copy-to-clipboard** functionality
+- **Hacker-themed** color scheme
+
+```python
+# Example: Python code with syntax highlighting
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+```
+
+### 🧮 Mathematics Support
+- **Inline math**: Use `$equation$` for inline equations
+- **Display math**: Use `$$equation$$` for centered equations
+- **KaTeX rendering** for fast, beautiful math
+
+Example: $E = mc^2$ and $$\sum_{i=1}^{n} i = \frac{n(n+1)}{2}$$
+
+### 📊 Enhanced Tables
+- **Styled tables** with hacker theme
+- **Responsive design** for mobile
+- **Sortable columns** (optional)
+
+### ✅ Task Lists
+- [x] Syntax highlighting
+- [x] Math support
+- [x] Hacker styling
+- [ ] Comments system
+
+### 🎨 Consistent Styling
+- **All blog posts** use the hacker terminal theme
+- **Static pages** (like About) match the homepage
+- **Responsive design** across all content types
+- **Terminal aesthetics** throughout the site
+
+### 🛠️ Testing Tools
+```bash
+# Test markdown features
+./test-markdown.sh
+
+# Check for syntax issues
+./fix-liquid-syntax.sh
+```
+
 ## Migrating Existing Posts
 
 If you have existing posts in HTML format (like in this repository), you can migrate them to Jekyll:

@@ -4,12 +4,23 @@ source "https://rubygems.org"
 gem "jekyll", "~> 3.9.0"
 gem "minima", "~> 2.5"
 
+# Enhanced markdown support
+gem "kramdown", "~> 2.3"
+gem "kramdown-parser-gfm"
+gem "rouge", "~> 3.26"
+
+# Math support
+gem "kramdown-math-katex"
+
 # Jekyll plugins
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.12"
   gem "jekyll-sitemap"
   gem "jekyll-seo-tag"
   gem "jekyll-paginate"
+  gem "jekyll-gist"
+  gem "jekyll-github-metadata"
+  gem "jekyll-include-cache"
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -13,6 +13,31 @@ markdown: kramdown
 highlighter: rouge
 permalink: /:year/:month/:day/:title/
 
+# Enhanced Kramdown settings for better markdown support
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true
+      start_line: 1
+    span:
+      line_numbers: false
+  math_engine: katex
+  math_engine_opts:
+    preview: true
+    preview_as_code: false
+
+# Rouge syntax highlighting settings
+rouge:
+  default_lang: console
+  css_class: 'highlight'
+  span:
+    line_numbers: false
+  block:
+    line_numbers: true
+    start_line: 1
+
 plugins:
   - jekyll-feed
   - jekyll-sitemap

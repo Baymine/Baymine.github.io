@@ -1,0 +1,173 @@
+---
+layout: default
+---
+
+<link rel="stylesheet" href="{{ "/assets/css/hacker-post.css" | relative_url }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+
+<div class="hacker-post">
+  <!-- Terminal Header -->
+  <div class="terminal-header">
+    <div class="terminal-controls">
+      <span class="control close"></span>
+      <span class="control minimize"></span>
+      <span class="control maximize"></span>
+    </div>
+    <div class="terminal-title">{{ page.title | default: "Untitled Post" }}</div>
+  </div>
+
+  <!-- Post Content -->
+  <div class="terminal-content">
+    <!-- Navigation breadcrumb -->
+    <div class="terminal-line">
+      <span class="prompt">root@baymine:~#</span>
+      <span class="command">cd /blog/{{ page.date | date: "%Y/%m/%d" }}/{{ page.title | slugify }}</span>
+    </div>
+    
+    <!-- Post metadata -->
+    <div class="post-meta">
+      <div class="meta-item">
+        <span class="label">DATE:</span>
+        <span class="value">{{ page.date | date: "%Y-%m-%d %H:%M:%S" }}</span>
+      </div>
+      {% if page.updated %}
+      <div class="meta-item">
+        <span class="label">UPDATED:</span>
+        <span class="value">{{ page.updated | date: "%Y-%m-%d %H:%M:%S" }}</span>
+      </div>
+      {% endif %}
+      {% if page.categories and page.categories.size > 0 %}
+      <div class="meta-item">
+        <span class="label">CATEGORIES:</span>
+        <span class="value">
+          {% for category in page.categories %}
+            <span class="tag">{{ category }}</span>
+          {% endfor %}
+        </span>
+      </div>
+      {% endif %}
+      {% if page.tags and page.tags.size > 0 %}
+      <div class="meta-item">
+        <span class="label">TAGS:</span>
+        <span class="value">
+          {% for tag in page.tags %}
+            <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </span>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="terminal-line">
+      <span class="prompt">root@baymine:~#</span>
+      <span class="command">cat {{ page.title | slugify }}.md</span>
+    </div>
+
+    <!-- Main post content -->
+    <article class="post-content">
+      {{ content }}
+    </article>
+
+    <!-- Navigation -->
+    <div class="post-navigation">
+      <div class="terminal-line">
+        <span class="prompt">root@baymine:~#</span>
+        <span class="command">ls -la ../</span>
+      </div>
+      
+      <div class="nav-links">
+        {% if page.previous %}
+        <div class="nav-item">
+          <span class="file-permissions">-rw-r--r--</span>
+          <span class="file-date">{{ page.previous.date | date: "%b %d" }}</span>
+          <a href="{{ page.previous.url }}" class="file-name">← {{ page.previous.title | default: "Previous Post" }}</a>
+        </div>
+        {% endif %}
+        
+        <div class="nav-item">
+          <span class="file-permissions">drwxr-xr-x</span>
+          <span class="file-date">{{ site.time | date: "%b %d" }}</span>
+          <a href="{{ "/" | relative_url }}" class="file-name">↑ Back to Terminal</a>
+        </div>
+        
+        {% if page.next %}
+        <div class="nav-item">
+          <span class="file-permissions">-rw-r--r--</span>
+          <span class="file-date">{{ page.next.date | date: "%b %d" }}</span>
+          <a href="{{ page.next.url }}" class="file-name">{{ page.next.title | default: "Next Post" }} →</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="terminal-line">
+      <span class="prompt">root@baymine:~#</span>
+      <span class="cursor blink">█</span>
+    </div>
+  </div>
+</div>
+
+<!-- Enhanced JavaScript libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+<script>
+// Initialize syntax highlighting
+Prism.highlightAll();
+
+// Initialize math rendering
+document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "$", right: "$", display: false},
+            {left: "\\[", right: "\\]", display: true},
+            {left: "\\(", right: "\\)", display: false}
+        ]
+    });
+});
+
+// Add hacker effects to post
+document.addEventListener('DOMContentLoaded', function() {
+    // Add typing effect to command
+    const commands = document.querySelectorAll('.command');
+    commands.forEach((cmd, index) => {
+        if (index === 0) return; // Skip first command
+        const text = cmd.textContent;
+        cmd.textContent = '';
+        setTimeout(() => {
+            typeText(cmd, text, 50);
+        }, 1000);
+    });
+    
+    function typeText(element, text, speed) {
+        let i = 0;
+        const timer = setInterval(() => {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+            } else {
+                clearInterval(timer);
+            }
+        }, speed);
+    }
+    
+    // Add glitch effect to headings occasionally
+    const headings = document.querySelectorAll('h1, h2, h3');
+    headings.forEach(heading => {
+        heading.addEventListener('mouseenter', () => {
+            if (Math.random() > 0.8) {
+                heading.style.animation = 'glitch-1 0.3s ease-in-out';
+                setTimeout(() => {
+                    heading.style.animation = '';
+                }, 300);
+            }
+        });
+    });
+});
+</script>
