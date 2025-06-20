@@ -1,0 +1,207 @@
+<!-- Mermaid.js for diagram rendering -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Configure Mermaid with hacker theme
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'dark',
+        themeVariables: {
+            // Customize colors to match hacker theme
+            primaryColor: '#00ff41',
+            primaryTextColor: '#00ff41',
+            primaryBorderColor: '#00ff41',
+            lineColor: '#00ff41',
+            secondaryColor: '#0a0a0a',
+            tertiaryColor: '#1a1a1a',
+            background: '#0a0a0a',
+            mainBkg: '#0a0a0a',
+            secondBkg: '#1a1a1a',
+            tertiaryBkg: '#2a2a2a',
+            primaryTextColor: '#00ff41',
+            secondaryTextColor: '#00cc33',
+            tertiaryTextColor: '#009922',
+            primaryBorderColor: '#00ff41',
+            secondaryBorderColor: '#00cc33',
+            tertiaryBorderColor: '#009922',
+            noteBkgColor: '#1a1a1a',
+            noteTextColor: '#00ff41',
+            noteBorderColor: '#00ff41',
+            activationBkgColor: '#2a2a2a',
+            activationBorderColor: '#00ff41',
+            sequenceNumberColor: '#00ff41',
+            sectionBkgColor: '#1a1a1a',
+            altSectionBkgColor: '#2a2a2a',
+            gridColor: '#333333',
+            clusterBkg: '#1a1a1a',
+            clusterBorder: '#00ff41',
+            fillType0: '#0a0a0a',
+            fillType1: '#1a1a1a',
+            fillType2: '#2a2a2a',
+            fillType3: '#3a3a3a',
+            fillType4: '#4a4a4a',
+            fillType5: '#5a5a5a',
+            fillType6: '#6a6a6a',
+            fillType7: '#7a7a7a'
+        },
+        flowchart: {
+            htmlLabels: true,
+            curve: 'basis'
+        },
+        sequence: {
+            diagramMarginX: 50,
+            diagramMarginY: 10,
+            actorMargin: 50,
+            width: 150,
+            height: 65,
+            boxMargin: 10,
+            boxTextMargin: 5,
+            noteMargin: 10,
+            messageMargin: 35,
+            mirrorActors: true,
+            bottomMarginAdj: 1,
+            useMaxWidth: true,
+            rightAngles: false,
+            showSequenceNumbers: false
+        },
+        gantt: {
+            titleTopMargin: 25,
+            barHeight: 20,
+            fontFamily: '"Fira Code", "Courier New", monospace',
+            fontSize: 11,
+            fontWeight: 'normal',
+            gridLineStartPadding: 35,
+            leftPadding: 75,
+            topPadding: 50,
+            bottomPadding: 50,
+            rightPadding: 75
+        }
+    });
+
+    // Add custom styling to mermaid diagrams
+    const style = document.createElement('style');
+    style.textContent = `
+        .mermaid {
+            background: #0a0a0a !important;
+            border: 1px solid #00ff41;
+            border-radius: 4px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Fira Code', 'Courier New', monospace !important;
+        }
+        
+        .mermaid svg {
+            background: #0a0a0a !important;
+            color: #00ff41 !important;
+        }
+        
+        .mermaid .node rect,
+        .mermaid .node circle,
+        .mermaid .node ellipse,
+        .mermaid .node polygon {
+            fill: #1a1a1a !important;
+            stroke: #00ff41 !important;
+            stroke-width: 2px !important;
+        }
+        
+        .mermaid .node .label {
+            color: #00ff41 !important;
+            font-family: 'Fira Code', 'Courier New', monospace !important;
+        }
+        
+        .mermaid .edgePath .path {
+            stroke: #00ff41 !important;
+            stroke-width: 2px !important;
+        }
+        
+        .mermaid .edgeLabel {
+            background-color: #0a0a0a !important;
+            color: #00ff41 !important;
+            font-family: 'Fira Code', 'Courier New', monospace !important;
+        }
+        
+        .mermaid .cluster rect {
+            fill: #1a1a1a !important;
+            stroke: #00cc33 !important;
+            stroke-width: 1px !important;
+        }
+        
+        .mermaid .cluster .label {
+            color: #00cc33 !important;
+            font-family: 'Fira Code', 'Courier New', monospace !important;
+        }
+        
+        .mermaid .actor {
+            fill: #1a1a1a !important;
+            stroke: #00ff41 !important;
+            stroke-width: 2px !important;
+        }
+        
+        .mermaid .actor-line {
+            stroke: #00ff41 !important;
+            stroke-width: 1px !important;
+        }
+        
+        .mermaid .messageLine0,
+        .mermaid .messageLine1 {
+            stroke: #00ff41 !important;
+            stroke-width: 2px !important;
+        }
+        
+        .mermaid .messageText {
+            fill: #00ff41 !important;
+            font-family: 'Fira Code', 'Courier New', monospace !important;
+        }
+        
+        .mermaid .labelText {
+            fill: #00ff41 !important;
+            font-family: 'Fira Code', 'Courier New', monospace !important;
+        }
+        
+        .mermaid .loopText {
+            fill: #00ff41 !important;
+            font-family: 'Fira Code', 'Courier New', monospace !important;
+        }
+        
+        .mermaid .noteText {
+            fill: #00ff41 !important;
+            font-family: 'Fira Code', 'Courier New', monospace !important;
+        }
+        
+        .mermaid .section {
+            fill: #00ff41 !important;
+            font-family: 'Fira Code', 'Courier New', monospace !important;
+        }
+        
+        .mermaid .grid .tick {
+            stroke: #333333 !important;
+        }
+        
+        .mermaid .grid .tick text {
+            fill: #00ff41 !important;
+            font-family: 'Fira Code', 'Courier New', monospace !important;
+        }
+        
+        .mermaid .today {
+            fill: none !important;
+            stroke: #ff0000 !important;
+            stroke-width: 2px !important;
+        }
+        
+        /* Glitch effect for mermaid diagrams */
+        .mermaid:hover {
+            animation: mermaid-glitch 0.3s ease-in-out;
+        }
+        
+        @keyframes mermaid-glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-1px, 1px); }
+            40% { transform: translate(-1px, -1px); }
+            60% { transform: translate(1px, 1px); }
+            80% { transform: translate(1px, -1px); }
+        }
+    `;
+    document.head.appendChild(style);
+});
+</script>
