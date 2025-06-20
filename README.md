@@ -308,27 +308,40 @@ deploy:
 ## Troubleshooting
 
 ### Common Issues
-1. **Posts not showing**: Check front matter format and date
-2. **Images not loading**: Verify image paths and file locations
-3. **Theme issues**: Ensure Icarus theme is properly installed
-4. **Deployment fails**: Check repository permissions and deploy configuration
+
+1. **Build fails with Liquid syntax error**
+   - Run `./fix-liquid-syntax.sh` to check for issues
+   - Wrap problematic code with `{% raw %}...{% endraw %}` tags
+   - Common culprits: `{{}}`, `{%`, template-like syntax in code
+
+2. **Posts not showing**
+   - Check filename format: `YYYY-MM-DD-title.md`
+   - Verify front matter syntax
+   - Ensure date is not in the future
+
+3. **Images not loading**
+   - Check file paths and spelling
+   - Use `/assets/images/filename.jpg` format
+   - Ensure images are in the correct directory
+
+4. **Site not updating**
+   - Wait a few minutes for GitHub Pages to build
+   - Check repository Actions tab for build status
+   - Verify you pushed to the `main` branch
 
 ### Useful Commands
 ```bash
-# Clean generated files
-hexo clean
-
-# Generate static files
-hexo generate
-
-# Start local server
-hexo server
-
 # Create new post
-hexo new post "Post Title"
+./new-post.sh "Post Title"
 
-# Create new page
-hexo new page "page-name"
+# Check for Liquid syntax issues
+./fix-liquid-syntax.sh
+
+# Local development (if Ruby is set up)
+bundle exec jekyll serve
+
+# Deploy
+git add . && git commit -m "Update" && git push origin main
 ```
 
 ## Next Steps
